@@ -1,0 +1,23 @@
+<ons-page id="userManage">
+  <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">ユーザ管理</div>
+  </ons-toolbar>
+  <ons-button onclick="send_userEdit()">ユーザ編集</ons-button>
+  <ons-button onclick="send_login()">ログアウト</ons-button>
+  <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
+
+  <script>
+    // 画面表示時
+    ons.getScriptPage().onShow = function() {
+    }
+    // userEdit画面へ
+    function send_userEdit(){
+      document.getElementById('nav').pushPage('userEdit.html', {});
+    };    
+    // login画面へ
+    function send_login(){
+      document.getElementById('nav').resetToPage('login.html');
+    };
+  </script>
+</ons-page>

@@ -1,0 +1,18 @@
+<ons-page id="itemSelect">
+  <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">アイテム選定</div>
+  </ons-toolbar>
+  <ons-button onclick="send_coordinate()">コーディネート</ons-button>
+  <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
+
+  <script>
+    // 画面表示時
+    ons.getScriptPage().onShow = function() {
+    }
+    // coordinate画面へ
+    function send_coordinate(){
+      document.getElementById('nav').pushPage('coordinate.html', {});
+    };    
+  </script>
+</ons-page>

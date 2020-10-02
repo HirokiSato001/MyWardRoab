@@ -1,0 +1,28 @@
+<ons-page id="menu">
+  <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">メニュー</div>
+  </ons-toolbar>
+  <ons-button onclick="send_userManage()">ユーザ管理</ons-button>
+  <ons-button onclick="send_itemList()">アイテム一覧</ons-button>
+  <ons-button onclick="send_itemSelect()">アイテム選定(コーディネート)</ons-button>
+  <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
+
+  <script>
+    // 画面表示時
+    ons.getScriptPage().onShow = function() {
+    }
+    // userManage画面へ
+    function send_userManage(){
+      document.getElementById('nav').pushPage('userManage.html', {});
+    };
+    // itemList画面へ
+    function send_itemList(){
+      document.getElementById('nav').pushPage('itemList.html', {});
+    };       
+    // itemSelect画面へ
+    function send_itemSelect(){
+      document.getElementById('nav').pushPage('itemSelect.html', {});
+    };       
+  </script>
+</ons-page>

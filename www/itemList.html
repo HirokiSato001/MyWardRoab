@@ -1,0 +1,28 @@
+<ons-page id="itemList">
+  <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">アイテム一覧</div>
+  </ons-toolbar>
+  <ons-button onclick="send_itemEdit()">アイテム編集</ons-button>
+  <ons-button onclick="send_itemRegist()">アイテム登録</ons-button>
+  <ons-button onclick="send_itemDetails()">アイテム詳細</ons-button>
+  <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
+
+  <script>
+    // 画面表示時
+    ons.getScriptPage().onShow = function() {
+    }
+    // itemEdit画面へ
+    function send_itemEdit(){
+      document.getElementById('nav').pushPage('itemEdit.html', {});
+    };
+    // itemRegist画面へ
+    function send_itemRegist(){
+      document.getElementById('nav').pushPage('itemRegist.html', {});
+    };       
+    // itemDetails画面へ
+    function send_itemDetails(){
+      document.getElementById('nav').pushPage('itemDetails.html', {});
+    };       
+  </script>
+</ons-page>

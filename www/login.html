@@ -1,0 +1,66 @@
+<ons-page id="login">
+  <ons-toolbar>
+    <div class="center">ログイン</div>
+  </ons-toolbar>  
+  
+  <!-- <ons-input id="message" modifier="underbar" placeholder="メッセージを入力" float></ons-input>
+  <ons-button id="send_login">ログイン</ons-button> -->
+
+  <div style="text-align: center; margin-top: 30px;">
+    <p>
+      <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+    </p>
+    <p>
+      <ons-input id="password" modifier="underbar" placeholder="Password" float></ons-input>
+    </p>
+    <p style="margin-top: 30px;">
+    <ons-button onclick="login()">ログイン</ons-button>
+    <ons-button id="send_userRegist">新規登録</ons-button>
+
+    </p>
+  </div>
+  <script>  
+  // 画面表示時に起動
+  ons.ready(function() {
+    // アラートビューの表示
+    // ons.notification.alert('ようこそ');
+  });
+
+  // javaScript関数
+  function login(){
+    //id="username"の値を取得
+    var username = document.getElementById('username').value;
+    //id="password"の値を取得
+    var password = document.getElementById('password').value;
+
+    if (username === 'a' && password === 'a') {
+      ons.notification.alert('Congratulations!');
+      // ログイン成功 次画面へ
+      document.getElementById('nav').pushPage('menu.html', {});
+    } else {
+      ons.notification.alert('Incorrect username or password.');
+    }
+  };
+    
+  // onsenUI関数
+  ons.getScriptPage().onInit = function() {
+    this.querySelector('#send_userRegist').onclick = (e) => {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;      
+      // const message = document.getElementById('message').value;
+
+      //テキストフィールドの空チェック
+        if (username === '' || password === '' ) {
+          ons.notification.alert('入力されていません');
+          return;
+        }
+        document.getElementById('nav').pushPage('userRegist.html', {
+          data: {
+            username,password
+          }
+        });
+      }      
+    };
+  </script>
+  <h1></h1>
+</ons-page>

@@ -1,0 +1,13 @@
+<ons-page id="userRegist">
+  <ons-toolbar>
+    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="center">ユーザ登録</div>    
+  </ons-toolbar>
+  <script>
+    ons.getScriptPage().onShow = function() {
+      // 前画面のdata取得
+      ons.notification.alert(this.data.username + " " + this.data.password);
+    }
+  </script>
+  <ons-button onclick="ons.notification.alert('Hello World!')">Click </ons-button>
+</ons-page>
