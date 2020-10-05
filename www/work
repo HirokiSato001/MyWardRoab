@@ -1,0 +1,36 @@
+
+画面一覧	英名
+ログイン	login
+新規登録	userRegist
+トップ		menu
+ユーザ管理	userManage
+ユーザ編集	userEdit
+アイテム一覧	itemList	
+アイテム編集	itemEdit
+アイテム登録	itemRegist
+アイテム詳細	itemDetails
+アイテム選定	itemSelect
+コーディネート	coordinate
+
+
+Document Object Model (DOM) 
+HTML や XML 文書のためのプログラミングインターフェイスです。ページを表現するため、プログラムが文書構造、スタイル、内容を変更することができます。 DOM は文書をノードとオブジェクトで表現します。そうやって、プログラミング言語をページに接続することができます。
+
+参考URL
+onsenUIについて　
+https://blog.mbaas.nifcloud.com/entry/2018/03/22/110734
+
+
+onsenUI PlayGround
+https://ja.onsen.io/playground/
+
+
+onsenUIの画面遷移わかりやすいPDF
+https://edu.monaca.io/wp-content/uploads/onsen-01.pdf
+
+
+画面のプッシュポップについて
+https://www.buildinsider.net/mobile/monaca/02
+
+洋服アプリとても似ている。。。
+https://qiita.com/coboco/items/61b36355b2b72d8225ee
