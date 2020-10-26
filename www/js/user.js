@@ -2,21 +2,29 @@
 
 class User{
   // コンストラクタ
-  constructor(name,age){
-    this.nickName = name;
+  constructor(nickName,age){
+    this.nickName = nickName;
     this.age = age;
-    this.test;
+    this.gender;
   }
 
   getNickName(){
     return this.age;
   }
-  
+
+  setGender(gender){
+    this.gender = gender;
+  }  
+  getGender(){
+    return this.gender;
+  }  
   saveUserInfo(){
+
     localStorage.setItem('userInfo', JSON.stringify({
                 nickName:this.nickName,
                 age: this.age
               }));
+
   }
 
   showStorage() {
@@ -25,8 +33,8 @@ class User{
     nameList = JSON.parse(localStorage.getItem('userInfo'));   
     for (var nameKey in nameList) {
       text = nameKey + " : " + nameList[nameKey];
-      console.log(text);
-      // alert(text);
+      // console.log(text);
+      alert(text);
     }
   }
   // clearStorage() {

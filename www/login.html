@@ -1,4 +1,8 @@
+
 <ons-page id="login">
+<script src="js/user.js"></script>
+<script src="js/item.js"></script>
+
   <ons-toolbar>
     <div class="center">ログイン</div>
   </ons-toolbar>  
@@ -19,12 +23,15 @@
 
     </p>
   </div>
-  
+    <ons-button onclick="test()">表示</ons-button>
+
+
   <script>  
   // 画面表示時に起動
   ons.ready(function() {
     // アラートビューの表示
     // ons.notification.alert('ようこそ');
+
   });
 
   // javaScript関数
@@ -42,7 +49,7 @@
       ons.notification.alert('Incorrect username or password.');
     }
   };
-    
+
   // onsenUI関数
   ons.getScriptPage().onInit = function() {
     this.querySelector('#send_userRegist').onclick = (e) => {
@@ -62,6 +69,50 @@
         });
       }      
     };
+
+// ---ほんとは外出ししたいけど、全然動かないから...-----------
+     function saveStorage() {
+
+        setStorage();
+        showStorage();
+      }
+ 
+      function setStorage() {
+        localStorage.setItem('userInfo', JSON.stringify({
+                        nickName:"hoge",
+                        age: 12
+                      }));
+      }
+       
+      function showStorage() {
+        var li,text, nameList;
+        // clearNodes(); 
+        nameList = JSON.parse(localStorage.getItem('userInfo'));   
+        for (var nameKey in nameList) {
+          text = nameKey + " : " + nameList[nameKey];
+          alert(text);
+        }
+      }
+       
+      function clearStorage() {
+        localStorage.clear();
+        showStorage();
+      }
+
+       
+      function test() {
+       alert("test");
+
+        var myUser = new User("aaa","bbb")
+        myUser.saveUserInfo();
+        myUser.showStorage();
+        myUser.setGender("おとこ")
+        alert(myUser.getGender());
+      }
+
+//--------------------------
+    
   </script>
+
   <h1></h1>
 </ons-page>
