@@ -1,7 +1,6 @@
 
 <ons-page id="login">
 <script src="js/user.js"></script>
-<script src="js/item.js"></script>
 
   <ons-toolbar>
     <div class="center">ログイン</div>
@@ -15,10 +14,16 @@
       <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
     </p>
     <p>
+      <ons-input id="mailAddress" modifier="underbar" placeholder="mailAddress" float></ons-input>
+    </p>
+    
+    <p>
       <ons-input id="password" modifier="underbar" placeholder="Password" float></ons-input>
     </p>
     <p style="margin-top: 30px;">
     <ons-button onclick="login()">ログイン</ons-button>
+        <ons-button onclick="onLoginBtn()">backEnd_ログイン</ons-button>
+
     <ons-button id="send_userRegist">新規登録</ons-button>
 
     </p>
@@ -31,7 +36,6 @@
   ons.ready(function() {
     // アラートビューの表示
     // ons.notification.alert('ようこそ');
-
   });
 
   // javaScript関数
@@ -69,7 +73,25 @@
         });
       }      
     };
-
+  function onLoginBtn()
+  {
+    var email = document.getElementById('mailAddress').value;
+    var password = document.getElementById('password').value;
+    var MC = monaca.cloud;
+    MC.User.login(email, password)
+      .done(function()
+      {
+        console.log('login: '  + MC.User._oid);
+              ons.notification.alert('Congratulations!');
+      // ログイン成功 次画面へ
+      document.getElementById('nav').pushPage('menu.html', {});
+      })
+      .fail(function(err)
+      {
+        alert('Login failed: ' + err.message);
+        console.error(JSON.stringify(err));
+      });
+  }
 // ---ほんとは外出ししたいけど、全然動かないから...-----------
      function saveStorage() {
 
@@ -99,15 +121,14 @@
         showStorage();
       }
 
-       
       function test() {
-       alert("test");
+        alert("a")
 
-        var myUser = new User("aaa","bbb")
-        myUser.saveUserInfo();
-        myUser.showStorage();
-        myUser.setGender("おとこ")
-        alert(myUser.getGender());
+        var amyUser = new myUser("Bob","20")
+        alert(amyUser.getNickName())
+        amyUser.test()
+
+
       }
 
 //--------------------------
