@@ -1,41 +1,63 @@
 
-<ons-page id="login">
-<script src="js/user.js"></script>
 
-  <ons-toolbar>
-    <div class="center">ログイン</div>
-  </ons-toolbar>  
-  
-  <!-- <ons-input id="message" modifier="underbar" placeholder="メッセージを入力" float></ons-input>
+<ons-page id="login">
+	<script src="js/user.js"></script>
+	<script src="js/item.js"></script>
+
+    <script language="javascript" type="text/javascript">
+        function OnLinkClick() {
+          document.getElementById('nav').pushPage('userRegist.html', {});
+            target = document.getElementById("output");
+            target.innerHTML = "Penguin";
+            return false;
+        }
+  </script>
+
+	<ons-toolbar>
+		<div class="center">ログイン</div>
+	</ons-toolbar>
+
+	<!-- <ons-input id="message" modifier="underbar" placeholder="メッセージを入力" float></ons-input>
   <ons-button id="send_login">ログイン</ons-button> ああ-->
 
-  <div style="text-align: center; margin-top: 30px;">
-    <p>
-      <ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
-    </p>
-    <p>
-      <ons-input id="mailAddress" modifier="underbar" placeholder="mailAddress" float></ons-input>
-    </p>
-    
-    <p>
-      <ons-input id="password" modifier="underbar" placeholder="Password" float></ons-input>
-    </p>
-    <p style="margin-top: 30px;">
-    <ons-button onclick="login()">ログイン</ons-button>
-        <ons-button onclick="onLoginBtn()">backEnd_ログイン</ons-button>
+	<div style="text-align: center; margin-top: 30px;">
+		<p>
+			ユーザーID（メールアドレス）
+			<br>
+			<ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+		</p>
+		<p>
+			Password
+			<br>
+			<ons-input id="password" modifier="underbar" placeholder="Password" float></ons-input>
+		</p>
+		<p style="margin-top: 30px;">
+			<ons-button onclick="login()">ログイン</ons-button>
+		</p>
+		<p>
+			<u>
+  <a href="javascript:OnLinkClick();">新規登録はこちら</a><br />
+  <br/>
+  <div id="output"></div>
+								<!--<a href="userRegist.html">新規登録はこちら</a> -->
+			</u>
+		</p>
+		<p>
+			<u>
+				<a href="～～～.html">パスワードを忘れた方はこちら</a>
+			</u>
+		</p>
 
-    <ons-button id="send_userRegist">新規登録</ons-button>
-
-    </p>
-  </div>
-    <ons-button onclick="test()">表示</ons-button>
+	</div>
+	<!--<ons-button onclick="test()">表示</ons-button> -->
 
 
-  <script>  
-  // 画面表示時に起動
+	<script>
+		// 画面表示時に起動
   ons.ready(function() {
     // アラートビューの表示
     // ons.notification.alert('ようこそ');
+
   });
 
   // javaScript関数
@@ -73,25 +95,7 @@
         });
       }      
     };
-  function onLoginBtn()
-  {
-    var email = document.getElementById('mailAddress').value;
-    var password = document.getElementById('password').value;
-    var MC = monaca.cloud;
-    MC.User.login(email, password)
-      .done(function()
-      {
-        console.log('login: '  + MC.User._oid);
-              ons.notification.alert('Congratulations!');
-      // ログイン成功 次画面へ
-      document.getElementById('nav').pushPage('menu.html', {});
-      })
-      .fail(function(err)
-      {
-        alert('Login failed: ' + err.message);
-        console.error(JSON.stringify(err));
-      });
-  }
+
 // ---ほんとは外出ししたいけど、全然動かないから...-----------
      function saveStorage() {
 
@@ -121,19 +125,19 @@
         showStorage();
       }
 
+       
       function test() {
-        alert("a")
+       alert("test");
 
-        var amyUser = new myUser("Bob","20")
-        alert(amyUser.getNickName())
-        amyUser.test()
-
-
+        var myUser = new User("aaa","bbb")
+        myUser.saveUserInfo();
+        myUser.showStorage();
+        myUser.setGender("おとこ")
+        alert(myUser.getGender());
       }
 
 //--------------------------
-    
-  </script>
+	</script>
 
-  <h1></h1>
+	<h1></h1>
 </ons-page>
