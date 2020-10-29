@@ -6,8 +6,22 @@
   <script>
     ons.getScriptPage().onShow = function() {
       // 前画面のdata取得
-      ons.notification.alert(this.data.username + " " + this.data.password);
+      //ons.notification.alert(this.data.username + " " + this.data.password);
     }
   </script>
   <ons-button onclick="ons.notification.alert('Hello World!')">Click </ons-button>
+  <br>
+  <a href="javascript:OnLinkClick();">Exec</a><br />
+  <p>情報を入力してください</p>
+  <p>メールアドレス※</p>
+  <ons-input id="mailAddress" modifier="underbar" placeholder="mailAddress" float></ons-input>
+  <p>ニックネーム※</p>
+  <ons-input id="nickName" modifier="underbar" placeholder="nickName" float></ons-input>
+  <p>生年月日</p>
+  <p>性別</p>
+  <p>身長</p>
+  <p>Password※</p>
+  <ons-input id="password" modifier="underbar" placeholder="Password" float></ons-input>
+  <p>Password(再確認)※</p>
+  <ons-input id="password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" float></ons-input>
 </ons-page>
