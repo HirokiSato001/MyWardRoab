@@ -3,10 +3,63 @@
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center">アイテム登録</div>    
   </ons-toolbar>
+  <ons-button onclick="ons.notification.alert('Hello World!')">Click </ons-button>
+  
+    <br>
+  <ons-button onclick="itemRegist()">Click </ons-button>
+  <ons-button onclick="getItems()">Click </ons-button>
+  <ons-button onclick="updateItem()">Click </ons-button>
+
   <script>
     // 画面表示時
     ons.getScriptPage().onShow = function() {
+      //**テスト用 固定ユーザでログイン(いつか消す)↓↓↓↓↓↓
+      monaca.cloud.User.login("sato@jp.com", "aaaa");
+      //**テスト用 固定ユーザでログイン(いつか消す)↑↑↑↑↑↑
     }
+
+    function itemRegist(){
+      var Item = monaca.cloud.Collection("item");
+ 
+      Item.insert({category: 'シャツ', sub_category: 'Tシャツ'})
+      .done(function(result)
+      {
+          console.log("Inserted!");
+      })
+      .fail(function(err)
+      {
+          console.log("Err#" + err.code +": " + err.message);
+      });
+    }
+
+    var myitem;
+    function getItems(){
+      var Items = monaca.cloud.Collection("item");
+      Items.findMine()
+      .done(function(result)
+      {
+          console.log('Total items found: ' + result.totalItems);
+          console.log('category' + result.items[0].category);
+          myitem = result.items[0]
+      })
+      .fail(function(err)
+      {
+          console.log("Err#" + err.code +": " + err.message);
+      });      
+    }
+  function updateItem(){
+    myitem.category = "ズボン";
+    myitem.update()
+    .done(function(result)
+    {
+        console.log('Updating success');
+    })
+    .fail(function(err)
+    {
+        console.log("Err#" + err.code +": " + err.message);
+    });
+  }
+
   </script>
-  <ons-button onclick="ons.notification.alert('Hello World!')">Click 
+
 </ons-page>
