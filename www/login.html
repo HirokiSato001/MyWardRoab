@@ -24,7 +24,7 @@
 		<p>
 			ユーザーID（メールアドレス）
 			<br>
-			<ons-input id="username" modifier="underbar" placeholder="Username" float></ons-input>
+			<ons-input id="mailAddress" modifier="underbar" placeholder="MailAddress" float></ons-input>
 		</p>
 		<p>
 			Password
@@ -63,78 +63,58 @@
   // javaScript関数
   function login(){
     //id="username"の値を取得
-    var username = document.getElementById('username').value;
+    var mailAddress = document.getElementById('mailAddress').value;
     //id="password"の値を取得
     var password = document.getElementById('password').value;
 
-    if (username === 'a' && password === 'a') {
-      ons.notification.alert('Congratulations!');
-      // ログイン成功 次画面へ
-      document.getElementById('nav').pushPage('menu.html', {});
-    } else {
-      ons.notification.alert('Incorrect username or password.');
-    }
+
+    mailAddress = "sato@jp.com";
+    password = "aaaa";
+
+    var MC = monaca.cloud;
+    MC.User.login(mailAddress, password)
+       //ログイン成功した場合
+      .done(function(result)
+      {
+        console.log('login: '  + MC.User._oid);
+        console.log("Hello again, " + result.user._username);
+        document.getElementById('nav').pushPage('top.html', {});
+      })
+       //ログイン失敗した場合
+      .fail(function(err)
+      {
+        alert('Login failed: ' + err.message);
+        console.error(JSON.stringify(err));
+      });    
+
+    // if (username === 'a' && password === 'a') {
+    //   ons.notification.alert('Congratulations!');
+    //   // ログイン成功 次画面へ
+    //   document.getElementById('nav').pushPage('menu.html', {});
+    // } else {
+    //   ons.notification.alert('Incorrect username or password.');
+    // }
   };
 
-  // onsenUI関数
-  ons.getScriptPage().onInit = function() {
-    this.querySelector('#send_userRegist').onclick = (e) => {
-      var username = document.getElementById('username').value;
-      var password = document.getElementById('password').value;      
-      // const message = document.getElementById('message').value;
+  // // onsenUI関数
+  // ons.getScriptPage().onInit = function() {
+  //   this.querySelector('#send_userRegist').onclick = (e) => {
+  //     var username = document.getElementById('username').value;
+  //     var password = document.getElementById('password').value;      
+  //     // const message = document.getElementById('message').value;
 
-      //テキストフィールドの空チェック
-        if (username === '' || password === '' ) {
-          ons.notification.alert('入力されていません');
-          return;
-        }
-        document.getElementById('nav').pushPage('userRegist.html', {
-          data: {
-            username,password
-          }
-        });
-      }      
-    };
-
-// ---ほんとは外出ししたいけど、全然動かないから...-----------
-     function saveStorage() {
-
-        setStorage();
-        showStorage();
-      }
- 
-      function setStorage() {
-        localStorage.setItem('userInfo', JSON.stringify({
-                        nickName:"hoge",
-                        age: 12
-                      }));
-      }
-       
-      function showStorage() {
-        var li,text, nameList;
-        // clearNodes(); 
-        nameList = JSON.parse(localStorage.getItem('userInfo'));   
-        for (var nameKey in nameList) {
-          text = nameKey + " : " + nameList[nameKey];
-          alert(text);
-        }
-      }
-       
-      function clearStorage() {
-        localStorage.clear();
-        showStorage();
-      }
-
-       
-      function test() {
-       alert("test");
-
-        var myUser = new User("aaa","bbb")
-        myUser.saveUserInfo();
-        myUser.showStorage();
-        myUser.setGender("おとこ")
-        alert(myUser.getGender());
-      }
+  //     //テキストフィールドの空チェック
+  //       if (username === '' || password === '' ) {
+  //         ons.notification.alert('入力されていません');
+  //         return;
+  //       }
+  //       document.getElementById('nav').pushPage('userRegist.html', {
+  //         data: {
+  //           username,password
+  //         }
+  //       });
+  //     }      
+  //   };
 
 //--------------------------
 	</script>
