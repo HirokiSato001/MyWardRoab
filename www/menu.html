@@ -7,10 +7,32 @@
   <ons-button onclick="send_itemList()">アイテム一覧</ons-button>
   <ons-button onclick="send_itemSelect()">アイテム選定(コーディネート)</ons-button>
   <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
+  <br>
+  <p>pタグ</p>
+  <p id="nickName">nickname</p>
+  <p id="password">password</p>
+  <p id="age">age</p>
+  </ons-tabbar>
 
   <script>
     // 画面表示時
     ons.getScriptPage().onShow = function() {
+      // ログイン済みか確認
+      //**テスト用 固定ユーザでログイン(いつか消す)↓↓↓↓↓↓
+      monaca.cloud.User.login("sato@jp.com", "aaaa");
+      //**テスト用 固定ユーザでログイン(いつか消す)↑↑↑↑↑↑
+      // ログイン確認
+      if (false == monaca.cloud.User.isAuthenticated()) {
+        alert("ログイン未")
+      } else {
+        alert("ログイン済み")
+      }
+      // ユーザからageプロパティ取得
+      monaca.cloud.User.getProperty("age")
+      .then(function(age){
+        console.log(age);
+        document.getElementById("age").innerText = age
+      })
     }
     // userManage画面へ
     function send_userManage(){
@@ -23,6 +45,7 @@
     // itemSelect画面へ
     function send_itemSelect(){
       document.getElementById('nav').pushPage('itemSelect.html', {});
-    };       
+    };
+
   </script>
 </ons-page>
