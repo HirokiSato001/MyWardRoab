@@ -1,13 +1,70 @@
 <ons-page id="coordinate">
   <ons-toolbar>
     <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">コーディネート</div>    
+    <div class="center"><ons-icon icon="user-circle"></ons-icon>コーディネート</div>    
   </ons-toolbar>
+    
+<p><img src="image/4_5_blue.png" alt="コーディネート" width="50%" height="50%"></p>
+ <div class="left">＜使用アイテム＞</div>
+ <div class="item">
+    <p><a href ="itemList">　　ブラウス</a></p>
+    <p><a href ="itemList">　　パンツ </a>  </p> 
+    <p><a href ="itemList">　　パンプス</a></p>
+</div>
+<div class="menu">
+    <ul>
+      <li><a href="http://portalsite.gcs.g01.fujitsu.local/sites/bsc/Pages/home.aspx">
+      <p><font size="1"><ons-icon icon="md-face"></ons-icon>マイページ</p></a></li>
+      <li><a href="http://portalsite.gcs.g01.fujitsu.local/sites/bsc/Pages/home.aspx">
+      <p><font size="1"><ons-icon icon="ice-cream"></ons-icon>メニュー</p></a></li>
+      <li><a href="http://portalsite.gcs.g01.fujitsu.local/sites/bsc/Pages/home.aspx">
+      <p><font size="1"><ons-icon icon="box-open"></ons-icon>アイテム一覧</p></a></li>
+      <li><a href="http://portalsite.gcs.g01.fujitsu.local/sites/bsc/Pages/home.aspx">
+      <p><font size="1"><ons-icon icon="user-circle"></ons-icon>コーディネート</p></a></li>
+    </ul>
+  </div>
   <script>
     // 画面表示時
     ons.getScriptPage().onShow = function() {
     }
+    // itemSelect画面へ
+    function send_itemSelect(){
+      document.getElementById('nav').pushPage('itemSelect.html', {});
+    }; 
   </script>
   <ons-button onclick="document.getElementById('nav').popPage()">Click</ons-button>
 
+<style type="text/css">
+p img  {
+  text-align: center; 
+  width: 300px;
+  height: 200px;
+  max-width: 100%;
+}
+p  {
+  text-align: center; 
+}
+.item p{
+  text-align: left;  
+}
+a  {
+  text-decoration: none;  
+}
+.menu ul{
+  list-style-type:none;/*箇条書きのポッチを消す*/
+  text-align: center;
+  background:White;
+}
+.menu ul li { 
+  display: inline-block;/*inline-blockにします*/
+  width: 60px;/*幅も指定できる*/
+  padding: 0px 0px;/*余白も指定できる*/
+  margin: 1px 1px;/*余白も指定できる*/
+  <!--margin-right:30px;--> 
+  vertical-align: middle;/*縦の表示位置も指定できる*/
+  border: 2px solid #ffaaaa;
+  background: #FFFFFF;
+  text-align: center;
+  color: #ffaaaa;
+}
 </ons-page>
