@@ -49,8 +49,10 @@
 		</p>
 
 	</div>
-	<!--<ons-button onclick="test()">表示</ons-button> -->
-
+	<ons-button onclick="test()">テストログイン</ons-button>
+	<ons-button onclick="testUser()">テストUser</ons-button>
+	<ons-button onclick="getNickName()">get</ons-button>
+	<ons-button onclick="setNickName()">set</ons-button>
 
 	<script>
 		// 画面表示時に起動
@@ -66,11 +68,8 @@
     var mailAddress = document.getElementById('mailAddress').value;
     //id="password"の値を取得
     var password = document.getElementById('password').value;
-
-
     mailAddress = "sato@jp.com";
     password = "aaaa";
-
     var MC = monaca.cloud;
     MC.User.login(mailAddress, password)
        //ログイン成功した場合
@@ -79,22 +78,50 @@
         console.log('login: '  + MC.User._oid);
         console.log("Hello again, " + result.user._username);
         document.getElementById('nav').pushPage('top.html', {});
+
+        // Userクラスに情報を設定
       })
        //ログイン失敗した場合
       .fail(function(err)
       {
         alert('Login failed: ' + err.message);
         console.error(JSON.stringify(err));
-      });    
-
-    // if (username === 'a' && password === 'a') {
-    //   ons.notification.alert('Congratulations!');
-    //   // ログイン成功 次画面へ
-    //   document.getElementById('nav').pushPage('menu.html', {});
-    // } else {
-    //   ons.notification.alert('Incorrect username or password.');
-    // }
+      });
   };
+
+  function test(){
+    mailAddress = "sato@jp.com";
+    password = "aaaa";
+    var MC = monaca.cloud;
+    MC.User.login(mailAddress, password)
+       //ログイン成功した場合
+      .done(function(result)
+      {
+        console.log('login: '  + MC.User._oid);
+        console.log("Hello again, " + result.user._username);
+        
+        // Userクラスに情報を設定
+      })
+       //ログイン失敗した場合
+      .fail(function(err)
+      {
+        alert('Login failed: ' + err.message);
+        console.error(JSON.stringify(err));
+      });     
+  }
+
+  function testUser(){
+    myUser = new User();
+    myUser.initNickName();
+  }
+  function getNickName(){
+    alert(myUser.getNickName());    
+
+  }
+  function setNickName(){
+    myUser.setNickName("佐藤")
+
+  }
 
   // // onsenUI関数
   // ons.getScriptPage().onInit = function() {
