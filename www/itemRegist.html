@@ -6,41 +6,41 @@
 
   <h4>カテゴリー：</h4>
   <div style="text-align: center">
-    <ons-select id="categoy" modifier="underbar" onchange="changeCategory(event)">
-      <option value="1" selected>トップス</option>
-      <option value="2">ボトムス</option>
-      <option value="3">アウター</option>
-      <option value="4">ワンピース</option>
-      <option value="5">シューズ</option>
+    <ons-select id="category" modifier="underbar" onchange="changeCategory()">
+      <option value = 1>トップス</option>
+      <option value = 2>ボトムス</option>
+      <option value = 3>アウター</option>
+      <option value = 4>ワンピース</option>
+      <option value = 5>シューズ</option>
     </ons-select>
   </div>
   
   <h4>サブカテゴリー：</h4>
   <div style="text-align: center">
-    <ons-select id="sub_categoy" modifier="underbar">
-      <option value="1">Tシャツ</option>
-      <option value="2">ポロシャツ</option>
-      <option value="3">パーカー</option>
-      <option value="4">ニット</option>
-      <option value="5">インナー</option>      
+    <ons-select id="sub_category" modifier="underbar">
+      <option value = 1>Tシャツ</option>
+      <option value = 2>ポロシャツ</option>
+      <option value = 3>パーカー</option>
+      <option value = 4>ニット</option>
+      <option value = 5>インナー</option>      
     </ons-select>
   </div>
   
   <h4>カラー：</h4>
   <div style="text-align: center">
     <ons-select id="color" modifier="underbar">
-      <option value="1">赤</option>
-      <option value="2">茶</option>
-      <option value="3">橙</option>
-      <option value="4">黄</option>
-      <option value="5">緑</option>
-      <option value="6">青</option>
-      <option value="7">紫</option>
-      <option value="8">黒</option>
-      <option value="9">白</option>
-      <option value="10">桃</option>
-      <option value="11">グレー</option>
-      <option value="12">ベージュ</option>
+      <option value = 1>赤</option>
+      <option value = 2>茶</option>
+      <option value = 3>橙</option>
+      <option value = 4>黄</option>
+      <option value = 5>緑</option>
+      <option value = 6>青</option>
+      <option value = 7>紫</option>
+      <option value = 8>黒</option>
+      <option value = 9>白</option>
+      <option value = 10>桃</option>
+      <option value = 11>グレー</option>
+      <option value = 12>ベージュ</option>
     </ons-select>
   </div>
 
@@ -121,44 +121,54 @@
  
 
   <script>
-    // 画面表示時
-    ons.getScriptPage().onShow = function() {
-      //**テスト用 固定ユーザでログイン(いつか消す)↓↓↓↓↓↓
-      monaca.cloud.User.login("sato@jp.com", "aaaa");
-      //**テスト用 固定ユーザでログイン(いつか消す)↑↑↑↑↑↑
-    }
-
-    function itemRegist(){
-      var Item = monaca.cloud.Collection("item");
- 
-      Item.insert({category: 'シャツ', sub_category: 'Tシャツ'})
-      .done(function(result)
-      {
-          console.log("Inserted!");
-      })
-      .fail(function(err)
-      {
-          console.log("Err#" + err.code +": " + err.message);
-      });
-    }
 
     //カテゴリーが変更された場合、サブカテゴリーのドロップダウンのメニュー項目を変更する
-    function changeCategory(event){
-      var categorySelect = document.getElementById("category")
-      var subCategorySelect = document.getElementById("sub_categoy");
+    function changeCategory(){
+      // カテゴリーのプルダウン
+      var category_select = document.getElementById("category");
+      // サブカテゴリーのプルダウン
+      var subCategory_select = document.getElementById("sub_category");
 
-      console.log("Onsen UI is 1");
-      subCategorySelect.options.length = 0;
+      // サブカテゴリーの項目
+      const sub_categories = [
+        ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
+        ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
+        ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
+        ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
+        ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
+      ];
 
-      if(categorySelect.optionsp[categorySelect.selectedIndex].value == "2"){
-        console.log("Onsen UI is 2");
-        subCategorySelect.options[0] = new Option("りんご");
-        subCategorySelect.options[0] = new Option("レモン"); 
+      // 選択された項目番号
+      const index = category_select.selectedIndex;
+
+      // サブカテゴリーのプルダウンを初期化
+      subCategory_select.length = 0;
+
+      // サブカテゴリーに項目を設定
+      for (let i = 0 ; i < sub_categories[index].length ; i++) {
+        subCategory_select.options[i] = new Option(sub_categories[index][i], i);
       }
-            
-    }
-
   }
+  //   // 画面表示時
+  //   ons.getScriptPage().onShow = function() {
+  //     //**テスト用 固定ユーザでログイン(いつか消す)↓↓↓↓↓↓
+  //     monaca.cloud.User.login("sato@jp.com", "aaaa");
+  //     //**テスト用 固定ユーザでログイン(いつか消す)↑↑↑↑↑↑
+  //   }
+
+  //   function itemRegist(){
+  //     var Item = monaca.cloud.Collection("item");
+ 
+  //     Item.insert({category: 'シャツ', sub_category: 'Tシャツ'})
+  //     .done(function(result)
+  //     {
+  //         console.log("Inserted!");
+  //     })
+  //     .fail(function(err)
+  //     {
+  //         console.log("Err#" + err.code +": " + err.message);
+  //     });
+  //   }
 
   </script>
 
