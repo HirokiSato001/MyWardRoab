@@ -47,42 +47,42 @@
   <h4>柄：</h4>
   <div style="text-align: center">
     <ons-select id="design" modifier="underbar">
-      <option value="1">無地</option>
-      <option value="2">水玉（ドット）</option>
-      <option value="3">ストライプ</option>
-      <option value="4">ボーダー</option>
-      <option value="5">チェック</option>
-      <option value="6">ペイズリー</option>
-      <option value="7">迷彩</option>
-      <option value="8">アニマル</option>
+      <option value = 1>無地</option>
+      <option value = 2>水玉（ドット）</option>
+      <option value = 3>ストライプ</option>
+      <option value = 4>ボーダー</option>
+      <option value = 5>チェック</option>
+      <option value = 6>ペイズリー</option>
+      <option value = 7>迷彩</option>
+      <option value = 8>アニマル</option>
     </ons-select>
   </div>
 
   <h4>素材：</h4>
   <div style="text-align: center">
     <ons-select id="material" modifier="underbar">
-      <option value="1">ナイロン</option>
-      <option value="2">ポリエステル</option>
-      <option value="3">ポリウレタン</option>
-      <option value="4">レーヨン</option>
-      <option value="5">アクリル</option>
-      <option value="6">綿（コットン）</option>
-      <option value="7">毛（ウール）</option>
-      <option value="8">麻（リネン）</option>
-      <option value="9">絹（シルク）</option>
-      <option value="10">ポリノジック</option>
-      <option value="11">キュプラ</option>
-      <option value="12">リヨセル</option>
+      <option value = 1>ナイロン</option>
+      <option value = 2>ポリエステル</option>
+      <option value = 3>ポリウレタン</option>
+      <option value = 4>レーヨン</option>
+      <option value = 5>アクリル</option>
+      <option value = 6>綿（コットン）</option>
+      <option value = 7>毛（ウール）</option>
+      <option value = 8>麻（リネン）</option>
+      <option value = 9>絹（シルク）</option>
+      <option value = 10>ポリノジック</option>
+      <option value = 11>キュプラ</option>
+      <option value = 12>リヨセル</option>
     </ons-select>
   </div>
   
   <h4>季節：</h4>
   <div style="text-align: center">
     <ons-row>
-      <ons-col><ons-radio name="season" input-id="radio-1" checked>春</ons-radio></ons-col>
-      <ons-col><ons-radio name="season" input-id="radio-2">夏</ons-radio></ons-col>
-      <ons-col><ons-radio name="season" input-id="radio-3">秋</ons-radio></ons-col>
-      <ons-col><ons-radio name="season" input-id="radio-4">冬</ons-radio></ons-col>
+      <ons-col><ons-radio name="season" input-id="radio-1" value = 1 checked>春</ons-radio></ons-col>
+      <ons-col><ons-radio name="season" input-id="radio-2" value = 2>夏</ons-radio></ons-col>
+      <ons-col><ons-radio name="season" input-id="radio-3" value = 3>秋</ons-radio></ons-col>
+      <ons-col><ons-radio name="season" input-id="radio-4" value = 4>冬</ons-radio></ons-col>
     </ons-row>
   </div>
   
@@ -111,7 +111,8 @@
 
   <h4>画像：</h4>
   <div style="text-align: center">
-      <ons-button onclick="itemRegist()">カメラ起動(テスト) </ons-button>
+      <img src="" id="image">
+      <ons-button onclick="boot_camera()">カメラ起動(テスト) </ons-button>
   </div>  
 
   <br>
@@ -149,27 +150,79 @@
         subCategory_select.options[i] = new Option(sub_categories[index][i], i);
       }
   }
-  //   // 画面表示時
-  //   ons.getScriptPage().onShow = function() {
-  //     //**テスト用 固定ユーザでログイン(いつか消す)↓↓↓↓↓↓
-  //     monaca.cloud.User.login("sato@jp.com", "aaaa");
-  //     //**テスト用 固定ユーザでログイン(いつか消す)↑↑↑↑↑↑
-  //   }
+  
+  function boot_camera(){
+    var image = document.getElementById("image");
+    var screenWidth = screen.width;
+    var screenHeight = screen.height;
 
-  //   function itemRegist(){
-  //     var Item = monaca.cloud.Collection("item");
- 
-  //     Item.insert({category: 'シャツ', sub_category: 'Tシャツ'})
-  //     .done(function(result)
-  //     {
-  //         console.log("Inserted!");
-  //     })
-  //     .fail(function(err)
-  //     {
-  //         console.log("Err#" + err.code +": " + err.message);
-  //     });
-  //   }
+    var option = {
+        saveToPhotoAlbum: true //撮影後端末に保存
+    };
 
+    navigator.camera.getPicture(onSuccess, onError, option);
+
+    //成功時に呼び出されるコールバック関数
+    function onSuccess(imageURI){
+      image.src = imageURI;
+      image.height = screenHeight / 3;
+      image.width = screenWidth / 4 * 3;
+      alert(imageURI);
+    }
+
+    //失敗時に呼び出されるコールバック関数
+    function onError(message){
+        alert("Error:" + message);
+    }
+  }
+
+  // 「登録」ボタン押下時の処理
+  function itemRegist(){
+    var category = document.getElementById("category").value;
+    var sub_category = document.getElementById("sub_category").value;
+    var color = document.getElementById("color").value;
+    var design = document.getElementById("design").value;
+    var material = document.getElementById("material").value;
+    
+    var season_radio =  document.getElementsByName("season");
+    var season = "";
+    for(var i = 0; i < season_radio.length ; i++){
+      if (season_radio[i].checked){
+        //選択されたラジオボタンのvalue値を取得する
+        season = season_radio[i].value;
+        break;
+      }
+    }
+
+    var size = document.getElementById("size").value;
+    var brand = document.getElementById("brand").value;
+    var remarks = document.getElementById("remarks").value;
+
+    var image = document.getElementById("image").src;
+
+    var Item = monaca.cloud.Collection("item");
+    Item.insert(
+      {
+        category: category, 
+        sub_category: sub_category,
+        color: color,
+        design: design,
+        material: material,
+        season: season,
+        size: size,
+        brand: brand,
+        remarks: remarks,
+        image: image
+      })
+      .done(function(result)
+      {
+        console.log("Inserted!");
+      })
+      .fail(function(err)
+      {
+        console.log("Err#" + err.code +": " + err.message);
+      });
+  }
   </script>
 
 </ons-page>
