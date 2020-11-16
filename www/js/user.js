@@ -11,18 +11,12 @@ var height // 身長
 var password // パスワード
 
 class User {
-  // コンストラクタ
-  // constructor(mailAddress,nickName,age,password){
-  //   this.mailAddress = mailAddress;
-  //   this.nickName = nickName;
-  //   this.age = age;
-  //   this.password = password;
-  //   this.gender;
-  // }
+
   constructor() {
     // ログイン済みの場合
     if (monaca.cloud.User.isAuthenticated() == true) {
       console.log("new User()ログイン済み");
+      initUser();
     } else {
       console.log("new User()未ログイン");
     }
@@ -43,15 +37,6 @@ class User {
         console.log('FAILED');
         alert('Registration failed!');
         console.error(JSON.stringify(err));
-      });
-  }
-  /** バックエンドのユーザからmailaddressを取得し、グローバル変数に設定する*/
-  initNickName() {
-    // ログインユーザからnickNameプロパティ取得
-    monaca.cloud.User.getProperty("nickName")
-      .then(function (argNickName) {
-        // グローバル変数に取得したプロパティ値を設定
-        nickName = argNickName
       });
   }
 
