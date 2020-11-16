@@ -13,9 +13,9 @@
 
   <p>情報を入力してください</p>
   <p>メールアドレス※</p>
-  <ons-input type="email" id="mailAddress" modifier="underbar" placeholder="mailAddress" float></ons-input>
+  <ons-input type="email" id="regist_mailAddress" modifier="underbar" placeholder="mailAddress" float></ons-input>
   <p>ニックネーム※</p>
-  <ons-input id="nickName" modifier="underbar" placeholder="nickName" float></ons-input>
+  <ons-input id="regist_nickName" modifier="underbar" placeholder="nickName" float></ons-input>
   <p>生年月日</p>
   <select name="year">
 <option value="">-</option>
@@ -176,9 +176,9 @@
   <p>身長</p>
     <ons-input type="number" min="50" max="250" id="height" modifier="underbar" placeholder="身長" float></ons-input>cm
   <p>Password※</p>
-  <ons-input id="password" modifier="underbar" placeholder="Password" float></ons-input>
+  <ons-input id="regist_password" modifier="underbar" placeholder="Password" float></ons-input>
   <p>Password(再確認)※</p>
-  <ons-input id="password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" float></ons-input>
+  <ons-input id="regist_password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" float></ons-input>
 <br>
  <ons-button onclick="onclick_userRegist()">新規登録</ons-button>
 <br>
@@ -191,37 +191,14 @@
       }else{
       }
     };
-    function getElement(){
-      // メールアドレス
-      var address =  document.getElementById('mailAddress').value;
-      // ニックネーム
-      var nickName =  document.getElementById('nickName').value;
-      // 生年月日
-      var barthYear =  document.getElementsByName('year').value;          
-      var barthMonth =  document.getElementsByName('month').value;
-      var barthDay =  document.getElementsByName('day').value;     
-      // 性別
-      var genderList = document.getElementsByName("gender");
-      var gender = "";
-      // ラジオボタン(name="gender")のチェックされている項目取得
-      for (let i = 0; i < genderList.length; i++){
-        if(genderList[i].checked){
-          gender = genderList[i].value;
-          break;
-        }
-      }
-      // 身長
-      var height =  document.getElementById('height').value;
-      // パスワード
-      var password = document.getElementById('password').value;
-      var password_re =  document.getElementById('password_reconfirmation').value;
-    }
+ 
 
     function checkVaridation(){
       // メールアドレス
-      var address =  document.getElementById('mailAddress').value;
+      var address =  document.getElementById('regist_mailAddress').value;
+      alert(address)
       // ニックネーム
-      var nickName =  document.getElementById('nickName').value;
+      var nickName =  document.getElementById('regist_nickName').value;
       // 生年月日
       var barthYear =  document.getElementsByName('year').value;          
       var barthMonth =  document.getElementsByName('month').value;
@@ -239,11 +216,12 @@
       // 身長
       var height =  document.getElementById('height').value;
       // パスワード
-      var password = document.getElementById('password').value;
-      var password_re =  document.getElementById('password_reconfirmation').value;
+      var password = document.getElementById('regist_password').value;
+      var password_re =  document.getElementById('regist_password_reconfirmation').value;
 
       // メールアドレスの正規表現
       var reg = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
+      alert(address)
       if (!reg.test(address)) {
         ons.notification.alert('メールアドレスが不正です');
         return false;
@@ -283,7 +261,7 @@
     }
 
     function onclick_userRegistTEST(){
-      myUser = new User("sato@jp.com","sato",25);
+      myUser = new User("eba@jp.com","eba",25,"aaaa");
       myUser.test();
 
     }
