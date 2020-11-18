@@ -1,6 +1,7 @@
 // This is a JavaScript file
 // グローバル変数定義
 var mailaddress // メールアドレス
+var password // パスワード
 var nickName // ニックネーム
 var birthDay // 生年月日
 var year // 年
@@ -8,28 +9,41 @@ var month // 月
 var day // 日
 var gender // 性別
 var height // 身長
-var password // パスワード
 
 class User {
-
+  // コンストラクタ
+  // constructor(mailAddress,nickName,age,password){
+  //   this.mailAddress = mailAddress;
+  //   this.nickName = nickName;
+  //   this.age = age;
+  //   this.password = password;
+  //   this.gender;
+  // }
   constructor() {
     // ログイン済みの場合
     if (monaca.cloud.User.isAuthenticated() == true) {
       console.log("new User()ログイン済み");
-      initUser();
     } else {
       console.log("new User()未ログイン");
     }
   }
-  test() {
-    var MC = monaca.cloud;
-    var email = this.mailAddress;
-    var password = this.password;
-    var age = this.age;
-    var nickName = this.nickName;
+  userRegist(mailaddress, password, nickName, birthDay, year, month, day, gender, height) {
+    //いる？
+    // var MC = monaca.cloud;
+    //var email = this.mailAddress;
+    //var password = this.password;
+    //var age = this.age;
+    //var nickName = this.nickName;
+    //var birthDay = this.birthDay;
+    //var year = this.year;
+    //var month = this.month;
+    //var day = this.day;
+    //var gender = this.gender;
+    //var height = this.height;
+
     console.log(MC);
 
-    MC.User.register(email, password, { age: age, nickName: nickName }).done(function () {
+    MC.User.register(email, password, { age: age, nickName: nickName, birthDay: birthDay, year: year, month: month, day: day, gender: gender, height: height }).done(function () {
       console.log('Registration is success!' + MC.User._oid);
       document.getElementById('nav').pushPage('menu.html', {});
     })
@@ -39,63 +53,13 @@ class User {
         console.error(JSON.stringify(err));
       });
   }
-
-  /** バックエンドのユーザからユーザー情報を取得し、グローバル変数に設定する*/
-  initUser() {
-    // メールアドレスを取得し、ユーザー情報に設定する
-    monaca.cloud.User.getProperty("mailAddress")
-      .then(function (argMailaddress) {
-        // グローバル変数に取得したプロパティ値を設定
-        mailAddress = argMailaddress
-      });
-
-    // ニックネームを取得し、ユーザー情報に設定する
+  /** バックエンドのユーザからmailaddressを取得し、グローバル変数に設定する*/
+  initNickName() {
+    // ログインユーザからnickNameプロパティ取得
     monaca.cloud.User.getProperty("nickName")
       .then(function (argNickName) {
         // グローバル変数に取得したプロパティ値を設定
         nickName = argNickName
-      });
-
-    // 誕生日を取得し、ユーザー情報に設定する
-    monaca.cloud.User.getProperty("birthDay")
-      .then(function (argbirthDay) {
-        // グローバル変数に取得したプロパティ値を設定
-        birthDay = argbirthDay
-      });
-
-    // 年を取得し、ユーザー情報に設定する
-    monaca.cloud.User.getProperty("year")
-      .then(function (argyear) {
-        // グローバル変数に取得したプロパティ値を設定
-        year = argyear
-      });
-
-    // 月を取得し、ユーザー情報に設定する
-    monaca.cloud.User.getProperty("month")
-      .then(function (argMonth) {
-        // グローバル変数に取得したプロパティ値を設定
-        month = argMonth
-      });
-
-    // 日を取得し、ユーザー情報に設定する
-    monaca.cloud.User.getProperty("day")
-      .then(function (argDay) {
-        // グローバル変数に取得したプロパティ値を設定
-        day = argDay
-      });
-
-    // 性別を取得し、ユーザー情報に設定する
-    monaca.cloud.User.getProperty("gender")
-      .then(function (argGender) {
-        // グローバル変数に取得したプロパティ値を設定
-        gender = argGender
-      });
-
-    // 身長を取得し、ユーザー情報に設定する
-    monaca.cloud.User.getProperty("height")
-      .then(function (argHeight) {
-        // グローバル変数に取得したプロパティ値を設定
-        height = argHeight
       });
   }
   /** mailaddressのsetter */
@@ -113,18 +77,18 @@ class User {
     nickName = argNickName;
   }
   /** birthDayのsetter */
-  setbirthDay(argbirthDay) {
+  setBirthDay(argBirthDay) {
     // ログインユーザからbirthDayプロパティ値を更新
-    monaca.cloud.User.saveProperty("birthDay", argbirthDay);
+    monaca.cloud.User.saveProperty("birthDay", argBirthDay);
     // グローバル変数:birthDayを更新
-    birthDay = argbirthDay;
+    birthDay = argBirthDay;
   }
   /** yearのsetter */
-  setyear(argyear) {
+  setYear(argYear) {
     // ログインユーザからyearプロパティ値を更新
-    monaca.cloud.User.saveProperty("year", argyear);
+    monaca.cloud.User.saveProperty("year", argYear);
     // グローバル変数:yearを更新
-    year = argyear;
+    year = argYear;
   }
   /** monthのsetter */
   setMonth(argMonth) {
@@ -172,12 +136,12 @@ class User {
     return nickName;
   }
   /** 生年月日のgetter */
-  getbirthDay() {
+  getBirthDay() {
     // グローバル変数:birthDayの値を返却
     return birthDay;
   }
   /** 年のgetter */
-  getyear() {
+  getYear() {
     // グローバル変数:yearの値を返却
     return year;
   }
