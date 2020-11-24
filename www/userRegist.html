@@ -1,23 +1,25 @@
 <ons-page id="userRegist">
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">ユーザ登録</div>    
-  </ons-toolbar>
-  <script>
-    ons.getScriptPage().onShow = function() {
+	<ons-toolbar>
+		<div class="left">
+			<ons-back-button>Back</ons-back-button>
+		</div>
+		<div class="center">ユーザ登録</div>
+	</ons-toolbar>
+	<script>
+		ons.getScriptPage().onShow = function() {
       // 前画面のdata取得
       //ons.notification.alert(this.data.username + " " + this.data.password);
     }
-  </script>
-   <ons-button onclick="onclick_userRegistTEST()">新規登録_Test固定値</ons-button>
+	</script>
+	<ons-button onclick="onclick_userRegistTEST()">新規登録_Test固定値</ons-button>
 
-  <p>情報を入力してください</p>
-  <p>メールアドレス※</p>
-  <ons-input type="email" id="mailAddress" modifier="underbar" placeholder="mailAddress" float></ons-input>
-  <p>ニックネーム※</p>
-  <ons-input id="nickName" modifier="underbar" placeholder="nickName" float></ons-input>
-  <p>生年月日</p>
-  <select name="year">
+	<p>情報を入力してください</p>
+	<p>メールアドレス※</p>
+	<ons-input type="email" id="mailAddress" modifier="underbar" placeholder="mailAddress" float></ons-input>
+	<p>ニックネーム※</p>
+	<ons-input id="nickName" modifier="underbar" placeholder="nickName" float></ons-input>
+	<p>生年月日</p>
+	<select name="year">
 <option value="">-</option>
 <option value="1931">1931</option>
 <option value="1932">1932</option>
@@ -120,7 +122,7 @@
 <option value="2029">2029</option>
 <option value="2030">2030</option>
 </select>年
-<select name="month">
+	<select name="month">
 <option value="">-</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -135,7 +137,7 @@
 <option value="11">11</option>
 <option value="12">12</option>
 </select>月
-<select name="day">
+	<select name="day">
 <option value="">-</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -169,26 +171,26 @@
 <option value="30">30</option>
 <option value="31">31</option>
 </select>　日
-  <p>性別</p>
-    <input type="radio" name="gender" value=male>男
-    <input type="radio" name="gender" value="female">女
-    <input type="radio" name="gender" value="other">その他
-  <p>身長</p>
-    <ons-input type="number" min="50" max="250" id="height" modifier="underbar" placeholder="身長" float></ons-input>cm
-  <p>Password※</p>
-  <ons-input id="password" modifier="underbar" placeholder="Password" float></ons-input>
-  <p>Password(再確認)※</p>
-  <ons-input id="password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" float></ons-input>
-<br>
- <ons-button onclick="onclick_userRegist()">新規登録</ons-button>
-<br>
-<br>
+	<p>性別</p>
+	<input type="radio" name="gender" value=male>男
+	<input type="radio" name="gender" value="female">女
+	<input type="radio" name="gender" value="other">その他
+	<p>身長</p>
+	<ons-input type="number" min="50" max="250" id="height" modifier="underbar" placeholder="身長" float></ons-input>cm
+	<p>Password※</p>
+	<ons-input id="password" modifier="underbar" placeholder="Password" type="password" float></ons-input>
+	<p>Password(再確認)※</p>
+	<ons-input id="password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" type="password" float></ons-input>
+	<br>
+	<ons-button onclick="onclick_userRegist()">新規登録</ons-button>
+	<br>
+	<br>
 
-<script>
-    function onclick_userRegist(){
+	<script>
+		function onclick_userRegist(){
       // 入力必須欄のバリデーションチェック
       if(checkVaridation()){
-      }else{
+        // 何もしない
       }
     };
     function getElement(){
@@ -197,9 +199,9 @@
       // ニックネーム
       var nickName =  document.getElementById('nickName').value;
       // 生年月日
-      var barthYear =  document.getElementsByName('year').value;          
-      var barthMonth =  document.getElementsByName('month').value;
-      var barthDay =  document.getElementsByName('day').value;     
+      var birthYear =  document.getElementsByName('year').value;
+      var birthMonth =  document.getElementsByName('month').value;
+      var birthDay =  document.getElementsByName('day').value;
       // 性別
       var genderList = document.getElementsByName("gender");
       var gender = "";
@@ -223,9 +225,9 @@
       // ニックネーム
       var nickName =  document.getElementById('nickName').value;
       // 生年月日
-      var barthYear =  document.getElementsByName('year').value;          
-      var barthMonth =  document.getElementsByName('month').value;
-      var barthDay =  document.getElementsByName('day').value;     
+      var birthYear =  document.getElementsByName('year').value;
+      var birthMonth =  document.getElementsByName('month').value;
+      var birthDay =  document.getElementsByName('day').value;
       // 性別
       var genderList = document.getElementsByName("gender");
       var gender = "";
@@ -242,6 +244,12 @@
       var password = document.getElementById('password').value;
       var password_re =  document.getElementById('password_reconfirmation').value;
 
+      // メールアドレスの入力確認
+      // if(address == ''){
+      //   ons.notification.alert('メールアドレスが入力されていません');
+      //   return false;
+      // }
+
       // メールアドレスの正規表現
       var reg = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;
       if (!reg.test(address)) {
@@ -250,32 +258,33 @@
       }
       // ニックネーム
       if(nickName == ''){
-        ons.notification.alert('ニックネームが不正です');
-        return false
+        ons.notification.alert('ニックネームが入力されていません');
+        return false;
       }
       // 生年月日
-      if(barthYear == '' || barthMonth == '' || barthDay == ''){
-        ons.notification.alert('生年月日が不正です');
-        return false
+      if(birthYear == '' || birthMonth == '' || birthDay == ''){
+        ons.notification.alert('生年月日が入力されていません');
+        return false;
       }
       // 性別
       if(gender == ""){
-        ons.notification.alert('性別が不正です');
-        return false
+        ons.notification.alert('性別が入力されていません');
+        return false;
       }
       // 身長
       if(height == ""){
-        ons.notification.alert("身長が不正です"); 
-        return false;       
+        ons.notification.alert("身長が入力されていません");
+        return false;
       }
       // パスワード
-      if(password == "" && password_re == ""){
-        ons.notification.alert("パスワードが不正です")
+      if(password == "" || password_re == ""){
+        ons.notification.alert("パスワードが入力されていません")
         return false;
       }
       
       if(password != password_re){
         ons.notification.alert("パスワードが一致しません")
+        return false;
       }
 
       return true;
@@ -287,6 +296,6 @@
       myUser.test();
 
     }
-</script>
+	</script>
 
 </ons-page>

@@ -17,7 +17,7 @@ Document Object Model (DOM) 
 HTML や XML 文書のためのプログラミングインターフェイスです。ページを表現するため、プログラムが文書構造、スタイル、内容を変更することができます。 DOM は文書をノードとオブジェクトで表現します。そうやって、プログラミング言語をページに接続することができます。
 
 参考URL
-onsenUIについて　
+onsenUIについて
 https://blog.mbaas.nifcloud.com/entry/2018/03/22/110734
 
 
@@ -34,3 +34,30 @@ https://www.buildinsider.net/mobile/monaca/02
 
 洋服アプリとても似ている。。。
 https://qiita.com/coboco/items/61b36355b2b72d8225ee
+
+
+Monaca Cloud
+ユーザ管理Doc
+https://docs.monaca.io/ja/reference/monaca_api/cloud_management/user/
+
+
+コレクションの扱い方
+https://docs.monaca.io/ja/reference/monaca_api/cloud/collection
+
+jQueryの.doneとか.failとかの説明
+https://docs.monaca.io/ja/reference/monaca_api/cloud/other/#promise
+
+
+やってて思ったこと...
+login画面
+ユーザID(メールアドレス)の(メールアドレス)を削除したい。
+登録する際、メールアドレスとパスワードで認証するため、ユーザIDの認証はツラい。
+
+Userは静的(static)クラスとしたい。いちいちnewしなくてもいいんじゃないかと。
+User.js内で、MonacaCloudのユーザ登録/取得/更新など全部担う感じで。
+MonacaCloudユーザのプロパティ取得がややこしい処理?しているので、
+ログイン時にUserクラスに入れ込んでおくといいかも。
+
+※いまはUserクラスをnewしてやっている。(userRegist.htmlから)
+
+デバッカー使った時に、Backボタンが実機の時計とか充電とかで被って押せない。

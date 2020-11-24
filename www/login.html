@@ -1,24 +1,18 @@
-
-
 <ons-page id="login">
 	<script src="js/user.js"></script>
 	<script src="js/item.js"></script>
 
-    <script language="javascript" type="text/javascript">
-        function OnLinkClick() {
+	<script language="javascript" type="text/javascript">
+		function OnLinkClick() {
           document.getElementById('nav').pushPage('userRegist.html', {});
             target = document.getElementById("output");
-            target.innerHTML = "Penguin";
             return false;
         }
-  </script>
+	</script>
 
 	<ons-toolbar>
 		<div class="center">ログイン</div>
 	</ons-toolbar>
-
-	<!-- <ons-input id="message" modifier="underbar" placeholder="メッセージを入力" float></ons-input>
-  <ons-button id="send_login">ログイン</ons-button> ああ-->
 
 	<div style="text-align: center; margin-top: 30px;">
 		<p>
@@ -27,19 +21,19 @@
 			<ons-input id="mailAddress" modifier="underbar" placeholder="MailAddress" float></ons-input>
 		</p>
 		<p>
-			Password
+			パスワード
 			<br>
-			<ons-input id="password" modifier="underbar" placeholder="Password" float></ons-input>
+			<ons-input id="password" type="password" modifier="underbar" placeholder="Password" float></ons-input>
 		</p>
 		<p style="margin-top: 30px;">
 			<ons-button onclick="login()">ログイン</ons-button>
 		</p>
+    <br>
 		<p>
 			<u>
-  <a href="javascript:OnLinkClick();">新規登録はこちら</a><br />
-  <br/>
-  <div id="output"></div>
-								<!--<a href="userRegist.html">新規登録はこちら</a> -->
+				<a href="javascript:OnLinkClick();">新規登録はこちら</a><br />
+				<br>
+				<div id="output"></div>
 			</u>
 		</p>
 		<p>
@@ -49,16 +43,12 @@
 		</p>
 
 	</div>
-	<ons-button onclick="test()">テストログイン</ons-button>
-	<ons-button onclick="testUser()">テストUser</ons-button>
-	<ons-button onclick="getNickName()">get</ons-button>
-	<ons-button onclick="setNickName()">set</ons-button>
 
 	<script>
 		// 画面表示時に起動
   ons.ready(function() {
     // アラートビューの表示
-    // ons.notification.alert('ようこそ');
+     //ons.notification.alert('ようこそ');
 
   });
 
@@ -68,13 +58,13 @@
     var mailAddress = document.getElementById('mailAddress').value;
     //id="password"の値を取得
     var password = document.getElementById('password').value;
-    mailAddress = "sato@jp.com";
-    password = "aaaa";
+
     var MC = monaca.cloud;
     MC.User.login(mailAddress, password)
        //ログイン成功した場合
       .done(function(result)
       {
+        // ログを表示
         console.log('login: '  + MC.User._oid);
         console.log("Hello again, " + result.user._username);
         document.getElementById('nav').pushPage('top.html', {});
@@ -84,7 +74,9 @@
        //ログイン失敗した場合
       .fail(function(err)
       {
-        alert('Login failed: ' + err.message);
+        ons.notification.alert('ユーザーIDまたはパスワードが間違っています。');
+        //ons.notification.alert(err.message);
+
         console.error(JSON.stringify(err));
       });
   };
@@ -110,19 +102,6 @@
       });     
   }
 
-  function testUser(){
-    myUser = new User();
-    myUser.initNickName();
-  }
-  function getNickName(){
-    alert(myUser.getNickName());    
-
-  }
-  function setNickName(){
-    myUser.setNickName("佐藤")
-
-  }
-
   // // onsenUI関数
   // ons.getScriptPage().onInit = function() {
   //   this.querySelector('#send_userRegist').onclick = (e) => {
@@ -145,6 +124,4 @@
 
 //--------------------------
 	</script>
-
-	<h1></h1>
 </ons-page>
