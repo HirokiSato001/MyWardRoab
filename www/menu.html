@@ -1,51 +1,48 @@
 <ons-page id="menu">
   <ons-toolbar>
     <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">メニュー</div>
+    <div class="center">���j���[</div>
   </ons-toolbar>
-  <ons-button onclick="send_userManage()">ユーザ管理</ons-button>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./../css/style.css" type="text/css">
+  </head>
+  <body>
+	  <p class="resizeimage">
+      <img src="title.gif" alt="�^�C�g��">
+    </p>
+    <br>
+    <br>
+    var hoge=monaca.getCurrentPage().options;
+    console.log(hoge.val1);
+    <p>�悤�����I{{document.getElementById('nav').topPage.data.val1}}����</p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  </body>
+
+  <ons-button onclick="send_userManage()">ユーザー管理</ons-button>
   <ons-button onclick="send_itemList()">アイテム一覧</ons-button>
-  <ons-button onclick="send_itemSelect()">アイテム選定(コーディネート)</ons-button>
+  <ons-button onclick="send_itemSelect()">アイテム選択)</ons-button>
   <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
-  <br>
-  <p>pタグ</p>
-  <p id="nickName">nickname</p>
-  <p id="password">password</p>
-  <p id="age">age</p>
-  </ons-tabbar>
 
   <script>
-    // 画面表示時
+    // ���ʕ\����
     ons.getScriptPage().onShow = function() {
-      // ログイン済みか確認
-      //**テスト用 固定ユーザでログイン(いつか消す)↓↓↓↓↓↓
-      monaca.cloud.User.login("sato@jp.com", "aaaa");
-      //**テスト用 固定ユーザでログイン(いつか消す)↑↑↑↑↑↑
-      // ログイン確認
-      if (false == monaca.cloud.User.isAuthenticated()) {
-        alert("ログイン未")
-      } else {
-        alert("ログイン済み")
-      }
-      // ユーザからageプロパティ取得
-      monaca.cloud.User.getProperty("age")
-      .then(function(age){
-        console.log(age);
-        document.getElementById("age").innerText = age
-      })
     }
-    // userManage画面へ
+    // userManage���ʂ�
     function send_userManage(){
       document.getElementById('nav').pushPage('userManage.html', {});
     };
-    // itemList画面へ
+    // itemList���ʂ�
     function send_itemList(){
       document.getElementById('nav').pushPage('itemList.html', {});
     };       
-    // itemSelect画面へ
+    // itemSelect���ʂ�
     function send_itemSelect(){
       document.getElementById('nav').pushPage('itemSelect.html', {});
-    };
-
+    };       
   </script>
 </ons-page>
