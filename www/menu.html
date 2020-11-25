@@ -1,48 +1,28 @@
-<ons-page id="menu">
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">���j���[</div>
-  </ons-toolbar>
+<!DOCTYPE html>
+<once-page>
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./../css/style.css" type="text/css">
+    <link rel="stylesheet" href="/www/css/style.css" type="text/css">
+	  <p class="resizeimage">
+      <img src="/www/image/title.gif" alt="タイトル">
+    </p>
   </head>
   <body>
-	  <p class="resizeimage">
-      <img src="title.gif" alt="�^�C�g��">
-    </p>
     <br>
     <br>
-    var hoge=monaca.getCurrentPage().options;
-    console.log(hoge.val1);
-    <p>�悤�����I{{document.getElementById('nav').topPage.data.val1}}����</p>
+    <br>
+      <h2 style="text-align:center">ようこそ、</h2>
+
     <br>
     <br>
     <br>
     <br>
-    <br>
+    <span style="font-size: 32px;">＜お知らせ＞</span>
   </body>
-
-  <ons-button onclick="send_userManage()">ユーザー管理</ons-button>
-  <ons-button onclick="send_itemList()">アイテム一覧</ons-button>
-  <ons-button onclick="send_itemSelect()">アイテム選択)</ons-button>
-  <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
-
-  <script>
-    // ���ʕ\����
-    ons.getScriptPage().onShow = function() {
-    }
-    // userManage���ʂ�
-    function send_userManage(){
-      document.getElementById('nav').pushPage('userManage.html', {});
-    };
-    // itemList���ʂ�
-    function send_itemList(){
-      document.getElementById('nav').pushPage('itemList.html', {});
-    };       
-    // itemSelect���ʂ�
-    function send_itemSelect(){
-      document.getElementById('nav').pushPage('itemSelect.html', {});
-    };       
-  </script>
+  <ons-tabbar swipeable position="auto">
+    <ons-tab page="menu1.html" icon="ion-md-home" label="Menu" active></ons-tab>   
+    <ons-tab page="userManage.html" icon="ion-md-home" label="Home"></ons-tab>
+    <ons-tab page="itemList.html" icon="ion-md-person" label="My Profile" ></ons-tab>
+    <ons-tab page="itemSelect.html" icon="ion-md-person" label="My Profile"></ons-tab>  
+  </ons-tabbar>
 </ons-page>
