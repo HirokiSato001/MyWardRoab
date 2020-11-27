@@ -8,10 +8,49 @@
   <ons-button onclick="send_itemDetails()">アイテム詳細</ons-button>
   <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
 
+  <ons-list id="list">
+    <ons-list-header>Default</ons-list-header>
+  </ons-list>
+
   <script>
+    var toDoubleDigits = function(num) {
+      num += "";
+      if (num.length === 1) {
+        num = "0" + num;
+      }
+    return num;     
+    };
+
     // 画面表示時
-    ons.getScriptPage().onShow = function() {
-    }
+    document.addEventListener('show', function(event) {
+      var onsList = document.getElementById("list");
+      var items = monaca.cloud.Collection("item");
+
+      items.findMine()
+      .done(function(result)
+      {
+        console.log('Total items found: ' + result.totalItems);
+
+        var itemList = result.items;
+        for (var i = 0; i < itemList.length; i++) {
+          var onsItem = document.createElement("ons-list-item");
+          var date = new Date(itemList[i]._createdAt);
+          // onsItem.innerText = itemList[i].image;
+          var dateText = date.getFullYear() + "/" + toDoubleDigits(date.getMonth()+1) + "/" + toDoubleDigits(date.getDate()) + " " + toDoubleDigits(date.getHours())+":"+toDoubleDigits(date.getMinutes())+":"+toDoubleDigits(date.getSeconds());
+          console.log('Date: ' + dateText);
+          onsItem.innerText = dateText;
+          onsList.appendChild(onsItem);
+        }
+      })
+      .fail(function(err)
+      {
+        console.log("Err#" + err.code +": " + err.message);
+      });
+      
+      // var onsItem = document.createElement("ons-list-item");
+      // onsItem.innerText = "a";
+      // onsList.appendChild(onsItem);
+    }, false);
     // itemEdit画面へ
     function send_itemEdit(){
       document.getElementById('nav').pushPage('itemEdit.html', {});
