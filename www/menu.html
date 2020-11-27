@@ -1,28 +1,26 @@
 <!DOCTYPE html>
 <once-page>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="/www/js/script11_1.js"></script>
     <link rel="stylesheet" href="/www/css/style.css" type="text/css">
 	  <p class="resizeimage">
       <img src="/www/image/title.gif" alt="タイトル">
     </p>
   </head>
   <body>
-    <br>
-    <br>
-    <br>
-      <h2 style="text-align:center">ようこそ、</h2>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <span style="font-size: 32px;">＜お知らせ＞</span>
+ <p>ボタンをクリック！</p>
+ <div id="edit_area"></div>
+ <input type="button" value="Check" onclick="myfunc()">
+ <div id="disp">ここにデータを表示</div>
   </body>
-  <ons-tabbar swipeable position="auto">
-    <ons-tab page="menu1.html" icon="ion-md-home" label="Menu" active></ons-tab>   
-    <ons-tab page="userManage.html" icon="ion-md-home" label="Home"></ons-tab>
-    <ons-tab page="itemList.html" icon="ion-md-person" label="My Profile" ></ons-tab>
-    <ons-tab page="itemSelect.html" icon="ion-md-person" label="My Profile"></ons-tab>  
-  </ons-tabbar>
-</ons-page>
+  <script>
+     var myfunc = function () {
+         console.log('Hello');
+      document.getElementById("disp").innerText = "ボタンをクリックしてください"; 
+//      alert("全要素描画終了");
+    }
+   </script> 
+</once-page>
+ 

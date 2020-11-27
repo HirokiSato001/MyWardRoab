@@ -1,11 +1,4 @@
 /**/
 /**/
-//body {background-color: #90ee90; }
 body {background-image: url("/www/image/haikei.gif"); }
 .resizeimage img { width: 100%; }
-body {
-font-family:Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-color:#630;
-line-height:25px;
-font-size:0.95em;
-}
