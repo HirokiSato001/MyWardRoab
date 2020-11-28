@@ -11,13 +11,13 @@
       //ons.notification.alert(this.data.username + " " + this.data.password);
     }
 	</script>
-	<ons-button onclick="onclick_userRegistTEST()">新規登録_Test固定値</ons-button>
+	<ons-button onclick="onclick_userRegistTEST()"> 入力値をコンソールに出力</ons-button>
 
 	<p>情報を入力してください</p>
 	<p>メールアドレス※</p>
-	<ons-input type="email" id="mailAddress" modifier="underbar" placeholder="mailAddress" float></ons-input>
+	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" placeholder="mailAddress" value="aa@a.a" float></ons-input>
 	<p>ニックネーム※</p>
-	<ons-input id="nickName" modifier="underbar" placeholder="nickName" float></ons-input>
+	<ons-input id="regist_nickName" modifier="underbar" placeholder="nickName" float></ons-input>
 	<p>生年月日</p>
 	<select name="year">
 <option value="">-</option>
@@ -170,7 +170,7 @@
 <option value="29">29</option>
 <option value="30">30</option>
 <option value="31">31</option>
-</select>　日
+</select>日
 	<p>性別</p>
 	<input type="radio" name="gender" value=male>男
 	<input type="radio" name="gender" value="female">女
@@ -178,33 +178,51 @@
 	<p>身長</p>
 	<ons-input type="number" min="50" max="250" id="height" modifier="underbar" placeholder="身長" float></ons-input>cm
 	<p>Password※</p>
-	<ons-input id="password" modifier="underbar" placeholder="Password" type="password" float></ons-input>
+	<ons-input id="regist_password" modifier="underbar" placeholder="Password" type="password" float></ons-input>
 	<p>Password(再確認)※</p>
-	<ons-input id="password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" type="password" float></ons-input>
+	<ons-input id="regist_password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" type="password" float></ons-input>
 	<br>
 	<ons-button onclick="onclick_userRegist()">新規登録</ons-button>
 	<br>
 	<br>
 
 	<script>
+    var address;
+    var nickName;
+    var birthYear;
+    var birthMonth;
+    var birthDay;
+    var gender;
+    var height;
+    var password;
+    var password_re;
+    
 		function onclick_userRegist(){
       // 入力必須欄のバリデーションチェック
       if(checkVaridation()){
+
+        myUser = new User();
+        // myUser.userRegist("adaaadress@aaa.a", "password", "nickName",2020, 12, 15, "男", 123)
+        // 生年月日の入力フォームがなおるまで固定値
+        // myUser.userRegist(address, password, nickName, birthYear, birthMonth, birthDay, gender, height)
+        myUser.userRegist(address, password, nickName, 2020, 01, 02,gender, 123)
+
+
         // 何もしない
       }
     };
     function getElement(){
       // メールアドレス
-      var address =  document.getElementById('mailAddress').value;
+      address =  document.getElementById('regist_mailAddress').value;
       // ニックネーム
-      var nickName =  document.getElementById('nickName').value;
+      nickName =  document.getElementById('regist_nickName').value;
       // 生年月日
-      var birthYear =  document.getElementsByName('year').value;
-      var birthMonth =  document.getElementsByName('month').value;
-      var birthDay =  document.getElementsByName('day').value;
+      birthYear =  document.getElementsByName('year').value;
+      birthMonth =  document.getElementsByName('month').value;
+      birthDay =  document.getElementsByName('day').value;
       // 性別
       var genderList = document.getElementsByName("gender");
-      var gender = "";
+      gender = "";
       // ラジオボタン(name="gender")のチェックされている項目取得
       for (let i = 0; i < genderList.length; i++){
         if(genderList[i].checked){
@@ -213,36 +231,46 @@
         }
       }
       // 身長
-      var height =  document.getElementById('height').value;
+      height =  document.getElementById('height').value;
       // パスワード
-      var password = document.getElementById('password').value;
-      var password_re =  document.getElementById('password_reconfirmation').value;
+      password = document.getElementById('regist_password').value;
+      password_re =  document.getElementById('regist_password_reconfirmation').value;
     }
 
     function checkVaridation(){
-      // メールアドレス
-      var address =  document.getElementById('mailAddress').value;
-      // ニックネーム
-      var nickName =  document.getElementById('nickName').value;
-      // 生年月日
-      var birthYear =  document.getElementsByName('year').value;
-      var birthMonth =  document.getElementsByName('month').value;
-      var birthDay =  document.getElementsByName('day').value;
-      // 性別
-      var genderList = document.getElementsByName("gender");
-      var gender = "";
-      // ラジオボタン(name="gender")のチェックされている項目取得
-      for (let i = 0; i < genderList.length; i++){
-        if(genderList[i].checked){
-          gender = genderList[i].value;
-          break;
-        }
-      }
-      // 身長
-      var height =  document.getElementById('height').value;
-      // パスワード
-      var password = document.getElementById('password').value;
-      var password_re =  document.getElementById('password_reconfirmation').value;
+      getElement()
+      console.log("address:" + address);
+      console.log("nickName:" + nickName);
+      console.log("birthYear:" + birthYear);
+      console.log("birthMonth:" + birthMonth);
+      console.log("birthDay:" + birthDay);
+      console.log("gender:" + gender);
+      console.log("height:" + height);
+      console.log("password:" + password);
+      console.log("password_re:" + password_re); 
+      // // メールアドレス
+      // var address =  document.getElementById('regist_mailAddress').value;
+      // // ニックネーム
+      // var nickName =  document.getElementById('regist_nickName').value;
+      // // 生年月日
+      // var birthYear =  document.getElementsByName('year').value;
+      // var birthMonth =  document.getElementsByName('month').value;
+      // var birthDay =  document.getElementsByName('day').value;
+      // // 性別
+      // var genderList = document.getElementsByName("gender");
+      // var gender = "";
+      // // ラジオボタン(name="gender")のチェックされている項目取得
+      // for (let i = 0; i < genderList.length; i++){
+      //   if(genderList[i].checked){
+      //     gender = genderList[i].value;
+      //     break;
+      //   }
+      // }
+      // // 身長
+      // var height =  document.getElementById('height').value;
+      // // パスワード
+      // var password = document.getElementById('regist_password').value;
+      // var password_re =  document.getElementById('regist_password_reconfirmation').value;
 
       // メールアドレスの入力確認
       // if(address == ''){
@@ -292,9 +320,16 @@
     }
 
     function onclick_userRegistTEST(){
-      myUser = new User("sato@jp.com","sato",25);
-      myUser.test();
-
+      getElement()
+      console.log("address:" + address);
+      console.log("nickName:" + nickName);
+      console.log("birthYear:" + birthYear);
+      console.log("birthMonth:" + birthMonth);
+      console.log("birthDay:" + birthDay);
+      console.log("gender:" + gender);
+      console.log("height:" + height);
+      console.log("password:" + password);
+      console.log("password_re:" + password_re); 
     }
 	</script>
 
