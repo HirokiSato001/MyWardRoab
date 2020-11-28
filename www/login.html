@@ -14,6 +14,13 @@
 		<div class="center">ログイン</div>
 	</ons-toolbar>
 
+    <ons-tabbar id="tabbar">
+    <ons-tab page="menu.html" icon="ion-md-home" label="Menu" active></ons-tab>   
+    <ons-tab page="userManage.html" icon="ion-md-home" label="Home"></ons-tab>
+    <ons-tab page="itemList.html" icon="ion-md-person" label="My Profile" ></ons-tab>
+    <ons-tab page="itemSelect.html" icon="ion-md-person" label="My Profile"></ons-tab>    
+  </ons-tabbar>
+
 	<div style="text-align: center; margin-top: 30px;">
 		<p>
 			ユーザーID（メールアドレス）
@@ -27,6 +34,7 @@
 		</p>
 		<p style="margin-top: 30px;">
 			<ons-button onclick="login()">ログイン</ons-button>
+			<ons-button onclick="test_login()">ログイン(固定ユーザ)</ons-button>
 		</p>
     <br>
 		<p>
@@ -52,54 +60,38 @@
 
   });
 
+// ニフクラmobile backendのキー設定
+// API key.
+var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+// SDK initialization.
+var ncmb = new NCMB(applicationKey, clientKey);
+
+
   // javaScript関数
   function login(){
     //id="username"の値を取得
     var mailAddress = document.getElementById('mailAddress').value;
     //id="password"の値を取得
     var password = document.getElementById('password').value;
+    alert(mailAddress);
+    alert(password);
+    // ログイン処理
+    ncmb.User.login(mailAddress, password)
+    .then(function(data){
+      // ログを表示
+      console.log("Hello again, " + result.user._username);
+      document.getElementById('nav').pushPage('top.html', {});
+    }).catch(function(err){
+      // エラー処理
+      ons.notification.alert('メールアドレスまたはパスワードが間違っています');
+    });
 
-    var MC = monaca.cloud;
-    MC.User.login(mailAddress, password)
-       //ログイン成功した場合
-      .done(function(result)
-      {
-        // ログを表示
-        console.log('login: '  + MC.User._oid);
-        console.log("Hello again, " + result.user._username);
-        document.getElementById('nav').pushPage('top.html', {});
 
-        // Userクラスに情報を設定
-      })
-       //ログイン失敗した場合
-      .fail(function(err)
-      {
-        ons.notification.alert('ユーザーIDまたはパスワードが間違っています。');
-        //ons.notification.alert(err.message);
-
-        console.error(JSON.stringify(err));
-      });
-  };
+  }
 
   function test(){
-    mailAddress = "sato@jp.com";
-    password = "aaaa";
-    var MC = monaca.cloud;
-    MC.User.login(mailAddress, password)
-       //ログイン成功した場合
-      .done(function(result)
-      {
-        console.log('login: '  + MC.User._oid);
-        console.log("Hello again, " + result.user._username);
-        
-        // Userクラスに情報を設定
-      })
-       //ログイン失敗した場合
-      .fail(function(err)
-      {
-        alert('Login failed: ' + err.message);
-        console.error(JSON.stringify(err));
-      });     
+
   }
 
   // // onsenUI関数
@@ -123,5 +115,17 @@
   //   };
 
 //--------------------------
+function test_login() {  
+  ncmb.User.login("aa@a.a", "aaaa")
+      .then(function(data){
+        // ログイン後処理
+        console.log("login Success");
+        document.getElementById('nav').pushPage('top.html', {});
+        
+      })
+      .catch(function(err){
+        // エラー処理
+      });      
+}
 	</script>
-</ons-page>
+</ons-page> 

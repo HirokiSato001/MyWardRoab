@@ -200,12 +200,22 @@
 		function onclick_userRegist(){
       // 入力必須欄のバリデーションチェック
       if(checkVaridation()){
+      console.log("address:" + address);
+      console.log("nickName:" + nickName);
+      console.log("birthYear:" + birthYear);
+      console.log("birthMonth:" + birthMonth);
+      console.log("birthDay:" + birthDay);
+      console.log("gender:" + gender);
+      console.log("height:" + height);
+      console.log("password:" + password);
+      console.log("password_re:" + password_re); 
+      // ニックネームだけうまく渡せないので１クッション挟んでます
+      var sendNickName = nickName
 
         myUser = new User();
-        // myUser.userRegist("adaaadress@aaa.a", "password", "nickName",2020, 12, 15, "男", 123)
         // 生年月日の入力フォームがなおるまで固定値
-        // myUser.userRegist(address, password, nickName, birthYear, birthMonth, birthDay, gender, height)
-        myUser.userRegist(address, password, nickName, 2020, 01, 02,gender, 123)
+        // myUser.userRegist(address, password, sendNickName, birthYear, birthMonth, birthDay, gender, height)
+        myUser.userRegist(address, password, sendNickName, 2020, 01, 02,gender, 123)
 
 
         // 何もしない
@@ -238,45 +248,8 @@
     }
 
     function checkVaridation(){
+      // 入力値を変数に設定
       getElement()
-      console.log("address:" + address);
-      console.log("nickName:" + nickName);
-      console.log("birthYear:" + birthYear);
-      console.log("birthMonth:" + birthMonth);
-      console.log("birthDay:" + birthDay);
-      console.log("gender:" + gender);
-      console.log("height:" + height);
-      console.log("password:" + password);
-      console.log("password_re:" + password_re); 
-      // // メールアドレス
-      // var address =  document.getElementById('regist_mailAddress').value;
-      // // ニックネーム
-      // var nickName =  document.getElementById('regist_nickName').value;
-      // // 生年月日
-      // var birthYear =  document.getElementsByName('year').value;
-      // var birthMonth =  document.getElementsByName('month').value;
-      // var birthDay =  document.getElementsByName('day').value;
-      // // 性別
-      // var genderList = document.getElementsByName("gender");
-      // var gender = "";
-      // // ラジオボタン(name="gender")のチェックされている項目取得
-      // for (let i = 0; i < genderList.length; i++){
-      //   if(genderList[i].checked){
-      //     gender = genderList[i].value;
-      //     break;
-      //   }
-      // }
-      // // 身長
-      // var height =  document.getElementById('height').value;
-      // // パスワード
-      // var password = document.getElementById('regist_password').value;
-      // var password_re =  document.getElementById('regist_password_reconfirmation').value;
-
-      // メールアドレスの入力確認
-      // if(address == ''){
-      //   ons.notification.alert('メールアドレスが入力されていません');
-      //   return false;
-      // }
 
       // メールアドレスの正規表現
       var reg = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/;

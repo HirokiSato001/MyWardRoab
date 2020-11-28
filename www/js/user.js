@@ -21,9 +21,9 @@ var currentUser = ncmb.User.getCurrentUser();
 class User {
   // コンストラクタ
   constructor() {
-    alert("User constructor")
     // ログイン済みの場合
     if (currentUser) {
+      console.log("new User()ログイン済み");
       mailAddress = currentUser.get("mailAddress")
       password = currentUser.get("password")
       nickName = currentUser.get("nickName")
@@ -33,6 +33,15 @@ class User {
       day = currentUser.get("day")
       gender = currentUser.get("gender")
       height = currentUser.get("height")
+      // ログ出力
+      console.log("address    : " + address);
+      console.log("nickName   : " + nickName);
+      console.log("birthYear  :" + year);
+      console.log("birthMonth :" + month);
+      console.log("birthDay   :" + day);
+      console.log("gender     :" + gender);
+      console.log("height     :" + height);
+      console.log("password   :" + password);
     } else {
       console.log("new User()未ログイン");
     }
@@ -41,10 +50,9 @@ class User {
   // ユーザ登録
   userRegist(argMailAddress, argPassword, argNickName, argYear, argMonth, argDay, argGender, argHeight) {
     // ユーザ登録情報を設定
-    alert(argNickName)
 
     var user = new ncmb.User();
-    user.set("userName", argNickName) // ユーザ名
+    user.set("userName", argMailAddress) // ユーザ名
         .set("password", argPassword) /* パスワード */
         .set("mailAddress",argMailAddress)// メールアドレス
         .set("password",argPassword)// パスワード
@@ -55,6 +63,8 @@ class User {
         .set("day",argDay)// 日
         .set("gender",argGender)// 性別
         .set("height",argHeight);// 身長
+
+        
     // ユーザーの新規登録処理
     user.signUpByAccount()
     .then(function(){
@@ -68,7 +78,7 @@ class User {
           })
           .catch(function(err){
             // エラー処理
-          });      
+          });
     })
     .catch(function(err){
       // エラー処理
