@@ -1,12 +1,77 @@
 <ons-page id="itemDetail">
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">アイテム詳細</div>    
-  </ons-toolbar>
-  <script>
+	<ons-toolbar>
+		<div class="left">
+			<ons-back-button>Back</ons-back-button>
+		</div>
+		<div class="center">アイテム詳細</div>
+	</ons-toolbar>
+	<div style="text-align: center">
+		<img src="/www/image/1_1_pink.png">
+	</div>
+	<table border="0">
+		<tr>
+			<td>カテゴリー</td>
+			<td> : </td>
+			<td>category</td>
+		</tr>
+		<tr>
+			<td>サブカテゴリー</td>
+			<td> : </td>
+			<td>sub_category</td>
+		</tr>
+		<tr>
+			<td>色</td>
+			<td> : </td>
+			<td>color</td>
+		</tr>
+		<tr>
+			<td>柄</td>
+			<td> : </td>
+			<td>design</td>
+		</tr>
+		<tr>
+			<td>画像ID</td>
+			<td> : </td>
+			<td>imageID</td>
+		</tr>
+		<tr>
+			<td>素材</td>
+			<td> : </td>
+			<td>material</td>
+		</tr>
+		<tr>
+			<td>季節</td>
+			<td> : </td>
+			<td>season</td>
+		</tr>
+		<tr>
+			<td>サイズ</td>
+			<td> : </td>
+			<td>size</td>
+		</tr>
+		<tr>
+			<td>ブランド</td>
+			<td> : </td>
+			<td>brand</td>
+		</tr>
+		<tr>
+			<td>備考</td>
+			<td> : </td>
+			<td>remarks</td>
+		</tr>
+	</table>
+
+	<ons-button onclick="send_ItemEditPage()">編集</ons-button>
+	<script>
+		var itemID = "aaaa";
     // 画面表示時
     ons.getScriptPage().onShow = function() {
     }
-  </script>
-  <ons-button onclick="ons.notification.alert('Hello World!')">Click 
+    function send_ItemEditPage(){
+      document.getElementById('nav').pushPage('itemEdit.html', {
+        data: {itemID}
+        // 次画面で、this.data.itemIDをすればとれる
+      }); 
+    }
+	</script>
 </ons-page>
