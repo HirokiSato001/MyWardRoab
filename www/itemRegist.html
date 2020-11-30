@@ -111,7 +111,7 @@
 
     <h4>画像：</h4>
     <div style="text-align: center">
-      <input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">  
+      <input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">
     </div>  
 
     <br>
@@ -154,10 +154,11 @@
 
       // サブカテゴリーに項目を設定
       for (let i = 0 ; i < sub_categories[index].length ; i++) {
-        subCategory_select.options[i] = new Option(sub_categories[index][i], i);
+        subCategory_select.options[i] = new Option(sub_categories[index][i], i+1);
       }
   }
   
+  // カメラ起動関数
   function boot_camera(){
     var image = document.getElementById("image");
     var screenWidth = screen.width;
@@ -205,8 +206,8 @@
     var brand = document.getElementById("brand").value;
     var remarks = document.getElementById("remarks").value;
     var image = document.getElementById("image").src;
-
     var Item = monaca.cloud.Collection("item");
+
     Item.insert(
       {
         category: category, 
@@ -223,6 +224,16 @@
       .done(function(result)
       {
         console.log("Inserted!");
+        console.log('category: ' + category);
+        console.log('sub_category: ' + sub_category);
+        console.log('color: ' + color);
+        console.log('design: ' + design);
+        console.log('material: ' + material);
+        console.log('season: ' + season);
+        console.log('size: ' + size);
+        console.log('brand: ' + brand);
+        console.log('remarks: ' + remarks);
+        console.log('image: ' + image);
         document.getElementById('nav').pushPage('itemList.html',{});
       })
       .fail(function(err)
