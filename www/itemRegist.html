@@ -3,125 +3,132 @@
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center">アイテム登録</div>    
   </ons-toolbar>
+  <body>
+    <h4>カテゴリー：</h4>
+    <div style="text-align: center">
+      <ons-select id="category" modifier="underbar" onchange="changeCategory()">
+        <option value = 1>トップス</option>
+        <option value = 2>ボトムス</option>
+        <option value = 3>アウター</option>
+        <option value = 4>ワンピース</option>
+        <option value = 5>シューズ</option>
+      </ons-select>
+    </div>
+    
+    <h4>サブカテゴリー：</h4>
+    <div style="text-align: center">
+      <ons-select id="sub_category" modifier="underbar">
+        <option value = 1>Tシャツ</option>
+        <option value = 2>ポロシャツ</option>
+        <option value = 3>パーカー</option>
+        <option value = 4>ニット</option>
+        <option value = 5>インナー</option>      
+      </ons-select>
+    </div>
+    
+    <h4>カラー：</h4>
+    <div style="text-align: center">
+      <ons-select id="color" modifier="underbar">
+        <option value = 1>赤</option>
+        <option value = 2>茶</option>
+        <option value = 3>橙</option>
+        <option value = 4>黄</option>
+        <option value = 5>緑</option>
+        <option value = 6>青</option>
+        <option value = 7>紫</option>
+        <option value = 8>黒</option>
+        <option value = 9>白</option>
+        <option value = 10>桃</option>
+        <option value = 11>グレー</option>
+        <option value = 12>ベージュ</option>
+      </ons-select>
+    </div>
 
-  <h4>カテゴリー：</h4>
-  <div style="text-align: center">
-    <ons-select id="category" modifier="underbar" onchange="changeCategory()">
-      <option value = 1>トップス</option>
-      <option value = 2>ボトムス</option>
-      <option value = 3>アウター</option>
-      <option value = 4>ワンピース</option>
-      <option value = 5>シューズ</option>
-    </ons-select>
-  </div>
-  
-  <h4>サブカテゴリー：</h4>
-  <div style="text-align: center">
-    <ons-select id="sub_category" modifier="underbar">
-      <option value = 1>Tシャツ</option>
-      <option value = 2>ポロシャツ</option>
-      <option value = 3>パーカー</option>
-      <option value = 4>ニット</option>
-      <option value = 5>インナー</option>      
-    </ons-select>
-  </div>
-  
-  <h4>カラー：</h4>
-  <div style="text-align: center">
-    <ons-select id="color" modifier="underbar">
-      <option value = 1>赤</option>
-      <option value = 2>茶</option>
-      <option value = 3>橙</option>
-      <option value = 4>黄</option>
-      <option value = 5>緑</option>
-      <option value = 6>青</option>
-      <option value = 7>紫</option>
-      <option value = 8>黒</option>
-      <option value = 9>白</option>
-      <option value = 10>桃</option>
-      <option value = 11>グレー</option>
-      <option value = 12>ベージュ</option>
-    </ons-select>
-  </div>
+    <h4>柄：</h4>
+    <div style="text-align: center">
+      <ons-select id="design" modifier="underbar">
+        <option value = 1>無地</option>
+        <option value = 2>水玉（ドット）</option>
+        <option value = 3>ストライプ</option>
+        <option value = 4>ボーダー</option>
+        <option value = 5>チェック</option>
+        <option value = 6>ペイズリー</option>
+        <option value = 7>迷彩</option>
+        <option value = 8>アニマル</option>
+      </ons-select>
+    </div>
 
-  <h4>柄：</h4>
-  <div style="text-align: center">
-    <ons-select id="design" modifier="underbar">
-      <option value = 1>無地</option>
-      <option value = 2>水玉（ドット）</option>
-      <option value = 3>ストライプ</option>
-      <option value = 4>ボーダー</option>
-      <option value = 5>チェック</option>
-      <option value = 6>ペイズリー</option>
-      <option value = 7>迷彩</option>
-      <option value = 8>アニマル</option>
-    </ons-select>
-  </div>
+    <h4>素材：</h4>
+    <div style="text-align: center">
+      <ons-select id="material" modifier="underbar">
+        <option value = 1>ナイロン</option>
+        <option value = 2>ポリエステル</option>
+        <option value = 3>ポリウレタン</option>
+        <option value = 4>レーヨン</option>
+        <option value = 5>アクリル</option>
+        <option value = 6>綿（コットン）</option>
+        <option value = 7>毛（ウール）</option>
+        <option value = 8>麻（リネン）</option>
+        <option value = 9>絹（シルク）</option>
+        <option value = 10>ポリノジック</option>
+        <option value = 11>キュプラ</option>
+        <option value = 12>リヨセル</option>
+      </ons-select>
+    </div>
+    
+    <h4>季節：</h4>
+    <div style="text-align: center">
+      <ons-row>
+        <ons-col><ons-radio name="season" input-id="radio-1" value = 1 checked>春</ons-radio></ons-col>
+        <ons-col><ons-radio name="season" input-id="radio-2" value = 2>夏</ons-radio></ons-col>
+        <ons-col><ons-radio name="season" input-id="radio-3" value = 3>秋</ons-radio></ons-col>
+        <ons-col><ons-radio name="season" input-id="radio-4" value = 4>冬</ons-radio></ons-col>
+      </ons-row>
+    </div>
+    
+    <h4>サイズ：</h4>
+    <div style="text-align: center">
+      <ons-select id="size" modifier="underbar">
+        <option value="1">XS</option>
+        <option value="2">S</option>
+        <option value="3">M</option>
+        <option value="4">L</option>
+        <option value="5">XL</option>
+        <option value="6">XXL</option>
+        <option value="7">3XL</option>
+      </ons-select>
+    </div>
 
-  <h4>素材：</h4>
-  <div style="text-align: center">
-    <ons-select id="material" modifier="underbar">
-      <option value = 1>ナイロン</option>
-      <option value = 2>ポリエステル</option>
-      <option value = 3>ポリウレタン</option>
-      <option value = 4>レーヨン</option>
-      <option value = 5>アクリル</option>
-      <option value = 6>綿（コットン）</option>
-      <option value = 7>毛（ウール）</option>
-      <option value = 8>麻（リネン）</option>
-      <option value = 9>絹（シルク）</option>
-      <option value = 10>ポリノジック</option>
-      <option value = 11>キュプラ</option>
-      <option value = 12>リヨセル</option>
-    </ons-select>
-  </div>
-  
-  <h4>季節：</h4>
-  <div style="text-align: center">
-    <ons-row>
-      <ons-col><ons-radio name="season" input-id="radio-1" value = 1 checked>春</ons-radio></ons-col>
-      <ons-col><ons-radio name="season" input-id="radio-2" value = 2>夏</ons-radio></ons-col>
-      <ons-col><ons-radio name="season" input-id="radio-3" value = 3>秋</ons-radio></ons-col>
-      <ons-col><ons-radio name="season" input-id="radio-4" value = 4>冬</ons-radio></ons-col>
-    </ons-row>
-  </div>
-  
-  <h4>サイズ：</h4>
-  <div style="text-align: center">
-    <ons-select id="size" modifier="underbar">
-      <option value="1">XS</option>
-      <option value="2">S</option>
-      <option value="3">M</option>
-      <option value="4">L</option>
-      <option value="5">XL</option>
-      <option value="6">XXL</option>
-      <option value="7">3XL</option>
-    </ons-select>
-  </div>
+    <h4>ブランド：</h4>
+    <div style="text-align: center">
+      <ons-input id="brand" modifier="material" placeholder="ブランド" float></ons-input>
+    </div>
 
-  <h4>ブランド：</h4>
-  <div style="text-align: center">
-    <ons-input id="brand" modifier="material" placeholder="ブランド" float></ons-input>
-  </div>
+    <h4>備考：</h4>
+    <div style="text-align: center">
+      <textarea  id="remarks" class="textarea" rows="5" cols="25" placeholder="備考"></textarea>
+    </div>
 
-  <h4>備考：</h4>
-  <div style="text-align: center">
-    <textarea  id="remarks" class="textarea" rows="5" cols="25" placeholder="備考"></textarea>
-  </div>
+    <h4>画像：</h4>
+    <div style="text-align: center">
+      <input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">
+    </div>  
 
-  <h4>画像：</h4>
-  <div style="text-align: center">
-      <img src="" id="image">
-      <ons-button onclick="boot_camera()">カメラ起動(テスト) </ons-button>
-  </div>  
-
-  <br>
-  <div style="text-align: center">
-       <ons-button onclick="itemRegist()">登録</ons-button>
-  </div>  
- 
+    <br>
+    <div style="text-align: center">
+        <ons-button onclick="itemRegist()">登録</ons-button>
+    </div>  
+  </body>
 
   <script>
+    // 画面表示時に起動
+     document.addEventListener('show', function(event) {
+      var image = document.getElementById("image");
+      var screenWidth = screen.width;
+      var screenHeight = screen.height;
+      image.height = screenHeight / 3;
+      image.width = screenWidth / 4 * 3;
+    }, false);
 
     //カテゴリーが変更された場合、サブカテゴリーのドロップダウンのメニュー項目を変更する
     function changeCategory(){
@@ -147,17 +154,20 @@
 
       // サブカテゴリーに項目を設定
       for (let i = 0 ; i < sub_categories[index].length ; i++) {
-        subCategory_select.options[i] = new Option(sub_categories[index][i], i);
+        subCategory_select.options[i] = new Option(sub_categories[index][i], i+1);
       }
   }
   
+  // カメラ起動関数
   function boot_camera(){
     var image = document.getElementById("image");
     var screenWidth = screen.width;
     var screenHeight = screen.height;
 
+    image.height = screenHeight / 3;
+    image.width = screenWidth / 4 * 3;
+
     var option = {
-        saveToPhotoAlbum: true //撮影後端末に保存
     };
 
     navigator.camera.getPicture(onSuccess, onError, option);
@@ -165,8 +175,6 @@
     //成功時に呼び出されるコールバック関数
     function onSuccess(imageURI){
       image.src = imageURI;
-      image.height = screenHeight / 3;
-      image.width = screenWidth / 4 * 3;
       alert(imageURI);
     }
 
@@ -197,10 +205,9 @@
     var size = document.getElementById("size").value;
     var brand = document.getElementById("brand").value;
     var remarks = document.getElementById("remarks").value;
-
     var image = document.getElementById("image").src;
-
     var Item = monaca.cloud.Collection("item");
+
     Item.insert(
       {
         category: category, 
@@ -217,6 +224,17 @@
       .done(function(result)
       {
         console.log("Inserted!");
+        console.log('category: ' + category);
+        console.log('sub_category: ' + sub_category);
+        console.log('color: ' + color);
+        console.log('design: ' + design);
+        console.log('material: ' + material);
+        console.log('season: ' + season);
+        console.log('size: ' + size);
+        console.log('brand: ' + brand);
+        console.log('remarks: ' + remarks);
+        console.log('image: ' + image);
+        document.getElementById('nav').pushPage('itemList.html',{});
       })
       .fail(function(err)
       {
