@@ -34,7 +34,7 @@ class User {
       gender = currentUser.get("gender")
       height = currentUser.get("height")
       // ログ出力
-      console.log("address    : " + address);
+      console.log("address    : " + mailAddress);
       console.log("nickName   : " + nickName);
       console.log("birthYear  :" + year);
       console.log("birthMonth :" + month);
@@ -86,6 +86,12 @@ class User {
       alert('Registration failed!');
     });    
   }
+
+    // ユーザーのログアウト
+    userLogout(){
+      ncmb.User.logout();
+       console.log("ログアウト");
+    }
 
 
   /** バックエンドのユーザからmailAddressを取得し、グローバル変数に設定する*/
