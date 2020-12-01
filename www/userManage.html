@@ -1,23 +1,78 @@
 <ons-page id="userManage">
+  <script src="js/user.js"></script>
   <ons-toolbar>
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center">ユーザ管理</div>
   </ons-toolbar>
   <ons-button onclick="send_userEdit()">ユーザ編集</ons-button>
   <ons-button onclick="send_login()">ログアウト</ons-button>
+ <!–デバッグ用–>
   <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
+  <ons-button onclick="Confirm_login()">ログイン確認</ons-button>
+
+
+  <p>メールアドレス</p>
+	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" float></ons-input>
+	<p>ニックネーム</p>
+	<ons-input id="regist_nickName" modifier="underbar" float></ons-input>
+	<p>生年月日</p>
+  <ons-input id="regist_birthDay"></ons-input>
+  <p>性別</p>
+  <ons-input id="regist_gender"></ons-input>
+  <p>身長(cm)</p>
+  <ons-input id="regist_height"></ons-input>
+
 
   <script>
     // 画面表示時
     ons.getScriptPage().onShow = function() {
+      var myuser = new User();
+      // メールアドレスの取得
+      var mail = myuser.getMailAddress();
+      // メールアドレスの表示
+      document.getElementById("regist_mailAddress").innerText = mail;
+      // ニックネームの取得
+      var nickName = myuser.getNickName();
+      // ニックネームの表示
+      document.getElementById("regist_nickName").innerText = nickName;
+      // 生年月日の取得
+      var birthDay = myuser.getBirthDay();
+      // 生年月日の表示
+      document.getElementById("regist_birthDay").innerText = birthDay;
+      // 性別の取得
+      var gender = myuser.getGender();
+      // 性別の表示
+      document.getElementById("regist_gender").innerText = gender;
+      // 身長の取得
+      var height = myuser.getHeight();
+      // 身長の表示
+      document.getElementById("regist_height").innerText = height;      
+
     }
     // userEdit画面へ
     function send_userEdit(){
       document.getElementById('nav').pushPage('userEdit.html', {});
     };    
+
+    // ニフクラmobile backendのキー設定
+// API key.
+var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+// SDK initialization.
+var ncmb = new NCMB(applicationKey, clientKey);  
     // login画面へ
     function send_login(){
+      ncmb.User.logout();
+      alert("あああ");
       document.getElementById('nav').resetToPage('login.html');
     };
+
+
+
+
+
+
+
   </script>
+
 </ons-page>

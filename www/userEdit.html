@@ -3,9 +3,24 @@
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center">ユーザ編集</div>    
   </ons-toolbar>
+  <ons-button onclick="userRegist()">完了</ons-button>
+
   <script>
     ons.getScriptPage().onShow = function() {
     }
+
+    // 完了ボタン押下
+    function userRegist(){
+      document.getElementById('nav').resetToPage('userManage.html');
+    };
   </script>
-  <ons-button onclick="ons.notification.alert('Hello World!')">Click 
+  
+
+  <p>メールアドレス</p>
+	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" placeholder="mailAddress" value=monaca.cloud.User.getProperty("mailAddress") ></ons-input>
+	<p>ニックネーム</p>
+	<ons-input id="regist_nickName" modifier="underbar" placeholder="nickName" ></ons-input>
+	<p>生年月日</p>
+  <p>性別</p>
+  <p>身長</p>
 </ons-page>
