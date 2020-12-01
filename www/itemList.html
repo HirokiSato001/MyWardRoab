@@ -4,6 +4,10 @@
 			<ons-back-button>Back</ons-back-button>
 		</div>
 		<div class="center">アイテム一覧</div>
+		<div class="right">
+			<ons-button onclick="send_ItemRegistPage()">追加</ons-button>
+		</div>
+    
 	</ons-toolbar>
 
 	<!-- カテゴリー別のリスト表示 -->
@@ -237,7 +241,11 @@
         console.log("Err#" + err.code +": " + err.message);
       });  
     }, false);
+    
+    // アイテム登録画面への遷移
+    function send_ItemRegistPage(){
+      document.getElementById('nav').pushPage('itemRegist.html', {});    
+    }
 
-
-	</script>
+  </script>
 </ons-page>
