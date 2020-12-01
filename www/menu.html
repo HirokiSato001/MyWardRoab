@@ -9,18 +9,21 @@
     </p>
   </head>
   <body>
-
- <p>ボタンをクリック！</p>
- <div id="edit_area"></div>
- <input type="button" value="Check" onclick="myfunc()">
- <div id="disp">ここにデータを表示</div>
+    <h2><div id="disp"></div></h2>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+<h2>おしらせ</h2>
   </body>
-  <script>
-     var myfunc = function () {
+<script type="text/javascript">
+  let youkoso = 'ようこそ！' + '千代田区' + 'さん';
          console.log('Hello');
-      document.getElementById("disp").innerText = "ボタンをクリックしてください"; 
-//      alert("全要素描画終了");
-    }
-   </script> 
+      document.getElementById("disp").innerText = youkoso; 
+//disp.style.fontWeight = "bold";
+//disp.style.fontFamily = "Meiryo UI";
+//disp.style.fontSize = '20pt' ;  
+</script> 
 </once-page>
  
