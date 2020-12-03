@@ -77,35 +77,58 @@
     const sizes = [ 
       "XS","S","M","L","XL","XXL","3XL"
     ];
+  // ニフクラmobile backendのキー設定
+  // API key.
+  var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+  var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+  // SDK initialization.
+  var ncmb = new NCMB(applicationKey, clientKey);
+    // 画面表示時
+    ons.getScriptPage().onShow = function() {
+      var GameScore = ncmb.DataStore("item");
+GameScore.fetchAll()
+         .then(function(results){           
+            for (var i = 0; i < results.length; i++) {
+              var object = results[i];
+              console.log(object.get("category"));
+            }
+          })
+         .catch(function(err){
+            console.log(err);
+          });
+    }
 
-    document.addEventListener('show', function(event) {      
-    
-      // itemテーブルにアクセス
-      var items = monaca.cloud.Collection("item");
+    document.addEventListener('show', function(event) {
+      var Item = ncmb.DataStore("item");
+      Item.fetchAll()
+      .then(function(results){
 
-      // Userに紐づくitemリストを取得
-      items.findMine()
-      .done(function(result)
-      {
-        console.log('Total items found: ' + result.totalItems);
+      // // itemテーブルにアクセス
+      // var items = monaca.cloud.Collection("item");
+
+      // // Userに紐づくitemリストを取得
+      // items.findMine()
+      // .done(function(result){
 
         // Userに紐づくitemリスト
-        var itemList = result.items;
+        // var itemList = results.items;
+        var itemList = results;
         
         // itemListの数だけ繰り返す
-        for (var i = 0; i < itemList.length; i++) {
+        for (var i = 0; i < results.length; i++) {
           // アイテム表示用
           var onsListItem = document.createElement("ons-list-item");
           // カテゴリー取得
-          var cateIdx = itemList[i].category;
+          var cateIdx = itemList[i].get("category");
           // サブカテゴリー取得
-          var sub_cateIdx = itemList[i].sub_category;
+          var sub_cateIdx = itemList[i].get("sub_category");
           // カラー取得
-          var colorIdx = itemList[i].color;
+          var colorIdx = itemList[i].get("color");
           // サイズ取得
-          var sizeIdx = itemList[i].size;
+          var sizeIdx = itemList[i].get("size");
           // 画像取得
-          var imageUri = itemList[i].image;
+          var imageUri = itemList[i].get("image");
+          console.log("category :" + cateIdx)
 
           // リスト表示用
           var List;
@@ -236,10 +259,10 @@
           List.appendChild(onsListItem);
         }
       })
-      .fail(function(err)
-      {
-        console.log("Err#" + err.code +": " + err.message);
-      });  
+
+      .catch(function(err){
+          console.log(err);
+        });    
     }, false);
     
     // アイテム登録画面への遷移
