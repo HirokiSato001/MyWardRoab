@@ -116,7 +116,7 @@
 
     <br>
     <div style="text-align: center">
-        <ons-button onclick="itemRegist()">登録</ons-button>
+        <ons-button onclick="itemRegist_mobileBackend()">登録</ons-button>
     </div>  
   </body>
 
@@ -241,6 +241,77 @@
         console.log("Err#" + err.code +": " + err.message);
       });
   }
+
+
+
+  // ニフクラmobile backendのキー設定
+  // API key.
+  var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+  var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+  // SDK initialization.
+  var ncmb = new NCMB(applicationKey, clientKey);
+  // 「登録」ボタン押下時の処理
+  function itemRegist_mobileBackend(){
+
+    var category = document.getElementById("category").value;
+    var sub_category = document.getElementById("sub_category").value;
+    var color = document.getElementById("color").value;
+    var design = document.getElementById("design").value;
+    var material = document.getElementById("material").value;
+    
+    var season_radio =  document.getElementsByName("season");
+    var season = "";
+    for(var i = 0; i < season_radio.length ; i++){
+      if (season_radio[i].checked){
+        //選択されたラジオボタンのvalue値を取得する
+        season = season_radio[i].value;
+        break;
+      }
+    }
+
+    var size = document.getElementById("size").value;
+    var brand = document.getElementById("brand").value;
+    var remarks = document.getElementById("remarks").value;
+    var image = document.getElementById("image").src;
+    // ログインユーザを取得
+    var currentUser = ncmb.User.getCurrentUser();
+
+    var Item = ncmb.DataStore("item");
+    var insertItem = new Item();
+    insertItem.set("category", category) 
+              .set("sub_category", sub_category)
+              .set("color", color)
+              .set("design", design)
+              .set("material", material)
+              .set("season", season)
+              .set("size", size)
+              .set("brand", brand)
+              .set("remarks", remarks)
+              .set("image", image)
+              .set("userId", currentUser.get("objectId"))
+              .save()
+              .then(function(insertItem){
+                // 保存後の処理
+                console.log("Inserted!");
+                console.log('category: ' + category);
+                console.log('sub_category: ' + sub_category);
+                console.log('color: ' + color);
+                console.log('design: ' + design);
+                console.log('material: ' + material);
+                console.log('season: ' + season);
+                console.log('size: ' + size);
+                console.log('brand: ' + brand);
+                console.log('remarks: ' + remarks);
+                console.log('image: ' + image);
+                document.getElementById('nav').pushPage('itemList.html',{});
+              })
+              .catch(function(err){
+                // エラー処理
+                console.log("Err#" + err.code +": " +err.message);   
+              });
+              
+  }
+
   </script>
 
 </ons-page>
