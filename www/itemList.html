@@ -110,12 +110,25 @@ GameScore.fetchAll()
       // items.findMine()
       // .done(function(result){
 
+        var t = document.getElementById("tops");
+        t.innerHTML = "";
+        var b = document.getElementById("bottoms");
+        b.innerHTML = "";
+        var o = document.getElementById("outer");
+        o.innerHTML = "";
+        var d = document.getElementById("dress");
+        d.innerHTML = "";
+        var s = document.getElementById("shoes");
+        s.innerHTML = "";
+
         // Userに紐づくitemリスト
         // var itemList = results.items;
         var itemList = results;
         
         // itemListの数だけ繰り返す
         for (var i = 0; i < results.length; i++) {
+          //var count = i;
+
           // アイテム表示用
           var onsListItem = document.createElement("ons-list-item");
           // カテゴリー取得
@@ -128,7 +141,9 @@ GameScore.fetchAll()
           var sizeIdx = itemList[i].get("size");
           // 画像取得
           var imageUri = itemList[i].get("image");
-          console.log("category :" + cateIdx)
+
+          var itemID = itemList[i].get("objectId");
+          console.log("category :" + cateIdx);
 
           // リスト表示用
           var List;
@@ -217,22 +232,31 @@ GameScore.fetchAll()
 
           // 詳細ボタン
           var detail_button =  document.createElement("ons-button");
-          detail_button.onclick = function() {
-            document.getElementById('nav').pushPage('itemDetails.html', {});
-          };
+          detail_button.onclick = (function(num) {
+            return function(){
+              document.getElementById('nav').pushPage('itemDetails.html', {
+               data: itemList[num].get("objectId")
+            });
+            console.log("objectId: " + itemList[num].get("objectId"));
+            }
+          })(i);
           detail_button.innerText = "詳細";
 
           // 編集ボタン
           var edit_button =  document.createElement("ons-button");
           edit_button.onclick = function() {
-            document.getElementById('nav').pushPage('itemEdit.html', {});
+            document.getElementById('nav').pushPage('itemEdit.html', {
+
+            });
           };
           edit_button.innerText = "編集";
 
           // 削除ボタン
           var delete_button =  document.createElement("ons-button");
           delete_button.onclick = function() {
-            document.getElementById('nav').pushPage('itemDetails.html', {});
+            document.getElementById('nav').pushPage('itemDetails.html', {
+
+            });
           };
           delete_button.innerText = "削除";
 
