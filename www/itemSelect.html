@@ -1,18 +1,41 @@
 <ons-page id="itemSelect">
   <ons-toolbar>
     <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">アイテム選定</div>
+    <div class="center">アイテム選定</div>    
   </ons-toolbar>
-  <ons-button onclick="send_coordinate()">コーディネート</ons-button>
-  <ons-button onclick="ons.notification.alert('Hello World!')">Click</ons-button>
 
-  <script>
-    // 画面表示時
+   <input type="checkbox">
+  	<div style="text-align">
+			<input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">
+		</div>
+
+    <input type="checkbox">
+    <div style="text-align">
+			<input id="image" type="image" src="image/1_1_pink.png" onclick="boot_camera()">
+		</div>
+
+    <input type="checkbox">
+    <div style="text-align">
+			<input id="image" type="image" src="image/2_6_blue.png" onclick="boot_camera()">
+		</div>
+
+    <input type="checkbox">
+    <div style="text-align">
+			<input id="image" type="image" src="image/5_5_red.png" onclick="boot_camera()">
+		</div>
+
+  </ons-toolbar>
+	 <div class="center">
+		<ons-button onclick="send_coordinate()">コーディネート</ons-button>
+	 </div>
+
+	<script>
+		// 画面表示時
     ons.getScriptPage().onShow = function() {
     }
     // coordinate画面へ
     function send_coordinate(){
       document.getElementById('nav').pushPage('coordinate.html', {});
-    };    
-  </script>
+    };
+	</script>
 </ons-page>
