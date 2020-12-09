@@ -6,58 +6,58 @@
 		<div class="center">アイテム詳細</div>
 	</ons-toolbar>
 	<div style="text-align: center">
-		<img src="/www/image/1_1_pink.png">
+		<img id="image_top" src="/www/image/1_1_pink.png">
 	</div>
 	<table border="0">
 		<tr>
 			<td>カテゴリー</td>
 			<td> : </td>
-			<td>category</td>
+			<td id="category">category</td>
 		</tr>
 		<tr>
 			<td>サブカテゴリー</td>
 			<td> : </td>
-			<td>sub_category</td>
+			<td id="sub_category">sub_category</td>
 		</tr>
 		<tr>
 			<td>色</td>
 			<td> : </td>
-			<td>color</td>
+			<td id="color">color</td>
 		</tr>
 		<tr>
 			<td>柄</td>
 			<td> : </td>
-			<td>design</td>
+			<td id="design">design</td>
 		</tr>
 		<tr>
 			<td>画像ID</td>
 			<td> : </td>
-			<td>imageID</td>
+			<td id="image_mid">imageID</td>
 		</tr>
 		<tr>
 			<td>素材</td>
 			<td> : </td>
-			<td>material</td>
+			<td id="material">material</td>
 		</tr>
 		<tr>
 			<td>季節</td>
 			<td> : </td>
-			<td>season</td>
+			<td id="season">season</td>
 		</tr>
 		<tr>
 			<td>サイズ</td>
 			<td> : </td>
-			<td>size</td>
+			<td id="size">size</td>
 		</tr>
 		<tr>
 			<td>ブランド</td>
 			<td> : </td>
-			<td>brand</td>
+			<td id="brand">brand</td>
 		</tr>
 		<tr>
 			<td>備考</td>
 			<td> : </td>
-			<td>remarks</td>
+			<td id="remarks">remarks</td>
 		</tr>
 	</table>
 
@@ -70,6 +70,39 @@
     // SDK initialization.
     var ncmb = new NCMB(applicationKey, clientKey);
     var items = ncmb.DataStore("item");
+
+		// カテゴリーの項目
+    var categories = [
+      "トップス","ボトムス","アウター","ワンピース","シューズ"
+    ];
+    
+    // サブカテゴリーの項目
+    var sub_categories = [
+      ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
+      ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
+      ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
+      ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
+      ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
+    ];
+
+    // 柄項目
+    var designs = ["無地","水玉(ドット)","ストライプ","ボーダー","チェック","ペイズリー","迷彩","アニマル"]
+
+    // 素材
+    var materials = ["ナイロン","ポリエステル","ポリウレタン","レーヨン","アクリル","綿（コットン）","毛（ウール）","麻（リネン）","絹（シルク）","ポリノジック","キュプラ","リヨセル"]
+
+    // 季節
+    var seasons = ["春","夏","秋","冬"]
+
+    // カラー項目
+    var colors = [
+      "赤","茶","橙","黄","緑","青","紫","黒","白","桃","グレー","ベージュ" 
+    ];
+
+    // サイズ項目
+    var sizes = [ 
+      "XS","S","M","L","XL","XXL","3XL"
+    ];    
     // 画面表示時
     ons.getScriptPage().onShow = function() {
     var itemID_detail = this.data.itemID_detail
@@ -79,7 +112,19 @@
          .then(function(results){
             for (var i = 0; i < results.length; i++) {
               var object = results[i];
-              console.log("取得category:" + object.get("category"));
+              console.log("image :" + object.get("image"));
+              document.getElementById("category").innerHTML = categories[object.get("category")-1]
+              document.getElementById("sub_category").innerHTML = sub_categories[object.get("category")-1][object.get("sub_category")-1]
+              document.getElementById("color").innerHTML = colors[object.get("color")-1]
+              document.getElementById("design").innerHTML = designs[object.get("design")-1]
+              document.getElementById("material").innerHTML = materials[object.get("material")-1]
+              document.getElementById("season").innerHTML = seasons[object.get("season")-1]
+              document.getElementById("size").innerHTML = sizes[object.get("size")-1]
+              // これやると画面が崩れる...
+              // document.getElementById("image_mid").innerHTML = object.get("image")
+              document.getElementById("image_top").src = object.get("image")
+              document.getElementById("brand").innerHTML = object.get("brand")
+              document.getElementById("remarks").innerHTML = object.get("remarks")
             }
           })
          .catch(function(err){
