@@ -55,12 +55,12 @@
 
 	<script>
 		// カテゴリーの項目
-    const categories = [
+    var categories = [
       "トップス","ボトムス","アウター","ワンピース","シューズ"
     ];
     
     // サブカテゴリーの項目
-    const sub_categories = [
+    var sub_categories = [
       ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
       ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
       ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
@@ -69,12 +69,12 @@
     ];
 
     // カラー項目
-    const colors = [
+    var colors = [
       "赤","茶","橙","黄","緑","青","紫","黒","白","桃","グレー","ベージュ" 
     ];
 
     // サイズ項目
-    const sizes = [ 
+    var sizes = [ 
       "XS","S","M","L","XL","XXL","3XL"
     ];
   // ニフクラmobile backendのキー設定
@@ -86,7 +86,7 @@
     // 画面表示時
     ons.getScriptPage().onShow = function() {
       var GameScore = ncmb.DataStore("item");
-GameScore.fetchAll()
+        GameScore.fetchAll()
          .then(function(results){           
             for (var i = 0; i < results.length; i++) {
               var object = results[i];
@@ -102,13 +102,6 @@ GameScore.fetchAll()
       var Item = ncmb.DataStore("item");
       Item.fetchAll()
       .then(function(results){
-
-      // // itemテーブルにアクセス
-      // var items = monaca.cloud.Collection("item");
-
-      // // Userに紐づくitemリストを取得
-      // items.findMine()
-      // .done(function(result){
 
         var t = document.getElementById("tops");
         t.innerHTML = "";
@@ -233,7 +226,6 @@ GameScore.fetchAll()
           detail_button.onclick = (function(num) {
             return function(){
               var itemID_detail = itemList[num].get("objectId"); 
-              
               document.getElementById('nav').pushPage('itemDetails.html', {
                data:{itemID_detail} 
             });
@@ -244,11 +236,14 @@ GameScore.fetchAll()
 
           // 編集ボタン
           var edit_button =  document.createElement("ons-button");
-          edit_button.onclick = function() {
-            document.getElementById('nav').pushPage('itemEdit.html', {
-
-            });
-          };
+          edit_button.onclick = (function(num) {
+            return function(){
+              var itemID_edit = itemList[num].get("objectId");
+              document.getElementById('nav').pushPage('itemEdit.html', {
+                data:{itemID_edit}
+              });
+            }
+          })(i);
           edit_button.innerText = "編集";
 
           // 削除ボタン

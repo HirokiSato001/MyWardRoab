@@ -1,14 +1,257 @@
 <ons-page id="itemEdit">
   <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <div class="left">
+      <ons-back-button>Back</ons-back-button>
+    </div>
     <div class="center">アイテム編集</div>    
   </ons-toolbar>
+
+  <h4>カテゴリー：</h4>
+  <div style="text-align: center">
+    <ons-select id="category" modifier="underbar" onchange="changeCategory()">
+      <option value = 1>トップス</option>
+      <option value = 2>ボトムス</option>
+      <option value = 3>アウター</option>
+      <option value = 4>ワンピース</option>
+      <option value = 5>シューズ</option>
+    </ons-select>
+  </div>
+  
+  <h4>サブカテゴリー：</h4>
+  <div style="text-align: center">
+    <ons-select id="sub_category" modifier="underbar">
+      <option value = 1>Tシャツ</option>
+      <option value = 2>ポロシャツ</option>
+      <option value = 3>パーカー</option>
+      <option value = 4>ニット</option>
+      <option value = 5>インナー</option>      
+    </ons-select>
+  </div>
+  
+  <h4>カラー：</h4>
+  <div style="text-align: center">
+    <ons-select id="color" modifier="underbar">
+      <option value = 1>赤</option>
+      <option value = 2>茶</option>
+      <option value = 3>橙</option>
+      <option value = 4>黄</option>
+      <option value = 5>緑</option>
+      <option value = 6>青</option>
+      <option value = 7>紫</option>
+      <option value = 8>黒</option>
+      <option value = 9>白</option>
+      <option value = 10>桃</option>
+      <option value = 11>グレー</option>
+      <option value = 12>ベージュ</option>
+    </ons-select>
+  </div>
+
+  <h4>柄：</h4>
+  <div style="text-align: center">
+    <ons-select id="design" modifier="underbar">
+      <option value = 1>無地</option>
+      <option value = 2>水玉（ドット）</option>
+      <option value = 3>ストライプ</option>
+      <option value = 4>ボーダー</option>
+      <option value = 5>チェック</option>
+      <option value = 6>ペイズリー</option>
+      <option value = 7>迷彩</option>
+      <option value = 8>アニマル</option>
+    </ons-select>
+  </div>
+
+  <h4>素材：</h4>
+  <div style="text-align: center">
+    <ons-select id="material" modifier="underbar">
+      <option value = 1>ナイロン</option>
+      <option value = 2>ポリエステル</option>
+      <option value = 3>ポリウレタン</option>
+      <option value = 4>レーヨン</option>
+      <option value = 5>アクリル</option>
+      <option value = 6>綿（コットン）</option>
+      <option value = 7>毛（ウール）</option>
+      <option value = 8>麻（リネン）</option>
+      <option value = 9>絹（シルク）</option>
+      <option value = 10>ポリノジック</option>
+      <option value = 11>キュプラ</option>
+      <option value = 12>リヨセル</option>
+    </ons-select>
+  </div>
+  
+  <h4>季節：</h4>
+  <div style="text-align: center">
+    <ons-row>
+      <ons-col><ons-radio name="season" id="radio-1" value = 1>春</ons-radio></ons-col>
+      <ons-col><ons-radio name="season" id="radio-2" value = 2>夏</ons-radio></ons-col>
+      <ons-col><ons-radio name="season" id="radio-3" value = 3>秋</ons-radio></ons-col>
+      <ons-col><ons-radio name="season" id="radio-4" value = 4>冬</ons-radio></ons-col>
+    </ons-row>
+  </div>
+  
+  <h4>サイズ：</h4>
+  <div style="text-align: center">
+    <ons-select id="size" modifier="underbar">
+      <option value=1>XS</option>
+      <option value=2>S</option>
+      <option value=3>M</option>
+      <option value=4>L</option>
+      <option value=5>XL</option>
+      <option value=6>XXL</option>
+      <option value=7>3XL</option>
+    </ons-select>
+  </div>
+
+  <h4>ブランド：</h4>
+  <div style="text-align: center">
+    <ons-input id="brand" modifier="material" placeholder="ブランド" float></ons-input>
+  </div>
+
+  <h4>備考：</h4>
+  <div style="text-align: center">
+    <textarea  id="remarks" class="textarea" rows="5" cols="25" placeholder="備考"></textarea>
+  </div>
+
+  <h4>画像：</h4>
+  <div style="text-align: center">
+    <input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">
+  </div>  
+
+  <br>
+  <div style="text-align: center">
+      <ons-button onclick="itemEdit()">完了</ons-button>
+  </div>
+
   <script>
+    // ニフクラmobile backendのキー設定
+    // API key.
+    var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+    var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+    // SDK initialization.
+    var ncmb = new NCMB(applicationKey, clientKey);
+    var items = ncmb.DataStore("item");
+
+    // アイテムオブジェクト
+    var item;
+
+    // 各入力項目のUIオブジェクト取得
+    var category = document.getElementById("category");
+    var sub_category = document.getElementById("sub_category");
+    var color = document.getElementById("color");
+    var design = document.getElementById("design");
+    var material = document.getElementById("material");
+    var season_radio =  document.getElementsByName("season");
+    var size = document.getElementById("size");
+    var brand = document.getElementById("brand");
+    var remarks = document.getElementById("remarks");
+    var image = document.getElementById("image");
+
+    // ログインユーザを取得
+    var currentUser = ncmb.User.getCurrentUser();
+
+    // 前画面から送られた"objectId"
+    var itemID_edit;
+
     // 画面表示時
-    var itemID_edit = this.data.send_itemID_edit
     ons.getScriptPage().onShow = function() {
-      console.log("edit :" + itemID_edit)
+      itemID_edit = this.data.itemID_edit;
+      console.log("edit :" + itemID_edit);
+
+      items.equalTo("objectId", itemID_edit)
+        .fetchAll()
+        .then(function(results){
+          // object取得
+          item = results[0];
+
+          // 初期設定
+          category.value = item.get("category");
+          sub_category.value = item.get("sub_category");
+          color.value = item.get("color");
+          design.value = item.get("design");
+          material.value = item.get("material");
+          size.value = item.get("size");
+          brand.value = item.get("brand");
+          remarks.value = item.get("remarks");
+          image.src = item.get("image");
+          console.log("season :" + item.get("season"));
+
+          var radio_id = "radio-" + item.get("season");
+          var season_ra =  document.getElementById(radio_id);
+          season_ra.checked = true;
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+    }
+
+    // 「完了」ボタン押下時
+    function itemEdit(){
+      var v_category = document.getElementById("category").value;
+      var v_sub_category = document.getElementById("sub_category").value;
+      var v_color = document.getElementById("color").value;
+      var v_design = document.getElementById("design").value;
+      var v_material = document.getElementById("material").value;
+      var v_size = document.getElementById("size").value;
+      var v_brand = document.getElementById("brand").value;
+      var v_remarks = document.getElementById("remarks").value;
+      var v_image = document.getElementById("image").src;
+      var v_season;
+      for(var i = 0; i < season_radio.length ; i++){
+        if (season_radio[i].checked){
+          //選択されたラジオボタンのvalue値を取得する
+          v_season = season_radio[i].value;
+          break;
+        }
+      }
+
+      console.log("完了： " + itemID_edit);
+
+      items.equalTo("objectId",itemID_edit)
+        .fetchAll()
+        .then(function(results){
+          results[0]
+            .set("category", v_category) 
+            .set("sub_category", v_sub_category)
+            .set("color", v_color)
+            .set("design", v_design)
+            .set("material", v_material)
+            .set("season", v_season)
+            .set("size", v_size)
+            .set("brand", v_brand)
+            .set("remarks", v_remarks)
+            .set("image", v_image)
+            .set("userId", currentUser.get("objectId"));
+          document.getElementById('nav').pushPage('itemList.html',{});
+          return results[0].update();
+        })
+        .catch(function(err){
+          // エラー処理
+          console.log("Err#" + err.code +": " +err.message);
+        });
+    }
+
+    //カテゴリーが変更された場合、サブカテゴリーのドロップダウンのメニュー項目を変更する
+    function changeCategory(){
+      // サブカテゴリーの項目
+      const sub_categories = [
+        ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
+        ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
+        ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
+        ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
+        ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
+      ];
+
+      // 選択された項目番号
+      const index = category.selectedIndex;
+
+      console.log("index: " + index);
+
+      // サブカテゴリーのプルダウンを初期化
+      sub_category.length = 0;
+
+      // サブカテゴリーに項目を設定
+      for (let i = 0 ; i < sub_categories[index].length ; i++) {
+        sub_category.options[i] = new Option(sub_categories[index][i], i+1);
+      }
     }
   </script>
-  <ons-button onclick="ons.notification.alert('Hello World!')">Click 
 </ons-page>
