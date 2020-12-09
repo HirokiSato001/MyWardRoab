@@ -63,13 +63,34 @@
 
 	<ons-button onclick="send_ItemEditPage()">編集</ons-button>
 	<script>
-		var itemID = "aaaa";
+    // ニフクラmobile backendのキー設定
+    // API key.
+    var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+    var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+    // SDK initialization.
+    var ncmb = new NCMB(applicationKey, clientKey);
+    var items = ncmb.DataStore("item");
     // 画面表示時
     ons.getScriptPage().onShow = function() {
+    var itemID_detail = this.data.itemID_detail
+      console.log("detail :" + itemID_detail);
+      items.equalTo("objectId", this.data.itemID_detail)
+         .fetchAll()
+         .then(function(results){
+            for (var i = 0; i < results.length; i++) {
+              var object = results[i];
+              console.log("取得category:" + object.get("category"));
+            }
+          })
+         .catch(function(err){
+            console.log(err);
+          });
+
     }
     function send_ItemEditPage(){
+      var itemID_edit = "aaaaa"
       document.getElementById('nav').pushPage('itemEdit.html', {
-        data: {itemID}
+        data: {itemID_edit}
         // 次画面で、this.data.itemIDをすればとれる
       }); 
     }

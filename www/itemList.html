@@ -142,8 +142,6 @@ GameScore.fetchAll()
           // 画像取得
           var imageUri = itemList[i].get("image");
 
-          var itemID = itemList[i].get("objectId");
-          console.log("category :" + cateIdx);
 
           // リスト表示用
           var List;
@@ -234,8 +232,10 @@ GameScore.fetchAll()
           var detail_button =  document.createElement("ons-button");
           detail_button.onclick = (function(num) {
             return function(){
+              var itemID_detail = itemList[num].get("objectId"); 
+              
               document.getElementById('nav').pushPage('itemDetails.html', {
-               data: itemList[num].get("objectId")
+               data:{itemID_detail} 
             });
             console.log("objectId: " + itemList[num].get("objectId"));
             }
