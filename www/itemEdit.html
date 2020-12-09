@@ -5,7 +5,9 @@
   </ons-toolbar>
   <script>
     // 画面表示時
+    var itemID_edit = this.data.send_itemID_edit
     ons.getScriptPage().onShow = function() {
+      console.log("edit :" + itemID_edit)
     }
   </script>
   <ons-button onclick="ons.notification.alert('Hello World!')">Click 
