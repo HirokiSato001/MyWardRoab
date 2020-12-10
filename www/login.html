@@ -29,6 +29,7 @@
 		<p style="margin-top: 30px;">
 			<ons-button onclick="login()">ログイン</ons-button>
 			<ons-button onclick="test_login()">ログイン(固定ユーザ)</ons-button>
+			<ons-button onclick="logintest()">user確認</ons-button>
 		</p>
     <br>
 		<p>
@@ -120,6 +121,15 @@ function test_login() {
       .catch(function(err){
         // エラー処理
       });      
+}
+function logintest() {  
+var currentUser = ncmb.User.getCurrentUser();
+if (currentUser) {
+    console.log("ログイン中のユーザー: " + currentUser.get("userName"));
+} else {
+    console.log("未ログインまたは取得に失敗");
+}  
+
 }
 	</script>
 </ons-page> 
