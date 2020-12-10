@@ -62,9 +62,14 @@ var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2
 var ncmb = new NCMB(applicationKey, clientKey);  
     // login画面へ
     function send_login(){
-      ncmb.User.logout();
+      console.log(ncmb.User.getCurrentUser().get("userName"));
+      ncmb.User.logout().catch(function(err){
+                // エラー処理
+                console.log("Err#" + err.code +": " +err.message);   
+              });
+      
       alert("あああ");
-      document.getElementById('nav').resetToPage('login.html');
+      document.getElementById('nav').resetToPage('login.html',{});
     };
 
 
