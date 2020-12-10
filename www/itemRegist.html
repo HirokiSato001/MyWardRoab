@@ -3,7 +3,6 @@
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center">アイテム登録</div>    
   </ons-toolbar>
-  <body>
     <h4>カテゴリー：</h4>
     <div style="text-align: center">
       <ons-select id="category" modifier="underbar" onchange="changeCategory()">
@@ -117,9 +116,8 @@
     <br>
     <div style="text-align: center">
         <ons-button onclick="itemRegist_mobileBackend()">登録</ons-button>
-    </div>  
-  </body>
-
+    </div>
+    
   <script>
     // 画面表示時に起動
      document.addEventListener('show', function(event) {
