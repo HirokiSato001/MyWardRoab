@@ -128,7 +128,7 @@ h4, h5, h6 {
   bottom: 0;
   box-sizing: border-box;
 }
-.page__background {
+/* .page__background {
   background-color: #efeff4;
   position: absolute;
   top: 0;
@@ -136,6 +136,17 @@ h4, h5, h6 {
   right: 0;
   bottom: 0;
   box-sizing: border-box;
+} */
+.page__background {
+background-image: url(../image/haikei.gif);
+position: absolute;
+top: 0px;
+left: 0px;
+right: 0px;
+bottom: 0px;
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
 }
 .page--material {
   font-family: 'Roboto', 'Noto', sans-serif;
