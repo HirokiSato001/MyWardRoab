@@ -162,8 +162,12 @@
           // object取得
           item = results[0];
 
+          console.log("category:"+item.get("category"));
+          console.log("sub_category:"+item.get("sub_category"));
+
           // 初期設定
           category.value = item.get("category");
+          changeCategory();
           sub_category.value = item.get("sub_category");
           color.value = item.get("color");
           design.value = item.get("design");
@@ -220,7 +224,7 @@
             .set("remarks", v_remarks)
             .set("image", v_image)
             .set("userId", currentUser.get("objectId"));
-          document.getElementById('nav').pushPage('itemList.html',{});
+          document.getElementById('nav').popPage();
           return results[0].update();
         })
         .catch(function(err){
@@ -230,16 +234,7 @@
     }
 
     //カテゴリーが変更された場合、サブカテゴリーのドロップダウンのメニュー項目を変更する
-    function changeCategory(){
-      // サブカテゴリーの項目
-      const sub_categories = [
-        ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
-        ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
-        ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
-        ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
-        ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
-      ];
-
+    function changeCategory(){     
       // 選択された項目番号
       const index = category.selectedIndex;
 
@@ -249,8 +244,8 @@
       sub_category.length = 0;
 
       // サブカテゴリーに項目を設定
-      for (let i = 0 ; i < sub_categories[index].length ; i++) {
-        sub_category.options[i] = new Option(sub_categories[index][i], i+1);
+      for (let i = 0 ; i < getSubCategorysLength(index) ; i++) {
+        sub_category.options[i] = new Option(convert_sub_category(index+1,i+1), i+1);
       }
     }
   </script>

@@ -54,6 +54,10 @@ function convert_size(argSize){
   return sizes[argSize-1]
 }
 
+function getSubCategorysLength(argCategory){
+  return sub_categories[argCategory].length
+}
+
 class Item{
   // コンストラクタ
   constructor(category,sub_category,color){

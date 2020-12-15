@@ -5,10 +5,24 @@
 		</div>
 		<div class="center">アイテム一覧</div>
 		<div class="right">
+      <ons-button onclick="readyItemList()">更新</ons-button>
 			<ons-button onclick="send_ItemRegistPage()">追加</ons-button>
 		</div>
-    
 	</ons-toolbar>
+
+  <!-- ダイアログ -->
+  <template id="alert-dialog.html">
+    <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+      <div class="alert-dialog-title">Alert</div>
+      <div class="alert-dialog-content">
+        アイテムを削除してもいいですか？
+      </div>
+      <div class="alert-dialog-footer">
+        <ons-alert-dialog-button onclick="hideDialog('my-alert-dialog')">Cancel</ons-alert-dialog-button>
+        <ons-alert-dialog-button onclick="deleteItem()">OK</ons-alert-dialog-button>
+      </div>
+    </ons-alert-dialog>
+  </template>
 
 	<!-- カテゴリー別のリスト表示 -->
 	<ons-list>
@@ -77,28 +91,25 @@
     var sizes = [ 
       "XS","S","M","L","XL","XXL","3XL"
     ];
-  // ニフクラmobile backendのキー設定
-  // API key.
-  var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
-  var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
-  // SDK initialization.
-  var ncmb = new NCMB(applicationKey, clientKey);
+    
+    // ニフクラmobile backendのキー設定
+    // API key.
+    var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+    var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+    // SDK initialization.
+    var ncmb = new NCMB(applicationKey, clientKey);
+
+    // アイテム削除オブジェクト
+    var delete_item_obj;
+
     // 画面表示時
     ons.getScriptPage().onShow = function() {
-      var GameScore = ncmb.DataStore("item");
-        GameScore.fetchAll()
-         .then(function(results){           
-            for (var i = 0; i < results.length; i++) {
-              var object = results[i];
-              console.log(object.get("category"));
-            }
-          })
-         .catch(function(err){
-            console.log(err);
-          });
+      console.log("onShow");
+      readyItemList();
     }
 
-    document.addEventListener('show', function(event) {
+    // アイテムリスト画面の描画処理
+      function readyItemList(){
       var Item = ncmb.DataStore("item");
       Item.fetchAll()
       .then(function(results){
@@ -115,7 +126,6 @@
         s.innerHTML = "";
 
         // Userに紐づくitemリスト
-        // var itemList = results.items;
         var itemList = results;
         
         // itemListの数だけ繰り返す
@@ -134,7 +144,6 @@
           var sizeIdx = itemList[i].get("size");
           // 画像取得
           var imageUri = itemList[i].get("image");
-
 
           // リスト表示用
           var List;
@@ -248,11 +257,36 @@
 
           // 削除ボタン
           var delete_button =  document.createElement("ons-button");
-          delete_button.onclick = function() {
-            document.getElementById('nav').pushPage('itemDetails.html', {
-
-            });
-          };
+          delete_button.onclick = (function(num) {
+            return function(){
+              var itemID_delete = itemList[num].get("objectId");
+              showDialog(
+                "削除してもよろしいでしょうか？",
+                function(index) {
+                  console.log('index:'+index);
+                  if(index == -1) {
+                    console.log('confirmのコールバック:キャンセル');
+                  } else if(index == 0) {
+                    console.log('confirmのコールバック:No');
+                  } else if(index == 1) {
+                    console.log('confirmのコールバック:Yes');
+                    Item.equalTo("objectId", itemID_delete)
+                      .fetch()
+                      .then(function (res) {
+                          res.delete()
+                            .then(function (res) {
+                            }).catch(function (err) {
+                              console.log("削除エラー");
+                            });
+                      }).catch(function (err) {
+                         console.log("削除対象検出エラー");
+                      });
+                  }
+                  
+                }
+              );
+            }
+          })(i);
           delete_button.innerText = "削除";
 
           // ボタンエリア作成
@@ -281,13 +315,30 @@
 
       .catch(function(err){
           console.log(err);
-        });    
-    }, false);
+      });
+    }    
+    //}, false);
     
     // アイテム登録画面への遷移
     function send_ItemRegistPage(){
       document.getElementById('nav').pushPage('itemRegist.html', {});    
     }
+
+   // ダイアログ表示
+function showDialog(message, callback) {
+    ons.notification.confirm({
+        title: "確認",
+        message: message,
+        buttonLabels: [ "いいえ", "はい"],
+        //primaryButtonIndex: 1,
+        cancelable: true,
+        callback: function(index) {
+          if (index) {
+            callback(index);
+          }
+        }
+    })
+}
 
   </script>
 </ons-page>
