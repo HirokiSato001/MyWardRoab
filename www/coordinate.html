@@ -6,38 +6,242 @@
   </ons-toolbar>
  </head>
  <body>   
+ 
+ <br>
+ 
  <div class="left">＜使用アイテム＞</div>
+ 
+ <br>
 
-<div class="item">
-    <ul>
-      <li><a href="itemList.html">
-      <p>ブラウス</p></a>      
-      <p><img src="image/1_1_pink.png" id='imageArea' alt="ブラウスの画像"style="float:left;"
-      width="100px" height="100px" >カテゴリー<br>サブカテゴリー<br>カラー<br>柄</p></li>
-      <p style="clear:both;"></p>
-      
-      <li><a href="itemList.html">
-      <p>パンツ</p></a>
-      <p><img src="image/2_6_blue.png" alt="パンツの画像"style="float:left;"
-      width="100px" height="100px">カテゴリー<br>サブカテゴリー<br>カラー<br>柄</p></li>
-     
-      <li><a href="itemList.html">
-      <p>パンプス</p></a>
-      <p><img src="image/5_5_red.png" alt="パンプスの画像"style="float:left;"
-      width="100px" height="100px">カテゴリー<br>サブカテゴリー<br>カラー<br>柄</p></li>
-    </ul>
-  </div>
+	<table border="0">
+		<tr>
+		<td rowspan="5"><img src="image/1_1_pink.png" id='imageArea' alt="トップスの画像"style="float:left;"width="100px" height="100px" >
+		</td>
+    	<th>カテゴリー</th>
+			<td> : </td>
+			<td id="tops_category">category</td>
+		</tr>
+
+		<tr>
+			<th>サブカテゴリー</th>
+			<td> : </td>
+			<td id="tops_sub_category">sub_category</td>
+		</tr>
+	
+  	<tr>
+			<th>色</th>
+			<td> : </td>
+			<td id="tops_color">color</td>
+		</tr>
+	
+  	<tr>
+			<th>柄</th>
+			<td> : </td>
+			<td id="tops_design">design</td>
+		</tr>
+	
+  	<tr>
+			<th>サイズ</th>
+			<td> : </td>
+			<td id="tops_size">size</td>
+		</tr>
+	</table>
+
+<br>   
+
+  <table border="0">
+		<tr>
+		<td rowspan="5"><img src="image/2_6_blue.png" alt="ボトムスの画像"style="float:left;"
+      width="100px" height="100px" >
+		</td>
+    	<th>カテゴリー</th>
+			<td> : </td>
+			<td id="bottoms_category">category</td>
+		</tr>
+
+		<tr>
+			<th>サブカテゴリー</th>
+			<td> : </td>
+			<td id="bottoms_sub_category">sub_category</td>
+		</tr>
+		
+    <tr>
+			<th>色</th>
+			<td> : </td>
+			<td id="bottoms_color">color</td>
+		</tr>
+
+		<tr>
+			<th>柄</th>
+			<td> : </td>
+			<td id="bottoms_design">design</td>
+		</tr>
+
+		<tr>
+			<th>サイズ</th>
+			<td> : </td>
+			<td id="bottoms_size">size</td>
+		</tr>
+	</table>
+
+<br>
+
+  <table border="0">
+		<tr>
+		<td rowspan="5"><img src="image/5_5_red.png" alt="パンプスの画像"style="float:left;"
+      width="100px" height="100px" >
+		</td>
+    	<th>カテゴリー</th>
+			<td> : </td>
+			<td id="shoes_category">category</td>
+		</tr>
+
+		<tr>
+			<th>サブカテゴリー</th>
+			<td> : </td>
+			<td id="shoes_sub_category">sub_category</td>
+		</tr>
+
+		<tr>
+			<th>色</th>
+			<td> : </td>
+			<td id="shoes_color">color</td>
+		</tr>
+
+		<tr>
+			<th>柄</th>
+			<td> : </td>
+			<td id="shoes_design">design</td>
+		</tr>
+
+		<tr>
+			<th>サイズ</th>
+			<td> : </td>
+			<td id="shoes_size">size</td>
+		</tr>
+	</table>
+
+<br>
+
  </body>
-  <script>
 
-   
-      // 画面表示時
+  <script>
+    // カテゴリーの項目
+    var categories = [
+      "トップス","ボトムス","アウター","ワンピース","シューズ"
+    ];
+    
+    // サブカテゴリーの項目
+    var sub_categories = [
+      ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
+      ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
+      ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
+      ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
+      ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
+    ];
+
+    // 柄項目
+    var designs = ["無地","水玉(ドット)","ストライプ","ボーダー","チェック","ペイズリー","迷彩","アニマル"
+    ];
+
+    // カラー項目
+    var colors = [
+      "赤","茶","橙","黄","緑","青","紫","黒","白","桃","グレー","ベージュ" 
+    ];
+
+    // サイズ項目
+    var sizes = [ 
+      "XS","S","M","L","XL","XXL","3XL"
+    ];    
+
+    // ニフクラmobile backendのキー設定
+  // API key.
+  var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+  var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+  // SDK initialization.
+  var ncmb = new NCMB(applicationKey, clientKey);
+    var items = ncmb.DataStore("item");
+
+    // 画面表示時
     ons.getScriptPage().onShow = function() {
+    console.log("onShow")
+      items.equalTo("category", "1")
+         .fetchAll()
+         .then(function(results){
+           // 配列からランダムで値を選択
+       var object = results[ Math.floor( Math.random() * results.length ) ] ;
+            // for (var i = 0; i < results.length; i++) {
+            //   var object = results[i];
+              document.getElementById("tops_category").innerHTML=categories[object.get("category")-1]
+              document.getElementById("tops_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
+              document.getElementById("tops_color").innerHTML=colors[object.get("color")-1]
+              document.getElementById("tops_design").innerHTML=designs[object.get("design")-1]
+              document.getElementById("tops_size").innerHTML=sizes[object.get("size")-1]
+         })
+          .catch(function(err){
+            console.log(err);
+          });
+    
+      items.equalTo("category", "2")
+         .fetchAll()
+         .then(function(results){
+           // 配列からランダムで値を選択
+       var object = results[ Math.floor( Math.random() * results.length ) ] ;
+            // for (var i = 0; i < results.length; i++) {
+            //   var object = results[i];
+              document.getElementById("bottoms_category").innerHTML=categories[object.get("category")-1]
+              document.getElementById("bottoms_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
+              document.getElementById("bottoms_color").innerHTML=colors[object.get("color")-1]
+              document.getElementById("bottoms_design").innerHTML=designs[object.get("design")-1]
+              document.getElementById("bottoms_size").innerHTML=sizes[object.get("size")-1]          
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+
+      items.equalTo("category", "5")
+         .fetchAll()
+         .then(function(results){
+           // 配列からランダムで値を選択
+       var object = results[ Math.floor( Math.random() * results.length ) ] ;
+            // for (var i = 0; i < results.length; i++) {
+            //   var object = results[i];
+              document.getElementById("shoes_category").innerHTML=categories[object.get("category")-1]
+              document.getElementById("shoes_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
+              document.getElementById("shoes_color").innerHTML=colors[object.get("color")-1]
+              document.getElementById("shoes_design").innerHTML=designs[object.get("design")-1]
+              document.getElementById("shoes_size").innerHTML=sizes[object.get("size")-1]
+          
+            //   console.log("取得category:" + object.get("category")+" color:"+object.get("color"));
+            
+            // }
+          })
+         .catch(function(err){
+            console.log(err);
+          });
+
     }
+     
+
     // itemSelect画面へ
     function send_itemSelect(){
       document.getElementById('nav').pushPage('itemSelect.html', {});
     }; 
-  </script>
-  <ons-button onclick="document.getElementById('nav').popPage()">Click</ons-button>
 
+   function test(){
+     // 配列
+var arr = [ "こんにちは", "おはよう", "こんばんは", "さようなら" ] ;
+
+// 配列からランダムで値を選択
+var a = arr[ Math.floor( Math.random() * arr.length ) ] ;
+   alert(a)
+   }
+         
+
+  </script>
+
+  <ons-button onclick="document.getElementById('nav').popPage()">Click</ons-button>
+  <ons-button onclick="test()">Click</ons-button>
+
+
+</ons-page>
