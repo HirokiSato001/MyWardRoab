@@ -206,7 +206,6 @@
 
     // 完了ボタン押下
     function userRegist(){
-      document.getElementById('nav').resetToPage('userManage.html');
       mail = document.getElementById("pre_regist_mailAddress").value;
       myuser.setMailAddress(mail);
 
@@ -216,7 +215,8 @@
 
 
       //ユーザー管理画面へ遷移
-      document.getElementById('nav').pushPage('userManage.html', {});
+      document.getElementById('nav').resetToPage('userManage.html');
+      // document.getElementById('nav').pushPage('userManage.html', {});
     };
 
   </script>
