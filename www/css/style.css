@@ -2,6 +2,8 @@
 /**/
 body {background-image: url("/www/image/haikei.gif"); }
 .resizeimage img { width: 100%; }
+#title {text-align: center;}
+#infomation {text-align: left;}
 
 /* itemList.html */
 ul.itemList {

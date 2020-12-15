@@ -1,13 +1,8 @@
 <!DOCTYPE html>
 <ons-page>
-  <head>
-    <meta charset="utf-8" />
-    <script type="text/javascript" src="/www/js/script11_1.js"></script>
-    <link rel="stylesheet" href="/www/css/style.css" type="text/css">
-	  <p class="resizeimage">
-      <img src="/www/image/title.gif" alt="タイトル">
-    </p>
-  </head>
+  <p class="resizeimage">
+    <img src="/www/image/title.gif" alt="公園">
+  </p>
   <body>
     <h2><div id="disp"></div></h2>
     <br/>
@@ -15,15 +10,19 @@
     <br/>
     <br/>
     <br/>
-<h2>おしらせ</h2>
+    <h2>おしらせ</h2>
   </body>
-<script type="text/javascript">
-  let youkoso = 'ようこそ！' + '千代田区' + 'さん';
+<script>
+    // 画面表示時
+    ons.getScriptPage().onShow = function() {
+  
+    // ユーザクラスを生成
+    myUser = new User();
+      let youkoso = 'ようこそ！' + myUser.getNickName() + 'さん';
          console.log('Hello');
-      document.getElementById("disp").innerText = youkoso; 
-//disp.style.fontWeight = "bold";
-//disp.style.fontFamily = "Meiryo UI";
-//disp.style.fontSize = '20pt' ;  
+      document.getElementById("disp").innerText = youkoso;
+    }
+
 </script> 
 </ons-page>
  
