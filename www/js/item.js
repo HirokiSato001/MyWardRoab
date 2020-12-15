@@ -1,4 +1,62 @@
 // This is a JavaScript file
+// カテゴリーの項目
+var categories = [
+  "トップス","ボトムス","アウター","ワンピース","シューズ"
+];
+
+// サブカテゴリーの項目
+var sub_categories = [
+  ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
+  ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
+  ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
+  ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
+  ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
+];
+
+// 柄項目
+var designs = ["無地","水玉(ドット)","ストライプ","ボーダー","チェック","ペイズリー","迷彩","アニマル"]
+
+// 素材
+var materials = ["ナイロン","ポリエステル","ポリウレタン","レーヨン","アクリル","綿（コットン）","毛（ウール）","麻（リネン）","絹（シルク）","ポリノジック","キュプラ","リヨセル"]
+
+// 季節
+var seasons = ["春","夏","秋","冬"]
+
+// カラー項目
+var colors = [
+  "赤","茶","橙","黄","緑","青","紫","黒","白","桃","グレー","ベージュ" 
+];
+
+// サイズ項目
+var sizes = [ 
+  "XS","S","M","L","XL","XXL","3XL"
+];    
+function convert_category(argCategory){
+  return categories[argCategory-1]
+}
+function convert_sub_category(argCategory,argSubCategory){
+  return sub_categories[argCategory-1][argSubCategory-1]
+}
+function convert_color(argColor){
+  return colors[argColor-1]
+}
+function convert_design(argDesign){
+  return designs[argDesign-1]
+}
+
+function convert_material(argMaterial){
+  return materials[argMaterial-1]
+}
+function convert_season(argSeason){
+  return seasons[argSeason-1]
+}
+function convert_size(argSize){
+  return sizes[argSize-1]
+}
+
+function getSubCategorysLength(argCategory){
+  return sub_categories[argCategory].length
+}
 
 class Item{
   // コンストラクタ

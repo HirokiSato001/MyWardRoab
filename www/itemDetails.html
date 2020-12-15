@@ -61,7 +61,7 @@
 		</tr>
 	</table>
 
-	<ons-button onclick="send_ItemEditPage()">編集</ons-button>
+	<ons-button id = "edit">編集</ons-button>
 	<script>
     // ニフクラmobile backendのキー設定
     // API key.
@@ -71,41 +71,9 @@
     var ncmb = new NCMB(applicationKey, clientKey);
     var items = ncmb.DataStore("item");
 
-		// カテゴリーの項目
-    var categories = [
-      "トップス","ボトムス","アウター","ワンピース","シューズ"
-    ];
-    
-    // サブカテゴリーの項目
-    var sub_categories = [
-      ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
-      ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
-      ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
-      ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
-      ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
-    ];
-
-    // 柄項目
-    var designs = ["無地","水玉(ドット)","ストライプ","ボーダー","チェック","ペイズリー","迷彩","アニマル"]
-
-    // 素材
-    var materials = ["ナイロン","ポリエステル","ポリウレタン","レーヨン","アクリル","綿（コットン）","毛（ウール）","麻（リネン）","絹（シルク）","ポリノジック","キュプラ","リヨセル"]
-
-    // 季節
-    var seasons = ["春","夏","秋","冬"]
-
-    // カラー項目
-    var colors = [
-      "赤","茶","橙","黄","緑","青","紫","黒","白","桃","グレー","ベージュ" 
-    ];
-
-    // サイズ項目
-    var sizes = [ 
-      "XS","S","M","L","XL","XXL","3XL"
-    ];    
     // 画面表示時
     ons.getScriptPage().onShow = function() {
-    var itemID_detail = this.data.itemID_detail
+    var itemID_detail = this.data.itemID_detail;
       console.log("detail :" + itemID_detail);
       items.equalTo("objectId", this.data.itemID_detail)
          .fetchAll()
@@ -113,13 +81,13 @@
             for (var i = 0; i < results.length; i++) {
               var object = results[i];
               console.log("image :" + object.get("image"));
-              document.getElementById("category").innerHTML = categories[object.get("category")-1]
-              document.getElementById("sub_category").innerHTML = sub_categories[object.get("category")-1][object.get("sub_category")-1]
-              document.getElementById("color").innerHTML = colors[object.get("color")-1]
-              document.getElementById("design").innerHTML = designs[object.get("design")-1]
-              document.getElementById("material").innerHTML = materials[object.get("material")-1]
-              document.getElementById("season").innerHTML = seasons[object.get("season")-1]
-              document.getElementById("size").innerHTML = sizes[object.get("size")-1]
+              document.getElementById("category").innerHTML = convert_category(object.get("category"))
+              document.getElementById("sub_category").innerHTML = convert_sub_category(object.get("category"),object.get("sub_category"))
+              document.getElementById("color").innerHTML = convert_color(object.get("color"))
+              document.getElementById("design").innerHTML = convert_design(object.get("design"))
+              document.getElementById("material").innerHTML = convert_material(object.get("material"))
+              document.getElementById("season").innerHTML = convert_season(object.get("season"))
+              document.getElementById("size").innerHTML = convert_size(object.get("size"))        
               // これやると画面が崩れる...
               // document.getElementById("image_mid").innerHTML = object.get("image")
               document.getElementById("image_top").src = object.get("image")
@@ -131,13 +99,23 @@
             console.log(err);
           });
 
+        var edit_button =  document.getElementById("edit");
+        edit_button.onclick = (function() {
+            return function(){
+              var itemID_edit = itemID_detail;
+              document.getElementById('nav').pushPage('itemEdit.html', {
+               data:{itemID_edit} 
+            });
+            }
+          })();
     }
-    function send_ItemEditPage(){
-      var itemID_edit = "aaaaa"
-      document.getElementById('nav').pushPage('itemEdit.html', {
-        data: {itemID_edit}
-        // 次画面で、this.data.itemIDをすればとれる
-      }); 
-    }
+    
+    // function send_ItemEditPage(){
+    //   var itemID_edit = itemID_detail;
+    //   document.getElementById('nav').pushPage('itemEdit.html', {
+    //     data: {itemID_edit}
+    //     // 次画面で、this.data.itemID_editをすればとれる
+    //   });
+    // }
 	</script>
 </ons-page>
