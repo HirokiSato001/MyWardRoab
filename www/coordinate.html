@@ -9,11 +9,15 @@
  
  <br>
  
- <div class="left">＜使用アイテム＞</div>
+ <div class="left"><font size="3" font color="#0000ff">＜使用アイテム＞</font></div>
  
  <br>
 
-	<table border="0">
+ <div id="coordinate"＞
+
+ <br>
+
+	<table border="0" >
 		<tr>
 		<td rowspan="5"><img src="image/1_1_pink.png" id='imageArea' alt="トップスの画像"style="float:left;"width="100px" height="100px" >
 		</td>
@@ -86,6 +90,78 @@
 
 <br>
 
+	<table border="0">
+		<tr>
+		<td rowspan="5"><img src="image/3_1_blue.png" id='imageArea' alt="アウターの画像"style="float:left;"width="100px" height="100px" >
+		</td>
+    	<th>カテゴリー</th>
+			<td> : </td>
+			<td id="outer_category">category</td>
+		</tr>
+
+		<tr>
+			<th>サブカテゴリー</th>
+			<td> : </td>
+			<td id="outer_sub_category">sub_category</td>
+		</tr>
+	
+  	<tr>
+			<th>色</th>
+			<td> : </td>
+			<td id="outer_color">color</td>
+		</tr>
+	
+  	<tr>
+			<th>柄</th>
+			<td> : </td>
+			<td id="outer_design">design</td>
+		</tr>
+	
+  	<tr>
+			<th>サイズ</th>
+			<td> : </td>
+			<td id="outer_size">size</td>
+		</tr>
+	</table>
+  
+<br>
+
+	<table border="0">
+		<tr>
+		<td rowspan="5"><img src="image/4_5_yellow.png" id='imageArea' alt="ワンピースの画像"style="float:left;"width="100px" height="100px" >
+		</td>
+    	<th>カテゴリー</th>
+			<td> : </td>
+			<td id="one_piece_category">category</td>
+		</tr>
+
+		<tr>
+			<th>サブカテゴリー</th>
+			<td> : </td>
+			<td id="one_piece_sub_category">sub_category</td>
+		</tr>
+	
+  	<tr>
+			<th>色</th>
+			<td> : </td>
+			<td id="one_piece_color">color</td>
+		</tr>
+	
+  	<tr>
+			<th>柄</th>
+			<td> : </td>
+			<td id="one_piece_design">design</td>
+		</tr>
+	
+  	<tr>
+			<th>サイズ</th>
+			<td> : </td>
+			<td id="one_piece_size">size</td>
+		</tr>
+	</table>
+
+<br>
+
   <table border="0">
 		<tr>
 		<td rowspan="5"><img src="image/5_5_red.png" alt="パンプスの画像"style="float:left;"
@@ -121,7 +197,12 @@
 		</tr>
 	</table>
 
+
+ </div>
+
 <br>
+
+
 
  </body>
 
@@ -165,6 +246,7 @@
     // 画面表示時
     ons.getScriptPage().onShow = function() {
     console.log("onShow")
+
       items.equalTo("category", "1")
          .fetchAll()
          .then(function(results){
@@ -199,6 +281,40 @@
             console.log(err);
           });
 
+      items.equalTo("category", "3")
+         .fetchAll()
+         .then(function(results){
+           // 配列からランダムで値を選択
+       var object = results[ Math.floor( Math.random() * results.length ) ] ;
+            // for (var i = 0; i < results.length; i++) {
+            //   var object = results[i];
+              document.getElementById("outer_category").innerHTML=categories[object.get("category")-1]
+              document.getElementById("outer_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
+              document.getElementById("outer_color").innerHTML=colors[object.get("color")-1]
+              document.getElementById("outer_design").innerHTML=designs[object.get("design")-1]
+              document.getElementById("outer_size").innerHTML=sizes[object.get("size")-1]          
+          })
+          .catch(function(err){
+            console.log(err);
+          });
+
+      items.equalTo("category", "4")
+         .fetchAll()
+         .then(function(results){
+           // 配列からランダムで値を選択
+       var object = results[ Math.floor( Math.random() * results.length ) ] ;
+            // for (var i = 0; i < results.length; i++) {
+            //   var object = results[i];
+              document.getElementById("one_piece_category").innerHTML=categories[object.get("category")-1 ]
+              document.getElementById("one_piece_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
+              document.getElementById("one_piece_color").innerHTML=colors[object.get("color")-1]
+              document.getElementById("one_piece_design").innerHTML=designs[object.get("design")-1]
+              document.getElementById("one_piece_size").innerHTML=sizes[object.get("size")-1]          
+          })
+          .catch(function(err){
+            console.log(err);
+          });        
+
       items.equalTo("category", "5")
          .fetchAll()
          .then(function(results){
@@ -211,10 +327,6 @@
               document.getElementById("shoes_color").innerHTML=colors[object.get("color")-1]
               document.getElementById("shoes_design").innerHTML=designs[object.get("design")-1]
               document.getElementById("shoes_size").innerHTML=sizes[object.get("size")-1]
-          
-            //   console.log("取得category:" + object.get("category")+" color:"+object.get("color"));
-            
-            // }
           })
          .catch(function(err){
             console.log(err);
