@@ -11,15 +11,15 @@
       //ons.notification.alert(this.data.username + " " + this.data.password);
     }
 	</script>
-	<ons-button onclick="onclick_userRegistTEST()"> 入力値をコンソールに出力</ons-button>
-
+	<!-- <ons-button onclick="onclick_userRegistTEST()"> 入力値をコンソールに出力</ons-button> -->
+<div class="padding_left">
 	<p>情報を入力してください</p>
 	<p>メールアドレス※</p>
-	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" placeholder="mailAddress" value="aa@a.a" float></ons-input>
+	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" placeholder="mailAddress" value="" float></ons-input>
 	<p>ニックネーム※</p>
 	<ons-input id="regist_nickName" modifier="underbar" placeholder="nickName" float></ons-input>
 	<p>生年月日</p>
-	<select name="year">
+	<select id="year">
 <option value="">-</option>
 <option value="1931">1931</option>
 <option value="1932">1932</option>
@@ -122,7 +122,7 @@
 <option value="2029">2029</option>
 <option value="2030">2030</option>
 </select>年
-	<select name="month">
+	<select id="month">
 <option value="">-</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -137,7 +137,7 @@
 <option value="11">11</option>
 <option value="12">12</option>
 </select>月
-	<select name="day">
+	<select id="day">
 <option value="">-</option>
 <option value="1">1</option>
 <option value="2">2</option>
@@ -185,6 +185,7 @@
 	<ons-button onclick="onclick_userRegist()">新規登録</ons-button>
 	<br>
 	<br>
+</div>
 
 	<script>
     var address;
@@ -214,8 +215,8 @@
 
         myUser = new User();
         // 生年月日の入力フォームがなおるまで固定値
-        // myUser.userRegist(address, password, sendNickName, birthYear, birthMonth, birthDay, gender, height)
-        myUser.userRegist(address, password, sendNickName, 2020, 01, 02,gender, 123)
+        myUser.userRegist(address, password, sendNickName, birthYear, birthMonth, birthDay, gender, height)
+        // myUser.userRegist(address, password, sendNickName, 2020, 01, 02,gender, 123)
 
 
         // 何もしない
@@ -227,9 +228,10 @@
       // ニックネーム
       nickName =  document.getElementById('regist_nickName').value;
       // 生年月日
-      birthYear =  document.getElementsByName('year').value;
-      birthMonth =  document.getElementsByName('month').value;
-      birthDay =  document.getElementsByName('day').value;
+      // <!-- birthYear =  document.getElementsByName('year').value; -->
+      birthYear =  document.getElementById('year').value;
+      birthMonth =  document.getElementById('month').value;
+      birthDay =  document.getElementById('day').value;
       // 性別
       var genderList = document.getElementsByName("gender");
       gender = "";
@@ -294,6 +296,7 @@
 
     function onclick_userRegistTEST(){
       getElement()
+      console.log("新規登録画面:入力値");
       console.log("address:" + address);
       console.log("nickName:" + nickName);
       console.log("birthYear:" + birthYear);
