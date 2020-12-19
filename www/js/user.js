@@ -16,11 +16,12 @@ var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112e
 var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
 // SDK initialization.
 var ncmb = new NCMB(applicationKey, clientKey);  
-var currentUser = ncmb.User.getCurrentUser();
-
+// var currentUser = ncmb.User.getCurrentUser();
+var currentUser
 class User {
   // コンストラクタ
   constructor() {
+    currentUser = ncmb.User.getCurrentUser();
     // ログイン済みの場合
     if (currentUser) {
       console.log("new User()ログイン済み");
@@ -71,19 +72,22 @@ class User {
       // 登録後処理
       console.log('Registration is success!' + argNickName);
       // ログイン処理
-      ncmb.User.login(argNickName, argPassword)
+      ncmb.User.login(argMailAddress, argPassword)
           .then(function(data){
             // ログイン後処理
             console.log("login Success");
+            document.getElementById('nav').pushPage('top.html', {});
+            
           })
           .catch(function(err){
             // エラー処理
+            console.log(argNickName + argPassword);
           });
     })
     .catch(function(err){
       // エラー処理
       console.log('Registration failed!');
-      alert('Registration failed!');
+      alert('登録失敗');
     });    
   }
 
@@ -119,7 +123,7 @@ class User {
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
-        console.log("Success. Change userName to " + argPassword);
+        console.log("Success. Change password to " + argPassword);
       })
       .catch(function(error) {
         // エラーの時
@@ -153,7 +157,7 @@ class User {
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
-        console.log("Success. Change userName to " + argBirthDay);
+        console.log("Success. Change birthDay to " + argBirthDay);
       })
       .catch(function(error) {
         // エラーの時
@@ -170,7 +174,7 @@ class User {
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
-        console.log("Success. Change userName to " + argYear);
+        console.log("Success. Change year to " + argYear);
       })
       .catch(function(error) {
         // エラーの時
@@ -187,7 +191,7 @@ class User {
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
-        console.log("Success. Change userName to " + argMonth);
+        console.log("Success. Change month to " + argMonth);
       })
       .catch(function(error) {
         // エラーの時
@@ -204,7 +208,7 @@ class User {
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
-        console.log("Success. Change userName to " + argDay);
+        console.log("Success. Change day to " + argDay);
       })
       .catch(function(error) {
         // エラーの時
@@ -221,7 +225,7 @@ class User {
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
-        console.log("Success. Change userName to " + argGender);
+        console.log("Success. Change gender to " + argGender);
       })
       .catch(function(error) {
         // エラーの時
@@ -238,7 +242,7 @@ class User {
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
-        console.log("Success. Change userName to " + argHeight);
+        console.log("Success. Change height to " + argHeight);
       })
       .catch(function(error) {
         // エラーの時
