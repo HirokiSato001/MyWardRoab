@@ -19,17 +19,16 @@
 		<p>
 			ユーザーID（メールアドレス）
 			<br>
-			<ons-input id="mailAddress" modifier="underbar" placeholder="MailAddress" float></ons-input>
+			<ons-input id="login_mailAddress" modifier="underbar" placeholder="MailAddress" float></ons-input>
 		</p>
 		<p>
 			パスワード
 			<br>
-			<ons-input id="password" type="password" modifier="underbar" placeholder="Password" float></ons-input>
+			<ons-input id="login_password" type="password" modifier="underbar" placeholder="Password" float></ons-input>
 		</p>
 		<p style="margin-top: 30px;">
 			<ons-button onclick="login()">ログイン</ons-button>
 			<ons-button onclick="test_login()">ログイン(固定ユーザ)</ons-button>
-			<ons-button onclick="logintest()">user確認</ons-button>
 		</p>
     <br>
 		<p>
@@ -54,6 +53,12 @@
      //ons.notification.alert('ようこそ');
 
   });
+  ons.getScriptPage().onShow = function() {
+
+    // アラートビューの表示
+    //  ons.notification.alert('ようこそ');
+  }
+
 
 // ニフクラmobile backendのキー設定
 // API key.
@@ -61,28 +66,26 @@ var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112e
 var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
 // SDK initialization.
 var ncmb = new NCMB(applicationKey, clientKey);
-
-
+var mailAddress;
+var password;
   // javaScript関数
   function login(){
     //id="username"の値を取得
-    var mailAddress = document.getElementById('mailAddress').value;
+    mailAddress = document.getElementById('login_mailAddress').value;
     //id="password"の値を取得
-    var password = document.getElementById('password').value;
-    alert(mailAddress);
-    alert(password);
-    // ログイン処理
-    ncmb.User.login(mailAddress, password)
-    .then(function(data){
-      // ログを表示
-      console.log("Hello again, " + result.user._username);
-      document.getElementById('nav').pushPage('top.html', {});
-    }).catch(function(err){
-      // エラー処理
-      ons.notification.alert('メールアドレスまたはパスワードが間違っています');
-    });
+    password = document.getElementById('login_password').value;
 
-
+    console.log("Try login ... " + mailAddress + ":" + password)
+      ncmb.User.login(mailAddress, password)
+      .then(function(data){
+        // ログイン後処理
+        console.log("login Success : " + mailAddress + ":" + password);
+        document.getElementById('nav').pushPage('top.html', {});
+      })
+      .catch(function(err){
+        // エラー処理
+        ons.notification.alert('メールアドレスまたはパスワードが間違っています');
+      });  
   }
 
   function test(){
@@ -122,14 +125,35 @@ function test_login() {
         // エラー処理
       });      
 }
-function logintest() {  
-var currentUser = ncmb.User.getCurrentUser();
-if (currentUser) {
-    console.log("ログイン中のユーザー: " + currentUser.get("userName"));
-} else {
-    console.log("未ログインまたは取得に失敗");
-}  
+function logintest() {
+    // //id="username"の値を取得
+    // var mailAddress = document.getElementById('mailAddress').value;
+    // //id="password"の値を取得
+    // var password = document.getElementById('password').value;
+    //   ncmb.User.login(mailAddress, password)
+    //   .then(function(data){
+    //     // ログイン後処理
+    //     console.log("login Success");
+    //     document.getElementById('nav').pushPage('top.html', {});
+    //   })
+    //   .catch(function(err){
+    //     // エラー処理
+    //   });      
 
+var currentUser = ncmb.User.getCurrentUser();
+  if (currentUser) {
+      console.log("ログイン中のユーザー: " + currentUser.get("userName"));
+  } else {
+      console.log("未ログインまたは取得に失敗");
+  }
 }
+
+function logintest1() {
+     ncmb.User.logout().catch(function(err){
+       // エラー処理
+       console.log("Err#" + err.code +": " +err.message);   
+       });
+}
+
 	</script>
 </ons-page> 
