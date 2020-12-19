@@ -1,13 +1,11 @@
 <ons-page id="userManage">
   <script src="js/user.js"></script>
   <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
+    <!-- <div class="left"><ons-back-button>Back</ons-back-button></div> -->
     <div class="center">ユーザ管理</div>
   </ons-toolbar>
   <ons-button onclick="send_userEdit()">ユーザ編集</ons-button>
   <ons-button onclick="send_login()">ログアウト</ons-button>
-
-
 
   <p>メールアドレス</p>
 	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" float></ons-input>
@@ -81,7 +79,8 @@
        // エラー処理
        console.log("Err#" + err.code +": " +err.message);   
        });
-       document.getElementById('nav').resetToPage('login.html',{});
+       document.getElementById('nav').popPage();  
+      //  document.getElementById('nav').bringPageTop('login.html',{});
      };
 
   </script>
