@@ -3,6 +3,7 @@
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center">アイテム登録</div>    
   </ons-toolbar>
+
     <h4>カテゴリー：</h4>
     <div style="text-align: center">
       <ons-select id="category" modifier="underbar" onchange="changeCategory()">
@@ -28,18 +29,18 @@
     <h4>カラー：</h4>
     <div style="text-align: center">
       <ons-select id="color" modifier="underbar">
-        <option value = 1>赤</option>
-        <option value = 2>茶</option>
-        <option value = 3>橙</option>
-        <option value = 4>黄</option>
-        <option value = 5>緑</option>
-        <option value = 6>青</option>
-        <option value = 7>紫</option>
-        <option value = 8>黒</option>
-        <option value = 9>白</option>
-        <option value = 10>桃</option>
-        <option value = 11>グレー</option>
-        <option value = 12>ベージュ</option>
+        <option value = red>赤</option>
+        <option value = brown>茶</option>
+        <option value = orange>橙</option>
+        <option value = yellow>黄</option>
+        <option value = green>緑</option>
+        <option value = blue>青</option>
+        <option value = purple>紫</option>
+        <option value = black>黒</option>
+        <option value = white>白</option>
+        <option value = pink>桃</option>
+        <option value = gray>グレー</option>
+        <option value = beige>ベージュ</option>
       </ons-select>
     </div>
 
@@ -60,7 +61,7 @@
     <h4>素材：</h4>
     <div style="text-align: center">
       <ons-select id="material" modifier="underbar">
-        <option value = 1>ナン</option>
+        <option value = 1>ナイロン</option>
         <option value = 2>ポリエステル</option>
         <option value = 3>ポリウレタン</option>
         <option value = 4>レーヨン</option>
@@ -133,7 +134,9 @@
       boot_camera();
     }, false);
 
-    //カテゴリーが変更された場合、サブカテゴリーのドロップダウンのメニュー項目を変更する
+    //カテゴリーが変更された場合、以下を変更する
+    //  １：サブカテゴリーのドロップダウンのメニュー項目
+    //  ２：イメージ画像
     function changeCategory(){
       // カテゴリーのプルダウン
       var category_select = document.getElementById("category");
@@ -148,18 +151,50 @@
         ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
         ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
       ];
-
       // 選択された項目番号
       const index = category_select.selectedIndex;
 
       // サブカテゴリーのプルダウンを初期化
       subCategory_select.length = 0;
 
-      // サブカテゴリーに項目を設定
+      // サブカテゴリーのリストを作成し設定
       for (let i = 0 ; i < sub_categories[index].length ; i++) {
         subCategory_select.options[i] = new Option(sub_categories[index][i], i+1);
       }
+      // イメージ画像を表示
+      showImage();
   }
+
+  /*
+  * 画像表示 メソッド
+  * 選択された以下のプルダウンから、イメージ画像を表示する。
+  *   ・カテゴリー・サブカテゴリー・カラー
+  */
+  function showImage(){
+    // イメージ画像が格納されているフォルダ
+    const image_folder = "image/";
+    // アンダーバー "_"
+    const unbar = "_";
+    // 画像形式 ".png"
+    const png = ".png";
+    document.getElementById("regist-image").src=("image/2_3_yellow.png");
+
+    // 選択されたカテゴリー
+    var category_index = document.getElementById("category").selectedIndex;
+    // 選択されたサブテゴリー
+    var subCategory_index = document.getElementById("sub_category").selectedIndex;
+    // 選択されたカラー
+    var color_index = document.getElementById("color").selectedIndex;
+    var pics = new Array("1_1_pink.png","2_3_yellow.png","3_1_blue.png","4_5_blue.png","5_4_black.png");
+
+    // 各選択から画像名を作成(暫定：カテゴリのみで画像を表示)
+    // var image_name = image_folder + category_index + unbar + subCategory_index + unbar + color_value + png;
+    var image_name = image_folder + pics[category_index];
+    // 画像を表示
+    document.getElementById("regist-image").src=(image_name);
+  }
+
+
 
   // カメラ起動関数
   function boot_camera(){
