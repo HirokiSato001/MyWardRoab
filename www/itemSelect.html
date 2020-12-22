@@ -4,25 +4,270 @@
     <div class="center">アイテム選定</div>    
   </ons-toolbar>
 
-   <input type="checkbox">
-  	<div style="text-align">
-			<input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">
-		</div>
+<!-- カテゴリー別のリスト表示
+	<ons-list>
+    <!-- トップス -->
+		<!-- <ons-list-item expandable>
+			トップス
+			<div class="itemSelect">
+				<ons-list id="tops">
+          <table class="itemSelect_tops" border="0">
+          <tr>
+          
+          <td><input type="checkbox">
+                <div style="text-align">
+	            	<input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">
+    	          </div>
+          </td> -->
+       
+          <!-- <td><input type="checkbox">
+                <div style="text-align">
+		           	<input id="image" type="image" src="image/1_1_pink.png" onclick="boot_camera()">
+	            	</div>
+          </td>
+  
+          <td><input type="checkbox">
+                <div style="text-align">
+			          <input id="image" type="image" src="image/2_6_blue.png" onclick="boot_camera()">
+	            	</div>
+          </td>
+          -->
+          <!-- </tr>
+          </table>
+        </ons-list>
+			</div>
+		</ons-list-item>
 
-    <input type="checkbox">
-    <div style="text-align">
-			<input id="image" type="image" src="image/1_1_pink.png" onclick="boot_camera()">
-		</div>
+    <!-- ボトムス -->
+		<!-- <ons-list-item expandable>
+			ボトムス
+			<div class="expandable-content">
+				<ons-list id="bottoms">
+          <table border="0">
+          <tr>
+          <td><input type="checkbox">
+                <div style="text-align">
+			          <input id="image" type="image" src="image/2_6_blue.png" onclick="boot_camera()">
+	            	</div>
+          </td>
+          </tr>
+          </table>
+        </ons-list>
+			</div>
+		</ons-list-item> -->
 
-    <input type="checkbox">
-    <div style="text-align">
-			<input id="image" type="image" src="image/2_6_blue.png" onclick="boot_camera()">
-		</div>
+    <!-- アウター
+		<ons-list-item expandable>
+			アウター
+			<div class="expandable-content">
+				<ons-list id="outer"></ons-list>
+			</div>
+		</ons-list-item> -->
 
-    <input type="checkbox">
+    <!-- ワンピース -->
+		<!-- <ons-list-item expandable>
+			ワンピース
+			<div class="expandable-content">
+				<ons-list id="dress"></ons-list>
+			</div>
+		</ons-list-item>
+
+    <!-- シューズ -->
+		<!-- <ons-list-item expandable>
+			シューズ
+			<div class="expandable-content">
+				<ons-list id="shoes">
+          <table border="0">
+  <tr>
+  <!-- <td> -->
+    <!-- <input type="checkbox">
     <div style="text-align">
 			<input id="image" type="image" src="image/5_5_red.png" onclick="boot_camera()">
-		</div>
+		</div></td> -->
+  <!-- </tr> --> 
+          <!-- </table>
+  
+        </ons-list>
+			</div>
+		</ons-list-item>
+	</ons-list> --> 
+
+<!-- トップス -->
+		
+	<p>トップス</p>		
+			<div class="itemSelect">
+			
+          <table class="itemSelect_tops" border="0" table id="tops_table" >
+                      
+            <tr>
+          
+          <td><input type="checkbox">
+                <div style="text-align">
+	            	<input id="tops_image" type="image" src=""  width="100" height="100"
+                onclick="boot_camera()">
+    	          </div>
+          </td>
+       
+          <td><input type="checkbox">
+                <div style="text-align">
+		           	<input id="tops_image" type="image" src=""  width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+  
+          <td><input type="checkbox">
+                <div style="text-align">
+			          <input id="tops_image" type="image" src="" width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+         
+          </tr>
+          </table>
+        
+			</div>
+
+      <ons-navigator id="photoNav" page="list-page.html">
+  </ons-navigator>
+  <template id="list-page.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="center" id="toolbar-title">写真</div>
+      </ons-toolbar>
+      <div style="text-align: center; padding-top: 50px;">
+        <ons-row id="photos">
+        </ons-row>
+      </div>
+    </ons-page>
+  </template>
+
+      <!-- ボトムス -->
+		
+		<p>ボトムス</p>
+			<div class="itemSelect">
+			
+         
+         
+          <table class="itemSelect_bottoms" border="0">
+          <tr>         
+          <td><input type="checkbox">
+                <div style="text-align">
+	            	<input id="image" type="image" src="image/2_6_beige.png" width="100" height="100" onclick="boot_camera()">
+    	          </div>
+          </td>
+       
+          <td><input type="checkbox">
+                <div style="text-align">
+		           	<input id="image" type="image" src=""  width="100" height="100"
+                onclick="boot_camera()">
+	            	</div>
+          </td>
+  
+          <td><input type="checkbox">
+                <div style="text-align">
+			          <input id="image" type="image" src=""  width="100" height="100"
+                onclick="boot_camera()">
+	            	</div>
+          </td>
+         
+          </tr>
+          </table>
+        
+			</div>
+
+      <!-- アウター -->
+		
+	<p>アウター</p>		
+			<div class="itemSelect">
+			
+          <table class="itemSelect_outer" border="0" >
+          <tr>
+          
+          <td><input type="checkbox">
+                <div style="text-align">
+	            	<input id="image" type="image" src=""  width="100" height="100"
+                onclick="boot_camera()">
+    	          </div>
+          </td>
+       
+          <td><input type="checkbox">
+                <div style="text-align">
+		           	<input id="image" type="image" src="g"  width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+  
+          <td><input type="checkbox">
+                <div style="text-align">
+			          <input id="image" type="image" src="" width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+         
+          </tr>
+          </table>
+        
+			</div>
+
+      <!-- ワンピース -->
+		
+	<p>ワンピース</p>		
+			<div class="itemSelect">
+			
+          <table class="itemSelect_dress" border="0" >
+          <tr>
+          
+          <td><input type="checkbox">
+                <div style="text-align">
+	            	<input id="image" type="image" src="image/1_4_black.png"  width="100" height="100"
+                onclick="boot_camera()">
+    	          </div>
+          </td>
+       
+          <td><input type="checkbox">
+                <div style="text-align">
+		           	<input id="image" type="image" src=""  width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+  
+          <td><input type="checkbox">
+                <div style="text-align">
+			          <input id="image" type="image" src="" width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+         
+          </tr>
+          </table>
+        
+			</div>
+
+      <!-- シューズ -->
+		
+	<p>シューズ</p>		
+			<div class="itemSelect">
+			
+          <table class="itemSelect_shoes" border="0" >
+          <tr>
+          
+          <td><input type="checkbox">
+                <div style="text-align">
+	            	<input id="image" type="image" src="image/1_4_black.png"  width="100" height="100"
+                onclick="boot_camera()">
+    	          </div>
+          </td>
+       
+          <td><input type="checkbox">
+                <div style="text-align">
+		           	<input id="image" type="image" src=""  width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+  
+          <td><input type="checkbox">
+                <div style="text-align">
+			          <input id="image" type="image" src="" width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+         
+          </tr>
+          </table>
+        
+			</div>  
 
   </ons-toolbar>
 	 <div class="center">
@@ -30,6 +275,62 @@
 	 </div>
 
 	<script>
+     // ニフクラmobile backendのキー設定
+    // API key.
+    // var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+    // var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+    // // SDK initialization.
+    // var ncmb = new NCMB(applicationKey, clientKey);
+    //     var items = ncmb.DataStore("item");
+
+		// 画面表示時
+    ons.getScriptPage().onShow = function() {
+    console.log("onShow");
+   readyItemList();
+   
+    }
+    // アイテムリスト画面の描画処理
+      function readyItemList(){
+        alert("start")
+      var Item = ncmb.DataStore("item");   
+     items.equalTo("category", "1")
+      Item.fetchAll()
+      .then(function(results){
+        alert("getDB")
+
+        // Userに紐づくitemリスト
+        var itemList = results;
+         // itemListの数だけ繰り返す
+        for (var i = 0; i < results.length; i++) {
+          //var count = i;
+            // アイテム表示用
+          var onsListItem = document.createElement("ons-list-item");
+          // カテゴリー取得
+          var cateIdx = itemList[i].get("category");
+          // サブカテゴリー取得
+          var sub_cateIdx = itemList[i].get("sub_category");
+          // カラー取得
+          var colorIdx = itemList[i].get("color");
+          // サイズ取得
+          var sizeIdx = itemList[i].get("size");
+          // 画像取得
+          var imageUri = itemList[i].get("image");
+
+          var table = document.getElementById("tops_table");
+          var rows = table.insertRow(-1);
+          // -1で列末尾に追加。インデックスで指定の位置に追加も可能
+          var cell = rows[0].insertCell(-1);
+        }
+
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+    
+    } 
+
+
+
 		// 画面表示時
     ons.getScriptPage().onShow = function() {
     }
