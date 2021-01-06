@@ -28,20 +28,8 @@
     
     <h4>カラー：</h4>
     <div style="text-align: center">
-      <ons-select id="color" modifier="underbar" onchange="changeColor()">
-        <option value = red>赤</option>
-        <option value = brown>茶</option>
-        <option value = orange>橙</option>
-        <option value = yellow>黄</option>
-        <option value = green>緑</option>
-        <option value = blue>青</option>
-        <option value = purple>紫</option>
-        <option value = black>黒</option>
-        <option value = white>白</option>
-        <option value = pink>桃</option>
-        <option value = gray>グレー</option>
-        <option value = beige>ベージュ</option>
-        <!-- <option value = 1>赤</option>
+      <ons-select id="color" modifier="underbar">
+        <option value = 1>赤</option>
         <option value = 2>茶</option>
         <option value = 3>橙</option>
         <option value = 4>黄</option>
@@ -52,7 +40,7 @@
         <option value = 9>白</option>
         <option value = 10>桃</option>
         <option value = 11>グレー</option>
-        <option value = 12>ベージュ</option> -->
+        <option value = 12>ベージュ</option>
       </ons-select>
     </div>
 
@@ -123,10 +111,9 @@
 
     <h4>画像：</h4>
     <div style="text-align: center">
-      <img id="regist-image" src="image/1_1_pink.png" style="filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%)">
-      <!-- <img id="regist-image"> -->
-      <!-- <div style= "filter: hue-rotate(100deg)"> -->
-
+      <!-- 画像の色を変更する場合の処理
+       <img id="regist-image" src="image/1_1_pink.png" style="filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%)"> -->
+      <img id="regist-image">
     </div>  
 
     <br>
@@ -145,7 +132,7 @@
       image.width = screenWidth / 4 * 3;
     };
     // イメージ画像を表示 
-    /* showImage() */
+    showImage();
 
 
     // document.getElementById("regist-image").addEventListener('click', function(event){
@@ -193,18 +180,12 @@
       showImage();
   }
 
-    //カラー変更処理
-    // １：以下の項目を選択されたカラーに合わせ変更する
-    //   ①イメージ画像
-    function changeColor(){
-      // イメージ画像を表示
-      showImage();
-  }
+
 
   /*
   * 画像表示 メソッド
   * 選択された以下のプルダウンから、イメージ画像を表示する。
-  *   ・カテゴリー・サブカテゴリー・カラー
+  *   ・カテゴリー・サブカテゴリー
   */
   function showImage(){
     // イメージ画像が格納されているフォルダ
@@ -219,10 +200,10 @@
     // 選択されたサブテゴリー
     var subCategory_index = document.getElementById("sub_category").selectedIndex + 1;
     // 選択されたカラー
-    var color_value = document.getElementById("color").value;
+    // var color_value = document.getElementById("color").value;
 
     // 各選択から画像名を作成(暫定：カテゴリのみで画像を表示)
-    var image_name = image_folder + category_index + unbar + subCategory_index + unbar + color_value + png;
+    var image_name = image_folder + category_index + unbar + subCategory_index + png;
 
     // 画像を表示
     console.log(image_name);
