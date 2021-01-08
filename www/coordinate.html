@@ -19,7 +19,7 @@
 
 	<table border="0" >
 		<tr>
-		<td rowspan="5"><img src="image/1_1_pink.png" id='imageArea' alt="トップスの画像"style="float:left;"width="100px" height="100px" >
+		<td rowspan="5"><img src="image/1_1_pink.png" id='tops_image' alt="トップスの画像"style="float:left;"width="100px" height="100px" >
 		</td>
     	<th>カテゴリー</th>
 			<td> : </td>
@@ -55,7 +55,7 @@
 
   <table border="0">
 		<tr>
-		<td rowspan="5"><img src="image/2_6_blue.png" alt="ボトムスの画像"style="float:left;"
+		<td rowspan="5"><img src="image/2_6_blue.png" id='bottoms_image' alt="ボトムスの画像"style="float:left;"
       width="100px" height="100px" >
 		</td>
     	<th>カテゴリー</th>
@@ -92,7 +92,7 @@
 
 	<table border="0">
 		<tr>
-		<td rowspan="5"><img src="image/3_1_blue.png" id='imageArea' alt="アウターの画像"style="float:left;"width="100px" height="100px" >
+		<td rowspan="5"><img src="image/3_1_blue.png" id='outer_image' alt="アウターの画像"style="float:left;"width="100px" height="100px" >
 		</td>
     	<th>カテゴリー</th>
 			<td> : </td>
@@ -128,7 +128,7 @@
 
 	<table border="0">
 		<tr>
-		<td rowspan="5"><img src="image/4_5_yellow.png" id='imageArea' alt="ワンピースの画像"style="float:left;"width="100px" height="100px" >
+		<td rowspan="5"><img src="image/4_5_yellow.png" id='one_piece_image' alt="ワンピースの画像"style="float:left;"width="100px" height="100px" >
 		</td>
     	<th>カテゴリー</th>
 			<td> : </td>
@@ -164,7 +164,7 @@
 
   <table border="0">
 		<tr>
-		<td rowspan="5"><img src="image/5_5_red.png" alt="パンプスの画像"style="float:left;"
+		<td rowspan="5"><img src="image/5_5_red.png" id='shoes_image' alt="シューズの画像"style="float:left;"
       width="100px" height="100px" >
 		</td>
     	<th>カテゴリー</th>
@@ -243,10 +243,15 @@
   var ncmb = new NCMB(applicationKey, clientKey);
     var items = ncmb.DataStore("item");
 
+    
+
     // 画面表示時
     ons.getScriptPage().onShow = function() {
     console.log("onShow")
 
+    var objectId = this.data.objectId;
+    
+     
       items.equalTo("category", "1")
          .fetchAll()
          .then(function(results){
@@ -259,7 +264,9 @@
               document.getElementById("tops_color").innerHTML=colors[object.get("color")-1]
               document.getElementById("tops_design").innerHTML=designs[object.get("design")-1]
               document.getElementById("tops_size").innerHTML=sizes[object.get("size")-1]
+              document.getElementById("tops_image").src=(object.get("image"));
          })
+
           .catch(function(err){
             console.log(err);
           });
@@ -275,7 +282,8 @@
               document.getElementById("bottoms_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
               document.getElementById("bottoms_color").innerHTML=colors[object.get("color")-1]
               document.getElementById("bottoms_design").innerHTML=designs[object.get("design")-1]
-              document.getElementById("bottoms_size").innerHTML=sizes[object.get("size")-1]          
+              document.getElementById("bottoms_size").innerHTML=sizes[object.get("size")-1]
+               document.getElementById("bottoms_image").src=(object.get("image"));          
           })
           .catch(function(err){
             console.log(err);
@@ -292,7 +300,8 @@
               document.getElementById("outer_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
               document.getElementById("outer_color").innerHTML=colors[object.get("color")-1]
               document.getElementById("outer_design").innerHTML=designs[object.get("design")-1]
-              document.getElementById("outer_size").innerHTML=sizes[object.get("size")-1]          
+              document.getElementById("outer_size").innerHTML=sizes[object.get("size")-1]  
+               document.getElementById("outer_image").src=(object.get("image"));        
           })
           .catch(function(err){
             console.log(err);
@@ -309,7 +318,8 @@
               document.getElementById("one_piece_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
               document.getElementById("one_piece_color").innerHTML=colors[object.get("color")-1]
               document.getElementById("one_piece_design").innerHTML=designs[object.get("design")-1]
-              document.getElementById("one_piece_size").innerHTML=sizes[object.get("size")-1]          
+              document.getElementById("one_piece_size").innerHTML=sizes[object.get("size")-1]       
+               document.getElementById("one_piece_image").src=(object.get("image"));   
           })
           .catch(function(err){
             console.log(err);
@@ -327,10 +337,14 @@
               document.getElementById("shoes_color").innerHTML=colors[object.get("color")-1]
               document.getElementById("shoes_design").innerHTML=designs[object.get("design")-1]
               document.getElementById("shoes_size").innerHTML=sizes[object.get("size")-1]
+              document.getElementById("shoes_image").src=(object.get("image"));
           })
          .catch(function(err){
             console.log(err);
           });
+        
+
+          showSelectItem(objectId)
 
     }
      
@@ -340,20 +354,58 @@
       document.getElementById('nav').pushPage('itemSelect.html', {});
     }; 
 
-   function test(){
-     // 配列
-var arr = [ "こんにちは", "おはよう", "こんばんは", "さようなら" ] ;
+//    function test(){
+//      // 配列
+// var arr = [ "こんにちは", "おはよう", "こんばんは", "さようなら" ] ;
 
-// 配列からランダムで値を選択
-var a = arr[ Math.floor( Math.random() * arr.length ) ] ;
-   alert(a)
-   }
-         
+// // 配列からランダムで値を選択
+// var a = arr[ Math.floor( Math.random() * arr.length ) ] ;
+//    alert(a)
+//    }
+  
 
+      function showSelectItem(objectId){
+        
+         console.log("coordinate :" + objectId);
+
+         items.equalTo("objectId", objectId)
+         .fetchAll()
+         .then(function(results){
+           // 配列からランダムで値を選択
+       var object = results[0] ;
+              var category=object.get("category")
+              var strCategory
+              switch(category){
+                case "1":
+                  strCategory="tops"
+                  break
+                case "2":
+                  strCategory="bottoms"
+                  break
+                case "3":
+                  strCategory="outer"
+                  break
+                case "4":
+                  strCategory="one_piece"
+                  break
+                case "5":
+                  strCategory="shoes"
+                  break        
+              }
+              document.getElementById(strCategory+"_category").innerHTML=categories[object.get("category")-1]
+              document.getElementById(strCategory+"_sub_category").innerHTML=sub_categories[object.get("category")-1][object.get("sub_category")-1]
+              document.getElementById(strCategory+"_color").innerHTML=colors[object.get("color")-1]
+              document.getElementById(strCategory+"_design").innerHTML=designs[object.get("design")-1]
+              document.getElementById(strCategory+"_size").innerHTML=sizes[object.get("size")-1]
+              document.getElementById(strCategory+"_image").src=(object.get("image"));
+          })
+         .catch(function(err){
+            console.log(err);
+          });
+
+      }
   </script>
 
-  <ons-button onclick="document.getElementById('nav').popPage()">Click</ons-button>
-  <ons-button onclick="test()">Click</ons-button>
-
+ 
 
 </ons-page>
