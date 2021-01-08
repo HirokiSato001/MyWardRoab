@@ -101,12 +101,12 @@
 
     <h4>ブランド：</h4>
     <div style="text-align: center">
-      <ons-input id="brand" modifier="material" placeholder="ブランド" float></ons-input>
+      <ons-input id="brand" modifier="material" placeholder="ブランド" maxlength="100" float></ons-input>
     </div>
 
     <h4>備考：</h4>
     <div style="text-align: center">
-      <textarea  id="remarks" class="textarea" rows="5" cols="25" placeholder="備考"></textarea>
+      <textarea  id="remarks" class="textarea" rows="5" cols="25" placeholder="備考" maxlength="1000"></textarea>
     </div>
 
     <h4>画像：</h4>
@@ -308,6 +308,7 @@
                 console.log('image: ' + image);
                 document.getElementById('nav').popPage();
               })
+
               .catch(function(err){
                 // エラー処理
                 console.log("Err#" + err.code +": " +err.message);   
