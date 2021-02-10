@@ -272,17 +272,18 @@
                     console.log('confirmのコールバック:Yes');
                     Item.equalTo("objectId", itemID_delete)
                       .fetch()
-                      .then(function (res) {
-                          res.delete()
+                      .then(async function (res) {
+                          await res.delete()
                             .then(function (res) {
                             }).catch(function (err) {
                               console.log("削除エラー");
                             });
+                          await readyItemList();
                       }).catch(function (err) {
                          console.log("削除対象検出エラー");
                       });
+                    
                   }
-                  
                 }
               );
             }
