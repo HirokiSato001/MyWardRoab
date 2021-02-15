@@ -1,41 +1,326 @@
 <ons-page id="itemSelect">
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">アイテム選定</div>    
-  </ons-toolbar>
+	<ons-toolbar>
+		<div class="center">アイテム選定</div>
+	</ons-toolbar>
 
-   <input type="checkbox">
-  	<div style="text-align">
-			<input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">
-		</div>
+	<!-- カテゴリー別のリスト表示		 -->
 
-    <input type="checkbox">
-    <div style="text-align">
-			<input id="image" type="image" src="image/1_1_pink.png" onclick="boot_camera()">
-		</div>
+	<!-- トップス -->
 
-    <input type="checkbox">
-    <div style="text-align">
-			<input id="image" type="image" src="image/2_6_blue.png" onclick="boot_camera()">
-		</div>
+	<p>トップス</p>
+	<div class="itemSelect">
 
-    <input type="checkbox">
-    <div style="text-align">
-			<input id="image" type="image" src="image/5_5_red.png" onclick="boot_camera()">
-		</div>
+		<table class="itemSelect_tops" border="0" table id="tops_table">
 
-  </ons-toolbar>
-	 <div class="center">
+			<tr>
+
+				<!-- <td><input type="checkbox">
+                <div style="text-align">
+	            	<input id="tops_image" type="image" src=""  width="100" height="100"
+                onclick="boot_camera()">
+    	          </div>
+          </td> -->
+
+				<!-- <td><input type="checkbox">
+                <div style="text-align">
+		           	<input id="tops_image" type="image" src=""  width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+  
+          <td><input type="checkbox">
+                <div style="text-align">
+			          <input id="tops_image" type="image" src="" width="100" height="100"  onclick="boot_camera()">
+	            	</div>
+          </td>
+          -->
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- ボトムス -->
+
+	<p>ボトムス</p>
+	<div class="itemSelect">
+
+		<table class="itemSelect_bottoms" border="0" table id="bottoms_table">
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- アウター -->
+
+	<p>アウター</p>
+	<div class="itemSelect">
+
+		<table class="itemSelect_outer" border="0" table id="outer_table">
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- ワンピース -->
+
+	<p>ワンピース</p>
+	<div class="itemSelect">
+
+		<table class="itemSelect_dress" border="0" table id="dress_table">
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- シューズ -->
+
+	<p>シューズ</p>
+	<div class="itemSelect">
+
+		<table class="itemSelect_shoes" border="0" table id="shoes_table">
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- </ons-toolbar> -->
+
+	<div class="center">
 		<ons-button onclick="send_coordinate()">コーディネート</ons-button>
-	 </div>
+	</div>
+
+	<!-- <ons-button onclick="getRadioValue()">行追加ボタン</ons-button> -->
+
+	<!-- <ons-button onclick="deleteTable()">削除ボタン</ons-button> -->
+
+
 
 	<script>
+		// ニフクラmobile backendのキー設定
+    // API key.
+    var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+    var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+    // SDK initialization.
+    var ncmb = new NCMB(applicationKey, clientKey);
+        var items = ncmb.DataStore("item");
+   
+
+
 		// 画面表示時
     ons.getScriptPage().onShow = function() {
+    console.log("onShow");
+  //  readyItemList();
+   
+      // deleteTable();
+     
+      showItems("1","tops_table")
+      showItems("2","bottoms_table")
+      showItems("3","outer_table")
+      showItems("4","dress_table")
+      showItems("5","shoes_table")
+   
     }
+    function showItems(argCategory,tableId){
+      var Item = ncmb.DataStore("item");   
+      Item.equalTo("category", argCategory)
+                      .fetchAll()
+      .then(function(results){
+
+        // Userに紐づくitemリスト
+        var itemList = results;
+         // itemListの数だけ繰り返す
+        for (var i = 0; i < results.length; i++) {
+          //var count = i;
+            // アイテム表示用
+          var onsListItem = document.createElement("ons-list-item");
+          // オブジェクトID取得
+          var objIdx = itemList[i].get("objectId");
+          // カテゴリー取得
+          var cateIdx = itemList[i].get("category");
+          // サブカテゴリー取得
+          var sub_cateIdx = itemList[i].get("sub_category");
+          // カラー取得
+          var colorIdx = itemList[i].get("color");
+          // サイズ取得
+          var sizeIdx = itemList[i].get("size");
+          // 画像取得
+          var imageUri = itemList[i].get("image");
+        
+          insertColumn(tableId,imageUri,objIdx,cateIdx,sub_cateIdx)
+         
+        }
+
+        })
+        .catch(function(err){
+          console.log(err);
+        });
+    
+    }
+
+
+    
+
     // coordinate画面へ
     function send_coordinate(){
-      document.getElementById('nav').pushPage('coordinate.html', {});
+      var objectId=getRadioValue()
+      if (objectId ==null ) {
+        alert("選択してください");
+        return
+      }
+    document.getElementById('nav').pushPage('coordinate.html', {
+                data:{objectId}
+              });
     };
+
+
+    function insertColumn(id,imageUri,objectId,cateIdx,sub_cateIdx) {
+    // テーブル取得
+    var table = document.getElementById(id);
+    // 行数取得
+    var rows = table.rows.length;
+     
+    // 各行末尾にセルを追加
+    for ( var i = 0; i < rows; i++) {
+        var cell = table.rows[i].insertCell(-1);
+        var cols = table.rows[i].cells.length;
+        if (cols > 100) {
+            continue;
+        }
+        // cell.innerHTML = (i + 1) + '-' + (cols - 1);
+ 
+// switch( id ) {
+//     case 'tops_table':
+//         imageUri=showImage(cateIdx,sub_cateIdx)
+//        break;
+ 
+//     case 'bottoms_table':
+//         imageUri="image/2_3_yellow.png"
+//         break;
+ 
+//     case 'outer_table':
+//         imageUri="image/3_2.png"
+//         break;
+
+//     case 'dress_table':
+//         imageUri="image/4_1.png"
+//         break;
+
+//     case 'shoes_table':
+//         imageUri="image/5_1.png"
+//         break;
+// }
+
+imageUri=showImage(cateIdx,sub_cateIdx)
+
+// if (id = "tops_table") {
+//     imageUri="image/1_1_pink.png"
+//     // console.log("idは"tops_table"です。");
+// } else if (id = "bottoms_table") {
+//     imageUri="image/2_3_yellow.png"
+//     // console.log("IDは"bottoms_table"です。");  
+// } else if (id = "bottoms_table") {
+//     imageUri="image/2_3_yellow.png"
+//     // console.log("IDは"bottoms_table"です。");  
+// } else if (id = "bottoms_table") {
+//     imageUri="image/2_3_yellow.png"
+//     // console.log("IDは"bottoms_table"です。"); 
+// } else if (id = "bottoms_table") {
+//     imageUri="image/2_3_yellow.png"
+//     // console.log("IDは"bottoms_table"です。");               
+// } else {imageUri="image/5_6_blue.png"
+//     // console.log("numは60未満です。");
+// }
+    
+    // img要素を作成
+var img_element = document.createElement('img');
+img_element.src = imageUri; // 画像パス
+img_element.alt = "画像"; // 代替テキスト
+img_element.width = 100; // 横サイズ（px）
+img_element.height = 100; // 縦サイズ（px）
+
+    // チェックボックスを作成
+var checkBox = document.createElement('input');
+  checkBox.setAttribute('type','radio');
+  checkBox.setAttribute('name','radio');
+  checkBox.setAttribute('value',objectId);
+  checkBox.setAttribute('id','radio');
+
+// 指定した要素にimg要素を挿入
+// var content_area = document.getElementById("content_area");
+cell.prepend(checkBox);
+// cell.appendChild(checkBox);
+cell.appendChild(img_element);
+
+    }
+}
+
+function getRadioValue(){
+   //ラジオボタンオブジェクトを取得する
+  var radios = document.getElementsByName("radio");
+ 
+  //取得したラジオボタンオブジェクトから選択されたものを探し出す
+  var result;
+  for(var i=0; i<radios.length; i++){
+    if (radios[i].checked) {
+      //選択されたラジオボタンのvalue値を取得する
+      result = radios[i].value;
+      break;
+    }
+  }
+ 
+  //value値を表示する
+  console.log("value値は" + result + "です");
+  return result
+
+}
+function deleteTable(){
+  var tables = document.body.getElementsByTagName( 'table' );
+for( var i = 0; i < tables.length; i++ )
+{
+    while( tables[i].rows[ 0 ] ) tables[i].deleteRow( 0 );
+}
+
+}
+
+/*
+  * 画像表示 メソッド
+  * 選択された以下のプルダウンから、イメージ画像を表示する。
+  *   ・カテゴリー・サブカテゴリー
+  */
+  function showImage(category_index,subCategory_index){
+    // イメージ画像が格納されているフォルダ
+    const image_folder = "image/";
+    // アンダーバー "_"
+    const unbar = "_";
+    // 画像形式 ".png"
+    const png = ".png";
+
+    // 選択されたカテゴリー
+    // var category_index = document.getElementById("category").selectedIndex + 1;
+    // 選択されたサブテゴリー
+    // var subCategory_index = document.getElementById("sub_category").selectedIndex + 1;
+    // 選択されたカラー
+    // var color_value = document.getElementById("color").value;
+
+    // 各選択から画像名を作成(暫定：カテゴリのみで画像を表示)
+    var image_name = image_folder + category_index + unbar + subCategory_index + png;
+
+    // 画像を表示
+    console.log(image_name);
+    // document.getElementById("regist-image").src=(image_name);
+
+    // 画像がなかった場合の処理
+    // var image = new Image();
+    // image.src = document.getElementById("regist-image").src;
+    // // 画像読み込みエラーの場合、メッセージを表示
+    // image.onerror = function() {
+    //     console.log('選択された画像がありません。画像名：' + image_name);
+    //     ons.notification.toast('イメージ画像は登録されていません', {timeout: 1000});
+    // }
+    return image_name
+  }
 	</script>
 </ons-page>

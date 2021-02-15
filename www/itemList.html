@@ -1,32 +1,29 @@
 <ons-page id="itemList">
 	<ons-toolbar>
-		<div class="left">
-			<ons-back-button>Back</ons-back-button>
-		</div>
 		<div class="center">アイテム一覧</div>
 		<div class="right">
-      <ons-button onclick="readyItemList()">更新</ons-button>
+			<ons-button onclick="readyItemList()">更新</ons-button>
 			<ons-button onclick="send_ItemRegistPage()">追加</ons-button>
 		</div>
 	</ons-toolbar>
 
-  <!-- ダイアログ -->
-  <template id="alert-dialog.html">
-    <ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
-      <div class="alert-dialog-title">Alert</div>
-      <div class="alert-dialog-content">
-        アイテムを削除してもいいですか？
-      </div>
-      <div class="alert-dialog-footer">
-        <ons-alert-dialog-button onclick="hideDialog('my-alert-dialog')">Cancel</ons-alert-dialog-button>
-        <ons-alert-dialog-button onclick="deleteItem()">OK</ons-alert-dialog-button>
-      </div>
-    </ons-alert-dialog>
-  </template>
+	<!-- ダイアログ -->
+	<template id="alert-dialog.html">
+		<ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
+			<div class="alert-dialog-title">Alert</div>
+			<div class="alert-dialog-content">
+				アイテムを削除してもいいですか？
+			</div>
+			<div class="alert-dialog-footer">
+				<ons-alert-dialog-button onclick="hideDialog('my-alert-dialog')">Cancel</ons-alert-dialog-button>
+				<ons-alert-dialog-button onclick="deleteItem()">OK</ons-alert-dialog-button>
+			</div>
+		</ons-alert-dialog>
+	</template>
 
 	<!-- カテゴリー別のリスト表示 -->
 	<ons-list>
-    <!-- トップス -->
+		<!-- トップス -->
 		<ons-list-item expandable>
 			トップス
 			<div class="expandable-content">
@@ -34,7 +31,7 @@
 			</div>
 		</ons-list-item>
 
-    <!-- ボトムス -->
+		<!-- ボトムス -->
 		<ons-list-item expandable>
 			ボトムス
 			<div class="expandable-content">
@@ -42,7 +39,7 @@
 			</div>
 		</ons-list-item>
 
-    <!-- アウター -->
+		<!-- アウター -->
 		<ons-list-item expandable>
 			アウター
 			<div class="expandable-content">
@@ -50,7 +47,7 @@
 			</div>
 		</ons-list-item>
 
-    <!-- ワンピース -->
+		<!-- ワンピース -->
 		<ons-list-item expandable>
 			ワンピース
 			<div class="expandable-content">
@@ -58,7 +55,7 @@
 			</div>
 		</ons-list-item>
 
-    <!-- シューズ -->
+		<!-- シューズ -->
 		<ons-list-item expandable>
 			シューズ
 			<div class="expandable-content">
@@ -272,17 +269,18 @@
                     console.log('confirmのコールバック:Yes');
                     Item.equalTo("objectId", itemID_delete)
                       .fetch()
-                      .then(function (res) {
-                          res.delete()
+                      .then(async function (res) {
+                          await res.delete()
                             .then(function (res) {
                             }).catch(function (err) {
                               console.log("削除エラー");
                             });
+                          await readyItemList();
                       }).catch(function (err) {
                          console.log("削除対象検出エラー");
                       });
+                    
                   }
-                  
                 }
               );
             }
@@ -339,6 +337,5 @@ function showDialog(message, callback) {
         }
     })
 }
-
-  </script>
+	</script>
 </ons-page>

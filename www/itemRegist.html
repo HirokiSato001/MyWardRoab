@@ -17,7 +17,7 @@
     
     <h4>サブカテゴリー：</h4>
     <div style="text-align: center">
-      <ons-select id="sub_category" modifier="underbar">
+      <ons-select id="sub_category" modifier="underbar" onchange="changeSubCategory()">
         <option value = 1>Tシャツ</option>
         <option value = 2>ポロシャツ</option>
         <option value = 3>パーカー</option>
@@ -89,29 +89,31 @@
     <h4>サイズ：</h4>
     <div style="text-align: center">
       <ons-select id="size" modifier="underbar">
-        <option value="1">XS</option>
-        <option value="2">S</option>
-        <option value="3">M</option>
-        <option value="4">L</option>
-        <option value="5">XL</option>
-        <option value="6">XXL</option>
-        <option value="7">3XL</option>
+        <option value=1>XS</option>
+        <option value=2>S</option>
+        <option value=3>M</option>
+        <option value=4>L</option>
+        <option value=5>XL</option>
+        <option value=6>XXL</option>
+        <option value=7>3XL</option>
       </ons-select>
     </div>
 
     <h4>ブランド：</h4>
     <div style="text-align: center">
-      <ons-input id="brand" modifier="material" placeholder="ブランド" float></ons-input>
+      <ons-input id="brand" modifier="material" placeholder="ブランド" maxlength="100" float></ons-input>
     </div>
 
     <h4>備考：</h4>
     <div style="text-align: center">
-      <textarea  id="remarks" class="textarea" rows="5" cols="25" placeholder="備考"></textarea>
+      <textarea  id="remarks" class="textarea" rows="5" cols="25" placeholder="備考" maxlength="1000"></textarea>
     </div>
 
     <h4>画像：</h4>
     <div style="text-align: center">
-      <img id="regist-image" src="image/1_4_black.png">
+      <!-- 画像の色を変更する場合の処理
+       <img id="regist-image" src="image/1_1_pink.png" style="filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%)"> -->
+      <img id="regist-image">
     </div>  
 
     <br>
@@ -129,15 +131,20 @@
       image.height = screenHeight / 3;
       image.width = screenWidth / 4 * 3;
     };
+    // イメージ画像を表示 
+    showImage();
 
-    document.getElementById("regist-image").addEventListener('click', function(event){
-      boot_camera();
-    }, false);
 
-    //カテゴリーが変更された場合、以下を変更する
-    //  １：サブカテゴリーのドロップダウンのメニュー項目
-    //  ２：イメージ画像
+    // document.getElementById("regist-image").addEventListener('click', function(event){
+    //   boot_camera();
+    // }, false);
+
+    //カテゴリー変更処理
+    // １：以下の項目を選択されたカテゴリーに合わせ変更する
+    //   ①サブカテゴリーのドロップダウンのメニュー項目
+    //   ②イメージ画像
     function changeCategory(){
+      console.log("do changeCategory");
       // カテゴリーのプルダウン
       var category_select = document.getElementById("category");
       // サブカテゴリーのプルダウン
@@ -165,10 +172,20 @@
       showImage();
   }
 
+    //サブカテゴリー変更処理
+    // １：以下の項目を選択されたサブカテゴリーに合わせ変更する
+    //   ①イメージ画像
+    function changeSubCategory(){
+      // イメージ画像を表示
+      showImage();
+  }
+
+
+
   /*
   * 画像表示 メソッド
   * 選択された以下のプルダウンから、イメージ画像を表示する。
-  *   ・カテゴリー・サブカテゴリー・カラー
+  *   ・カテゴリー・サブカテゴリー
   */
   function showImage(){
     // イメージ画像が格納されているフォルダ
@@ -177,50 +194,58 @@
     const unbar = "_";
     // 画像形式 ".png"
     const png = ".png";
-    document.getElementById("regist-image").src=("image/2_3_yellow.png");
 
     // 選択されたカテゴリー
-    var category_index = document.getElementById("category").selectedIndex;
+    var category_index = document.getElementById("category").selectedIndex + 1;
     // 選択されたサブテゴリー
-    var subCategory_index = document.getElementById("sub_category").selectedIndex;
+    var subCategory_index = document.getElementById("sub_category").selectedIndex + 1;
     // 選択されたカラー
-    var color_index = document.getElementById("color").selectedIndex;
-    var pics = new Array("1_1_pink.png","2_3_yellow.png","3_1_blue.png","4_5_blue.png","5_4_black.png");
+    // var color_value = document.getElementById("color").value;
 
     // 各選択から画像名を作成(暫定：カテゴリのみで画像を表示)
-    // var image_name = image_folder + category_index + unbar + subCategory_index + unbar + color_value + png;
-    var image_name = image_folder + pics[category_index];
+    var image_name = image_folder + category_index + unbar + subCategory_index + png;
+
     // 画像を表示
+    console.log(image_name);
     document.getElementById("regist-image").src=(image_name);
+
+    // 画像がなかった場合の処理
+    var image = new Image();
+    image.src = document.getElementById("regist-image").src;
+    // 画像読み込みエラーの場合、メッセージを表示
+    image.onerror = function() {
+        console.log('選択された画像がありません。画像名：' + image_name);
+        ons.notification.toast('イメージ画像は登録されていません', {timeout: 1000});
+    }
   }
 
 
 
-  // カメラ起動関数
-  function boot_camera(){
-    console.log("click");
+  // // カメラ起動関数
+  // function boot_camera(){
+  //   console.log("click");
 
-    //成功時に呼び出されるコールバック関数
-    var onSuccess = function(imageURI){
-      var image = document.getElementById("regist-image");
-      image.src = imageURI;
-      alert(imageURI);
-    };
+  //   //成功時に呼び出されるコールバック関数
+  //   var onSuccess = function(imageURI){
+  //     var image = document.getElementById("regist-image");
+  //     image.src = imageURI;
+  //     alert(imageURI);
+  //   };
 
-    //失敗時に呼び出されるコールバック関数
-    var onError = function(message){
-      alert("Error:" + message);
-    };
+  //   //失敗時に呼び出されるコールバック関数
+  //   var onError = function(message){
+  //     alert("Error:" + message);
+  //   };
 
-    var screenWidth = screen.width;
-    var screenHeight = screen.height;
-    var image = document.getElementById("regist-image");
+  //   var screenWidth = screen.width;
+  //   var screenHeight = screen.height;
+  //   var image = document.getElementById("regist-image");
       
-    image.height = screenHeight / 3;
-    image.width = screenWidth / 4 * 3;
-    var option = {};
-    navigator.camera.getPicture(onSuccess, onError, option);
-  }
+  //   image.height = screenHeight / 3;
+  //   image.width = screenWidth / 4 * 3;
+  //   var option = {};
+  //   navigator.camera.getPicture(onSuccess, onError, option);
+  // }
 
   // ニフクラmobile backendのキー設定
   // API key.
@@ -250,7 +275,7 @@
     var size = document.getElementById("size").value;
     var brand = document.getElementById("brand").value;
     var remarks = document.getElementById("remarks").value;
-    var image = document.getElementById("image").src;
+    var image = document.getElementById("regist-image").src;
     // ログインユーザを取得
     var currentUser = ncmb.User.getCurrentUser();
 
@@ -283,6 +308,7 @@
                 console.log('image: ' + image);
                 document.getElementById('nav').popPage();
               })
+
               .catch(function(err){
                 // エラー処理
                 console.log("Err#" + err.code +": " +err.message);   
