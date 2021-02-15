@@ -118,7 +118,7 @@
     <option value="">-</option>
     <option value="1">1</option>
     <option value="2">2</option>
-   <option value="3">3</option>
+    <option value="3">3</option>
     <option value="4">4</option>
     <option value="5">5</option>
     <option value="6">6</option>
@@ -224,50 +224,63 @@
 
     // 完了ボタン押下
     function userRegist(){
-      mail = document.getElementById("pre_regist_mailAddress").value;
-      nickName = document.getElementById("pre_regist_nickName").value;
-      birthYear = document.getElementById("pre_regist_birthYear").value;
-      birthMonth = document.getElementById("pre_regist_birthMonth").value;
-      birthDay = document.getElementById("pre_regist_birthDay").value;
+      // 画面入力された値を取得
+      chgmail = document.getElementById("pre_regist_mailAddress").value;
+      chgnickName = document.getElementById("pre_regist_nickName").value;
+      chgbirthYear = document.getElementById("pre_regist_birthYear").value;
+      chgbirthMonth = document.getElementById("pre_regist_birthMonth").value;
+      chgbirthDay = document.getElementById("pre_regist_birthDay").value;
 
       const gender_radio = document.getElementsByName("gender");
       for(var i = 0; i < gender_radio.length ; i++){
        if (gender_radio[i].checked){
        //選択されたラジオボタンのvalue値を取得する
-       gender = gender_radio[i].value;
+       chggender = gender_radio[i].value;
        break;
        }
       }
 
-      height = document.getElementById("pre_regist_height").value;  
+      chgheight = document.getElementById("pre_regist_height").value;  
 
-      // 全替えは冗長なので、変更があった項目のみ変更するように。
+      // 変更があった項目のみ値を更新する。
       // メールアドレスに変更がある場合
-      if(myuser.getMailAddress() != mail){
+      if(myuser.getMailAddress() != chgmail){
         // メールアドレスを更新
-        myuser.setMailAddress(mail);
+        myuser.setMailAddress(chgmail);
       }
-      if(myuser.getNickName() != nickName){
-        myuser.setNickName(nickName);
+      // ニックネームに変更がある場合
+      if(myuser.getNickName() != chgnickName){
+        // ニックネームを変更
+        myuser.setNickName(chgnickName);
       }
-      if(myuser.getYear() != birthYear){
-        myuser.setYear(birthYear);
+      // 誕生年に変更がある場合
+      if(myuser.getYear() != chgbirthYear){
+        // 誕生年を変更
+        myuser.setYear(chgbirthYear);
       }
-      if(myuser.getMonth() != birthMonth){
-        myuser.setMonth(birthMonth);
+      // 誕生月に変更がある場合
+      if(myuser.getMonth() != chgbirthMonth){
+        // 誕生月を変更
+        myuser.setMonth(chgbirthMonth);
       }
-      if(myuser.getDay() != birthDay){
-        myuser.setDay(birthDay);
+      // 誕生日に変更がある場合
+      if(myuser.getDay() != chgbirthDay){
+        // 誕生日を変更
+        myuser.setDay(chgbirthDay);
       }
-      if(myuser.getGender() != gender){
-        myuser.setGender(gender);
+      // 性別に変更がある場合
+      if(myuser.getGender() != chggender){
+        // 性別を変更
+        myuser.setGender(chggender);
       }
-      if(myuser.getHeight() != height){
-        myuser.setHeight(height);
+      // 身長に変更がある場合
+      if(myuser.getHeight() != chgheight){
+        // 身長を変更
+        myuser.setHeight(chgheight);
       }
       //ユーザー管理画面へ遷移
       document.getElementById('nav').resetToPage('userManage.html');
-      // document.getElementById('nav').pushPage('userManage.html', {});
+      //document.getElementById('nav').pushPage('userManage.html', {});
     };
 
 
