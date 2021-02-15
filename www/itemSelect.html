@@ -1,28 +1,27 @@
 <ons-page id="itemSelect">
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">アイテム選定</div>    
-  </ons-toolbar>
+	<ons-toolbar>
+		<div class="center">アイテム選定</div>
+	</ons-toolbar>
 
-<!-- カテゴリー別のリスト表示		 -->
+	<!-- カテゴリー別のリスト表示		 -->
 
-<!-- トップス -->
-		
-	<p>トップス</p>		
-			<div class="itemSelect">
-			
-          <table class="itemSelect_tops" border="0" table id="tops_table" >
-                      
-            <tr>
-          
-          <!-- <td><input type="checkbox">
+	<!-- トップス -->
+
+	<p>トップス</p>
+	<div class="itemSelect">
+
+		<table class="itemSelect_tops" border="0" table id="tops_table">
+
+			<tr>
+
+				<!-- <td><input type="checkbox">
                 <div style="text-align">
 	            	<input id="tops_image" type="image" src=""  width="100" height="100"
                 onclick="boot_camera()">
     	          </div>
           </td> -->
-       
-          <!-- <td><input type="checkbox">
+
+				<!-- <td><input type="checkbox">
                 <div style="text-align">
 		           	<input id="tops_image" type="image" src=""  width="100" height="100"  onclick="boot_camera()">
 	            	</div>
@@ -34,73 +33,73 @@
 	            	</div>
           </td>
           -->
-          </tr>
-          </table>
-        
-			</div>
+			</tr>
+		</table>
 
-      <!-- ボトムス -->
-		
-		<p>ボトムス</p>
-			<div class="itemSelect">
-		
-          <table class="itemSelect_bottoms" border="0" table id="bottoms_table">
-          <tr>          
-          </tr>
-          </table>
-        
-			</div>
-
-      <!-- アウター -->
-		
-	<p>アウター</p>		
-			<div class="itemSelect">
-			
-          <table class="itemSelect_outer" border="0" table id="outer_table">
-          <tr>
-          </tr>
-          </table>
-        
-			</div>
-
-      <!-- ワンピース -->
-		
-	<p>ワンピース</p>		
-			<div class="itemSelect">
-			
-          <table class="itemSelect_dress" border="0" table id="dress_table">
-          <tr>
-          </tr>
-          </table>
-        
-			</div>
-
-      <!-- シューズ -->
-		
-	<p>シューズ</p>		
-			<div class="itemSelect">
-			
-          <table class="itemSelect_shoes" border="0" table id="shoes_table">
-          <tr>
-          </tr>
-          </table>
-        
-			</div>  
-
-  <!-- </ons-toolbar> -->
-	 
-  <div class="center">
-	<ons-button onclick="send_coordinate()">コーディネート</ons-button>
 	</div>
 
-  <!-- <ons-button onclick="getRadioValue()">行追加ボタン</ons-button> -->
+	<!-- ボトムス -->
 
-  <!-- <ons-button onclick="deleteTable()">削除ボタン</ons-button> -->
+	<p>ボトムス</p>
+	<div class="itemSelect">
 
- 
+		<table class="itemSelect_bottoms" border="0" table id="bottoms_table">
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- アウター -->
+
+	<p>アウター</p>
+	<div class="itemSelect">
+
+		<table class="itemSelect_outer" border="0" table id="outer_table">
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- ワンピース -->
+
+	<p>ワンピース</p>
+	<div class="itemSelect">
+
+		<table class="itemSelect_dress" border="0" table id="dress_table">
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- シューズ -->
+
+	<p>シューズ</p>
+	<div class="itemSelect">
+
+		<table class="itemSelect_shoes" border="0" table id="shoes_table">
+			<tr>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- </ons-toolbar> -->
+
+	<div class="center">
+		<ons-button onclick="send_coordinate()">コーディネート</ons-button>
+	</div>
+
+	<!-- <ons-button onclick="getRadioValue()">行追加ボタン</ons-button> -->
+
+	<!-- <ons-button onclick="deleteTable()">削除ボタン</ons-button> -->
+
+
 
 	<script>
-     // ニフクラmobile backendのキー設定
+		// ニフクラmobile backendのキー設定
     // API key.
     var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
     var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
@@ -323,6 +322,5 @@ for( var i = 0; i < tables.length; i++ )
     // }
     return image_name
   }
-
 	</script>
 </ons-page>
