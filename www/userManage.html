@@ -1,7 +1,6 @@
 <ons-page id="userManage">
   <script src="js/user.js"></script>
   <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center">ユーザ管理</div>
   </ons-toolbar>
   <ons-button onclick="send_userEdit()">ユーザ編集</ons-button>
@@ -13,10 +12,6 @@
 	<ons-input id="regist_nickName" modifier="underbar" float></ons-input>
 	<p>生年月日</p>
   <ons-input id="regist_birthDay"></ons-input>
-
-
-<!--	<p>生年月日</p>
-  <ons-input id="regist_birthDay"></ons-input>-->
   <p>性別</p>
   <ons-input id="regist_gender"></ons-input>
   <p>身長(cm)</p>
@@ -41,16 +36,8 @@
       var birthMonth = myuser.getMonth();
       // 生年月日[日]の取得
       var birthDay = myuser.getDay();
-      // 生年月日[年]の表示
+      // 生年月日[年月日]の表示
       document.getElementById("regist_birthDay").innerText = birthYear+"年"+birthMonth+"月"+birthDay+"日";
-
-
-
-
-      // 生年月日[日]の取得
-      //var birthDay = myuser.getBirthDay();
-      // 生年月日の表示
-      //document.getElementById("regist_birthDay").innerText = birthDay;
       // 性別の取得
       var gender = myuser.getGender();
       // 性別の表示
@@ -79,8 +66,9 @@
        // エラー処理
        console.log("Err#" + err.code +": " +err.message);   
        });
-       document.getElementById('nav').popPage();  
-      //  document.getElementById('nav').bringPageTop('login.html',{});
+       //document.getElementById('nav').popPage();  
+       //document.getElementById('nav').bringPageTop('login.html',{});
+       document.getElementById('nav').resetToPage('login.html',{});
      };
 
   </script>
