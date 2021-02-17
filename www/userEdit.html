@@ -5,7 +5,6 @@
   </ons-toolbar>
   <ons-button onclick="userRegist()">完了</ons-button>
 
-  <ons-button onclick="test()">確認</ons-button>
 
   <p>メールアドレス</p>
 	<ons-input type="mail" id="pre_regist_mailAddress" modifier="underbar" float></ons-input>
@@ -165,7 +164,7 @@
     <option value="31">31</option>
   </select>日
 	<p>性別</p>
-	<input type="radio" name="gender" value="male" id="pre_regist_gender">男
+	<input type="radio" name="gender" value="male">男
  	<input type="radio" name="gender" value="female">女
  	<input type="radio" name="gender" value="other">その他
  	<p>身長</p>
@@ -173,13 +172,13 @@
 
   <script>
   var myuser;
-var mail    
-var nickName
-var birthYear
-var birthMonth
-var birthDay
-var gender
-var height
+  var mail    
+  var nickName
+  var birthYear
+  var birthMonth
+  var birthDay
+  var gender
+  var height
     // 画面表示時
     ons.getScriptPage().onShow = function() {
       myuser = new User();
@@ -205,10 +204,18 @@ var height
       document.getElementById("pre_regist_birthDay").value = birthDay;
       // 性別の取得
       gender = myuser.getGender();
+      console.log("gender:"+gender);
+      // 性別の表示
+      const gender_radio = document.getElementsByName("gender");
+      for(var i = 0; i < gender_radio.length ; i++){
+        if (gender_radio[i] = gender){
+          //選択されたラジオボタンのにチェックをつける
+          gender_radio[i].checked = true;
+          break;
+        }
+      }
       // ラジオボタンの値取得が違う...ここ見てやってください！！！！！！
       // https://itsakura.com/js-radiobutton
-      // 性別の表示
-      document.getElementById("pre_regist_gender").value = gender;
       // 身長の取得
       height = myuser.getHeight();
       // 身長の表示
@@ -222,43 +229,47 @@ var height
       birthYear = document.getElementById("pre_regist_birthYear").value;
       birthMonth = document.getElementById("pre_regist_birthMonth").value;
       birthDay = document.getElementById("pre_regist_birthDay").value;
-      gender = document.getElementById("pre_regist_gender").value;
+
+      const gender_radio = document.getElementsByName("gender");
+      for(var i = 0; i < gender_radio.length ; i++){
+       if (gender_radio[i].checked){
+       //選択されたラジオボタンのvalue値を取得する
+       gender = gender_radio[i].value;
+       break;
+       }
+      }
+
       height = document.getElementById("pre_regist_height").value;  
 
       // 全替えは冗長なので、変更があった項目のみ変更するように。
-      myuser.setMailAddress(mail);
-      myuser.setNickName(nickName);
-      myuser.setYear(birthYear);
-      myuser.setMonth(birthMonth);
-      myuser.setDay(birthDay);  
-      myuser.setGender(gender);
-      myuser.setHeight(height);
-
+      // メールアドレスに変更がある場合
+      if(myuser.getMailAddress() != mail){
+        // メールアドレスを更新
+        myuser.setMailAddress(mail);
+      }
+      if(myuser.getNickName() != nickName){
+        myuser.setNickName(nickName);
+      }
+      if(myuser.getYear() != birthYear){
+        myuser.setYear(birthYear);
+      }
+      if(myuser.getMonth() != birthMonth){
+        myuser.setMonth(birthMonth);
+      }
+      if(myuser.getDay() != birthDay){
+        myuser.setDay(birthDay);
+      }
+      if(myuser.getGender() != gender){
+        myuser.setGender(gender);
+      }
+      if(myuser.getHeight() != height){
+        myuser.setHeight(height);
+      }
       //ユーザー管理画面へ遷移
       document.getElementById('nav').resetToPage('userManage.html');
       // document.getElementById('nav').pushPage('userManage.html', {});
     };
 
-    // 完了ボタン押下
-    function test(){
-            // ニックネームの表示
-      nickName = document.getElementById("pre_regist_nickName").value;
-      console.log("regist" + nickName);
-      myuser.setNickName(nickName);
-      // console.log("test:myUser Info");
-      // console.log(myuser.getMailAddress());
-      // console.log(myuser.getNickName());
-      // console.log(myuser.getBirthDay());
-      // console.log(myuser.getYear());
-      // console.log(myuser.getMonth());
-      // console.log(myuser.getDay());
-      // console.log(myuser.getGender());
-      // console.log(myuser.getHeight());
-
-      //ユーザー管理画面へ遷移
-      document.getElementById('nav').popPage();
-      // document.getElementById('nav').pushPage('userManage.html', {});
-    };
 
 
   </script>
