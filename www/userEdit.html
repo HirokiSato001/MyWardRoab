@@ -1,17 +1,19 @@
 <ons-page id="userEdit">
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center">ユーザ編集</div>    
-  </ons-toolbar>
-  <ons-button onclick="userRegist()">完了</ons-button>
+	<ons-toolbar>
+		<div class="left">
+			<ons-back-button>Back</ons-back-button>
+		</div>
+		<div class="center">ユーザ編集</div>
+	</ons-toolbar>
+	<ons-button onclick="userRegist()">完了</ons-button>
 
 
-  <p>メールアドレス</p>
+	<p>メールアドレス</p>
 	<ons-input type="mail" id="pre_regist_mailAddress" modifier="underbar" float></ons-input>
 	<p>ニックネーム</p>
-	<ons-input id="pre_regist_nickName" modifier="underbar"float></ons-input>
+	<ons-input id="pre_regist_nickName" modifier="underbar" float></ons-input>
 	<p>生年月日</p>
-  <select id="pre_regist_birthYear">
+	<select id="pre_regist_birthYear">
     <option value="">-</option>
     <option value="1931">1931</option>
     <option value="1932">1932</option>
@@ -129,7 +131,7 @@
     <option value="11">11</option>
     <option value="12">12</option>
   </select>月
-  <select id="pre_regist_birthDay">
+	<select id="pre_regist_birthDay">
     <option value="">-</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -165,13 +167,13 @@
   </select>日
 	<p>性別</p>
 	<input type="radio" name="gender" value="male">男
- 	<input type="radio" name="gender" value="female">女
- 	<input type="radio" name="gender" value="other">その他
- 	<p>身長</p>
- 	<ons-input type="number" min="50" max="250" id="pre_regist_height" modifier="underbar" placeholder="身長" float></ons-input>cm
+	<input type="radio" name="gender" value="female">女
+	<input type="radio" name="gender" value="other">その他
+	<p>身長</p>
+	<ons-input type="number" min="50" max="250" id="pre_regist_height" modifier="underbar" placeholder="身長" float></ons-input>cm
 
-  <script>
-  var myuser;
+	<script>
+		var myuser;
   var mail    
   var nickName
   var birthYear
@@ -223,7 +225,10 @@
     }
 
     // 完了ボタン押下
-    function userRegist(){
+    async function userRegist(){
+      // 開始ログ
+      console.log("userRegistメソッド：開始");
+
       // 画面入力された値を取得
       chgmail = document.getElementById("pre_regist_mailAddress").value;
       chgnickName = document.getElementById("pre_regist_nickName").value;
@@ -240,51 +245,89 @@
        }
       }
 
-      chgheight = document.getElementById("pre_regist_height").value;  
+      chgheight = document.getElementById("pre_regist_height").value; 
 
-      // 変更があった項目のみ値を更新する。
+
+      //  日付の妥当性チェック
+      if("無効な日付" == verDate(chgbirthYear, chgbirthMonth, chgbirthDay)){
+        alert("誕生日が誤っています。");
+      }
+
+      // updValueメソッド（変更があった項目のみ値を更新する。）
+      updValue(chgmail, chgnickName, chgbirthYear, chgbirthMonth, chgbirthDay, chggender, chgheight);
+
+      //ユーザー管理画面へ遷移
+       document.getElementById('nav').resetToPage('userManage.html');
+      //document.getElementById('nav').pushPage('userManage.html', {});
+      // 終了ログ
+      console.log("userRegistメソッド：終了");
+    };
+
+    // 変更があった項目のみ値を更新する。
+    async function updValue(chgmail, chgnickName, chgbirthYear, chgbirthMonth, chgbirthDay, chggender, chgheight){
+      // 開始ログ
+      console.log("updValueメソッド：開始");
+
+      var result = null;
       // メールアドレスに変更がある場合
       if(myuser.getMailAddress() != chgmail){
         // メールアドレスを更新
-        myuser.setMailAddress(chgmail);
+        result = await myuser.setMailAddress(chgmail);
       }
       // ニックネームに変更がある場合
       if(myuser.getNickName() != chgnickName){
         // ニックネームを変更
-        myuser.setNickName(chgnickName);
+        result = await myuser.setNickName(chgnickName);
+        console.log("ニックネームresult:"+result);
       }
       // 誕生年に変更がある場合
       if(myuser.getYear() != chgbirthYear){
         // 誕生年を変更
-        myuser.setYear(chgbirthYear);
+        result = await myuser.setYear(chgbirthYear);
       }
       // 誕生月に変更がある場合
       if(myuser.getMonth() != chgbirthMonth){
         // 誕生月を変更
-        myuser.setMonth(chgbirthMonth);
+        result = await myuser.setMonth(chgbirthMonth);
       }
       // 誕生日に変更がある場合
       if(myuser.getDay() != chgbirthDay){
         // 誕生日を変更
-        myuser.setDay(chgbirthDay);
+        result = await myuser.setDay(chgbirthDay);
       }
       // 性別に変更がある場合
       if(myuser.getGender() != chggender){
         // 性別を変更
-        myuser.setGender(chggender);
+        result = await myuser.setGender(chggender);
       }
       // 身長に変更がある場合
       if(myuser.getHeight() != chgheight){
         // 身長を変更
-        myuser.setHeight(chgheight);
+        result = await myuser.setHeight(chgheight);
       }
-      //ユーザー管理画面へ遷移
-      document.getElementById('nav').resetToPage('userManage.html');
-      //document.getElementById('nav').pushPage('userManage.html', {});
-    };
 
+      // 開始ログ
+      console.log("updValueメソッド：終了");
+    }
 
+    // 日付チェック
+    function verDate(y, m ,d){
+      // date型に変換
+      var date = new Date(y,m-1,d);
+      // 月を取得
+      var month = date.getMonth() + 1;
+      // 月は「0」を起点とするので「+1」で調整します
 
-  </script>
+      if(m==month){
+        // "有効な日付"
+        var result = "有効な日付";
+      } else {
+        // "無効な日付"
+        var result = "無効な日付";
+      }
+      // 判定結果を返す
+      return result;
+    }
+	</script>
 
 </ons-page>
