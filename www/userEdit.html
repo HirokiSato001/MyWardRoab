@@ -209,8 +209,9 @@
       console.log("gender:"+gender);
       // 性別の表示
       const gender_radio = document.getElementsByName("gender");
+      console.log("gender_radio:"+gender_radio[0].value);
       for(var i = 0; i < gender_radio.length ; i++){
-        if (gender_radio[i] = gender){
+        if (gender_radio[i].value == gender){
           //選択されたラジオボタンのにチェックをつける
           gender_radio[i].checked = true;
           break;
