@@ -30,11 +30,6 @@
 			<td id="design">design</td>
 		</tr>
 		<tr>
-			<td>画像ID</td>
-			<td> : </td>
-			<td id="image_mid">imageID</td>
-		</tr>
-		<tr>
 			<td>素材</td>
 			<td> : </td>
 			<td id="material">material</td>
@@ -88,8 +83,6 @@
               document.getElementById("material").innerHTML = convert_material(object.get("material"))
               document.getElementById("season").innerHTML = convert_season(object.get("season"))
               document.getElementById("size").innerHTML = convert_size(object.get("size"))        
-              // これやると画面が崩れる...
-              // document.getElementById("image_mid").innerHTML = object.get("image")
               document.getElementById("image_top").src = object.get("image")
               document.getElementById("brand").innerHTML = object.get("brand")
               document.getElementById("remarks").innerHTML = object.get("remarks")
