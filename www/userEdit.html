@@ -5,7 +5,7 @@
 		</div>
 		<div class="center">ユーザ編集</div>
 	</ons-toolbar>
-	<ons-button onclick="userRegist()">完了</ons-button>
+	<ons-button onclick="return userRegist()">完了</ons-button>
 
 
 	<p>メールアドレス</p>
@@ -174,13 +174,14 @@
 
 	<script>
 		var myuser;
-  var mail    
-  var nickName
-  var birthYear
-  var birthMonth
-  var birthDay
-  var gender
-  var height
+    var mail    
+    var nickName
+    var birthYear
+    var birthMonth
+    var birthDay
+    var gender
+    var height
+
     // 画面表示時
     ons.getScriptPage().onShow = function() {
       myuser = new User();
@@ -217,8 +218,6 @@
           break;
         }
       }
-      // ラジオボタンの値取得が違う...ここ見てやってください！！！！！！
-      // https://itsakura.com/js-radiobutton
       // 身長の取得
       height = myuser.getHeight();
       // 身長の表示
@@ -226,7 +225,7 @@
     }
 
     // 完了ボタン押下
-    async function userRegist(){
+    function userRegist(){
       // 開始ログ
       console.log("userRegistメソッド：開始");
 
@@ -252,11 +251,15 @@
       //  日付の妥当性チェック
       if("無効な日付" == verDate(chgbirthYear, chgbirthMonth, chgbirthDay)){
         alert("誕生日が誤っています。");
+        return false;
       }
 
       // updValueメソッド（変更があった項目のみ値を更新する。）
       updValue(chgmail, chgnickName, chgbirthYear, chgbirthMonth, chgbirthDay, chggender, chgheight);
-
+      
+      // デバッグログ
+      console.log("ユーザ編集画面のuserメソッド：開始");
+      myuser = new User();
       //ユーザー管理画面へ遷移
        document.getElementById('nav').resetToPage('userManage.html');
       //document.getElementById('nav').pushPage('userManage.html', {});
@@ -329,6 +332,8 @@
       // 判定結果を返す
       return result;
     }
+    // ラジオボタン実装の参考サイト
+    // https://itsakura.com/js-radiobutton
 	</script>
 
 </ons-page>
