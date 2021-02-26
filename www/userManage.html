@@ -21,6 +21,9 @@
   <script>
     // 画面表示時
     ons.getScriptPage().onShow = function() {
+
+      // デバッグログ
+      console.log("ユーザ管理画面のuserメソッド：開始");
       var myuser = new User();
       // メールアドレスの取得
       var mail = myuser.getMailAddress();
