@@ -6,53 +6,53 @@
 		<div class="center">アイテム詳細</div>
 	</ons-toolbar>
 	<div style="text-align: center">
-		<img id="image_top" src="/www/image/1_1_pink.png">
+		<img id="image_top_details" src="/www/image/1_1_pink.png">
 	</div>
 	<table border="0">
 		<tr>
 			<td>カテゴリー</td>
 			<td> : </td>
-			<td id="category">category</td>
+			<td id="category_details">category</td>
 		</tr>
 		<tr>
 			<td>サブカテゴリー</td>
 			<td> : </td>
-			<td id="sub_category">sub_category</td>
+			<td id="sub_category_details">sub_category</td>
 		</tr>
 		<tr>
 			<td>色</td>
 			<td> : </td>
-			<td id="color">color</td>
+			<td id="color_details">color</td>
 		</tr>
 		<tr>
 			<td>柄</td>
 			<td> : </td>
-			<td id="design">design</td>
+			<td id="design_details">design</td>
 		</tr>
 		<tr>
 			<td>素材</td>
 			<td> : </td>
-			<td id="material">material</td>
+			<td id="material_details">material</td>
 		</tr>
 		<tr>
 			<td>季節</td>
 			<td> : </td>
-			<td id="season">season</td>
+			<td id="season_details">season</td>
 		</tr>
 		<tr>
 			<td>サイズ</td>
 			<td> : </td>
-			<td id="size">size</td>
+			<td id="size_details">size</td>
 		</tr>
 		<tr>
 			<td>ブランド</td>
 			<td> : </td>
-			<td id="brand">brand</td>
+			<td id="brand_details">brand</td>
 		</tr>
 		<tr>
 			<td>備考</td>
 			<td> : </td>
-			<td id="remarks">remarks</td>
+			<td id="remarks_details">remarks</td>
 		</tr>
 	</table>
 
@@ -76,16 +76,16 @@
             for (var i = 0; i < results.length; i++) {
               var object = results[i];
               console.log("image :" + object.get("image"));
-              document.getElementById("category").innerHTML = convert_category(object.get("category"))
-              document.getElementById("sub_category").innerHTML = convert_sub_category(object.get("category"),object.get("sub_category"))
-              document.getElementById("color").innerHTML = convert_color(object.get("color"))
-              document.getElementById("design").innerHTML = convert_design(object.get("design"))
-              document.getElementById("material").innerHTML = convert_material(object.get("material"))
-              document.getElementById("season").innerHTML = convert_season(object.get("season"))
-              document.getElementById("size").innerHTML = convert_size(object.get("size"))        
-              document.getElementById("image_top").src = object.get("image")
-              document.getElementById("brand").innerHTML = object.get("brand")
-              document.getElementById("remarks").innerHTML = object.get("remarks")
+              document.getElementById("category_details").innerHTML = convert_category(object.get("category"))
+              document.getElementById("sub_category_details").innerHTML = convert_sub_category(object.get("category"),object.get("sub_category"))
+              document.getElementById("color_details").innerHTML = convert_color(object.get("color"))
+              document.getElementById("design_details").innerHTML = convert_design(object.get("design"))
+              document.getElementById("material_details").innerHTML = convert_material(object.get("material"))
+              document.getElementById("season_details").innerHTML = convert_season(object.get("season"))
+              document.getElementById("size_details").innerHTML = convert_size(object.get("size"))        
+              document.getElementById("image_top_details").src = object.get("image")
+              document.getElementById("brand_details").innerHTML = object.get("brand")
+              document.getElementById("remarks_details").innerHTML = object.get("remarks")
             }
           })
          .catch(function(err){
@@ -102,13 +102,6 @@
             }
           })();
     }
-    
-    // function send_ItemEditPage(){
-    //   var itemID_edit = itemID_detail;
-    //   document.getElementById('nav').pushPage('itemEdit.html', {
-    //     data: {itemID_edit}
-    //     // 次画面で、this.data.itemID_editをすればとれる
-    //   });
-    // }
+
 	</script>
 </ons-page>
