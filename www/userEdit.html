@@ -213,7 +213,7 @@
       console.log("gender_radio:"+gender_radio[0].value);
       for(var i = 0; i < gender_radio.length ; i++){
         if (gender_radio[i].value == gender){
-          //選択されたラジオボタンのにチェックをつける
+          //選択されたラジオボタンにチェックをつける
           gender_radio[i].checked = true;
           break;
         }
@@ -261,7 +261,8 @@
       console.log("ユーザ編集画面のuserメソッド：開始");
       myuser = new User();
       //ユーザー管理画面へ遷移
-       document.getElementById('nav').resetToPage('userManage.html');
+      // setTimeout("document.getElementById('nav').resetToPage('userManage.html')",200);
+      // await document.getElementById('nav').resetToPage('userManage.html');
       //document.getElementById('nav').pushPage('userManage.html', {});
       // 終了ログ
       console.log("userRegistメソッド：終了");
@@ -272,46 +273,46 @@
       // 開始ログ
       console.log("updValueメソッド：開始");
 
-      var result = null;
       // メールアドレスに変更がある場合
       if(myuser.getMailAddress() != chgmail){
         // メールアドレスを更新
-        result = await myuser.setMailAddress(chgmail);
+        await myuser.setMailAddress(chgmail);
       }
       // ニックネームに変更がある場合
       if(myuser.getNickName() != chgnickName){
         // ニックネームを変更
-        result = await myuser.setNickName(chgnickName);
-        console.log("ニックネームresult:"+result);
+        await myuser.setNickName(chgnickName);
       }
       // 誕生年に変更がある場合
       if(myuser.getYear() != chgbirthYear){
         // 誕生年を変更
-        result = await myuser.setYear(chgbirthYear);
+        await myuser.setYear(chgbirthYear);
       }
       // 誕生月に変更がある場合
       if(myuser.getMonth() != chgbirthMonth){
         // 誕生月を変更
-        result = await myuser.setMonth(chgbirthMonth);
+        await myuser.setMonth(chgbirthMonth);
       }
       // 誕生日に変更がある場合
       if(myuser.getDay() != chgbirthDay){
         // 誕生日を変更
-        result = await myuser.setDay(chgbirthDay);
+        await myuser.setDay(chgbirthDay);
       }
       // 性別に変更がある場合
       if(myuser.getGender() != chggender){
         // 性別を変更
-        result = await myuser.setGender(chggender);
+        await myuser.setGender(chggender);
       }
       // 身長に変更がある場合
       if(myuser.getHeight() != chgheight){
         // 身長を変更
-        result = await myuser.setHeight(chgheight);
+        await myuser.setHeight(chgheight);
       }
 
-      // 開始ログ
-      console.log("updValueメソッド：終了");
+      //ユーザー管理画面へ遷移
+      await document.getElementById('nav').resetToPage('userManage.html');
+      // 終了ログ
+      await console.log("updValueメソッド：終了");
     }
 
     // 日付チェック
@@ -332,6 +333,9 @@
       // 判定結果を返す
       return result;
     }
+    // 非同期関数の参考サイト
+    // https://qiita.com/_takeshi_24/items/1403727efb3fd86f0bcd
+    // https://tech.playground.style/javascript/asynchronous-processing/
     // ラジオボタン実装の参考サイト
     // https://itsakura.com/js-radiobutton
 	</script>

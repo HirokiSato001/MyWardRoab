@@ -100,9 +100,9 @@ class User {
 
   /** バックエンドのユーザからmailAddressを取得し、グローバル変数に設定する*/
   /** mailAddressのsetter */
-  setMailAddress(argMailAddress) {
+  async setMailAddress(argMailAddress) {
     // ログインユーザからmailAddressプロパティ値を更新    
-    currentUser.set("mailAddress", argMailAddress)
+    await currentUser.set("mailAddress", argMailAddress)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
@@ -117,9 +117,9 @@ class User {
   }
   /** バックエンドのユーザからpasswordを取得し、グローバル変数に設定する*/
   /** passwordのsetter */
-  setPassword(argPassword) {
+  async setPassword(argPassword) {
     // ログインユーザからpasswordプロパティ値を更新    
-    currentUser.set("password", argPassword)
+    await currentUser.set("password", argPassword)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
@@ -134,9 +134,9 @@ class User {
   }
   /** バックエンドのユーザからnickNameを取得し、グローバル変数に設定する*/
   /** nickNameのsetter */
-  setNickName(argNickName) {
+  async setNickName(argNickName) {
     // ログインユーザからnickNameプロパティ値を更新    
-    currentUser.set("nickName", argNickName)
+    await currentUser.set("nickName", argNickName)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
@@ -151,9 +151,9 @@ class User {
   }
   /** バックエンドのユーザからbirthDayを取得し、グローバル変数に設定する*/
   /** birthDayのsetter */
-  setBirthDay(argBirthDay) {
+  async setBirthDay(argBirthDay) {
     // ログインユーザからbirthDayプロパティ値を更新    
-    currentUser.set("birthDay", argBirthDay)
+    await currentUser.set("birthDay", argBirthDay)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
@@ -168,9 +168,9 @@ class User {
   }
   /** バックエンドのユーザからyearを取得し、グローバル変数に設定する*/
   /** yearのsetter */
-  setYear(argYear) {
+  async setYear(argYear) {
     // ログインユーザからyearプロパティ値を更新    
-    currentUser.set("year", argYear)
+    await currentUser.set("year", argYear)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
@@ -185,9 +185,9 @@ class User {
   }
   /** バックエンドのユーザからmonthを取得し、グローバル変数に設定する*/
   /** monthのsetter */
-  setMonth(argMonth) {
+  async setMonth(argMonth) {
     // ログインユーザからmonthプロパティ値を更新    
-    currentUser.set("month", argMonth)
+    await currentUser.set("month", argMonth)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
@@ -202,9 +202,9 @@ class User {
   }
   /** バックエンドのユーザからdayを取得し、グローバル変数に設定する*/
   /** dayのsetter */
-  setDay(argDay) {
+  async setDay(argDay) {
     // ログインユーザからdayプロパティ値を更新    
-    currentUser.set("day", argDay)
+    await currentUser.set("day", argDay)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
@@ -219,9 +219,9 @@ class User {
   }
   /** バックエンドのユーザからgenderを取得し、グローバル変数に設定する*/
   /** genderのsetter */
-  setGender(argGender) {
+  async setGender(argGender) {
     // ログインユーザからgenderプロパティ値を更新    
-    currentUser.set("gender", argGender)
+    await currentUser.set("gender", argGender)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
@@ -236,9 +236,9 @@ class User {
   }
   /** バックエンドのユーザからheightを取得し、グローバル変数に設定する*/
   /** heightのsetter */
-  setHeight(argHeight) {
+  async setHeight(argHeight) {
     // ログインユーザからheightプロパティ値を更新    
-    currentUser.set("height", argHeight)
+    await currentUser.set("height", argHeight)
       .update()
       .then(function(obj) {
         // 更新がうまくいった時
