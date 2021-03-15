@@ -110,9 +110,8 @@
 
 
 		// 画面表示時
-    ons.getScriptPage().onShow = function() {
-    console.log("onShow");
-  //  readyItemList();
+    ons.getScriptPage().onInit = function() {
+    console.log("onInit");
    
       // deleteTable();
      
@@ -133,8 +132,7 @@
         var itemList = results;
          // itemListの数だけ繰り返す
         for (var i = 0; i < results.length; i++) {
-          //var count = i;
-            // アイテム表示用
+          // アイテム表示用
           var onsListItem = document.createElement("ons-list-item");
           // オブジェクトID取得
           var objIdx = itemList[i].get("objectId");
@@ -150,7 +148,6 @@
           var imageUri = itemList[i].get("image");
         
           insertColumn(tableId,imageUri,objIdx,cateIdx,sub_cateIdx)
-         
         }
 
         })
