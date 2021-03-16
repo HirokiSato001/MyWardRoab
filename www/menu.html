@@ -18,6 +18,9 @@
       <br/>
       <br/>
     </div>
+  <ons-button onclick="send_login()">ログアウト</ons-button>
+
+
   </body>
 <script>
     // 画面表示時
@@ -29,6 +32,17 @@
          console.log('Hello');
       document.getElementById("disp").innerText = youkoso;
     }
+
+    function send_login(){
+     console.log(ncmb.User.getCurrentUser().get("userName"));
+     ncmb.User.logout().catch(function(err){
+       // エラー処理
+       console.log("Err#" + err.code +": " +err.message);   
+       });
+       //document.getElementById('nav').popPage();  
+       //document.getElementById('nav').bringPageTop('login.html',{});
+       document.getElementById('nav').resetToPage('login.html',{});
+     };
 
 </script> 
 </ons-page>
