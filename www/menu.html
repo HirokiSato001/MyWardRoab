@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <ons-page>
   <p class="resizeimage">
     <img src="/www/image/title.gif" alt="公園">
   </p>
+  
   <body>
     <div id="title" class="box18">
       <h2><div id="disp"></div></h2>
@@ -18,8 +19,7 @@
       <br/>
       <br/>
     </div>
-  <ons-button onclick="send_login()">ログアウト</ons-button>
-
+  <ons-button icon="door-open" onclick="send_login()">ログアウト</ons-button>
 
   </body>
 <script>
@@ -33,16 +33,13 @@
       document.getElementById("disp").innerText = youkoso;
     }
 
-    function send_login(){
-     console.log(ncmb.User.getCurrentUser().get("userName"));
+    function send_login(){      
      ncmb.User.logout().catch(function(err){
        // エラー処理
        console.log("Err#" + err.code +": " +err.message);   
        });
-       //document.getElementById('nav').popPage();  
-       //document.getElementById('nav').bringPageTop('login.html',{});
        document.getElementById('nav').resetToPage('login.html',{});
-     };
+     }
 
 </script> 
 </ons-page>
