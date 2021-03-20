@@ -70,6 +70,7 @@ class Item{
       this.season; //季節
       this.size; //サイズ
       this.brand; //ブランド
+      this.fvrtFlg; //お気に入りフラグ
       this.remarks; //備考
   }
   //カテゴリー
@@ -107,6 +108,10 @@ class Item{
 //ブランド
   getBrand(){
     return this.brand;
+  }
+//お気に入りフラグ
+  getFvrtFlg(){
+    return this.fvrtFlg;
   }
 //備考
   getRemarks(){
@@ -148,6 +153,10 @@ Size(){
 Brand(){
     this.brand = brand;
   }
+//お気に入りフラグ
+FvrtFlg(){
+    this.fvrtFlg = fvrtFlg;
+  }  
 //備考
 Remarks(){
     this.remarks = remarks;
@@ -166,6 +175,7 @@ Remarks(){
                 season:this.season,
                 size:this.size,
                 brand:this.brand,
+                fvrtFlg:this.fvrtFlg,
                 remarks:this.remarks
               }));
   }
