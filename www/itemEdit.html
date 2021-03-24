@@ -116,6 +116,15 @@
     <input id="image" type="image" src="image/1_4_black.png" onclick="boot_camera()">
   </div>  
 
+   <br>
+   <div style="text-align: center">
+       <ons-checkbox input-id="fvrtFlg" value="1"></ons-checkbox>
+            <label for="fvrtFlg" class="center">
+        お気に入りに登録する。<br>
+        <font size="1">※コーディネートに使用されやすくなります。</font>
+      </label>
+    </div>
+
   <br>
   <div style="text-align: center">
       <ons-button onclick="itemEdit()">完了</ons-button>
@@ -170,7 +179,18 @@
           brand.value = item.get("brand");
           remarks.value = item.get("remarks");
           image.src = item.get("image");
-          console.log("season :" + item.get("season"));
+
+        // お気に入りチェックボックス
+          var dbFvrtFlg = item.get("fvrtFlg");
+          console.log("fvrtFlg :" + dbFvrtFlg);
+          // お気に入りフラグ1の場合はチェックして初期表示
+          if (dbFvrtFlg=="1"){
+            document.getElementById("fvrtFlg").checked = true;
+          } else {
+            document.getElementById("fvrtFlg").checked = false;
+
+          }
+
 
           var radio_id = "radio-" + item.get("season");
           var season_ra =  document.getElementById(radio_id);
@@ -201,6 +221,16 @@
         }
       }
 
+    // お気に入り登録のチェックが入っていれば、お気に入りフラグ”１”で登録する。
+    var fvrtFlg = "0";
+    const fvrtFlgCheck = document.getElementById("fvrtFlg");
+    if(fvrtFlgCheck.checked){
+		  fvrtFlg =  "1";
+      console.log('お気に入りフラグ true：' + fvrtFlg);
+	  }else{
+		  fvrtFlg =  "0";
+       console.log('お気に入りフラグ false：' + fvrtFlg);
+	  }
       console.log("完了： " + itemID_edit);
 
       items.equalTo("objectId",itemID_edit)
@@ -217,6 +247,7 @@
             .set("brand", v_brand)
             .set("remarks", v_remarks)
             .set("image", v_image)
+            .set("fvrtFlg", fvrtFlg)
             .set("userId", currentUser.get("objectId"));
           document.getElementById('nav').popPage();
           return results[0].update();
