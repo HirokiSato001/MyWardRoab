@@ -1,16 +1,19 @@
 <ons-page id="coordinate">
  <head>
      <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center"><ons-icon icon="user-circle"></ons-icon>コーディネート</div>    
-  </ons-toolbar>
+      <div class="left"><ons-back-button>Back</ons-back-button></div>
+      <div class="center"><ons-icon icon="user-circle"></ons-icon>コーディネート</div>    
+    </ons-toolbar>
  </head>
  <body>   
    
  <br>
  
  <div class="left"><font size="3" font color="#0000ff">＜使用アイテム＞</font></div>
- 
+
+ <!-- コーディネート詳細画面へのボタン -->
+ <ons-button onclick="send_coordinateDtl()">詳細</ons-button>
+
  <br>
 
  <div id="coordinate"＞
@@ -395,6 +398,12 @@
           });
 
       }
+
+      // コーディネート詳細画面への遷移
+      function send_coordinateDtl(){
+        document.getElementById('nav').pushPage('coordinateDtl.html', {});
+      };
+
   </script>
 
  
