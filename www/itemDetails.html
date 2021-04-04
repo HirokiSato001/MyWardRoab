@@ -54,6 +54,11 @@
 			<td> : </td>
 			<td id="remarks_details">remarks</td>
 		</tr>
+    <tr>
+			<td>お気に入り</td>
+			<td> : </td>
+			<td id="fvrt_details">fvrt</td>
+		</tr>
 	</table>
 
 	<ons-button id = "edit">編集</ons-button>
@@ -80,6 +85,17 @@
               document.getElementById("image_top_details").src = object.get("image")
               document.getElementById("brand_details").innerHTML = object.get("brand")
               document.getElementById("remarks_details").innerHTML = object.get("remarks")
+
+              // お気に入り
+              var dbFvrtFlg = object.get("fvrtFlg");
+              var fvrtFlg = "未登録";
+              console.log("fvrtFlg :" + dbFvrtFlg);
+              // お気に入りフラグ1の場合はチェックして初期表示
+              if (dbFvrtFlg=="1"){
+                fvrtFlg = "登録済み";
+              } 
+              document.getElementById("fvrt_details").innerHTML = fvrtFlg;
+
             }
           })
          .catch(function(err){
