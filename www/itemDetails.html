@@ -54,16 +54,15 @@
 			<td> : </td>
 			<td id="remarks_details">remarks</td>
 		</tr>
+    <tr>
+			<td>お気に入り</td>
+			<td> : </td>
+			<td id="fvrt_details">fvrt</td>
+		</tr>
 	</table>
 
 	<ons-button id = "edit">編集</ons-button>
 	<script>
-    // ニフクラmobile backendのキー設定
-    // API key.
-    var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
-    var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
-    // SDK initialization.
-    var ncmb = new NCMB(applicationKey, clientKey);
     var items = ncmb.DataStore("item");
 
     // 画面表示時
@@ -86,6 +85,17 @@
               document.getElementById("image_top_details").src = object.get("image")
               document.getElementById("brand_details").innerHTML = object.get("brand")
               document.getElementById("remarks_details").innerHTML = object.get("remarks")
+
+              // お気に入り
+              var dbFvrtFlg = object.get("fvrtFlg");
+              var fvrtFlg = "未登録";
+              console.log("fvrtFlg :" + dbFvrtFlg);
+              // お気に入りフラグ1の場合はチェックして初期表示
+              if (dbFvrtFlg=="1"){
+                fvrtFlg = "登録済み";
+              } 
+              document.getElementById("fvrt_details").innerHTML = fvrtFlg;
+
             }
           })
          .catch(function(err){

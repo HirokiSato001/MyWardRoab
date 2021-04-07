@@ -1,16 +1,19 @@
 <ons-page id="coordinate">
  <head>
      <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center"><ons-icon icon="user-circle"></ons-icon>コーディネート</div>    
-  </ons-toolbar>
+      <div class="left"><ons-back-button>Back</ons-back-button></div>
+      <div class="center"><ons-icon icon="user-circle"></ons-icon>コーディネート</div>    
+    </ons-toolbar>
  </head>
  <body>   
    
  <br>
  
  <div class="left"><font size="3" font color="#0000ff">＜使用アイテム＞</font></div>
- 
+
+ <!-- コーディネート詳細画面へのボタン -->
+ <ons-button onclick="send_coordinateDtl()">詳細</ons-button>
+
  <br>
 
  <div id="coordinate"＞
@@ -235,16 +238,7 @@
       "XS","S","M","L","XL","XXL","3XL"
     ];    
 
-    // ニフクラmobile backendのキー設定
-  // API key.
-  var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
-  var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
-  // SDK initialization.
-  var ncmb = new NCMB(applicationKey, clientKey);
     var items = ncmb.DataStore("item");
-
-    
-
     // 画面表示時
     ons.getScriptPage().onShow = function() {
     console.log("onShow")
@@ -404,6 +398,12 @@
           });
 
       }
+
+      // コーディネート詳細画面への遷移
+      function send_coordinateDtl(){
+        document.getElementById('nav').pushPage('coordinateDtl.html', {});
+      };
+
   </script>
 
  

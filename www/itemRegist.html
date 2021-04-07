@@ -116,6 +116,17 @@
       <img id="regist-image">
     </div>  
 
+
+
+   <br>
+   <div style="text-align: center">
+       <ons-checkbox input-id="fvrtFlg" value="1"></ons-checkbox>
+            <label for="fvrtFlg" class="center">
+        お気に入りに登録する。<br>
+        <font size="1">※コーディネートに使用されやすくなります。</font>
+      </label>
+    </div>
+
     <br>
     <div style="text-align: center">
         <ons-button onclick="itemRegist_mobileBackend()">登録</ons-button>
@@ -220,7 +231,6 @@
   }
 
 
-
   // // カメラ起動関数
   // function boot_camera(){
   //   console.log("click");
@@ -247,12 +257,6 @@
   //   navigator.camera.getPicture(onSuccess, onError, option);
   // }
 
-  // ニフクラmobile backendのキー設定
-  // API key.
-  var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
-  var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
-  // SDK initialization.
-  var ncmb = new NCMB(applicationKey, clientKey);
   // 「登録」ボタン押下時の処理
   function itemRegist_mobileBackend(){
 
@@ -276,6 +280,18 @@
     var brand = document.getElementById("brand").value;
     var remarks = document.getElementById("remarks").value;
     var image = document.getElementById("regist-image").src;
+
+    // お気に入り登録のチェックが入っていれば、お気に入りフラグ”１”で登録する。
+    var fvrtFlg = "0";
+    const fvrtFlgCheck = document.getElementById("fvrtFlg");
+    if(fvrtFlgCheck.checked){ //(color5[i].checked === true)と同じ
+		  fvrtFlg =  "1";
+      console.log('お気に入りフラグ true：' + fvrtFlg);
+	  }else{
+		  fvrtFlg =  "0";
+       console.log('お気に入りフラグ false：' + fvrtFlg);
+	  }
+
     // ログインユーザを取得
     var currentUser = ncmb.User.getCurrentUser();
 
@@ -291,6 +307,7 @@
               .set("brand", brand)
               .set("remarks", remarks)
               .set("image", image)
+              .set("fvrtFlg", fvrtFlg)
               .set("userId", currentUser.get("objectId"))
               .save()
               .then(function(insertItem){
@@ -306,6 +323,7 @@
                 console.log('brand: ' + brand);
                 console.log('remarks: ' + remarks);
                 console.log('image: ' + image);
+                console.log('fvrtFlg: ' + fvrtFlg);
                 document.getElementById('nav').popPage();
               })
 
