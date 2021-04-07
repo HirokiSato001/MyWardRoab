@@ -273,6 +273,9 @@
       // 開始ログ
       console.log("updValueメソッド：開始");
 
+      // 空更新しています。（複数項目の更新について、最初の項目が更新されないため。）
+      await myuser.setYear(myuser.getYear());
+
       // メールアドレスに変更がある場合
       if(myuser.getMailAddress() != chgmail){
         // メールアドレスを更新
