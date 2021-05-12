@@ -1,7 +1,7 @@
 <ons-page id="coordinate">
  <head>
      <ons-toolbar>
-      <div class="left"><ons-back-button>Back</ons-back-button></div>
+      <!-- <div class="left"><ons-back-button>Back</ons-back-button></div> -->
       <div class="center"><ons-icon icon="user-circle"></ons-icon>コーディネート</div>    
     </ons-toolbar>
  </head>
@@ -9,7 +9,7 @@
    
  <br>
  
- <div class="left"><font size="3" font color="#0000ff">＜使用アイテム＞</font></div>
+ <!-- <div class="left"><font size="3" font color="#0000ff">＜使用アイテム＞</font></div> -->
 
  <!-- コーディネート詳細画面へのボタン -->
  <ons-button onclick="send_coordinateDtl()">詳細</ons-button>
@@ -20,7 +20,117 @@
 
  <br>
 
-	<table border="0" >
+
+ <div>
+     <p class="box" style="border-bottom: 2px solid blue; color: navy; border-color:navy; text-align:center;">
+       <font size="5"> コーデＡ </font>
+     </p>
+     <table border="0" style="margin-left: auto; margin-right: auto;">
+       <tr>
+        <td colspan="1" rowspan="2">
+          <!-- トップス -->
+          <!-- <input id="tops_image_1" type="image" src="/image/1_1.png"  width="100" height="100"> -->
+          <img src="image/1_1_pink.png" id='tops_image_1' alt="トップスの画像"style="float:left;"width="100px" height="100px" >
+        </td>
+        <td colspan="1" rowspan="3">
+          <!-- アウター -->
+          <!-- <input id="outer_image_1" type="image" src="/image/3_1.png"  width="100" height="100"> -->
+          <img src="image/3_1_blue.png" id='outer_image_1' alt="アウターの画像"style="float:left;"width="100px" height="100px" >
+        </td>
+      </tr>
+      <tr></tr>
+      <tr>
+        <td colspan="1" rowspan="2">
+          <!-- ボトムス -->
+          <!-- <input id="bottoms_image_1" type="image" src="/image/2_1.png"  width="100" height="100"> -->
+          <img src="image/2_6_blue.png" id='bottoms_image_1' alt="ボトムスの画像"style="float:left;" width="100px" height="100px" >
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="3"></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="2">
+          <!-- 靴 -->
+          <!-- <input id="shoes_image_1" type="image" src="/image/5_7.png"  width="100" height="100"> -->
+          <img src="image/5_5_red.png" id='shoes_image_1' alt="シューズの画像"style="float:left;" width="100px" height="100px" >
+        </td>
+      </tr>
+    </table>
+
+   </div>
+
+ <div>
+     <p class="box" style="border-bottom: 2px solid blue; color: navy; border-color:navy; text-align:center;">
+       <font size="5"> コーデB </font>
+     </p>
+     <table border="0" style="margin-left: auto; margin-right: auto;">
+       <tr>
+        <td colspan="1" rowspan="2">
+          <!-- トップス -->
+          <img src="image/1_1_pink.png" id='tops_image_2' alt="トップスの画像"style="float:left;"width="100px" height="100px" >
+        </td>
+        <td colspan="1" rowspan="3">
+          <!-- アウター -->
+          <img src="image/3_1_blue.png" id='outer_image_2' alt="アウターの画像"style="float:left;"width="100px" height="100px" >
+        </td>
+      </tr>
+      <tr></tr>
+      <tr>
+        <td colspan="1" rowspan="2">
+          <!-- ボトムス -->
+          <img src="image/2_6_blue.png" id='bottoms_image_2' alt="ボトムスの画像"style="float:left;" width="100px" height="100px" >
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="3"></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="2">
+          <!-- 靴 -->
+          <img src="image/5_5_red.png" id='shoes_image_2' alt="シューズの画像"style="float:left;" width="100px" height="100px" >
+        </td>
+      </tr>
+    </table>
+
+   </div>
+
+   <div>
+     <p class="box" style="border-bottom: 2px solid blue; color: navy; border-color:navy; text-align:center;">
+       <font size="5"> コーデC </font>
+     </p>
+     <table border="0" style="margin-left: auto; margin-right: auto;">
+       <tr>
+        <td colspan="1" rowspan="2">
+          <!-- トップス -->
+          <img src="image/1_1_pink.png" id='tops_image_3' alt="トップスの画像"style="float:left;"width="100px" height="100px" >
+        </td>
+        <td colspan="1" rowspan="3">
+          <!-- アウター -->
+          <img src="image/3_1_blue.png" id='outer_image_3' alt="アウターの画像"style="float:left;"width="100px" height="100px" >
+        </td>
+      </tr>
+      <tr></tr>
+      <tr>
+        <td colspan="1" rowspan="2">
+          <!-- ボトムス -->
+          <img src="image/2_6_blue.png" id='bottoms_image_3' alt="ボトムスの画像"style="float:left;" width="100px" height="100px" >
+        </td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="3"></td>
+      </tr>
+      <tr>
+        <td colspan="1" rowspan="2">
+          <!-- 靴 -->
+          <img src="image/5_5_red.png" id='shoes_image_3' alt="シューズの画像"style="float:left;" width="100px" height="100px" >
+        </td>
+      </tr>
+    </table>
+
+   </div>
+   
+	<!-- <table border="0" >
 		<tr>
   		<td><img src="image/1_1_pink.png" id='tops_image_1' alt="トップスの画像"style="float:left;"width="100px" height="100px" ></td>
 	  	<td><img src="image/2_6_blue.png" id='bottoms_image_1' alt="ボトムスの画像"style="float:left;" width="100px" height="100px" ></td>
@@ -45,7 +155,7 @@
 		</tr>
 	</table>
  
- </div>
+ </div> -->
 
 <br>
 
