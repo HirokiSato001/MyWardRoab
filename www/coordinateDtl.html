@@ -1,6 +1,6 @@
 <ons-page id="coordinateDtl">
  <head>
-     <ons-toolbar>
+  <ons-toolbar>
     <div class="left"><ons-back-button>Back</ons-back-button></div>
     <div class="center"><ons-icon icon="user-circle"></ons-icon>コーディネート詳細画面</div>    
   </ons-toolbar>
@@ -16,18 +16,18 @@
        <tr>
         <td colspan="1" rowspan="2">
           <!-- トップス -->
-          <input id="tops_image" type="image" src="/image/1_1.png"  width="100" height="100">
+          <input id="tops_image" type="image" width="100" height="100">
         </td>
         <td colspan="1" rowspan="3">
           <!-- アウター -->
-          <input id="tops_image" type="image" src="/image/3_1.png"  width="100" height="100">
+          <input id="outer_image" type="image" width="100" height="100">
         </td>
       </tr>
       <tr></tr>
       <tr>
         <td colspan="1" rowspan="2">
           <!-- ボトムス -->
-          <input id="tops_image" type="image" src="/image/2_1.png"  width="100" height="100">
+          <input id="bottoms_image" type="image" width="100" height="100">
         </td>
       </tr>
       <tr>
@@ -36,7 +36,7 @@
       <tr>
         <td colspan="1" rowspan="2">
           <!-- 靴 -->
-          <input id="tops_image" type="image" src="/image/5_7.png"  width="100" height="100">
+          <input id="shoes_image" type="image" width="100" height="100">
         </td>
       </tr>
     </table>
@@ -51,24 +51,24 @@
       <!-- アウター -->
       <tr>
         <!-- 画像 -->
-        <td><input id="tops_image" type="image" src="/image/3_1.png"  width="100" height="100"></td>
+        <td><input id="outer_image2" type="image" width="100" height="100"></td>
         <!-- 詳細 -->
         <td>
           <table border="0" color="white" style="margin-left: auto; margin-right: auto; font-size: 5pt;">
             <tr>
-              <td align="left">カテゴリー</td><td>:</td><td>*******</td>
+              <td align="left">カテゴリー</td><td>:</td><td>アウター</td>
             </tr>
             <tr>
-              <td align="left">サブカテゴリー</td><td>:</td><td>*******</td>
+              <td align="left">サブカテゴリー</td><td>:</td><td id="outer_sub"></td>
             </tr>
             <tr>
-              <td align="left">カラー</td><td>:</td><td>*******</td>
+              <td align="left">カラー</td><td>:</td><td id="outer_color"></td>
             </tr>
             <tr>
-              <td align="left">パターン</td><td>:</td><td>*******</td>
+              <td align="left">パターン</td><td>:</td><td id="outer_design"></td>
             </tr>
             <tr>
-              <td align="left">サイズ</td><td>:</td><td>*******</td>
+              <td align="left">サイズ</td><td>:</td><td id="outer_size"></td>
             </tr>
           </table>
         </td>
@@ -77,24 +77,24 @@
       <!-- トップス -->
       <tr>
         <!-- 画像 -->
-        <td><input id="tops_image" type="image" src="/image/1_1.png"  width="100" height="100"></td>
+        <td><input id="tops_image2" type="image"  width="100" height="100"></td>
         <!-- 詳細 -->
         <td>
           <table border="0" style="margin-left: auto; margin-right: auto; font-size: 5pt">
             <tr>
-              <td align="left">カテゴリー</td><td>:</td><td>*******</td>
+              <td align="left">カテゴリー</td><td>:</td><td>トップス</td>
             </tr>
             <tr>
-              <td align="left">サブカテゴリー</td><td>:</td><td>*******</td>
+              <td align="left">サブカテゴリー</td><td>:</td><td id="tops_sub"></td>
             </tr>
             <tr>
-              <td align="left">カラー</td><td>:</td><td>*******</td>
+              <td align="left">カラー</td><td>:</td><td id="tops_color"></td>
             </tr>
             <tr>
-              <td align="left">パターン</td><td>:</td><td>*******</td>
+              <td align="left">パターン</td><td>:</td><td id="tops_design"></td>
             </tr>
             <tr>
-              <td align="left">サイズ</td><td>:</td><td>*******</td>
+              <td align="left">サイズ</td><td>:</td><td id="tops_size"></td>
             </tr>
           </table>
         </td>
@@ -103,24 +103,24 @@
       <!-- ボトムス-->
       <tr>
         <!-- 画像 -->
-        <td><input id="tops_image" type="image" src="/image/2_1.png"  width="100" height="100"></td>
+        <td><input id="bottoms_image2" type="image"  width="100" height="100"></td>
         <!-- 詳細 -->
         <td>
           <table border="0" style="margin-left: auto; margin-right: auto; font-size: 5pt">
             <tr>
-              <td align="left">カテゴリー</td><td>:</td><td>*******</td>
+              <td align="left">カテゴリー</td><td>:</td><td>ボトムス</td>
             </tr>
             <tr>
-              <td align="left">サブカテゴリー</td><td>:</td><td>*******</td>
+              <td align="left">サブカテゴリー</td><td>:</td><td id="bottoms_sub"></td>
             </tr>
             <tr>
-              <td align="left">カラー</td><td>:</td><td>*******</td>
+              <td align="left">カラー</td><td>:</td><td id="bottoms_color"></td>
             </tr>
             <tr>
-              <td align="left">パターン</td><td>:</td><td>*******</td>
+              <td align="left">パターン</td><td>:</td><td id="bottoms_design"></td>
             </tr>
             <tr>
-              <td align="left">サイズ</td><td>:</td><td>*******</td>
+              <td align="left">サイズ</td><td>:</td><td id="bottoms_size"></td>
             </tr>
           </table>
         </td>
@@ -129,24 +129,24 @@
       <!-- 靴 -->
       <tr>
         <!-- 画像 -->
-        <td><input id="tops_image" type="image" src="/image/5_7.png"  width="100" height="100"></td>
+        <td><input id="shoes_image2" type="image" src="/image/5_7.png"  width="100" height="100"></td>
         <!-- 詳細 -->
         <td>
           <table border="0" style="margin-left: auto; margin-right: auto; font-size: 5pt">
             <tr>
-              <td align="left">カテゴリー</td><td>:</td><td>*******</td>
+              <td align="left">カテゴリー</td><td>:</td><td>シューズ</td>
             </tr>
             <tr>
-              <td align="left">サブカテゴリー</td><td>:</td><td>*******</td>
+              <td align="left">サブカテゴリー</td><td>:</td><td id="shoes_sub"></td>
             </tr>
             <tr>
-              <td align="left">カラー</td><td>:</td><td>*******</td>
+              <td align="left">カラー</td><td>:</td><td id="shoes_color"></td>
             </tr>
             <tr>
-              <td align="left">パターン</td><td>:</td><td>*******</td>
+              <td align="left">パターン</td><td>:<td id="shoes_design"></td>
             </tr>
             <tr>
-              <td align="left">サイズ</td><td>:</td><td>*******</td>
+              <td align="left">サイズ</td><td>:</td><td id="shoes_size"></td>
             </tr>
           </table>
         </td>
@@ -156,4 +156,58 @@
    </div>
 
  </body>
+
+ <script>
+
+  // 画面表示時
+  ons.getScriptPage().onShow = function() {
+    
+    console.log("コーディネート詳細画面:onShow");
+   
+    // コーディネート画面から送信されたデータを取得
+    var sub_categoryArrD = this.data.sub_categoryArr;
+    var colorArrD = this.data.colorArr;
+    var patternArrD = this.data.patternArr;
+    var sizeArrD = this.data.sizeArr;
+    
+    // コーデ画像を設定
+    document.getElementById("tops_image").src = "/image/1_"+sub_categoryArrD[0]+".png";
+    document.getElementById("bottoms_image").src = "/image/2_"+sub_categoryArrD[1]+".png";
+    document.getElementById("outer_image").src = "/image/3_"+sub_categoryArrD[2]+".png";
+    document.getElementById("shoes_image").src = "/image/5_"+sub_categoryArrD[3]+".png";
+
+    // ITEM LIST画像を設定
+    document.getElementById("tops_image2").src = "/image/1_"+sub_categoryArrD[0]+".png";
+    document.getElementById("bottoms_image2").src = "/image/2_"+sub_categoryArrD[1]+".png";
+    document.getElementById("outer_image2").src = "/image/3_"+sub_categoryArrD[2]+".png";
+    document.getElementById("shoes_image2").src = "/image/5_"+sub_categoryArrD[3]+".png";
+
+    // トップスの詳細を設定
+    document.getElementById("tops_sub").innerHTML = convert_sub_category(1,sub_categoryArrD[0]);
+    document.getElementById("tops_color").innerHTML = convert_color(colorArrD[0]);
+    document.getElementById("tops_design").innerHTML = convert_design(patternArrD[0]);
+    document.getElementById("tops_size").innerHTML = convert_size(sizeArrD[0]);
+
+    // ボトムスの詳細を設定
+    document.getElementById("bottoms_sub").innerHTML = convert_sub_category(2,sub_categoryArrD[1]);
+    document.getElementById("bottoms_color").innerHTML = convert_color(colorArrD[1]);
+    document.getElementById("bottoms_design").innerHTML = convert_design(patternArrD[1]);
+    document.getElementById("bottoms_size").innerHTML = convert_size(sizeArrD[1]);
+
+    // アウターの詳細を設定
+    document.getElementById("outer_sub").innerHTML = convert_sub_category(3,sub_categoryArrD[2]);
+    document.getElementById("outer_color").innerHTML = convert_color(colorArrD[2]);
+    document.getElementById("outer_design").innerHTML = convert_design(patternArrD[2]);
+    document.getElementById("outer_size").innerHTML = convert_size(sizeArrD[2]);
+
+    // シューズの詳細を設定
+    document.getElementById("shoes_sub").innerHTML = convert_sub_category(5,sub_categoryArrD[3]);
+    document.getElementById("shoes_color").innerHTML = convert_color(colorArrD[3]);
+    document.getElementById("shoes_design").innerHTML = convert_design(patternArrD[3]);
+    document.getElementById("shoes_size").innerHTML = convert_size(sizeArrD[3]);
+
+  }
+
+ </script>
+
 </ons-page>
