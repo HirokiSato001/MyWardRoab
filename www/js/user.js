@@ -9,6 +9,7 @@ var month; // 月
 var day; // 日
 var gender; // 性別
 var height; // 身長
+var favoriteColor; // 好みの色
 
 var currentUser
 class User {
@@ -27,6 +28,7 @@ class User {
       day = currentUser.get("day")
       gender = currentUser.get("gender")
       height = currentUser.get("height")
+      favoriteColor = currentUser.get("favoriteColor")
       // ログ出力
       console.log("address    : " + mailAddress);
       console.log("nickName   : " + nickName);
@@ -36,13 +38,14 @@ class User {
       console.log("gender     :" + gender);
       console.log("height     :" + height);
       console.log("password   :" + password);
+      console.log("favoriteColor   :" + favoriteColor);
     } else {
       console.log("new User()未ログイン");
     }
   }
 
   // ユーザ登録
-  userRegist(argMailAddress, argPassword, argNickName, argYear, argMonth, argDay, argGender, argHeight) {
+  userRegist(argMailAddress, argPassword, argNickName, argYear, argMonth, argDay, argGender, argHeight, argFavoriteColor) {
     // ユーザ登録情報を設定
 
     var user = new ncmb.User();
@@ -56,7 +59,8 @@ class User {
         .set("month",argMonth)// 月
         .set("day",argDay)// 日
         .set("gender",argGender)// 性別
-        .set("height",argHeight);// 身長
+        .set("height",argHeight)// 身長
+        .set("favoriteColor",favoriteColor);// 好みの色
 
         
     // ユーザーの新規登録処理
@@ -245,6 +249,24 @@ class User {
     height = argHeight;
   }
 
+  /** バックエンドのユーザからfavoriteColorを取得し、グローバル変数に設定する*/
+  /** favoriteColorのsetter */
+  async setFavoriteColor(argFavoriteColor) {
+    // ログインユーザからfavoriteColorプロパティ値を更新    
+    await currentUser.set("favoriteColor", argFavoriteColor)
+      .update()
+      .then(function(obj) {
+        // 更新がうまくいった時
+        console.log("Success. Change favoriteColor to " + argFavoriteColor);
+      })
+      .catch(function(error) {
+        // エラーの時
+        alert("Failed. Change favoriteColor.");
+      });
+    // グローバル変数:favoriteColorを更新
+    favoriteColor = argFavoriteColor;
+  }
+
   /** メールアドレスのgetter */
   getMailAddress() {
     // グローバル変数:mailaddressの値を返却
@@ -289,6 +311,11 @@ class User {
   getPassword() {
     // グローバル変数:passwordの値を返却
     return password;
+  }
+  /** 好みの色のgetter */
+  getFavoriteColor() {
+    // グローバル変数:favoriteColorの値を返却
+    return favoriteColor;
   }
 
   // ローカルストレージ
