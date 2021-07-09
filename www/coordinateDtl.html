@@ -1,213 +1,381 @@
 <ons-page id="coordinateDtl">
- <head>
-  <ons-toolbar>
-    <div class="left"><ons-back-button>Back</ons-back-button></div>
-    <div class="center"><ons-icon icon="user-circle"></ons-icon>コーディネート詳細画面</div>    
-  </ons-toolbar>
- </head>
 
- <body bgcolor="#F7823F">
+	<head>
+		<ons-toolbar>
+			<div class="left">
+				<ons-back-button>Back</ons-back-button>
+			</div>
+			<div class="center">
+				<ons-icon icon="user-circle"></ons-icon>コーディネート詳細画面</div>
+		</ons-toolbar>
+	</head>
 
-   <div>
-     <p class="box" style="border-bottom: 2px solid blue; color: navy; border-color:navy; text-align:center;">
-       <font size="5"> コーデＡ </font>
-     </p>
-     <table border="0" style="margin-left: auto; margin-right: auto;">
-       <tr>
-        <td colspan="1" rowspan="2">
-          <!-- トップス -->
-          <input id="tops_image" type="image" width="100" height="100">
-        </td>
-        <td colspan="1" rowspan="3">
-          <!-- アウター -->
-          <input id="outer_image" type="image" width="100" height="100">
-        </td>
-      </tr>
-      <tr></tr>
-      <tr>
-        <td colspan="1" rowspan="2">
-          <!-- ボトムス -->
-          <input id="bottoms_image" type="image" width="100" height="100">
-        </td>
-      </tr>
-      <tr>
-        <td colspan="1" rowspan="3"></td>
-      </tr>
-      <tr>
-        <td colspan="1" rowspan="2">
-          <!-- 靴 -->
-          <input id="shoes_image" type="image" width="100" height="100">
-        </td>
-      </tr>
-    </table>
+	<body>
 
-   </div>
-   <div>
-    <p class="box" style="border-top: 2px solid blue; color: navy; border-color:navy; text-align:center;">
-      <font face="fantasy" size="5"> ITEM LIST </font>
-    </p>
+		<div>
+			<p class="box" style="border-bottom: 2px solid blue; color: black; border-color:black; text-align:center;">
+				<font face="fantasy" size="5"> COORDINATE </font>
+			</p>
+			<table border="0" style="margin-left: auto; margin-right: auto;">
+				<tr>
+					<td colspan="1" rowspan="2">
+						<!-- トップス -->
+						<input id="tops_image" type="image" width="100" height="100">
+					</td>
+					<td colspan="1" rowspan="3">
+						<!-- アウター -->
+						<input id="outer_image" type="image" width="100" height="100">
+					</td>
+          <td colspan="1" rowspan="6" width="5" valign="top">
+						<div style="text-align: center">
+							<div style="text-align: center ;display:none">
+								<ons-checkbox input-id="coofvrtFlg" value="1"></ons-checkbox>
+							</div>
+							<div style="color:#D2D2D2; font-size: 30px;">
+								<label for="coofvrtFlg" class="center">★</label>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr></tr>
+				<tr>
+					<td colspan="1" rowspan="2">
+						<!-- ボトムス -->
+						<input id="bottoms_image" type="image" width="100" height="100">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="1" rowspan="3"></td>
+				</tr>
+				<tr>
+					<td colspan="1" rowspan="2">
+						<!-- 靴 -->
+						<input id="shoes_image" type="image" width="100" height="100">
+					</td>
+				</tr>
+			</table>
 
-    <table border="0" style="margin-left: auto; margin-right: auto; border-collapse: separate; border-spacing: 16px 8px; color:navy;">
-      <!-- アウター -->
-      <tr>
-        <!-- 画像 -->
-        <td><input id="outer_image2" type="image" width="100" height="100"></td>
-        <!-- 詳細 -->
-        <td>
-          <table border="0" color="white" style="margin-left: auto; margin-right: auto; font-size: 5pt;">
-            <tr>
-              <td align="left">カテゴリー</td><td>:</td><td>アウター</td>
-            </tr>
-            <tr>
-              <td align="left">サブカテゴリー</td><td>:</td><td id="outer_sub"></td>
-            </tr>
-            <tr>
-              <td align="left">カラー</td><td>:</td><td id="outer_color"></td>
-            </tr>
-            <tr>
-              <td align="left">パターン</td><td>:</td><td id="outer_design"></td>
-            </tr>
-            <tr>
-              <td align="left">サイズ</td><td>:</td><td id="outer_size"></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
+		</div>
+		<div>
+			<p class="box" style="border-top: 2px solid blue; color: black; border-color:black; text-align:center;">
+				<font face="fantasy" size="5"> ITEM LIST </font>
+			</p>
 
-      <!-- トップス -->
-      <tr>
-        <!-- 画像 -->
-        <td><input id="tops_image2" type="image"  width="100" height="100"></td>
-        <!-- 詳細 -->
-        <td>
-          <table border="0" style="margin-left: auto; margin-right: auto; font-size: 5pt">
-            <tr>
-              <td align="left">カテゴリー</td><td>:</td><td>トップス</td>
-            </tr>
-            <tr>
-              <td align="left">サブカテゴリー</td><td>:</td><td id="tops_sub"></td>
-            </tr>
-            <tr>
-              <td align="left">カラー</td><td>:</td><td id="tops_color"></td>
-            </tr>
-            <tr>
-              <td align="left">パターン</td><td>:</td><td id="tops_design"></td>
-            </tr>
-            <tr>
-              <td align="left">サイズ</td><td>:</td><td id="tops_size"></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
+			<table border="0" style="margin-left: auto; margin-right: auto; border-collapse: separate; border-spacing: 16px 8px; color:black; table-layout: fixed">
+				<!-- アウター -->
+				<tr>
+					<!-- 画像 -->
+					<td><input id="outer_image2" type="image" width="100" height="100"></td>
+					<td width="5" valign="top">
+						<div style="text-align:center">
+							<input type="checkbox" id="fvrtOuter" style="display:none;" value="1" onChange="chageFvrt(this)">
+							<div id="fvrtOuterBg" style="color:#D2D2D2; font-size: 30px;">
+								<label for="fvrtOuter" class="top"><font id="outerStar" color="#c0c0c0">★</font></label>
+							</div>
+						</div>
+					</td>
 
-      <!-- ボトムス-->
-      <tr>
-        <!-- 画像 -->
-        <td><input id="bottoms_image2" type="image"  width="100" height="100"></td>
-        <!-- 詳細 -->
-        <td>
-          <table border="0" style="margin-left: auto; margin-right: auto; font-size: 5pt">
-            <tr>
-              <td align="left">カテゴリー</td><td>:</td><td>ボトムス</td>
-            </tr>
-            <tr>
-              <td align="left">サブカテゴリー</td><td>:</td><td id="bottoms_sub"></td>
-            </tr>
-            <tr>
-              <td align="left">カラー</td><td>:</td><td id="bottoms_color"></td>
-            </tr>
-            <tr>
-              <td align="left">パターン</td><td>:</td><td id="bottoms_design"></td>
-            </tr>
-            <tr>
-              <td align="left">サイズ</td><td>:</td><td id="bottoms_size"></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
+					<!-- 詳細 -->
+					<td>
+						<table border="0" style="font-size: 5pt;">
+							<tr>
+								<td align="left">カテゴリー</td>
+								<td>:</td>
+								<td>アウター</td>
+							</tr>
+							<tr>
+								<td align="left">サブカテゴリー</td>
+								<td>:</td>
+								<td id="outer_sub"></td>
+							</tr>
+							<tr>
+								<td align="left">カラー</td>
+								<td>:</td>
+								<td id="outer_color"></td>
+							</tr>
+							<tr>
+								<td align="left">パターン</td>
+								<td>:</td>
+								<td id="outer_design"></td>
+							</tr>
+							<tr>
+								<td align="left">サイズ</td>
+								<td>:</td>
+								<td id="outer_size"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
 
-      <!-- 靴 -->
-      <tr>
-        <!-- 画像 -->
-        <td><input id="shoes_image2" type="image" src="/image/5_7.png"  width="100" height="100"></td>
-        <!-- 詳細 -->
-        <td>
-          <table border="0" style="margin-left: auto; margin-right: auto; font-size: 5pt">
-            <tr>
-              <td align="left">カテゴリー</td><td>:</td><td>シューズ</td>
-            </tr>
-            <tr>
-              <td align="left">サブカテゴリー</td><td>:</td><td id="shoes_sub"></td>
-            </tr>
-            <tr>
-              <td align="left">カラー</td><td>:</td><td id="shoes_color"></td>
-            </tr>
-            <tr>
-              <td align="left">パターン</td><td>:<td id="shoes_design"></td>
-            </tr>
-            <tr>
-              <td align="left">サイズ</td><td>:</td><td id="shoes_size"></td>
-            </tr>
-          </table>
-        </td>
-      </tr>
-    </table>
+				<!-- トップス -->
+				<tr>
+					<!-- 画像 -->
+					<td><input id="tops_image2" type="image" width="100" height="100"></td>
+					<td width="5" valign="top">
+						<div style="text-align: center">
+							<div style="text-align: center ;display:none">
+								<ons-checkbox input-id="fvrtFlg" value="1"></ons-checkbox>
+							</div>
+							<div style="color:#D2D2D2; font-size: 30px;">
+								<label for="fvrtFlg" class="center">★</label>
+							</div>
+						</div>
+					</td>
+					<!-- 詳細 -->
+					<td>
+						<table border="0" style="font-size: 5pt">
+							<tr>
+								<td align="left">カテゴリー</td>
+								<td>:</td>
+								<td>トップス</td>
+							</tr>
+							<tr>
+								<td align="left">サブカテゴリー</td>
+								<td>:</td>
+								<td id="tops_sub"></td>
+							</tr>
+							<tr>
+								<td align="left">カラー</td>
+								<td>:</td>
+								<td id="tops_color"></td>
+							</tr>
+							<tr>
+								<td align="left">パターン</td>
+								<td>:</td>
+								<td id="tops_design"></td>
+							</tr>
+							<tr>
+								<td align="left">サイズ</td>
+								<td>:</td>
+								<td id="tops_size"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
 
-   </div>
+				<!-- ボトムス-->
+				<tr>
+					<!-- 画像 -->
+					<td><input id="bottoms_image2" type="image" width="100" height="100"></td>
+					<td width="5" valign="top">
+						<div style="text-align: center">
+							<div style="text-align: center ;display:none">
+								<ons-checkbox input-id="fvrtFlg" value="1"></ons-checkbox>
+							</div>
+							<div style="color:#D2D2D2; font-size: 30px;">
+								<label for="fvrtFlg" class="center">★</label>
+							</div>
+						</div>
+					</td>
+					<!-- 詳細 -->
+					<td>
+						<table border="0" style="font-size: 5pt">
+							<tr>
+								<td align="left">カテゴリー</td>
+								<td>:</td>
+								<td>ボトムス</td>
+							</tr>
+							<tr>
+								<td align="left">サブカテゴリー</td>
+								<td>:</td>
+								<td id="bottoms_sub"></td>
+							</tr>
+							<tr>
+								<td align="left">カラー</td>
+								<td>:</td>
+								<td id="bottoms_color"></td>
+							</tr>
+							<tr>
+								<td align="left">パターン</td>
+								<td>:</td>
+								<td id="bottoms_design"></td>
+							</tr>
+							<tr>
+								<td align="left">サイズ</td>
+								<td>:</td>
+								<td id="bottoms_size"></td>
+							</tr>
+						</table>
+					</td>
+				</tr>
 
- </body>
+				<!-- 靴 -->
+				<tr>
+					<!-- 画像 -->
+					<td><input id="shoes_image2" type="image" width="100" height="100"></td>
+					<td width="5" valign="top">
+						<div style="text-align: center">
+							<div style="text-align: center ;display:none">
+								<ons-checkbox input-id="fvrtFlg" value="1"></ons-checkbox>
+							</div>
+							<div style="color:#D2D2D2; font-size: 30px;">
+								<label for="fvrtFlg" class="center">★</label>
+							</div>
+						</div>
+					</td>
+					<!-- 詳細 -->
+					<td>
+						<table border="0" style="font-size: 5pt">
+							<tr>
+								<td align="left">カテゴリー</td>
+								<td>:</td>
+								<td>シューズ</td>
+							</tr>
+							<tr>
+								<td align="left">サブカテゴリー</td>
+								<td>:</td>
+								<td id="shoes_sub"></td>
+							</tr>
+							<tr>
+								<td align="left">カラー</td>
+								<td>:</td>
+								<td id="shoes_color"></td>
+							</tr>
+							<tr>
+								<td align="left">パターン</td>
+								<td>:
+									<td id="shoes_design"></td>
+							</tr>
+							<tr>
+								<td align="left">サイズ</td>
+								<td>:</td>
+								<td id="shoes_size"></td>
+							</tr>
+						</table>
+						</td>
+				</tr>
+			</table>
 
- <script>
+		</div>
+
+	</body>
+
+	<script>
+	// コーディネート画面から送信されたobjectId
+  var objectId;
+
+  // アイテム一覧のお気に入りフラグ変更
+  function chageFvrt(e){
+    
+    // データベースに接続
+    var items = ncmb.DataStore("item");
+
+    // 選択されたＩＤ取得
+    var id = e.id;
+
+    // itemインデックス
+    var itemIdx = 0;
+
+    var flag = 0;
+
+    if('fvrtOuter' === id){
+      flag =  document.getElementById("fvrtOuter").value;
+      itemIdx = 0;
+      if(flag == 1){
+        document.getElementById("outerStar").color = '#ffff00';
+        document.getElementById("fvrtOuter").value = 0;
+        console.log('お気に入りフラグ true：' + flag);
+      } else {
+        document.getElementById("outerStar").color = '#c0c0c0';
+        document.getElementById("fvrtOuter").value = 1;
+        console.log('お気に入りフラグ false：' + flag);
+      }
+    } else if('fvrtTops' === id) {
+      flag =  document.getElementById("fvrtTops").value;
+      itemIdx = 1;
+      if(flag == 1){
+        document.getElementById("fvrtTopsBg").style.backgroundColor = '#ffffff';
+        document.getElementById("fvrtTops").value = 0;
+        console.log('お気に入りフラグ true：' + flag);
+      } else {
+        document.getElementById("fvrtTopsBg").style.backgroundColor = '#ff0000';
+        document.getElementById("fvrtTops").value = 1;
+        console.log('お気に入りフラグ false：' + flag);
+      }
+    } else if('fvrtBottoms' === id) {
+      flag =  document.getElementById("fvrtBottoms").value;
+      itemIdx = 2;
+      if(flag == 1){
+        document.getElementById("fvrtBottomsBg").style.backgroundColor = '#ffffff';
+        document.getElementById("fvrtBottoms").value = 0;
+        console.log('お気に入りフラグ true：' + flag);
+      } else {
+        document.getElementById("fvrtBottomsBg").style.backgroundColor = '#ff0000';
+        document.getElementById("fvrtBottoms").value = 1;
+        console.log('お気に入りフラグ false：' + flag);
+      }
+    } else if('fvrtShoes' === id) {
+      flag =  document.getElementById("fvrtShoes").value;
+      itemIdx = 3;
+      if(flag == 1){
+        document.getElementById("fvrtShoesBg").style.backgroundColor = '#ffffff';
+        document.getElementById("fvrtShoes").value = 0;
+        console.log('お気に入りフラグ true：' + flag);
+      } else {
+        document.getElementById("fvrtShoesBg").style.backgroundColor = '#ff0000';
+        document.getElementById("fvrtShoes").value = 1;
+        console.log('お気に入りフラグ false：' + flag);
+      }
+    }
+
+    // テーブルの更新
+    items.equalTo("objectId", objectId[itemIdx])
+        .fetchAll()
+        .then(function(results){
+          // object取得
+          var item = results[0];
+          item.set("fvrtFlg", flag);
+          return item.update();
+        })
+        .catch(function(err){
+          // エラー処理
+          console.log("Err#" + err.code +": " +err.message);
+        });
+  }
 
   // 画面表示時
   ons.getScriptPage().onShow = function() {
     
     console.log("コーディネート詳細画面:onShow");
-   
+
+    // データベースに接続
+    var items = ncmb.DataStore("item");
+
     // コーディネート画面から送信されたデータを取得
-    var sub_categoryArrD = this.data.sub_categoryArr;
-    var colorArrD = this.data.colorArr;
-    var patternArrD = this.data.patternArr;
-    var sizeArrD = this.data.sizeArr;
-    
-    // コーデ画像を設定
-    document.getElementById("tops_image").src = "/image/1_"+sub_categoryArrD[0]+".png";
-    document.getElementById("bottoms_image").src = "/image/2_"+sub_categoryArrD[1]+".png";
-    document.getElementById("outer_image").src = "/image/3_"+sub_categoryArrD[2]+".png";
-    document.getElementById("shoes_image").src = "/image/5_"+sub_categoryArrD[3]+".png";
+    objectId = this.data.objectIdArr;
 
-    // ITEM LIST画像を設定
-    document.getElementById("tops_image2").src = "/image/1_"+sub_categoryArrD[0]+".png";
-    document.getElementById("bottoms_image2").src = "/image/2_"+sub_categoryArrD[1]+".png";
-    document.getElementById("outer_image2").src = "/image/3_"+sub_categoryArrD[2]+".png";
-    document.getElementById("shoes_image2").src = "/image/5_"+sub_categoryArrD[3]+".png";
+    // 出力するアイテムの順番
+    var CATEGORY = ["tops", "bottoms", "outer", "shoes"];
 
-    // トップスの詳細を設定
-    document.getElementById("tops_sub").innerHTML = convert_sub_category(1,sub_categoryArrD[0]);
-    document.getElementById("tops_color").innerHTML = convert_color(colorArrD[0]);
-    document.getElementById("tops_design").innerHTML = convert_design(patternArrD[0]);
-    document.getElementById("tops_size").innerHTML = convert_size(sizeArrD[0]);
+    // カウント変数
+    var idx = 0;
 
-    // ボトムスの詳細を設定
-    document.getElementById("bottoms_sub").innerHTML = convert_sub_category(2,sub_categoryArrD[1]);
-    document.getElementById("bottoms_color").innerHTML = convert_color(colorArrD[1]);
-    document.getElementById("bottoms_design").innerHTML = convert_design(patternArrD[1]);
-    document.getElementById("bottoms_size").innerHTML = convert_size(sizeArrD[1]);
+    objectId.forEach(
+      function(id){
+        items.equalTo("objectId", id)
+          .fetchAll()
+          .then(
+            function(results){
+              var obj = results[0];
+              // コーディネート画像を設定
+              document.getElementById(CATEGORY[idx] + "_image").src = (obj.get("image"));
+              // ITEM LIST画像を設定
+              document.getElementById(CATEGORY[idx] + "_image2").src = (obj.get("image"));
+              // 各アイテムの詳細を設定←サブカテゴリのカラム名に自信なし
+              document.getElementById(CATEGORY[idx] + "_sub").innerHTML = convert_sub_category(obj.get("category"),obj.get("subcategory"));
+              document.getElementById(CATEGORY[idx] + "_color").innerHTML = convert_color(obj.get("color"));document.getElementById(CATEGORY[idx] + "_design").innerHTML = convert_design(obj.get("design"));document.getElementById(CATEGORY[idx] + "_size").innerHTML = convert_size(obj.get("size"));
+            }
+          )
+          .catch(
+            function(err){
+              console.log(err);
+            }
+          );
 
-    // アウターの詳細を設定
-    document.getElementById("outer_sub").innerHTML = convert_sub_category(3,sub_categoryArrD[2]);
-    document.getElementById("outer_color").innerHTML = convert_color(colorArrD[2]);
-    document.getElementById("outer_design").innerHTML = convert_design(patternArrD[2]);
-    document.getElementById("outer_size").innerHTML = convert_size(sizeArrD[2]);
-
-    // シューズの詳細を設定
-    document.getElementById("shoes_sub").innerHTML = convert_sub_category(5,sub_categoryArrD[3]);
-    document.getElementById("shoes_color").innerHTML = convert_color(colorArrD[3]);
-    document.getElementById("shoes_design").innerHTML = convert_design(patternArrD[3]);
-    document.getElementById("shoes_size").innerHTML = convert_size(sizeArrD[3]);
-
+        idx = idx + 1;
+      }
+    );
   }
-
- </script>
+	</script>
 
 </ons-page>
