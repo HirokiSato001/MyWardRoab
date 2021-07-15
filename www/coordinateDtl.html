@@ -30,7 +30,9 @@
 						<div style="text-align: center">
 							<input type="checkbox" id="coordinatefvrtFlg" style="display:none;" value="1" onChange="changeCoordinateFvrt()">
 							<div style="font-size: 30px;">
-								<label for="coordinatefvrtFlg" class="center"><font id="coordinateStar" color="#c0c0c0">★</font></label>
+								<label for="coordinatefvrtFlg" class="center">
+                  <font id="coordinateStar" color="#c0c0c0">★</font>
+                </label>
 							</div>
 						</div>
 					</td>
@@ -63,7 +65,7 @@
 				<!-- アウター -->
 				<tr>
 					<!-- 画像 -->
-					<td><input id="outer_image2" type="image" width="100" height="100"></td>
+					<td><input id="outer_image2" type="image" width="100" height="100" src="image/3_1_blue.png"></td>
 					<td width="5" valign="top">
 						<div style="text-align:center">
 							<input type="checkbox" id="outer_fvrt" style="display:none;" value="1" onChange="chageFvrt(this)">
@@ -108,7 +110,7 @@
 				<!-- トップス -->
 				<tr>
 					<!-- 画像 -->
-					<td><input id="tops_image2" type="image" width="100" height="100"></td>
+					<td><input id="tops_image2" type="image" width="100" height="100" src="image/1_1_pink.png"></td>
 					<td width="5" valign="top">
 						<div style="text-align: center">
 							<input type="checkbox" id="tops_fvrt" style="display:none;" value="1" onChange="chageFvrt(this)">
@@ -152,7 +154,7 @@
 				<!-- ボトムス-->
 				<tr>
 					<!-- 画像 -->
-					<td><input id="bottoms_image2" type="image" width="100" height="100"></td>
+					<td><input id="bottoms_image2" type="image" width="100" height="100" src="image/2_6_blue.png"></td>
 					<td width="5" valign="top">
 						<div style="text-align: center">
 							<input type="checkbox" id="bottoms_fvrt" style="display:none;" value="1" onChange="chageFvrt(this)">
@@ -196,7 +198,7 @@
 				<!-- 靴 -->
 				<tr>
 					<!-- 画像 -->
-					<td><input id="shoes_image2" type="image" width="100" height="100"></td>
+					<td><input id="shoes_image2" type="image" width="100" height="100" src="image/5_5_red.png"></td>
 					<td width="5" valign="top">
 						<div style="text-align: center">
 							<input type="checkbox" id="shoes_fvrt" style="display:none;" value="1" onChange="chageFvrt(this)">
@@ -243,11 +245,12 @@
 	</body>
 
 	<script>
-		// コーディネート画面から送信されたobjectId
+  // コーディネート画面から送信されたobjectId
   var objectId;
 
   // お気に入りコーディネートのobjectId
   var crdntObjectId;
+  var insert_fvrtCrdnt;
 
   //  コーディネートのお気に入りフラグ変更
   function changeCoordinateFvrt(){
@@ -257,12 +260,13 @@
 
     var flag = document.getElementById("coordinatefvrtFlg").value;
     if(flag == 1){
+      insert_fvrtCrdnt = new fvrtCrdnts();
       document.getElementById("coordinateStar").color = '#ffff00';
       document.getElementById("coordinatefvrtFlg").value = 0;
       console.log('お気に入りフラグ(コーディネート) true：' + flag);
 
       // TODO:お気に入りコーディネートの登録
-      fvrtCrdnts.set("item1_objId", objectId[0])
+      insert_fvrtCrdnt.set("item1_objId", objectId[0])
                 .set("item2_objId", objectId[1])
                 .set("item3_objId", objectId[2])
                 .set("item4_objId", objectId[3])
@@ -278,8 +282,8 @@
                             .equalTo("item4_objId", objectId[3])
                             .fetchAll()
                             .then(function(res){
-                              console.log("Successfully retrieved");
                               crdntObjectId = res[0].get("objectId");
+                              console.log("crdntObjectId採番後):"+ crdntObjectId);
                             }).catch(function(err){
                               // エラー処理
                               console.log("Err#" + err.code +": " +err.message);  
@@ -295,10 +299,9 @@
       console.log('お気に入りフラグ(コーディネート) false：' + flag);
 
       // TODO:お気に入りコーディネートの削除
-      fvrtCrdnts.equalTo("item1_objId", objectId[0])
-                .delete()
+      insert_fvrtCrdnt.delete()
                 .then(function(res){
-                  console.log("Successfully Delete!");
+                  console.log("お気に入りコーディネート Delete!");
                  } ).catch(function(err){
                     // エラー処理
                     console.log("Err#" + err.code +": " +err.message);  
@@ -308,6 +311,7 @@
 
   // アイテム一覧のお気に入りフラグ変更
   function chageFvrt(e){
+    console.log("コーディネート詳細画面:chageFvrt()");
     
     // データベースに接続
     var items = ncmb.DataStore("item");
@@ -322,7 +326,7 @@
 
     if('outer_fvrt' === id){
       flag =  document.getElementById("outer_fvrt").value;
-      itemIdx = 0;
+      itemIdx = 2;
       if(flag == 1){
         document.getElementById("outer_star").color = '#ffff00';
         document.getElementById("outer_fvrt").value = 0;
@@ -334,7 +338,7 @@
       }
     } else if('tops_fvrt' === id) {
       flag =  document.getElementById("tops_fvrt").value;
-      itemIdx = 1;
+      itemIdx = 0;
       if(flag == 1){
         document.getElementById("tops_star").color = '#ffff00';
         document.getElementById("tops_fvrt").value = 0;
@@ -346,7 +350,7 @@
       }
     } else if('bottoms_fvrt' === id) {
       flag =  document.getElementById("bottoms_fvrt").value;
-      itemIdx = 2;
+      itemIdx = 1;
       if(flag == 1){
         document.getElementById("bottoms_star").color = '#ffff00';
         document.getElementById("bottoms_fvrt").value = 0;
@@ -374,10 +378,13 @@
     items.equalTo("objectId", objectId[itemIdx])
         .fetchAll()
         .then(function(results){
+          console.log("アイテムお気に入り更新");
           // object取得
           var item = results[0];
-          item.set("fvrtFlg", flag);
-          return item.update();
+          item.fvrtFlg = flag;
+          item.update()
+            .then(function(up_res){console.log("Item Updating is success!");})
+            .catch(function(up_res){console.log("Item Updating is fail!");});
         })
         .catch(function(err){
           // エラー処理
@@ -410,12 +417,15 @@
               .equalTo("item4_objId", objectId[3])
               .fetchAll()
               .then(function(res){
-                console.log("Successfully retrieved");
+                console.log("コーディネートのお気に入り確認:" + res.length);
                 if(res.length > 0){
-                  document.getElementById("coordinateStar").color = '#c0c0c0';
-                  document.getElementById("coordinatefvrtFlg").value = 1;
+                  console.log("お気に入り済");
+                  insert_fvrtCrdnt = res[0];
+                  document.getElementById("coordinateStar").color = '#ffff00';
+                  document.getElementById("coordinatefvrtFlg").value = 0;
                 } else {
                   // 処理なし
+                  console.log("お気に入り未");
                 }
               }).catch(function(err){
                 // エラー処理
@@ -423,37 +433,46 @@
               });
 
     // コーディネート画像・アイテム一覧の初期設定
-    objectId.forEach(
-      function(id){
+    objectId.map(
+      function(id, idx){
         items.equalTo("objectId", id)
           .fetchAll()
           .then(
             function(results){
               var obj = results[0];
-              // コーディネート画像を設定
-              document.getElementById(CATEGORY[idx] + "_image").src = (obj.get("image"));
+              // COORDINATE画像を設定
+              console.log("CATEGORY["+ idx + "] =" + CATEGORY[idx]);
+              document.getElementById(CATEGORY[idx] + "_image").src = obj.get("image");
               // ITEM LIST画像を設定
-              document.getElementById(CATEGORY[idx] + "_image2").src = (obj.get("image"));
+              document.getElementById(CATEGORY[idx] + "_image2").src = obj.get("image");
               // 各アイテムの詳細を設定←サブカテゴリのカラム名に自信なし
-              document.getElementById(CATEGORY[idx] + "_sub").innerHTML = convert_sub_category(obj.get("category"),obj.get("subcategory"));
+              document.getElementById(CATEGORY[idx] + "_sub").innerHTML = convert_sub_category(obj.get("category"),obj.get("sub_category"));
               document.getElementById(CATEGORY[idx] + "_color").innerHTML = convert_color(obj.get("color"));document.getElementById(CATEGORY[idx] + "_design").innerHTML = convert_design(obj.get("design"));document.getElementById(CATEGORY[idx] + "_size").innerHTML = convert_size(obj.get("size"));
 
               // 各アイテムのお気に入りフラグを設定
              if(obj.get("fvrtFlg") == "1"){
+               console.log(CATEGORY[idx] + ":お気に入り済");
                document.getElementById(CATEGORY[idx] + "_star").color = '#ffff00';
                document.getElementById(CATEGORY[idx] + "_fvrt").value = 0;
              } else {
+               console.log(CATEGORY[idx] + ":お気に入り未");
                document.getElementById(CATEGORY[idx] + "_star").color = '#c0c0c0';
                document.getElementById(CATEGORY[idx] + "_fvrt").value = 1;
              }
-            })
+
+             console.log(CATEGORY[idx] + "_log");
+             console.log("image:" + obj.get("image"));
+             console.log("sub_category:" + obj.get("sub_category"));
+             console.log("color:" + obj.get("color"));
+             console.log("design:" + obj.get("design"));
+             console.log("size:" + obj.get("size"));
+            }
+            )
           .catch(
             function(err){
               console.log(err);
             }
           );
-
-        idx = idx + 1;
       }
     );
   }
