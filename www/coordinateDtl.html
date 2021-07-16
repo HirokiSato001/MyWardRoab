@@ -402,7 +402,7 @@
     var fvrtCrdnts = ncmb.DataStore("fvrtCrdnt");
 
     // コーディネート画面から送信されたデータを取得
-    objectId = this.data.objectIdArr;
+    objectId = [this.data.objectId_tops, this.data.objectId_bottoms, this.data.objectId_outer, this.data.objectId_shoes];
 
     // 出力するアイテムの順番
     var CATEGORY = ["tops", "bottoms", "outer", "shoes"];
