@@ -311,17 +311,24 @@
       
       // コーディネート詳細画面Bへの遷移
       function send_coordinateDtl_B(){
-        document.getElementById('nav').pushPage('coordinateDtl.html', {});
+        console.log("objectId_tops_B," + objectId_tops_B)
+        console.log("objectId_bottoms_B," + objectId_bottoms_B)
+        console.log("objectId_outer_B," + objectId_outer_B)
+        console.log("objectId_shoes_B," + objectId_shoes_B)
+        send_coordinateDtl(objectId_tops_B,objectId_bottoms_B,objectId_outer_B,objectId_shoes_B)
       };
       // コーディネート詳細画面Cへの遷移
       function send_coordinateDtl_C(){
-        document.getElementById('nav').pushPage('coordinateDtl.html', {});
+        console.log("objectId_tops_C," + objectId_tops_C)
+        console.log("objectId_Cottoms_C," + objectId_Cottoms_C)
+        console.log("objectId_outer_C," + objectId_outer_C)
+        console.log("objectId_shoes_C," + objectId_shoes_C)
+        send_coordinateDtl(objectId_tops_C,objectId_Cottoms_C,objectId_outer_C,objectId_shoes_C)
       };
       function send_coordinateDtl(objectId_tops,objectId_bottoms,objectId_outer,objectId_shoes){
         document.getElementById('nav').pushPage('coordinateDtl.html', {
           data:{objectId_tops,objectId_bottoms,objectId_outer,objectId_shoes}
         });
-
       }
 
       // 現在月から季節を取得
@@ -421,6 +428,8 @@
 
                 combinationArray.sort()
                 combinationArray.reverse()
+                // 同点数の要素内でシャッフル
+                combinationArray = combinationArrayShuffle(combinationArray)
                 console.log("季節考慮したソート後のcombinationArray" + combinationArray)
                 console.log("季節考慮したソート後のcombinationArray.lenght" + combinationArray.length)
                 for(var i = 1;i < combinationArray.length+1; i++){
@@ -536,6 +545,8 @@
               // 採点した組み合わせを降順にソート
               combinationArray.sort()
               combinationArray.reverse()
+              // 同点数の要素内でシャッフル
+              combinationArray = combinationArrayShuffle(combinationArray)
               console.log("季節考慮しないソート後のcombinationArray" + combinationArray)
               console.log("季節考慮しないソート後のcombinationArray.lenght" + combinationArray.length)
 
@@ -588,6 +599,47 @@
         console.log("残り物の色、入ってます")
         return "10"
       }
+
+      // 同点数で配列シャッフル
+      function combinationArrayShuffle(array){
+      // 前のスコア保持 
+      var result = array[0].split(",")
+      var preScore = result[0]
+      var startPos = 0
+      var endPos = 0
+
+      for(var i = 1; i < array.length ; i++){
+        result = array[i].split(",")
+        // 前のスコアと一緒の場合
+        if(preScore == result[0]){
+            endPos = i
+        }else{
+            // 同点数の要素でシャッフル
+            arrayShuffle(array,startPos,endPos) 
+            // スコアを塗替
+            preScore = result[0]
+            startPos = i
+            endPos = i
+        }
+      }
+        // 同点数の要素でシャッフル
+        arrayShuffle(array,startPos,endPos) 
+        return array 
+      }
+
+      // 配列のシャッフル(指定範囲)
+      function arrayShuffle(array,startPos,endPos) {
+        for(var i = startPos; endPos >= i; i++){
+          // 開始～終了範囲でランダムに並び替え
+          var r = Math.floor( Math.random() * (endPos + 1 - startPos) ) + startPos;
+          // 要素の並び替えを実行
+          var tmp = array[i];
+          array[i] = array[r];
+          array[r] = tmp;
+        }
+        return array;
+      }
+
       // 王道10パターン
       function noDoubtPattern(outerColor,topsColor,bottomsColor){
         console.log("outer:"+colors_gyomu[outerColor]+" ,tops:"+colors_gyomu[topsColor]+" ,bottoms:"+colors_gyomu[bottomsColor])
