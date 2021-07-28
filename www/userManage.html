@@ -39,19 +39,6 @@
    { No: 99, string: 'その他' }
 ];
 
-// 業務コードを参照し、'No'を'日本語名'に変換する
-const getColorStringbyNo = value =>{
-  const colorName = ECOLOR.find(p => p.No === value).string;
-  return colorName;
-};
-
-// 業務コードを参照し、'日本語名'を'No'に変換する
-const getColorNobyString = name =>{
-  const colorNo = ECOLOR.find(p => p.string === name).No;
-  return colorNo;
-};
-
-
     // 画面表示時
     ons.getScriptPage().onShow = function() {
 
@@ -89,7 +76,7 @@ const getColorNobyString = name =>{
       // document.getElementById("regist_favoriteColor").innerText = favoriteColor;
       // var ECOLOR = EnumCOLOR.getEcolor();
       // document.getElementById("regist_favoriteColor").value = COLOR.GREEN.string;
-      document.getElementById("regist_favoriteColor").value = getColorStringbyNo(favoriteColorNo);
+      document.getElementById("regist_favoriteColor").value = myuser.getFavoriteColor()
 
       // デバッグログ
       console.log("ユーザ管理画面の画面表示メソッド：終了");   
