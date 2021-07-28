@@ -23,9 +23,9 @@
 
 	<!-- カテゴリー別のリスト表示 -->
 	<ons-list>
-      <ons-list-header style= " height:30px; background-color: #808080;">
-     <div style=" text-align: center; font-size: 20px;color: #fff;">My アイテム</div>
-    </ons-list-header>
+		<ons-list-header style=" height:30px; background-color: #808080;">
+			<div style=" text-align: center; font-size: 20px;color: #fff;">My アイテム</div>
+		</ons-list-header>
 		<!-- トップス -->
 		<ons-list-item expandable>
 			トップス
@@ -66,284 +66,468 @@
 			</div>
 		</ons-list-item>
 
-      <ons-list-header style= " height:30px; background-color: #808080;">
-     <div style=" text-align: center; font-size: 20px;color: #fff;">My コーデ</div>
-    </ons-list-header>
+		<ons-list-header style=" height:30px; background-color: #808080;">
+			<div style=" text-align: center; font-size: 20px;color: #fff;">My コーデ</div>
+		</ons-list-header>
+
+
+		<table class="mycodeList_class" border="0" table id="mycodeList_id">
+			<tr>
+				<td style="width:10%">
+
+
+					<div>
+						<table class="mycode_class" border="0" style="margin-left: 45%; margin-right: 55%;" table id="mycode_id">
+							<tr>
+								<td colspan="1" rowspan="2">
+									<!-- トップス -->
+									<input id="tops_image" type="image" width="50" height="50">
+								</td>
+								<td colspan="1" rowspan="3">
+									<!-- アウター -->
+									<input id="outer_image" type="image" width="50" height="50">
+								</td>
+							</tr>
+							<tr></tr>
+							<tr>
+								<td colspan="1" rowspan="2">
+									<!-- ボトムス -->
+									<input id="bottoms_image" type="image" width="50" height="50">
+								</td>
+							</tr>
+							<tr>
+								<td colspan="1" rowspan="3"></td>
+							</tr>
+							<tr>
+								<td colspan="1" rowspan="2">
+									<!-- 靴 -->
+									<input id="shoes_image" type="image" width="50" height="50">
+								</td>
+							</tr>
+
+						</table>
+					</div>
+				</td>
+			</tr>
+		</table>
+
+
 
 	</ons-list>
 
 	<script>
 		// カテゴリーの項目
-    var categories = [
-      "トップス","ボトムス","アウター","ワンピース","シューズ"
-    ];
-    
-    // サブカテゴリーの項目
-    var sub_categories = [
-      ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
-      ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
-      ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
-      ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
-      ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
-    ];
+	var categories = [
+		"トップス", "ボトムス", "アウター", "ワンピース", "シューズ"
+	];
 
-    // カラー項目
-    var colors = [
-      "赤","茶","橙","黄","緑","青","紫","黒","白","桃","グレー","ベージュ" 
-    ];
+	// サブカテゴリーの項目
+	var sub_categories = [
+		["Tシャツ", "ポロシャツ", "パーカー", "ニット", "インナー"],
+		["ワイドパンツ", "スキニー", "ミニスカート", "ロングスカート", "ショートパンツ"],
+		["ジャケット", "ダウンコード", "カーディガン", "ブルゾン", "ライダース"],
+		["ニットワンピース（ミニ）", "ニットワンピース（ロング）", "シャツワンピース（ミニ）", "シャツワンピース（ロング）"],
+		["スニーカー", "サンダル", "ロングブーツ", "ショートブーツ", "ヒールパンプス", "フラットパンプス", "ローファー"]
+	];
 
-    // サイズ項目
-    var sizes = [ 
-      "XS","S","M","L","XL","XXL","3XL"
-    ];
-    
-    // ニフクラmobile backendのキー設定
-    // API key.
-    var applicationKey    = "a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
-    var clientKey = "c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
-    // SDK initialization.
-    var ncmb = new NCMB(applicationKey, clientKey);
+	// カラー項目
+	var colors = [
+		"赤", "茶", "橙", "黄", "緑", "青", "紫", "黒", "白", "桃", "グレー", "ベージュ"
+	];
 
-    // アイテム削除オブジェクト
-    var delete_item_obj;
+	// サイズ項目
+	var sizes = [
+		"XS", "S", "M", "L", "XL", "XXL", "3XL"
+	];
 
-    // 画面表示時
-    ons.getScriptPage().onShow = function() {
-      console.log("onShow");
-      readyItemList();
-    }
+	// ニフクラmobile backendのキー設定
+	// API key.
+	var applicationKey =
+		"a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+	var clientKey =
+		"c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+	// SDK initialization.
+	var ncmb = new NCMB(applicationKey, clientKey);
 
-    // アイテムリスト画面の描画処理
-      function readyItemList(){
-      var Item = ncmb.DataStore("item");
-      Item.fetchAll()
-      .then(function(results){
+	// アイテム削除オブジェクト
+	var delete_item_obj;
 
-        var t = document.getElementById("tops");
-        t.innerHTML = "";
-        var b = document.getElementById("bottoms");
-        b.innerHTML = "";
-        var o = document.getElementById("outer");
-        o.innerHTML = "";
-        var d = document.getElementById("dress");
-        d.innerHTML = "";
-        var s = document.getElementById("shoes");
-        s.innerHTML = "";
+	// 画面表示時
+	ons.getScriptPage().onShow = function() {
+		console.log("onShow");
+		readyItemList();
+	}
 
-        // Userに紐づくitemリスト
-        var itemList = results;
-        
-        // itemListの数だけ繰り返す
-        for (var i = 0; i < results.length; i++) {
-          //var count = i;
 
-          // アイテム表示用
-          var onsListItem = document.createElement("ons-list-item");
-          // カテゴリー取得
-          var cateIdx = itemList[i].get("category");
-          // サブカテゴリー取得
-          var sub_cateIdx = itemList[i].get("sub_category");
-          // カラー取得
-          var colorIdx = itemList[i].get("color");
-          // サイズ取得
-          var sizeIdx = itemList[i].get("size");
-          // 画像取得
-          var imageUri = itemList[i].get("image");
 
-          // リスト表示用
-          var List;
 
-          // トップスの場合
-          if(cateIdx == 1) {
-            List = document.getElementById("tops");
-          // ボトムスの場合
-          } else if(cateIdx == 2) {
-            List = document.getElementById("bottoms");
-          // アウターの場合
-          } else if(cateIdx == 3) {
-            List = document.getElementById("outer");
-          // ワンピースの場合
-          } else if(cateIdx == 4) {
-            List = document.getElementById("dress");
-          // シューズの場合
-          } else if(cateIdx == 5) {
-            List = document.getElementById("shoes");
-          } else {
-            // 処理なし
-          }
 
-          // ons-list-item の中身
-          // グリッドレイアウトの準備
-          var gridLayout = document.createElement("table");
+	// お気に入りコーデの取得
+	var fvrtCrdnt = ncmb.DataStore("fvrtCrdnt");
+	fvrtCrdnt.fetchAll()
+		.then(function(results) {
+  
 
-          // 画像・詳細エリア
-          var img_detail_area = document.createElement("tr");
-          var img_detail_area2 = document.createElement("tr"); // 表示なし
+  // お気に入りコーデの数繰り返す
+  for (var i = 0; i < results.length; i++) {
+    console.log("FvrtCrdntDbl " + results[i].get("objectId"));
 
-          // 画像エリア
-          var img_area = document.createElement("td");
-          img_area.setAttribute("rowspan","3");
-          var img_input =  document.createElement("input");
-          img_input.setAttribute("width",screen.width/4);
-          img_input.setAttribute("type","image");
-          img_input.setAttribute("src",imageUri);
-          img_input.setAttribute("class","itemList");
+     var item1_image = searchFvrtCrdItem(results[i].get("item1_objId"));
+     var item2_image = searchFvrtCrdItem(results[i].get("item2_objId"));
+     var item3_image = searchFvrtCrdItem(results[i].get("item3_objId"));
+     var item4_image = searchFvrtCrdItem(results[i].get("item4_objId"));
 
-          // 画像エリア作成
-          img_area.appendChild(img_input);
+     document.getElementById("tops_image").src = (item1_image);
+     document.getElementById("bottoms_image").src = (item2_image);
+     document.getElementById("outer_image").src = (item3_image);
+     document.getElementById("shoes_image").src = (item4_image);
+     console.log("item1_objId " +results[i].get("item1_objId"));
+     console.log("bottoms_image " + item2_image);
+     console.log("outer_image " + item3_image);
+     console.log("shoes_image " + item4_image);
+     }
+     // お気に入りのテーブル表示追加
+     addFavoriteTbl();
+})
 
-          // 詳細エリア
-          var detail_area = document.createElement("td");
-          detail_area.setAttribute("rowspan","2");
-          detail_area.setAttribute("colspan","6");
-          
-          // 詳細エリアの箇条書き
-          var detail_ul = document.createElement("ul");
-          detail_ul.setAttribute("class","itemList");
-          var detail_ul_li_cat = document.createElement("li");
-          var detail_ul_li_sub_cat = document.createElement("li");
-          var detail_ul_li_color = document.createElement("li");
-          var detail_ul_li_size = document.createElement("li");
-          detail_ul_li_cat.setAttribute("class","itemList");
-          detail_ul_li_sub_cat.setAttribute("class","itemList");
-          detail_ul_li_color.setAttribute("class","itemList");
-          detail_ul_li_size.setAttribute("class","itemList");
-          
-          // 箇条書きの内容
-          var str = "カテゴリー： " + categories[cateIdx-1];
-          detail_ul_li_cat.innerText = str;
-          str = "サブカテゴリー： " + sub_categories[cateIdx-1][sub_cateIdx-1];
-          detail_ul_li_sub_cat.innerText = str;
-          str = "カラー： " + colors[colorIdx-1];
-          detail_ul_li_color.innerText = str;
-          str = "サイズ： " + sizes[sizeIdx-1];
-          detail_ul_li_size.innerText = str;
 
-          // 詳細エリア作成
-          detail_ul.appendChild(detail_ul_li_cat);
-          detail_ul.appendChild(detail_ul_li_sub_cat);
-          detail_ul.appendChild(detail_ul_li_color);
-          detail_ul.appendChild(detail_ul_li_size);
-          detail_area.appendChild(detail_ul);
+// お気に入りコーデアイテムを検索する
+function searchFvrtCrdItem(objId) {
+  var Item_crdnt = ncmb.DataStore("item");
+  Item_crdnt.equalTo("objectId",objId).fetchAll().then(function(results) {
 
-          // ボタンエリア
-          var button_area = document.createElement("tr");
-          var button_sub_area1 = document.createElement("td");
-          var button_sub_area2 = document.createElement("td");
-          var button_sub_area3 = document.createElement("td");
-          button_sub_area1.setAttribute("colspan","2");
-          button_sub_area2.setAttribute("colspan","2");
-          button_sub_area3.setAttribute("colspan","2");
+    var imageUri = results[0].get("image");
+		console.log("image" + imageUri);
 
-          // 詳細ボタン
-          var detail_button =  document.createElement("ons-button");
-          detail_button.onclick = (function(num) {
-            return function(){
-              var itemID_detail = itemList[num].get("objectId"); 
-              document.getElementById('nav').pushPage('itemDetails.html', {
-               data:{itemID_detail} 
-            });
-            console.log("objectId: " + itemList[num].get("objectId"));
-            }
-          })(i);
-          detail_button.innerText = "詳細";
+    return imageUri;
 
-          // 編集ボタン
-          var edit_button =  document.createElement("ons-button");
-          edit_button.onclick = (function(num) {
-            return function(){
-              var itemID_edit = itemList[num].get("objectId");
-              document.getElementById('nav').pushPage('itemEdit.html', {
-                data:{itemID_edit}
-              });
-            }
-          })(i);
-          edit_button.innerText = "編集";
-
-          // 削除ボタン
-          var delete_button =  document.createElement("ons-button");
-          delete_button.onclick = (function(num) {
-            return function(){
-              var itemID_delete = itemList[num].get("objectId");
-              showDialog(
-                "削除してもよろしいでしょうか？",
-                function(index) {
-                  console.log('index:'+index);
-                  if(index == -1) {
-                    console.log('confirmのコールバック:キャンセル');
-                  } else if(index == 0) {
-                    console.log('confirmのコールバック:No');
-                  } else if(index == 1) {
-                    console.log('confirmのコールバック:Yes');
-                    Item.equalTo("objectId", itemID_delete)
-                      .fetch()
-                      .then(async function (res) {
-                          await res.delete()
-                            .then(function (res) {
-                            }).catch(function (err) {
-                              console.log("削除エラー");
-                            });
-                          await readyItemList();
-                      }).catch(function (err) {
-                         console.log("削除対象検出エラー");
-                      });
-                    
-                  }
-                }
-              );
-            }
-          })(i);
-          delete_button.innerText = "削除";
-
-          // ボタンエリア作成
-          button_sub_area1.appendChild(detail_button);
-          button_sub_area2.appendChild(edit_button);
-          button_sub_area3.appendChild(delete_button);
-          button_area.appendChild(button_sub_area1);
-          button_area.appendChild(button_sub_area2);
-          button_area.appendChild(button_sub_area3);
-
-          // 画像・詳細エリア作成
-          img_detail_area.appendChild(img_area);
-          img_detail_area.appendChild(detail_area);
-
-          // グリッドレイアウト作成
-          gridLayout.appendChild(img_detail_area);
-          gridLayout.appendChild(img_detail_area2);
-          gridLayout.appendChild(button_area);
-
-          // ons-list-item作成
-          onsListItem.appendChild(gridLayout);
-
-          List.appendChild(onsListItem);
-        }
-      })
-
-      .catch(function(err){
-          console.log(err);
-      });
-    }    
-    //}, false);
-    
-    // アイテム登録画面への遷移
-    function send_ItemRegistPage(){
-      document.getElementById('nav').pushPage('itemRegist.html', {});    
-    }
-
-   // ダイアログ表示
-function showDialog(message, callback) {
-    ons.notification.confirm({
-        title: "確認",
-        message: message,
-        buttonLabels: [ "いいえ", "はい"],
-        //primaryButtonIndex: 1,
-        cancelable: true,
-        callback: function(index) {
-          if (index) {
-            callback(index);
-          }
-        }
-    })
+  })
 }
+
+	function addFavoriteTbl() {
+    // テーブル取得
+    var mycodeList = document.getElementById("mycodeList_id");
+  	var new_table = document.getElementById("mycode_id");
+
+
+    // 横に追加
+    var tr = mycodeList.rows[0];
+    // console.log("お気に入りコーデ+1" + mycodeList.rows.length);
+    var td = tr.insertCell(-1);
+
+    
+
+	
+    var copy_table = new_table.cloneNode(true);
+
+    // トップスとアウターの列
+    var copy_table_rows0 = copy_table.rows[0];
+    var copy_table_tops = copy_table_rows0.cells[0];
+    var copy_table_outer = copy_table_rows0.cells[1];
+
+    // ボトムスの列
+    var copy_table_rows2 = copy_table.rows[2];
+    var copy_table_bottoms = copy_table_rows2.cells[0];
+
+    // シューズの列
+    var copy_table_rows4 = copy_table.rows[4];
+    var copy_table_shoes = copy_table_rows4.cells[0];
+    
+    
+    console.log("copy_table" + copy_table.innerHTML);
+    console.log("copy_table_rows0" + copy_table_rows0.innerHTML);
+    console.log("copy_table_tops" + copy_table_tops.innerHTML);
+    console.log("copy_table_rows1" + copy_table_rows1.innerHTML);
+    console.log("copy_table_rows2" + copy_table_rows2.innerHTML);
+    console.log("copy_table_rows3" + copy_table_rows3.innerHTML);
+    console.log("copy_table_rows4" + copy_table_rows4.innerHTML);
+
+
+    var img = new Image();   // 新たな img 要素を作成
+    img.src = "image/1_2.png"; 
+    img.width="50";
+    img.height="50";
+    
+    var img2 = new Image();   // 新たな img 要素を作成
+    img2.src = "image/2_1.png"; 
+    img2.width="50";
+    img2.height="50";
+    var img3 = new Image();   // 新たな img 要素を作成
+    img3.src = "image/3_1.png"; 
+    img3.width="50";
+    img3.height="50";
+    var img4 = new Image();   // 新たな img 要素を作成
+    img4.src = "image/4_1.png"; 
+    img4.width="50";
+    img4.height="50";
+    var new_td = document.createElement("td");
+    new_td.appendChild(img);
+    copy_table_tops.innerHTML = new_td.innerHTML;
+
+     var new_td2 = document.createElement("td");
+        new_td2.appendChild(img2);
+         copy_table_outer.innerHTML = new_td2.innerHTML;
+
+         var new_td3 = document.createElement("td");
+        new_td3.appendChild(img3);
+    copy_table_bottoms.innerHTML = new_td3.innerHTML;
+
+     var new_td4 = document.createElement("td");
+        new_td4.appendChild(img4);
+    copy_table_shoes.innerHTML = new_td4.innerHTML;
+    console.log("new_td" + new_td.innerHTML);
+
+    td.appendChild(copy_table);
+
+    // 2個め追加
+    var tr2 = mycodeList.insertRow(-1); 
+    var td2 = tr2.insertCell(-1);
+    var copy_table2 = new_table.cloneNode(true);
+    td2.appendChild(copy_table2);
+
+
+
+
+
+
+	}
+
+
+	// アイテムリスト画面の描画処理
+	function readyItemList() {
+		var Item = ncmb.DataStore("item");
+		Item.fetchAll()
+			.then(function(results) {
+
+				var t = document.getElementById("tops");
+				t.innerHTML = "";
+				var b = document.getElementById("bottoms");
+				b.innerHTML = "";
+				var o = document.getElementById("outer");
+				o.innerHTML = "";
+				var d = document.getElementById("dress");
+				d.innerHTML = "";
+				var s = document.getElementById("shoes");
+				s.innerHTML = "";
+
+				// Userに紐づくitemリスト
+				var itemList = results;
+
+				// itemListの数だけ繰り返す
+				for (var i = 0; i < results.length; i++) {
+					//var count = i;
+
+					// アイテム表示用
+					var onsListItem = document.createElement("ons-list-item");
+					// カテゴリー取得
+					var cateIdx = itemList[i].get("category");
+					// サブカテゴリー取得
+					var sub_cateIdx = itemList[i].get("sub_category");
+					// カラー取得
+					var colorIdx = itemList[i].get("color");
+					// サイズ取得
+					var sizeIdx = itemList[i].get("size");
+					// 画像取得
+					var imageUri = itemList[i].get("image");
+
+					// リスト表示用
+					var List;
+
+					// トップスの場合
+					if (cateIdx == 1) {
+						List = document.getElementById("tops");
+						// ボトムスの場合
+					} else if (cateIdx == 2) {
+						List = document.getElementById("bottoms");
+						// アウターの場合
+					} else if (cateIdx == 3) {
+						List = document.getElementById("outer");
+						// ワンピースの場合
+					} else if (cateIdx == 4) {
+						List = document.getElementById("dress");
+						// シューズの場合
+					} else if (cateIdx == 5) {
+						List = document.getElementById("shoes");
+					} else {
+						// 処理なし
+					}
+
+					// ons-list-item の中身
+					// グリッドレイアウトの準備
+					var gridLayout = document.createElement("table");
+
+					// 画像・詳細エリア
+					var img_detail_area = document.createElement("tr");
+					var img_detail_area2 = document.createElement("tr"); // 表示なし
+
+					// 画像エリア
+					var img_area = document.createElement("td");
+					img_area.setAttribute("rowspan", "3");
+					var img_input = document.createElement("input");
+					img_input.setAttribute("width", screen.width / 4);
+					img_input.setAttribute("type", "image");
+					img_input.setAttribute("src", imageUri);
+					// console.log("img_input" + imageUri);
+					img_input.setAttribute("class", "itemList");
+
+					// 画像エリア作成
+					img_area.appendChild(img_input);
+
+					// 詳細エリア
+					var detail_area = document.createElement("td");
+					detail_area.setAttribute("rowspan", "2");
+					detail_area.setAttribute("colspan", "6");
+
+					// 詳細エリアの箇条書き
+					var detail_ul = document.createElement("ul");
+					detail_ul.setAttribute("class", "itemList");
+					var detail_ul_li_cat = document.createElement("li");
+					var detail_ul_li_sub_cat = document.createElement("li");
+					var detail_ul_li_color = document.createElement("li");
+					var detail_ul_li_size = document.createElement("li");
+					detail_ul_li_cat.setAttribute("class", "itemList");
+					detail_ul_li_sub_cat.setAttribute("class", "itemList");
+					detail_ul_li_color.setAttribute("class", "itemList");
+					detail_ul_li_size.setAttribute("class", "itemList");
+
+					// 箇条書きの内容
+					var str = "カテゴリー： " + categories[cateIdx - 1];
+					detail_ul_li_cat.innerText = str;
+					str = "サブカテゴリー： " + sub_categories[cateIdx - 1][sub_cateIdx - 1];
+					detail_ul_li_sub_cat.innerText = str;
+					str = "カラー： " + colors[colorIdx - 1];
+					detail_ul_li_color.innerText = str;
+					str = "サイズ： " + sizes[sizeIdx - 1];
+					detail_ul_li_size.innerText = str;
+
+					// 詳細エリア作成
+					detail_ul.appendChild(detail_ul_li_cat);
+					detail_ul.appendChild(detail_ul_li_sub_cat);
+					detail_ul.appendChild(detail_ul_li_color);
+					detail_ul.appendChild(detail_ul_li_size);
+					detail_area.appendChild(detail_ul);
+
+					// ボタンエリア
+					var button_area = document.createElement("tr");
+					var button_sub_area1 = document.createElement("td");
+					var button_sub_area2 = document.createElement("td");
+					var button_sub_area3 = document.createElement("td");
+					button_sub_area1.setAttribute("colspan", "2");
+					button_sub_area2.setAttribute("colspan", "2");
+					button_sub_area3.setAttribute("colspan", "2");
+
+					// 詳細ボタン
+					var detail_button = document.createElement("ons-button");
+					detail_button.onclick = (function(num) {
+						return function() {
+							var itemID_detail = itemList[num].get("objectId");
+							document.getElementById('nav').pushPage('itemDetails.html', {
+								data: {
+									itemID_detail
+								}
+							});
+							console.log("objectId: " + itemList[num].get("objectId"));
+						}
+					})(i);
+					detail_button.innerText = "詳細";
+
+					// 編集ボタン
+					var edit_button = document.createElement("ons-button");
+					edit_button.onclick = (function(num) {
+						return function() {
+							var itemID_edit = itemList[num].get("objectId");
+							document.getElementById('nav').pushPage('itemEdit.html', {
+								data: {
+									itemID_edit
+								}
+							});
+						}
+					})(i);
+					edit_button.innerText = "編集";
+
+					// 削除ボタン
+					var delete_button = document.createElement("ons-button");
+					delete_button.onclick = (function(num) {
+						return function() {
+							var itemID_delete = itemList[num].get("objectId");
+							showDialog(
+								"削除してもよろしいでしょうか？",
+								function(index) {
+									console.log('index:' + index);
+									if (index == -1) {
+										console.log('confirmのコールバック:キャンセル');
+									} else if (index == 0) {
+										console.log('confirmのコールバック:No');
+									} else if (index == 1) {
+										console.log('confirmのコールバック:Yes');
+										Item.equalTo("objectId", itemID_delete)
+											.fetch()
+											.then(async function(res) {
+												await res.delete()
+													.then(function(res) {}).catch(function(err) {
+														console.log("削除エラー");
+													});
+												await readyItemList();
+											}).catch(function(err) {
+												console.log("削除対象検出エラー");
+											});
+
+									}
+								}
+							);
+						}
+					})(i);
+					delete_button.innerText = "削除";
+
+					// ボタンエリア作成
+					button_sub_area1.appendChild(detail_button);
+					button_sub_area2.appendChild(edit_button);
+					button_sub_area3.appendChild(delete_button);
+					button_area.appendChild(button_sub_area1);
+					button_area.appendChild(button_sub_area2);
+					button_area.appendChild(button_sub_area3);
+
+					// 画像・詳細エリア作成
+					img_detail_area.appendChild(img_area);
+					img_detail_area.appendChild(detail_area);
+
+					// グリッドレイアウト作成
+					gridLayout.appendChild(img_detail_area);
+					gridLayout.appendChild(img_detail_area2);
+					gridLayout.appendChild(button_area);
+
+					// ons-list-item作成
+					onsListItem.appendChild(gridLayout);
+
+					List.appendChild(onsListItem);
+				}
+			})
+
+		.catch(function(err) {
+			console.log(err);
+		});
+	}
+	//}, false);
+
+	// アイテム登録画面への遷移
+	function send_ItemRegistPage() {
+		document.getElementById('nav').pushPage('itemRegist.html', {});
+	}
+
+	// ダイアログ表示
+	function showDialog(message, callback) {
+		ons.notification.confirm({
+			title: "確認",
+			message: message,
+			buttonLabels: ["いいえ", "はい"],
+			//primaryButtonIndex: 1,
+			cancelable: true,
+			callback: function(index) {
+				if (index) {
+					callback(index);
+				}
+			}
+		})
+	}
 	</script>
 </ons-page>
