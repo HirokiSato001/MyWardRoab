@@ -171,43 +171,65 @@
 	<input type="radio" name="gender" value="other">その他
 	<p>身長</p>
 	<ons-input type="number" min="50" max="250" id="pre_regist_height" modifier="underbar" placeholder="身長" float></ons-input>cm
+	<p>好みの色	<p>
+		<ons-select id="pre_regist_favoriteColor" modifier="underbar">
+			<option value=1>黒</option>
+			<option value=2>ホワイト</option>
+			<option value=3>グレー</option>
+			<option value=4>カーキ</option>
+			<option value=5>ネイビー</option>
+			<option value=6>ブラウン</option>
+			<option value=7>ベージュ</option>
+			<option value=8>レッド</option>
+			<option value=9>オレンジ</option>
+			<option value=10>イエロー</option>
+			<option value=11>グリーン</option>
+			<option value=12>ブルー</option>
+      <option value=11>パープル</option>
+			<option value=12>ピンク</option>
+		</ons-select>
 
 	<script>
-		var myuser;
-    var mail    
-    var nickName
-    var birthYear
-    var birthMonth
-    var birthDay
-    var gender
-    var height
+    console.log("Script：開始");
+		var myuser11;
+    var mail;  
+    var nickName;
+    var birthYear;
+    var birthMonth;
+    var birthDay;
+    var gender;
+    var height;
+    var favoriteColor;
+    console.log("Script：終了");
 
     // 画面表示時
-    ons.getScriptPage().onShow = function() {
-      myuser = new User();
+    ons.ready(function() {
+      // デバッグログ
+      console.log("ユーザ編集画面の画面表示メソッド：開始");
+
+      myuser11 = new User();
       // メールアドレスの取得
-      mail = myuser.getMailAddress();
+      mail = myuser11.getMailAddress();
       // メールアドレスの表示
       document.getElementById("pre_regist_mailAddress").value = mail;
       // ニックネームの取得
-      nickName = myuser.getNickName();
+      nickName = myuser11.getNickName();
       // ニックネームの表示
       document.getElementById("pre_regist_nickName").value = nickName;
       // 生年月日[年]の取得
-      birthYear = myuser.getYear();
+      birthYear = myuser11.getYear();
       // 生年月日[年]の表示
       document.getElementById("pre_regist_birthYear").value = birthYear;
       // 生年月日[月]の取得
-      birthMonth = myuser.getMonth();
+      birthMonth = myuser11.getMonth();
       // 生年月日[月]の表示
       document.getElementById("pre_regist_birthMonth").value = birthMonth;
       // 生年月日[日]の取得
-      birthDay = myuser.getDay();
+      birthDay = myuser11.getDay();
       // 生年月日[日]の表示
       document.getElementById("pre_regist_birthDay").value = birthDay;
       // 性別の取得
-      gender = myuser.getGender();
-      console.log("gender:"+gender);
+      gender = myuser11.getGender();
       // 性別の表示
       const gender_radio = document.getElementsByName("gender");
       console.log("gender_radio:"+gender_radio[0].value);
@@ -219,10 +241,17 @@
         }
       }
       // 身長の取得
-      height = myuser.getHeight();
+      height = myuser11.getHeight();
       // 身長の表示
-      document.getElementById("pre_regist_height").value = height;  
-    }
+      document.getElementById("pre_regist_height").value = height;
+      // 好みの色の取得
+      favoriteColor = myuser11.getFavoriteColor();
+      // 好みの色の表示
+      document.getElementById("pre_regist_favoriteColor").value = favoriteColor;
+
+      // デバッグログ
+      console.log("ユーザ編集画面の画面表示メソッド：終了");  
+    });
 
     // 完了ボタン押下
     function userRegist(){
@@ -235,6 +264,7 @@
       chgbirthYear = document.getElementById("pre_regist_birthYear").value;
       chgbirthMonth = document.getElementById("pre_regist_birthMonth").value;
       chgbirthDay = document.getElementById("pre_regist_birthDay").value;
+      chgfavoriteColor = document.getElementById("pre_regist_favoriteColor").value;
 
       const gender_radio = document.getElementsByName("gender");
       for(var i = 0; i < gender_radio.length ; i++){
@@ -259,57 +289,59 @@
       
       // デバッグログ
       console.log("ユーザ編集画面のuserメソッド：開始");
-      myuser = new User();
-      //ユーザー管理画面へ遷移
-      // setTimeout("document.getElementById('nav').resetToPage('userManage.html')",200);
-      // await document.getElementById('nav').resetToPage('userManage.html');
-      //document.getElementById('nav').pushPage('userManage.html', {});
+      myuser11 = new User();
+
       // 終了ログ
       console.log("userRegistメソッド：終了");
     };
 
     // 変更があった項目のみ値を更新する。
-    async function updValue(chgmail, chgnickName, chgbirthYear, chgbirthMonth, chgbirthDay, chggender, chgheight){
+    async function updValue(chgmail, chgnickName, chgbirthYear, chgbirthMonth, chgbirthDay, chggender, chgheight, chgfavoriteColor){
       // 開始ログ
       console.log("updValueメソッド：開始");
 
       // 空更新しています。（複数項目の更新について、最初の項目が更新されないため。）
-      await myuser.setYear(myuser.getYear());
+      // await myuser11.setYear(myuser11.getYear());
 
       // メールアドレスに変更がある場合
-      if(myuser.getMailAddress() != chgmail){
+      if(myuser11.getMailAddress() != chgmail){
         // メールアドレスを更新
-        await myuser.setMailAddress(chgmail);
+        await myuser11.setMailAddress(chgmail);
       }
       // ニックネームに変更がある場合
-      if(myuser.getNickName() != chgnickName){
+      if(myuser11.getNickName() != chgnickName){
         // ニックネームを変更
-        await myuser.setNickName(chgnickName);
+        await myuser11.setNickName(chgnickName);
       }
       // 誕生年に変更がある場合
-      if(myuser.getYear() != chgbirthYear){
+      if(myuser11.getYear() != chgbirthYear){
         // 誕生年を変更
-        await myuser.setYear(chgbirthYear);
+        await myuser11.setYear(chgbirthYear);
       }
       // 誕生月に変更がある場合
-      if(myuser.getMonth() != chgbirthMonth){
+      if(myuser11.getMonth() != chgbirthMonth){
         // 誕生月を変更
-        await myuser.setMonth(chgbirthMonth);
+        await myuser11.setMonth(chgbirthMonth);
       }
       // 誕生日に変更がある場合
-      if(myuser.getDay() != chgbirthDay){
+      if(myuser11.getDay() != chgbirthDay){
         // 誕生日を変更
-        await myuser.setDay(chgbirthDay);
+        await myuser11.setDay(chgbirthDay);
       }
       // 性別に変更がある場合
-      if(myuser.getGender() != chggender){
+      if(myuser11.getGender() != chggender){
         // 性別を変更
-        await myuser.setGender(chggender);
+        await myuser11.setGender(chggender);
       }
       // 身長に変更がある場合
-      if(myuser.getHeight() != chgheight){
+      if(myuser11.getHeight() != chgheight){
         // 身長を変更
-        await myuser.setHeight(chgheight);
+        await myuser11.setHeight(chgheight);
+      }
+        //  好みの色に変更がある場合
+      if(myuser11.getFavoriteColor() != chgfavoriteColor){
+        // 好みの色を変更
+        await myuser11.setFavoriteColor(chgfavoriteColor);
       }
 
       //ユーザー管理画面へ遷移
@@ -341,6 +373,6 @@
     // https://tech.playground.style/javascript/asynchronous-processing/
     // ラジオボタン実装の参考サイト
     // https://itsakura.com/js-radiobutton
-	</script>
+			</script>
 
 </ons-page>

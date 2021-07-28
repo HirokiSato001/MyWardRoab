@@ -60,7 +60,7 @@ class User {
         .set("day",argDay)// 日
         .set("gender",argGender)// 性別
         .set("height",argHeight)// 身長
-        .set("favoriteColor",favoriteColor);// 好みの色
+        .set("favoriteColor",argFavoriteColor);// 好みの色
 
         
     // ユーザーの新規登録処理
@@ -183,7 +183,10 @@ class User {
   /** バックエンドのユーザからmonthを取得し、グローバル変数に設定する*/
   /** monthのsetter */
   async setMonth(argMonth) {
-    // ログインユーザからmonthプロパティ値を更新    
+    // ログインユーザからmonthプロパティ値を更新  
+     await console.log("currentUserの値"+currentUser.getMonth());
+     await console.log(argMonth);
+ 
     await currentUser.set("month", argMonth)
       .update()
       .then(function(obj) {
