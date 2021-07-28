@@ -172,22 +172,22 @@
 	<p>身長</p>
 	<ons-input type="number" min="50" max="250" id="pre_regist_height" modifier="underbar" placeholder="身長" float></ons-input>cm
 	<p>好みの色	<p>
-		<ons-select id="pre_regist_favoriteColor" modifier="underbar">
-			<option value=1>黒</option>
-			<option value=2>ホワイト</option>
-			<option value=3>グレー</option>
-			<option value=4>カーキ</option>
-			<option value=5>ネイビー</option>
-			<option value=6>ブラウン</option>
-			<option value=7>ベージュ</option>
-			<option value=8>レッド</option>
-			<option value=9>オレンジ</option>
-			<option value=10>イエロー</option>
-			<option value=11>グリーン</option>
-			<option value=12>ブルー</option>
-      <option value=11>パープル</option>
-			<option value=12>ピンク</option>
-		</ons-select>
+		<select id="pre_regist_favoriteColor">
+			<option value="1">黒</option>
+			<option value="2">ホワイト</option>
+			<option value="3">グレー</option>
+			<option value="4">カーキ</option>
+			<option value="5">ネイビー</option>
+			<option value="6">ブラウン</option>
+			<option value="7">ベージュ</option>
+			<option value="8">レッド</option>
+			<option value="9">オレンジ</option>
+			<option value="10">イエロー</option>
+			<option value="11">グリーン</option>
+			<option value="12">ブルー</option>
+			<option value="13">パープル</option>
+			<option value="14">ピンク</option>
+		</select>
 
 	<script>
     console.log("Script：開始");
@@ -285,7 +285,7 @@
       }
 
       // updValueメソッド（変更があった項目のみ値を更新する。）
-      updValue(chgmail, chgnickName, chgbirthYear, chgbirthMonth, chgbirthDay, chggender, chgheight);
+      updValue(chgmail, chgnickName, chgbirthYear, chgbirthMonth, chgbirthDay, chggender, chgheight,chgfavoriteColor);
       
       // デバッグログ
       console.log("ユーザ編集画面のuserメソッド：開始");
@@ -338,6 +338,7 @@
         // 身長を変更
         await myuser11.setHeight(chgheight);
       }
+      
         //  好みの色に変更がある場合
       if(myuser11.getFavoriteColor() != chgfavoriteColor){
         // 好みの色を変更
