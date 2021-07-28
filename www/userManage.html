@@ -1,28 +1,63 @@
 <ons-page id="userManage">
-  <script src="js/user.js"></script>
-  <ons-toolbar>
-    <div class="center">ユーザ管理</div>
-  </ons-toolbar>
-  <ons-button onclick="send_userEdit()">ユーザ編集</ons-button>
+	<script src="js/user.js"></script>
+	<ons-toolbar>
+		<div class="center">ユーザ管理</div>
+	</ons-toolbar>
+	<ons-button onclick="send_userEdit()">ユーザ編集</ons-button>
 
-  <p>メールアドレス</p>
+	<p>メールアドレス</p>
 	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" float></ons-input>
 	<p>ニックネーム</p>
 	<ons-input id="regist_nickName" modifier="underbar" float></ons-input>
 	<p>生年月日</p>
-  <ons-input id="regist_birthDay"></ons-input>
-  <p>性別</p>
-  <ons-input id="regist_gender"></ons-input>
-  <p>身長(cm)</p>
-  <ons-input id="regist_height"></ons-input>
+	<ons-input id="regist_birthDay"></ons-input>
+	<p>性別</p>
+	<ons-input id="regist_gender"></ons-input>
+	<p>身長(cm)</p>
+	<ons-input id="regist_height"></ons-input>
+	<p>好みの色</p>
+	<ons-input id="regist_favoriteColor"></ons-input>
 
 
-  <script>
+	<script>
+    // 業務コード（色）
+		var ECOLOR = [
+   { No: 1, string: '黒' },
+   { No: 2, string: 'ホワイト' },
+   { No: 3, string: 'グレー' },
+   { No: 4, string: 'カーキ' },
+   { No: 5, string: 'ネイビー' },
+   { No: 6, string: 'ブラウン' },
+   { No: 7, string: 'ベージュ' },
+   { No: 8, string: 'レッド' },
+   { No: 9, string: 'オレンジ' },
+   { No: 10, string: 'イエロー' },
+   { No: 11, string: 'グリーン' },
+   { No: 12, string: 'ブルー' },
+   { No: 13, string: 'パープル' },
+   { No: 14, string: 'ピンク' },
+   { No: 99, string: 'その他' }
+];
+
+// 業務コードを参照し、'No'を'日本語名'に変換する
+const getColorStringbyNo = value =>{
+  const colorName = ECOLOR.find(p => p.No === value).string;
+  return colorName;
+};
+
+// 業務コードを参照し、'日本語名'を'No'に変換する
+const getColorNobyString = name =>{
+  const colorNo = ECOLOR.find(p => p.string === name).No;
+  return colorNo;
+};
+
+
     // 画面表示時
     ons.getScriptPage().onShow = function() {
 
       // デバッグログ
-      console.log("ユーザ管理画面のuserメソッド：開始");
+      console.log("ユーザ管理画面の画面表示メソッド：開始");
+      // console.log(ECOLOR.getByVaule('3'));
       var myuser = new User();
       // メールアドレスの取得
       var mail = myuser.getMailAddress();
@@ -47,13 +82,23 @@
       // 身長の取得
       var height = myuser.getHeight();
       // 身長の表示
-      document.getElementById("regist_height").innerText = height;      
+      document.getElementById("regist_height").innerText = height; 
+      // 好みの色の取得
+      var favoriteColorNo = myuser.getFavoriteColor();
+      // 好みの色の表示
+      // document.getElementById("regist_favoriteColor").innerText = favoriteColor;
+      // var ECOLOR = EnumCOLOR.getEcolor();
+      // document.getElementById("regist_favoriteColor").value = COLOR.GREEN.string;
+      document.getElementById("regist_favoriteColor").value = getColorStringbyNo(favoriteColorNo);
+
+      // デバッグログ
+      console.log("ユーザ管理画面の画面表示メソッド：終了");   
     }
 
     // userEdit画面へ
     function send_userEdit(){
       document.getElementById('nav').pushPage('userEdit.html', {});
-    };    
-  </script>
+    };
+	</script>
 
 </ons-page>
