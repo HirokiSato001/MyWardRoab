@@ -63,3 +63,20 @@ MonacaCloudユーザのプロパティ取得がややこしい処理?してい�
 ※いまはUserクラスをnewしてやっている。(userRegist.htmlから)
 
 デバッカー使った時に、Backボタンが実機の時計とか充電とかで被って押せない。
+
+
+enum.js（列挙型）の実装について
+○追加方法
+businessCode.jsに追加（他の変数を参考に追加してください。）
+○参照方法
+  ・文字列取得
+    CATEGORIES.TOPS.string;                      //出力結果："トップス"
+  ・値の取得
+    CATEGORIES.TOPS.value;                       //出力結果："1"
+  ・名前を元に文字列取得
+    CATEGORIES.getByName('BOTOMS').string;       //出力結果："ボトムス"
+  ・値を元に文字列取得
+    CATEGORIES.getByValue('value', 3).string;    //出力結果："アウター"
+
+参考資料
+URL:https://qiita.com/dich1/items/4878ba4b089b3fe7ff30
