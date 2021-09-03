@@ -183,10 +183,7 @@ class User {
   /** バックエンドのユーザからmonthを取得し、グローバル変数に設定する*/
   /** monthのsetter */
   async setMonth(argMonth) {
-    // ログインユーザからmonthプロパティ値を更新  
-     await console.log("currentUserの値"+currentUser.getMonth());
-     await console.log(argMonth);
- 
+    // ログインユーザからmonthプロパティ値を更新   
     await currentUser.set("month", argMonth)
       .update()
       .then(function(obj) {
