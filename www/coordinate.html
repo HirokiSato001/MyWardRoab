@@ -643,8 +643,8 @@
         }
 
         // コーディネートテーブルに登録されていた場合
-    var items = ncmb.DataStore("item");
-      items.equalTo("item1_objId", argTops.get("objectId"))
+    var  = fvrtCrdnt.DataStore("fvrtCrdnt");
+      fvrtCrdnt.equalTo("item1_objId", argTops.get("objectId"))
          .equalTo("item2_objId", argBottoms.get("objectId"))
          .equalTo("item3_objId", argOuter.get("objectId"))
          .fetchAll()
@@ -835,7 +835,6 @@
 
       // 王道10パターン
       function noDoubtPattern(outerColor,topsColor,bottomsColor){
-        // console.log("outer:"+colors_gyomu[outerColor]+" ,tops:"+colors_gyomu[topsColor]+" ,bottoms:"+colors_gyomu[bottomsColor])
         // アウター	トップス	ボトムス
         // 白 白 黒
         if(outerColor == 2 && topsColor == 2 && bottomsColor == 1){
