@@ -159,6 +159,14 @@
       itemID_edit = this.data.itemID_edit;
       console.log("edit :" + itemID_edit);
 
+      // プルダウンの初期化
+      category.length = 0;
+      sub_category.length = 0;
+      color.length = 0;
+      design.length = 0;
+      material.length = 0;
+      size.length = 0;
+
       items.equalTo("objectId", itemID_edit)
         .fetchAll()
         .then(function(results){
@@ -169,13 +177,22 @@
           console.log("sub_category:"+item.get("sub_category"));
 
           // 初期設定
-          category.value = item.get("category");
-          changeCategory();
-          sub_category.value = item.get("sub_category");
-          color.value = item.get("color");
-          design.value = item.get("design");
-          material.value = item.get("material");
-          size.value = item.get("size");
+          setSelectAndSelected(category, CATEGORIES, item.get("category"));
+          var en;
+          if(item.get("category") == CATEGORIES.TOPS.value) {
+            en = TOPS;
+          } else if(item.get("category") == CATEGORIES.BOTOMS.value) {
+            en = BOTOMS;
+          } else if(item.get("category") == CATEGORIES.OUTER.value) {
+            en = OUTER;
+          } else if(item.get("category") == CATEGORIES.SHOES.value) {
+            en = SHOES;
+          }
+          setSelectAndSelected(sub_category, en, item.get("sub_category") );
+          setSelectAndSelected(color, COLORS, item.get("color"));
+          setSelectAndSelected(design, DESIGNS, item.get("design"));
+          setSelectAndSelected(material, MATERIALS, item.get("material"));
+          setSelectAndSelected(size, SIZES, item.get("size"));
           brand.value = item.get("brand");
           remarks.value = item.get("remarks");
           image.src = item.get("image");
@@ -190,7 +207,6 @@
             document.getElementById("fvrtFlg").checked = false;
 
           }
-
 
           var radio_id = "radio-" + item.get("season");
           var season_ra =  document.getElementById(radio_id);
@@ -268,10 +284,31 @@
       // サブカテゴリーのプルダウンを初期化
       sub_category.length = 0;
 
-      // サブカテゴリーに項目を設定
-      for (let i = 0 ; i < getSubCategorysLength(index) ; i++) {
-        sub_category.options[i] = new Option(convert_sub_category(index+1,i+1), i+1);
+      // サブカテゴリーの判定処理
+      var en;
+      if(index == 0) {
+        en = TOPS;
+      } else if(index == 1) {
+        en = BOTOMS;
+      } else if(index == 2) {
+        en = OUTER;
+      } else if(index == 3) {
+        en = SHOES;
       }
+
+      // プルダウンの設定処理
+      setSelectAndSelected(sub_category, en, 1);
+    }
+
+    // プルダウン設定処理&選択済設定処理
+    function setSelectAndSelected(select, en, v){
+      var i = 0;
+      en.forEach(function(e){
+        select.options[i] = new Option(e.string, e.value);
+        // 選択済設定処理
+        if(e.value == v) {select.options[i].selected = true;}
+        i = i + 1;
+      });
     }
   </script>
 </ons-page>

@@ -75,13 +75,23 @@
             for (var i = 0; i < results.length; i++) {
               var object = results[i];
               console.log("image :" + object.get("image"));
-              document.getElementById("category_details").innerHTML = convert_category(object.get("category"))
-              document.getElementById("sub_category_details").innerHTML = convert_sub_category(object.get("category"),object.get("sub_category"))
-              document.getElementById("color_details").innerHTML = convert_color(object.get("color"))
-              document.getElementById("design_details").innerHTML = convert_design(object.get("design"))
-              document.getElementById("material_details").innerHTML = convert_material(object.get("material"))
-              document.getElementById("season_details").innerHTML = convert_season(object.get("season"))
-              document.getElementById("size_details").innerHTML = convert_size(object.get("size"))        
+              document.getElementById("category_details").innerHTML = CATEGORIES.getByValue('value', object.get("category")).string
+              var en;
+              if(object.get("category") == CATEGORIES.TOPS.value) {
+                en = TOPS;
+              } else if(object.get("category") == CATEGORIES.BOTOMS.value) {
+                en = BOTOMS;
+              } else if(object.get("category") == CATEGORIES.OUTER.value) {
+                en = OUTER;
+              } else if(object.get("category") == CATEGORIES.SHOES.value) {
+                en = SHOES;
+              }
+              document.getElementById("sub_category_details").innerHTML = en.getByValue('value', object.get("sub_category")).string
+              document.getElementById("color_details").innerHTML = COLORS.getByValue('value', object.get("color")).string
+              document.getElementById("design_details").innerHTML = DESIGNS.getByValue('value', object.get("design")).string
+              document.getElementById("material_details").innerHTML = MATERIALS.getByValue('value', object.get("material")).string
+              document.getElementById("season_details").innerHTML = SEASONS.getByValue('value', object.get("season")).string
+              document.getElementById("size_details").innerHTML = SIZES.getByValue('value', object.get("size")).string
               document.getElementById("image_top_details").src = object.get("image")
               document.getElementById("brand_details").innerHTML = object.get("brand")
               document.getElementById("remarks_details").innerHTML = object.get("remarks")

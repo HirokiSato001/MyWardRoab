@@ -10,8 +10,7 @@
         <option value = 1>トップス</option>
         <option value = 2>ボトムス</option>
         <option value = 3>アウター</option>
-        <option value = 4>ワンピース</option>
-        <option value = 5>シューズ</option>
+        <option value = 4>シューズ</option>
       </ons-select>
     </div>
     
@@ -113,7 +112,7 @@
     <div style="text-align: center">
       <!-- 画像の色を変更する場合の処理
        <img id="regist-image" src="image/1_1_pink.png" style="filter: invert(15%) sepia(95%) saturate(6932%) hue-rotate(358deg) brightness(95%) contrast(112%)"> -->
-      <img id="regist-image">
+      <img id="regist-image" onclick="boot_camera()">
     </div>  
 
 
@@ -141,14 +140,36 @@
       
       image.height = screenHeight / 3;
       image.width = screenWidth / 4 * 3;
+
+      // カテゴリーのプルダウン
+      var category_select = document.getElementById("category");
+      // サブカテゴリーのプルダウン
+      var subCategory_select = document.getElementById("sub_category");
+      // カラーのプルダウン
+      var color_select = document.getElementById("color");
+      // 柄のプルダウン
+      var design_select = document.getElementById("design");
+      // 素材のプルダウン
+      var material_select = document.getElementById("material");
+      // サイズのプルダウン
+      var size_select = document.getElementById("size");
+
+      // プルダウンの初期化
+      category_select.length = 0;
+      subCategory_select.length = 0;
+      color_select.length = 0;
+      design_select.length = 0;
+      material_select.length = 0;
+      size_select.length = 0;
+
+      // プルダウンの初期設定
+      setSelect(category_select, CATEGORIES);
+      setSelect(subCategory_select, TOPS);
+      setSelect(color_select, COLORS);
+      setSelect(design_select, DESIGNS);
+      setSelect(material_select, MATERIALS);
+      setSelect(size_select, SIZES);
     };
-    // イメージ画像を表示 
-    showImage();
-
-
-    // document.getElementById("regist-image").addEventListener('click', function(event){
-    //   boot_camera();
-    // }, false);
 
     //カテゴリー変更処理
     // １：以下の項目を選択されたカテゴリーに合わせ変更する
@@ -160,28 +181,39 @@
       var category_select = document.getElementById("category");
       // サブカテゴリーのプルダウン
       var subCategory_select = document.getElementById("sub_category");
-
-      // サブカテゴリーの項目
-      const sub_categories = [
-        ["Tシャツ","ポロシャツ","パーカー","ニット","インナー"],
-        ["ワイドパンツ","スキニー","ミニスカート","ロングスカート","ショートパンツ"],
-        ["ジャケット","ダウンコード","カーディガン","ブルゾン","ライダース"],
-        ["ニットワンピース（ミニ）","ニットワンピース（ロング）","シャツワンピース（ミニ）","シャツワンピース（ロング）"],
-        ["スニーカー","サンダル","ロングブーツ","ショートブーツ","ヒールパンプス","フラットパンプス","ローファー"]
-      ];
       // 選択された項目番号
-      const index = category_select.selectedIndex;
+      var index = category_select.selectedIndex;
 
       // サブカテゴリーのプルダウンを初期化
       subCategory_select.length = 0;
 
-      // サブカテゴリーのリストを作成し設定
-      for (let i = 0 ; i < sub_categories[index].length ; i++) {
-        subCategory_select.options[i] = new Option(sub_categories[index][i], i+1);
+      // サブカテゴリーの判定処理
+      var en;
+      if(index == 0) {
+        en = TOPS;
+      } else if(index == 1) {
+        en = BOTOMS;
+      } else if(index == 2) {
+        en = OUTER;
+      } else if(index == 3) {
+        en = SHOES;
       }
+
+      // プルダウンの設定処理
+      setSelect(subCategory_select, en);
+
       // イメージ画像を表示
       showImage();
   }
+
+    // プルダウンの設定処理
+    function setSelect(select, en){
+      var i = 0;
+      en.forEach(function(e){
+        select.options[i] = new Option(e.string, e.value);
+        i = i + 1;
+      });
+    }
 
     //サブカテゴリー変更処理
     // １：以下の項目を選択されたサブカテゴリーに合わせ変更する
@@ -231,31 +263,31 @@
   }
 
 
-  // // カメラ起動関数
-  // function boot_camera(){
-  //   console.log("click");
+  // カメラ起動関数
+  function boot_camera(){
+    console.log("click");
 
-  //   //成功時に呼び出されるコールバック関数
-  //   var onSuccess = function(imageURI){
-  //     var image = document.getElementById("regist-image");
-  //     image.src = imageURI;
-  //     alert(imageURI);
-  //   };
+    //成功時に呼び出されるコールバック関数
+    var onSuccess = function(imageURI){
+      var image = document.getElementById("regist-image");
+      image.src = imageURI;
+      alert(imageURI);
+    };
 
-  //   //失敗時に呼び出されるコールバック関数
-  //   var onError = function(message){
-  //     alert("Error:" + message);
-  //   };
+    //失敗時に呼び出されるコールバック関数
+    var onError = function(message){
+      alert("Error:" + message);
+    };
 
-  //   var screenWidth = screen.width;
-  //   var screenHeight = screen.height;
-  //   var image = document.getElementById("regist-image");
+    var screenWidth = screen.width;
+    var screenHeight = screen.height;
+    var image = document.getElementById("regist-image");
       
-  //   image.height = screenHeight / 3;
-  //   image.width = screenWidth / 4 * 3;
-  //   var option = {};
-  //   navigator.camera.getPicture(onSuccess, onError, option);
-  // }
+    image.height = screenHeight / 3;
+    image.width = screenWidth / 4 * 3;
+    var option = {};
+    navigator.camera.getPicture(onSuccess, onError, option);
+  }
 
   // 「登録」ボタン押下時の処理
   function itemRegist_mobileBackend(){

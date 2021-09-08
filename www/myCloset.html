@@ -50,14 +50,6 @@
 			</div>
 		</ons-list-item>
 
-		<!-- ワンピース -->
-		<ons-list-item expandable>
-			ワンピース
-			<div class="expandable-content">
-				<ons-list id="dress"></ons-list>
-			</div>
-		</ons-list-item>
-
 		<!-- シューズ -->
 		<ons-list-item expandable>
 			シューズ
@@ -116,30 +108,6 @@
 	</ons-list>
 
 	<script>
-		// カテゴリーの項目
-	var categories = [
-		"トップス", "ボトムス", "アウター", "ワンピース", "シューズ"
-	];
-
-	// サブカテゴリーの項目
-	var sub_categories = [
-		["Tシャツ", "ポロシャツ", "パーカー", "ニット", "インナー"],
-		["ワイドパンツ", "スキニー", "ミニスカート", "ロングスカート", "ショートパンツ"],
-		["ジャケット", "ダウンコード", "カーディガン", "ブルゾン", "ライダース"],
-		["ニットワンピース（ミニ）", "ニットワンピース（ロング）", "シャツワンピース（ミニ）", "シャツワンピース（ロング）"],
-		["スニーカー", "サンダル", "ロングブーツ", "ショートブーツ", "ヒールパンプス", "フラットパンプス", "ローファー"]
-	];
-
-	// カラー項目
-	var colors = [
-		"赤", "茶", "橙", "黄", "緑", "青", "紫", "黒", "白", "桃", "グレー", "ベージュ"
-	];
-
-	// サイズ項目
-	var sizes = [
-		"XS", "S", "M", "L", "XL", "XXL", "3XL"
-	];
-
 	// ニフクラmobile backendのキー設定
 	// API key.
 	var applicationKey =
@@ -157,10 +125,6 @@
 		console.log("onShow");
 		readyItemList();
 	}
-
-
-
-
 
 	// お気に入りコーデの取得
 	var fvrtCrdnt = ncmb.DataStore("fvrtCrdnt");
@@ -215,9 +179,6 @@ function searchFvrtCrdItem(objId) {
     // console.log("お気に入りコーデ+1" + mycodeList.rows.length);
     var td = tr.insertCell(-1);
 
-    
-
-	
     var copy_table = new_table.cloneNode(true);
 
     // トップスとアウターの列
@@ -284,12 +245,6 @@ function searchFvrtCrdItem(objId) {
     var td2 = tr2.insertCell(-1);
     var copy_table2 = new_table.cloneNode(true);
     td2.appendChild(copy_table2);
-
-
-
-
-
-
 	}
 
 
@@ -305,8 +260,6 @@ function searchFvrtCrdItem(objId) {
 				b.innerHTML = "";
 				var o = document.getElementById("outer");
 				o.innerHTML = "";
-				var d = document.getElementById("dress");
-				d.innerHTML = "";
 				var s = document.getElementById("shoes");
 				s.innerHTML = "";
 
@@ -333,21 +286,18 @@ function searchFvrtCrdItem(objId) {
 					// リスト表示用
 					var List;
 
-					// トップスの場合
-					if (cateIdx == 1) {
-						List = document.getElementById("tops");
-						// ボトムスの場合
-					} else if (cateIdx == 2) {
-						List = document.getElementById("bottoms");
-						// アウターの場合
-					} else if (cateIdx == 3) {
-						List = document.getElementById("outer");
-						// ワンピースの場合
-					} else if (cateIdx == 4) {
-						List = document.getElementById("dress");
-						// シューズの場合
-					} else if (cateIdx == 5) {
-						List = document.getElementById("shoes");
+          // トップスの場合
+          if(cateIdx == CATEGORIES.TOPS.value) {
+            List = document.getElementById("tops");
+            // ボトムスの場合
+          } else if(cateIdx == CATEGORIES.BOTOMS.value) {
+            List = document.getElementById("bottoms");
+            // アウターの場合
+          } else if(cateIdx == CATEGORIES.OUTER.value) {
+            List = document.getElementById("outer");
+            // シューズの場合
+          } else if(cateIdx == CATEGORIES.SHOES.value) {
+            List = document.getElementById("shoes");
 					} else {
 						// 処理なし
 					}
@@ -391,13 +341,23 @@ function searchFvrtCrdItem(objId) {
 					detail_ul_li_size.setAttribute("class", "itemList");
 
 					// 箇条書きの内容
-					var str = "カテゴリー： " + categories[cateIdx - 1];
+					var str = "カテゴリー： " + CATEGORIES.getByValue('value', cateIdx).string;
 					detail_ul_li_cat.innerText = str;
-					str = "サブカテゴリー： " + sub_categories[cateIdx - 1][sub_cateIdx - 1];
+          var en;
+          if(cateIdx == CATEGORIES.TOPS.value) {
+            en = TOPS;
+          } else if(cateIdx == CATEGORIES.BOTOMS.value) {
+            en = BOTOMS;
+          } else if(cateIdx == CATEGORIES.OUTER.value) {
+            en = OUTER;
+          } else if(cateIdx == CATEGORIES.SHOES.value) {
+            en = SHOES;
+          }
+					str = "サブカテゴリー： " + en.getByValue('value', sub_cateIdx).string;
 					detail_ul_li_sub_cat.innerText = str;
-					str = "カラー： " + colors[colorIdx - 1];
+					str = "カラー： " + COLORS.getByValue('value', colorIdx).string;
 					detail_ul_li_color.innerText = str;
-					str = "サイズ： " + sizes[sizeIdx - 1];
+					str = "サイズ： " + SIZES.getByValue('value', sizeIdx).string;
 					detail_ul_li_size.innerText = str;
 
 					// 詳細エリア作成

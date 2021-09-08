@@ -47,7 +47,7 @@ var TOPS = defineEnum({
 });
 
 // ボトムス
-var TOPS = defineEnum({
+var BOTOMS = defineEnum({
     DENIM : {
         value : 1,
         string : 'デニムパンツ'
