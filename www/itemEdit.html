@@ -3,7 +3,10 @@
     <div class="left">
       <ons-back-button>Back</ons-back-button>
     </div>
-    <div class="center">アイテム編集</div>    
+    <div class="center">アイテム編集</div>  
+    <div class="right">
+			<ons-button onclick="deleteItem_edit()">削除</ons-button>
+		</div>     
   </ons-toolbar>
 
   <h4>カテゴリー：</h4>
@@ -131,184 +134,280 @@
   </div>
 
   <script>
-    var items = ncmb.DataStore("item");
+  var items = ncmb.DataStore("item");
 
-    // アイテムオブジェクト
-    var item;
+ // アイテムオブジェクト
+ var item;
 
-    // 各入力項目のUIオブジェクト取得
-    var category = document.getElementById("category");
-    var sub_category = document.getElementById("sub_category");
-    var color = document.getElementById("color");
-    var design = document.getElementById("design");
-    var material = document.getElementById("material");
-    var season_radio =  document.getElementsByName("season");
-    var size = document.getElementById("size");
-    var brand = document.getElementById("brand");
-    var remarks = document.getElementById("remarks");
-    var image = document.getElementById("image");
+ // 各入力項目のUIオブジェクト取得
+ var category = document.getElementById("category");
+ var sub_category = document.getElementById("sub_category");
+ var color = document.getElementById("color");
+ var design = document.getElementById("design");
+ var material = document.getElementById("material");
+ var season_radio = document.getElementsByName("season");
+ var size = document.getElementById("size");
+ var brand = document.getElementById("brand");
+ var remarks = document.getElementById("remarks");
+ var image = document.getElementById("image");
 
-    // ログインユーザを取得
-    var currentUser = ncmb.User.getCurrentUser();
+ // ログインユーザを取得
+ var currentUser = ncmb.User.getCurrentUser();
 
-    // 前画面から送られた"objectId"
-    var itemID_edit;
+ // 前画面から送られた"objectId"
+ var itemID_edit;
 
-    // 画面表示時
-    ons.getScriptPage().onShow = function() {
-      itemID_edit = this.data.itemID_edit;
-      console.log("edit :" + itemID_edit);
+ // 画面表示時
+ ons.getScriptPage().onShow = function() {
+   itemID_edit = this.data.itemID_edit;
+   console.log("edit :" + itemID_edit);
 
-      // プルダウンの初期化
-      category.length = 0;
-      sub_category.length = 0;
-      color.length = 0;
-      design.length = 0;
-      material.length = 0;
-      size.length = 0;
+   // プルダウンの初期化
+   category.length = 0;
+   sub_category.length = 0;
+   color.length = 0;
+   design.length = 0;
+   material.length = 0;
+   size.length = 0;
 
-      items.equalTo("objectId", itemID_edit)
-        .fetchAll()
-        .then(function(results){
-          // object取得
-          item = results[0];
+   items.equalTo("objectId", itemID_edit)
+     .fetchAll()
+     .then(function(results) {
+       // object取得
+       item = results[0];
 
-          console.log("category:"+item.get("category"));
-          console.log("sub_category:"+item.get("sub_category"));
+       console.log("category:" + item.get("category"));
+       console.log("sub_category:" + item.get("sub_category"));
 
-          // 初期設定
-          setSelectAndSelected(category, CATEGORIES, item.get("category"));
-          var en;
-          if(item.get("category") == CATEGORIES.TOPS.value) {
-            en = TOPS;
-          } else if(item.get("category") == CATEGORIES.BOTOMS.value) {
-            en = BOTOMS;
-          } else if(item.get("category") == CATEGORIES.OUTER.value) {
-            en = OUTER;
-          } else if(item.get("category") == CATEGORIES.SHOES.value) {
-            en = SHOES;
-          }
-          setSelectAndSelected(sub_category, en, item.get("sub_category") );
-          setSelectAndSelected(color, COLORS, item.get("color"));
-          setSelectAndSelected(design, DESIGNS, item.get("design"));
-          setSelectAndSelected(material, MATERIALS, item.get("material"));
-          setSelectAndSelected(size, SIZES, item.get("size"));
-          brand.value = item.get("brand");
-          remarks.value = item.get("remarks");
-          image.src = item.get("image");
+       // 初期設定
+       setSelectAndSelected(category, CATEGORIES, item.get("category"));
+       var en;
+       if (item.get("category") == CATEGORIES.TOPS.value) {
+         en = TOPS;
+       } else if (item.get("category") == CATEGORIES.BOTOMS.value) {
+         en = BOTOMS;
+       } else if (item.get("category") == CATEGORIES.OUTER.value) {
+         en = OUTER;
+       } else if (item.get("category") == CATEGORIES.SHOES.value) {
+         en = SHOES;
+       }
+       setSelectAndSelected(sub_category, en, item.get("sub_category"));
+       setSelectAndSelected(color, COLORS, item.get("color"));
+       setSelectAndSelected(design, DESIGNS, item.get("design"));
+       setSelectAndSelected(material, MATERIALS, item.get("material"));
+       setSelectAndSelected(size, SIZES, item.get("size"));
+       brand.value = item.get("brand");
+       remarks.value = item.get("remarks");
+       image.src = item.get("image");
 
-        // お気に入りチェックボックス
-          var dbFvrtFlg = item.get("fvrtFlg");
-          console.log("fvrtFlg :" + dbFvrtFlg);
-          // お気に入りフラグ1の場合はチェックして初期表示
-          if (dbFvrtFlg=="1"){
-            document.getElementById("fvrtFlg").checked = true;
-          } else {
-            document.getElementById("fvrtFlg").checked = false;
+       // お気に入りチェックボックス
+       var dbFvrtFlg = item.get("fvrtFlg");
+       console.log("fvrtFlg :" + dbFvrtFlg);
+       // お気に入りフラグ1の場合はチェックして初期表示
+       if (dbFvrtFlg == "1") {
+         document.getElementById("fvrtFlg").checked = true;
+       } else {
+         document.getElementById("fvrtFlg").checked = false;
 
-          }
+       }
 
-          var radio_id = "radio-" + item.get("season");
-          var season_ra =  document.getElementById(radio_id);
-          season_ra.checked = true;
-        })
-        .catch(function(err){
-          console.log(err);
-        });
-    }
+       var radio_id = "radio-" + item.get("season");
+       var season_ra = document.getElementById(radio_id);
+       season_ra.checked = true;
+     })
+     .catch(function(err) {
+       console.log(err);
+     });
+ }
 
-    // 「完了」ボタン押下時
-    function itemEdit(){
-      var v_category = document.getElementById("category").value;
-      var v_sub_category = document.getElementById("sub_category").value;
-      var v_color = document.getElementById("color").value;
-      var v_design = document.getElementById("design").value;
-      var v_material = document.getElementById("material").value;
-      var v_size = document.getElementById("size").value;
-      var v_brand = document.getElementById("brand").value;
-      var v_remarks = document.getElementById("remarks").value;
-      var v_image = document.getElementById("image").src;
-      var v_season;
-      for(var i = 0; i < season_radio.length ; i++){
-        if (season_radio[i].checked){
-          //選択されたラジオボタンのvalue値を取得する
-          v_season = season_radio[i].value;
-          break;
-        }
-      }
+ // 「完了」ボタン押下時
+ function itemEdit() {
+   var v_category = document.getElementById("category").value;
+   var v_sub_category = document.getElementById("sub_category").value;
+   var v_color = document.getElementById("color").value;
+   var v_design = document.getElementById("design").value;
+   var v_material = document.getElementById("material").value;
+   var v_size = document.getElementById("size").value;
+   var v_brand = document.getElementById("brand").value;
+   var v_remarks = document.getElementById("remarks").value;
+   var v_image = document.getElementById("image").src;
+   var v_season;
+   for (var i = 0; i < season_radio.length; i++) {
+     if (season_radio[i].checked) {
+       //選択されたラジオボタンのvalue値を取得する
+       v_season = season_radio[i].value;
+       break;
+     }
+   }
 
-    // お気に入り登録のチェックが入っていれば、お気に入りフラグ”１”で登録する。
-    var fvrtFlg = "0";
-    const fvrtFlgCheck = document.getElementById("fvrtFlg");
-    if(fvrtFlgCheck.checked){
-		  fvrtFlg =  "1";
-      console.log('お気に入りフラグ true：' + fvrtFlg);
-	  }else{
-		  fvrtFlg =  "0";
-       console.log('お気に入りフラグ false：' + fvrtFlg);
-	  }
-      console.log("完了： " + itemID_edit);
+   // お気に入り登録のチェックが入っていれば、お気に入りフラグ”１”で登録する。
+   var fvrtFlg = "0";
+   const fvrtFlgCheck = document.getElementById("fvrtFlg");
+   if (fvrtFlgCheck.checked) {
+     fvrtFlg = "1";
+     console.log('お気に入りフラグ true：' + fvrtFlg);
+   } else {
+     fvrtFlg = "0";
+     console.log('お気に入りフラグ false：' + fvrtFlg);
+   }
+   console.log("完了： " + itemID_edit);
 
-      items.equalTo("objectId",itemID_edit)
-        .fetchAll()
-        .then(function(results){
-          results[0]
-            .set("category", v_category) 
-            .set("sub_category", v_sub_category)
-            .set("color", v_color)
-            .set("design", v_design)
-            .set("material", v_material)
-            .set("season", v_season)
-            .set("size", v_size)
-            .set("brand", v_brand)
-            .set("remarks", v_remarks)
-            .set("image", v_image)
-            .set("fvrtFlg", fvrtFlg)
-            .set("userId", currentUser.get("objectId"));
-          document.getElementById('nav').popPage();
-          return results[0].update();
-        })
-        .catch(function(err){
-          // エラー処理
-          console.log("Err#" + err.code +": " +err.message);
-        });
-    }
+   items.equalTo("objectId", itemID_edit)
+     .fetchAll()
+     .then(function(results) {
+       results[0]
+         .set("category", v_category)
+         .set("sub_category", v_sub_category)
+         .set("color", v_color)
+         .set("design", v_design)
+         .set("material", v_material)
+         .set("season", v_season)
+         .set("size", v_size)
+         .set("brand", v_brand)
+         .set("remarks", v_remarks)
+         .set("image", v_image)
+         .set("fvrtFlg", fvrtFlg)
+         .set("userId", currentUser.get("objectId"));
+       document.getElementById('nav').popPage();
+       return results[0].update();
+     })
+     .catch(function(err) {
+       // エラー処理
+       console.log("Err#" + err.code + ": " + err.message);
+     });
+ }
 
-    //カテゴリーが変更された場合、サブカテゴリーのドロップダウンのメニュー項目を変更する
-    function changeCategory(){     
-      // 選択された項目番号
-      const index = category.selectedIndex;
+ //カテゴリーが変更された場合、サブカテゴリーのドロップダウンのメニュー項目を変更する
+ function changeCategory() {
+   // 選択された項目番号
+   const index = category.selectedIndex;
 
-      console.log("index: " + index);
+   console.log("index: " + index);
 
-      // サブカテゴリーのプルダウンを初期化
-      sub_category.length = 0;
+   // サブカテゴリーのプルダウンを初期化
+   sub_category.length = 0;
 
-      // サブカテゴリーの判定処理
-      var en;
-      if(index == 0) {
-        en = TOPS;
-      } else if(index == 1) {
-        en = BOTOMS;
-      } else if(index == 2) {
-        en = OUTER;
-      } else if(index == 3) {
-        en = SHOES;
-      }
+   // サブカテゴリーの判定処理
+   var en;
+   if (index == 0) {
+     en = TOPS;
+   } else if (index == 1) {
+     en = BOTOMS;
+   } else if (index == 2) {
+     en = OUTER;
+   } else if (index == 3) {
+     en = SHOES;
+   }
 
-      // プルダウンの設定処理
-      setSelectAndSelected(sub_category, en, 1);
-    }
+   // プルダウンの設定処理
+   setSelectAndSelected(sub_category, en, 1);
+ }
 
-    // プルダウン設定処理&選択済設定処理
-    function setSelectAndSelected(select, en, v){
-      var i = 0;
-      en.forEach(function(e){
-        select.options[i] = new Option(e.string, e.value);
-        // 選択済設定処理
-        if(e.value == v) {select.options[i].selected = true;}
-        i = i + 1;
-      });
-    }
+ // プルダウン設定処理&選択済設定処理
+ function setSelectAndSelected(select, en, v) {
+   var i = 0;
+   en.forEach(function(e) {
+     select.options[i] = new Option(e.string, e.value);
+     // 選択済設定処理
+     if (e.value == v) {
+       select.options[i].selected = true;
+     }
+     i = i + 1;
+   });
+ }
+
+   // 削除ボタン押下時、当アイテムを削除する。
+   // 当アイテムを使用したコーディネートも削除する。
+ function deleteItem_edit() {
+   showDialog(
+     "削除してもよろしいでしょうか？",
+     function(index) {
+       console.log('index:' + index);
+       if (index == -1) {
+         console.log('confirmのコールバック:キャンセル');
+       } else if (index == 0) {
+         console.log('confirmのコールバック:No');
+       } else if (index == 1) {
+         console.log('confirmのコールバック:Yes');
+         items.equalTo("objectId", itemID_edit)
+           .fetch()
+           .then(async function(res) {
+             await res.delete()
+               .then(function(res) {}).catch(function(err) {
+                 console.log("削除エラー");
+               });
+             await ready();
+           }).catch(function(err) {
+             console.log("削除対象検出エラー");
+           });
+
+         // コーディネートレコードに一致するコーディねとがあれば削除する。（アウター）
+         var find = fvrtCrdnt.DataStore("fvrtCrdnt");
+         fvrtCrdnt.equalTo("item1_objId", itemID_edit)
+           .fetchAll()
+           .then(async function(res) {
+             await res.delete()
+               .then(function(res) {}).catch(function(err) {
+                 console.log("削除エラー");
+               });
+             await ready();
+           }).catch(function(err) {
+             console.log("削除対象検出エラー");
+           });
+
+         // コーディネートレコードに一致するコーディねとがあれば削除する。（インナー）
+         fvrtCrdnt.equalTo("item1_objId", itemID_edit)
+           .fetchAll()
+           .then(async function(res) {
+             await res.delete()
+               .then(function(res) {}).catch(function(err) {
+                 console.log("削除エラー");
+               });
+             await ready();
+           }).catch(function(err) {
+             console.log("削除対象検出エラー");
+           });
+
+         // コーディネートレコードに一致するコーディねとがあれば削除する。（パンツ）
+         fvrtCrdnt.equalTo("item1_objId", itemID_edit)
+           .fetchAll()
+           .then(async function(res) {
+             await res.delete()
+               .then(function(res) {}).catch(function(err) {
+                 console.log("削除エラー");
+               });
+             await ready();
+           }).catch(function(err) {
+             console.log("削除対象検出エラー");
+           });
+
+         // コーディネートレコードに一致するコーディねとがあれば削除する。（シューズ）
+         fvrtCrdnt.equalTo("item1_objId", itemID_edit)
+           .fetchAll()
+           .then(async function(res) {
+             await res.delete()
+               .then(function(res) {}).catch(function(err) {
+                 console.log("削除エラー");
+               });
+             await ready();
+           }).catch(function(err) {
+             console.log("削除対象検出エラー");
+           });
+
+         // マイクローゼット画面へ遷移する
+         document.getElementById('nav').pushPage('myCloset.html', {});
+
+       }
+     }
+   );
+   console.log("deleteItemメソッド")
+ }
+
+
+   function ready(){
+     // 処理なし
+   }
+
+
   </script>
 </ons-page>
