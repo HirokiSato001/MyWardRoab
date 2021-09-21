@@ -1,23 +1,61 @@
 <ons-page id="userManage">
 	<script src="js/user.js"></script>
-	<ons-toolbar>
-		<div class="center">ユーザ管理</div>
-	</ons-toolbar>
-	<ons-button onclick="send_userEdit()">ユーザ編集</ons-button>
+		<ons-toolbar>
+			<div class="center">
+		  <ons-row vertical-align="center">
+		    <ons-col width="3%"></ons-col>
+		    <ons-col width="10%">
+			<div class="left">
+				<ons-button>戻る</ons-button>
+			</div></ons-col>
+		    <ons-col width="70%">
+			<div class="center">
+				<ons-icon icon="user-circle"></ons-icon>マイページ照会</div></ons-col>
+		    <ons-col width="10%">
+			<div class="right">
+				<ons-button onclick="send_userEdit()">編集</ons--button>
+			</div></ons-col>
+		    <ons-col width="7%"></ons-col>
+			</ons-row>
+			</div>
+		</ons-toolbar>
 
-	<p>メールアドレス</p>
-	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" float></ons-input>
-	<p>ニックネーム</p>
-	<ons-input id="regist_nickName" modifier="underbar" float></ons-input>
-	<p>生年月日</p>
-	<ons-input id="regist_birthDay"></ons-input>
-	<p>性別</p>
-	<ons-input id="regist_gender"></ons-input>
-	<p>身長(cm)</p>
-	<ons-input id="regist_height"></ons-input>
-	<p>好みの色</p>
-	<ons-input id="regist_favoriteColor"></ons-input>
+<div style="margin-top: 20px; color: Navy;">
+  <table border="0" style="margin-left: auto; margin-right: auto;">
+   <tr>
+     <td>
+<div style="font-size: 40px">
+       My Profile
+</div>
+    </td>
+   </tr>
+   <tr>
+     <td>
+       <div clsss="center">
+       <img src="image/icon.png" id='tops_image_1' alt="トップスの画像" style="float:center;" width="100px" height="100px">
+       </div>
+     </td>
+   </tr>
+  </table>
+</div>
 
+<div style="font-size: 20px; margin-top: 20px; color: Navy;">
+ <table border="0" style="margin-left: auto; margin-right: auto;">
+   <tr>
+    <td colspan="1" rowspan="2">
+     <ons-button onclick="send_login()">ログアウト</ons-button>
+    </td>
+   </tr> 
+
+   <ons-list-header>PROFILE</ons-list-header>
+	 <p style="text-decoration-line: underline;text-decoration-color: gray;">メールアドレス:<ons-input style="text-decoration-line: underline;text-decoration-color: gray;" type="mail" id="regist_mailAddress" modifier="underbar" float></p>
+	 <p style="text-decoration-line: underline;text-decoration-color: gray;">ニックネーム  :<ons-input  style="text-decoration-line: underline;text-decoration-color: gray;" id="regist_nickName" modifier="underbar" float></ons-input></p>
+	 <p style="text-decoration-line: underline;text-decoration-color: gray;">生年月日      :<ons-input  style="text-decoration-line: underline;text-decoration-color: gray;" id="regist_birthDay" modifier="underbar"></ons-input></p>
+	 <p style="text-decoration-line: underline;text-decoration-color: gray;">性別          :<ons-input  style="text-decoration-line: underline;text-decoration-color: gray;" id="regist_gender" modifier="underbar"></ons-input></p>
+	 <p style="text-decoration-line: underline;text-decoration-color: gray;">身長(cm)      :<ons-input  style="text-decoration-line: underline;text-decoration-color: gray;" id="regist_height" modifier="underbar"></ons-input></p>
+	 <p  style="text-decoration-line: underline;text-decoration-color: gray;">好みの色      :<ons-input  style="text-decoration-line: underline;text-decoration-color: gray;" id="regist_favoriteColor" modifier="underbar"></ons-input></p>
+  </table>
+</div>
 
 	<script>
     // 業務コード（色）
@@ -74,8 +112,13 @@
       // 好みの色の表示
       // document.getElementById("regist_favoriteColor").innerText = favoriteColor;
       // var ECOLOR = EnumCOLOR.getEcolor();
+<<<<<<< HEAD
       // document.getElementById("regist_favoriteColor").value = COLOR.getByValue('value', ).string;
       document.getElementById("regist_favoriteColor").value = COLORS.getByValue('value', myuser.getFavoriteColor()).string;
+=======
+      // document.getElementById("regist_favoriteColor").value = COLOR.GREEN.string;
+      document.getElementById("regist_favoriteColor").innerText = convert_color(myuser.getFavoriteColor())
+>>>>>>> 396f688a7e4abf26b8419a54caca68c9de4c885b
 
       // デバッグログ
       console.log("ユーザ管理画面の画面表示メソッド：終了");   
