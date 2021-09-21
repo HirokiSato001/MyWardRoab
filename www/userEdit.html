@@ -346,7 +346,7 @@
       }
 
       //ユーザー管理画面へ遷移
-      await document.getElementById('nav').resetToPage('userManage.html');
+      await document.getElementById('nav').pushPage('userManage.html', {});
       // 終了ログ
       await console.log("updValueメソッド：終了");
     }
