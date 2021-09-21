@@ -44,7 +44,6 @@
 
       // デバッグログ
       console.log("ユーザ管理画面の画面表示メソッド：開始");
-      // console.log(ECOLOR.getByVaule('3'));
       var myuser = new User();
       // メールアドレスの取得
       var mail = myuser.getMailAddress();
@@ -75,8 +74,8 @@
       // 好みの色の表示
       // document.getElementById("regist_favoriteColor").innerText = favoriteColor;
       // var ECOLOR = EnumCOLOR.getEcolor();
-      // document.getElementById("regist_favoriteColor").value = COLOR.GREEN.string;
-      document.getElementById("regist_favoriteColor").value = convert_color(myuser.getFavoriteColor())
+      // document.getElementById("regist_favoriteColor").value = COLOR.getByValue('value', ).string;
+      document.getElementById("regist_favoriteColor").value = COLORS.getByValue('value', myuser.getFavoriteColor()).string;
 
       // デバッグログ
       console.log("ユーザ管理画面の画面表示メソッド：終了");   
