@@ -101,3 +101,51 @@ input.itemList {
   padding: 0;
   font-size: 3vw;
 }
+/* 項目タイトル */
+.commonLabelTitle{
+  line-height:0;
+  font-weight: 900; 
+  margin-left: 10px;
+  color:#085078;
+}
+
+/* 項目アイテム */
+.commonLabelItem{
+  border-bottom: 1px solid gray;
+  font-weight: 500; 
+  color:#000000;
+  margin: 10px;
+}
+/* select属性共通 */
+select{
+  border:3px solid black;  
+  background-color:#F0F0F0; 
+}
+
+/* select属性の年*/
+.commonSelectYear{
+  width:40%;
+}
+/* select属性の月日*/
+.commonSelectMonthDay{
+  width:20%;
+}
+
+/* 項目タイトルとアイテムが同行*/
+.commonLabel{
+  text-decoration-line: underline;
+  text-decoration-color: gray;
+  font-weight: bold; 
+  color:#085078;
+}
+
+/* 共通インプット*/
+.commonInput{
+  line-height:0;
+  width:90%;
+  margin-left:10px;
+  border-style:solid;
+  border-color:black;
+  border-width:3px;
+  background-color:#f0f0f0;
+}
