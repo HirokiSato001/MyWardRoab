@@ -1,4 +1,6 @@
-<ons-page id="itemList">
+  <ons-page id="itemList">
+
+    	<head>
 	<ons-toolbar>
 		<div class="center"><b>My Closet</b></div>
 		<div class="right">
@@ -6,7 +8,8 @@
 			<ons-button onclick="send_ItemRegistPage()">追加</ons-button>
 		</div>
 	</ons-toolbar>
-
+	</head>
+  <body>
 	<!-- ダイアログ -->
 	<template id="alert-dialog.html">
 		<ons-alert-dialog id="my-alert-dialog" modifier="rowfooter">
@@ -70,6 +73,7 @@
 
 					<div>
 						<table class="mycode_class" border="0" style="margin-left: 45%; margin-right: 55%;" table id="mycode_id">
+
 							<tr>
 								<td colspan="1" rowspan="2">
 									<!-- トップス -->
@@ -106,146 +110,292 @@
 
 
 	</ons-list>
-
+</body>
 	<script>
 	// ニフクラmobile backendのキー設定
 	// API key.
-	var applicationKey =
-		"a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
-	var clientKey =
-		"c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
-	// SDK initialization.
-	var ncmb = new NCMB(applicationKey, clientKey);
+	// var applicationKey =
+	// 	"a5b0d94a415cb1c985e0766684fb926608305759441c8777962112ea428df5ae";
+	// var clientKey =
+	// 	"c0d33b2d67b4aeb9e608b6c2774965128e10e2c267e06c19654032e4a8f1de2e";
+	// // SDK initialization.
+	// var ncmb = new NCMB(applicationKey, clientKey);
 
 	// アイテム削除オブジェクト
 	var delete_item_obj;
+   
 
 	// 画面表示時
 	ons.getScriptPage().onShow = function() {
-		console.log("onShow");
-		readyItemList();
+    readyItemList();
+    getFvrtCrdnt();
 	}
+
+
+
+function getFvrtCrdnt() {
 
 	// お気に入りコーデの取得
 	var fvrtCrdnt = ncmb.DataStore("fvrtCrdnt");
+  var Item_crdnt = ncmb.DataStore("item");
+
+  
 	fvrtCrdnt.fetchAll()
 		.then(function(results) {
-  
 
-  // お気に入りコーデの数繰り返す
-  for (var i = 0; i < results.length; i++) {
-    console.log("FvrtCrdntDbl " + results[i].get("objectId"));
+      var fvrtcrdntList = results;
 
-     var item1_image = searchFvrtCrdItem(results[i].get("item1_objId"));
-     var item2_image = searchFvrtCrdItem(results[i].get("item2_objId"));
-     var item3_image = searchFvrtCrdItem(results[i].get("item3_objId"));
-     var item4_image = searchFvrtCrdItem(results[i].get("item4_objId"));
-
-     document.getElementById("tops_image").src = (item1_image);
-     document.getElementById("bottoms_image").src = (item2_image);
-     document.getElementById("outer_image").src = (item3_image);
-     document.getElementById("shoes_image").src = (item4_image);
-     console.log("item1_objId " +results[i].get("item1_objId"));
-     console.log("bottoms_image " + item2_image);
-     console.log("outer_image " + item3_image);
-     console.log("shoes_image " + item4_image);
-     }
-     // お気に入りのテーブル表示追加
-     addFavoriteTbl();
-})
+      // お気に入りコーデの数繰り返す
+      for (let j = 0; j < fvrtcrdntList.length; j++) {
+          console.log("fvrtcrdntList " + fvrtcrdntList[j].get("objectId"));
 
 
-// お気に入りコーデアイテムを検索する
-function searchFvrtCrdItem(objId) {
-  var Item_crdnt = ncmb.DataStore("item");
-  Item_crdnt.equalTo("objectId",objId).fetchAll().then(function(results) {
+          let crdntList = [];
+          // お気に入りコーデのアイテムのオブジェクトを取得
+          crdntList.push(fvrtcrdntList[j].get("item1_objId"));
+          crdntList.push(fvrtcrdntList[j].get("item2_objId"));
+          crdntList.push(fvrtcrdntList[j].get("item3_objId"));
+          crdntList.push(fvrtcrdntList[j].get("item4_objId"));
+          crdntList.push(fvrtcrdntList[j].get("item5_objId"));
 
-    var imageUri = results[0].get("image");
-		console.log("image" + imageUri);
+          // アイテムデータの取得
+          Item_crdnt.in("objectId",[crdntList[0],crdntList[1],crdntList[2],crdntList[3],crdntList[4],crdntList[5]]
+          ).fetchAll().then(function(results) {
+            let items = results;
+            for (let k = 0; k < items.length; k++) {
+              console.log("items image " + items[k].get("image"));
+            }
 
-    return imageUri;
+            if (j == 0) {
+              // カテゴリ順に並び替える
+              orderItemCategory(items);
+              // メソッド呼び出し時のアイテムを保持
+              let tops_item_now = tops_item;
+              let bottoms_item_now = bottoms_item;
+              let outer_item_now = outer_item;
+              let shoes_item_now = shoes_item;
 
-  })
+              let click_table = document.getElementById("mycode_id")
+              	  click_table.rows[0].cells[0].onclick = function() {
+            send_coordinateDtl(tops_item_now.get("objectId"),bottoms_item_now.get("objectId"),outer_item_now.get("objectId"),shoes_item_now.get("objectId"));
+      
+      console.log('onClick');
+    };
+               console.log("１回目");
+               document.getElementById("tops_image").src = (items[0].get("image"));
+              document.getElementById("bottoms_image").src = (items[1].get("image"));
+              document.getElementById("outer_image").src = (items[2].get("image"));
+              document.getElementById("shoes_image").src = (items[3].get("image"));
+            } else {
+              if (j % 2 == 1) {
+                console.log("２回目")
+                addFavoriteTbl(items , j);
+              } else if (j % 2 == 0) {
+                console.log("３回目")
+                addFavoriteTblRow(items);
+              }
+            }
+
+
+          })
+      }
+
+    })
 }
 
-	function addFavoriteTbl() {
+
+     function send_coordinateDtl(objectId_tops,objectId_bottoms,objectId_outer,objectId_shoes){
+
+        document.getElementById('nav').pushPage('coordinateDtl.html', {
+          data:{objectId_tops,objectId_bottoms,objectId_outer,objectId_shoes}
+        });
+
+      }
+
+function addFavoriteTblRow(items) {
+    // カテゴリ順に並び替える
+    orderItemCategory(items);
+    // メソッド呼び出し時のアイテムを保持
+    let tops_item_now = tops_item;
+    let bottoms_item_now = bottoms_item;
+    let outer_item_now = outer_item;
+    let shoes_item_now = shoes_item;
+
     // テーブル取得
-    var mycodeList = document.getElementById("mycodeList_id");
-  	var new_table = document.getElementById("mycode_id");
+    let mycodeList = document.getElementById("mycodeList_id");
+  	let new_table = document.getElementById("mycode_id");
 
-
-    // 横に追加
-    var tr = mycodeList.rows[0];
-    // console.log("お気に入りコーデ+1" + mycodeList.rows.length);
-    var td = tr.insertCell(-1);
-
-    var copy_table = new_table.cloneNode(true);
-
+   // 縦に追加
+    let tr2 = mycodeList.insertRow(-1); 
+    let td2 = tr2.insertCell(-1);
+    let copy_table = new_table.cloneNode(true);
+    // showAddFavoriteTbl(td2, copy_table, items);
+    td2.appendChild(copy_table);
+    
+	  td2.onclick = function() {
+            send_coordinateDtl(tops_item_now.get("objectId"),bottoms_item_now.get("objectId"),outer_item_now.get("objectId"),shoes_item_now.get("objectId"));
+      
+      console.log('onClick');
+    };
     // トップスとアウターの列
-    var copy_table_rows0 = copy_table.rows[0];
-    var copy_table_tops = copy_table_rows0.cells[0];
-    var copy_table_outer = copy_table_rows0.cells[1];
+    let copy_table_rows0 = copy_table.rows[0];
+    let copy_table_tops = copy_table_rows0.cells[0];
+    let copy_table_outer = copy_table_rows0.cells[1];
 
     // ボトムスの列
-    var copy_table_rows2 = copy_table.rows[2];
-    var copy_table_bottoms = copy_table_rows2.cells[0];
+    let copy_table_rows2 = copy_table.rows[2];
+    let copy_table_bottoms = copy_table_rows2.cells[0];
 
     // シューズの列
-    var copy_table_rows4 = copy_table.rows[4];
-    var copy_table_shoes = copy_table_rows4.cells[0];
-    
-    
-    console.log("copy_table" + copy_table.innerHTML);
-    console.log("copy_table_rows0" + copy_table_rows0.innerHTML);
-    console.log("copy_table_tops" + copy_table_tops.innerHTML);
-    console.log("copy_table_rows1" + copy_table_rows1.innerHTML);
-    console.log("copy_table_rows2" + copy_table_rows2.innerHTML);
-    console.log("copy_table_rows3" + copy_table_rows3.innerHTML);
-    console.log("copy_table_rows4" + copy_table_rows4.innerHTML);
+    let copy_table_rows4 = copy_table.rows[4];
+    let copy_table_shoes = copy_table_rows4.cells[0];
 
 
-    var img = new Image();   // 新たな img 要素を作成
-    img.src = "image/1_2.png"; 
+    let img = new Image();   // 新たな img 要素を作成
+    img.src = tops_item_now.get("image");
     img.width="50";
     img.height="50";
-    
-    var img2 = new Image();   // 新たな img 要素を作成
-    img2.src = "image/2_1.png"; 
+    let img2 = new Image();   // 新たな img 要素を作成
+    img2.src = outer_item_now.get("image");
     img2.width="50";
     img2.height="50";
-    var img3 = new Image();   // 新たな img 要素を作成
-    img3.src = "image/3_1.png"; 
+    let img3 = new Image();   // 新たな img 要素を作成
+    img3.src = bottoms_item_now.get("image");
     img3.width="50";
     img3.height="50";
-    var img4 = new Image();   // 新たな img 要素を作成
-    img4.src = "image/4_1.png"; 
+    let img4 = new Image();   // 新たな img 要素を作成 
+    img4.src = shoes_item_now.get("image");
     img4.width="50";
     img4.height="50";
-    var new_td = document.createElement("td");
+
+    let new_td = document.createElement("td");
     new_td.appendChild(img);
     copy_table_tops.innerHTML = new_td.innerHTML;
-
-     var new_td2 = document.createElement("td");
+     let new_td2 = document.createElement("td");
         new_td2.appendChild(img2);
          copy_table_outer.innerHTML = new_td2.innerHTML;
-
-         var new_td3 = document.createElement("td");
+         let new_td3 = document.createElement("td");
         new_td3.appendChild(img3);
     copy_table_bottoms.innerHTML = new_td3.innerHTML;
-
-     var new_td4 = document.createElement("td");
+     let new_td4 = document.createElement("td");
         new_td4.appendChild(img4);
     copy_table_shoes.innerHTML = new_td4.innerHTML;
     console.log("new_td" + new_td.innerHTML);
-
     td.appendChild(copy_table);
 
-    // 2個め追加
-    var tr2 = mycodeList.insertRow(-1); 
-    var td2 = tr2.insertCell(-1);
-    var copy_table2 = new_table.cloneNode(true);
-    td2.appendChild(copy_table2);
+ 
 	}
+
+  var tops_item;
+  var bottoms_item;
+  var outer_item;
+  var shoes_item;
+// アイテムのカテゴリを仕分ける
+function orderItemCategory(items) {
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].get("category") == 1) {
+       tops_item = items[i];
+        console.log("category 1 " + tops_item.get("category"));
+      } else if (items[i].get("category") == 2) {
+       bottoms_item = items[i];
+        console.log("category 2 " + bottoms_item.get("category"));
+      } else if (items[i].get("category") == 3) {
+       outer_item = items[i];
+        console.log("category 3 " + outer_item.get("category"));
+      } else if (items[i].get("category") == 5) {
+       shoes_item = items[i];
+        console.log("category 5 " + shoes_item.get("category"));
+      } else {
+        console.log("category X " + shoes_item.get("category"));
+      }
+
+    }
+}
+
+
+
+
+	function addFavoriteTbl(items, j) {
+    // カテゴリ順に並び替える
+    orderItemCategory(items);
+
+    // メソッド呼び出し時のアイテムを保持
+    let tops_item_now = tops_item;
+    let bottoms_item_now = bottoms_item;
+    let outer_item_now = outer_item;
+    let shoes_item_now = shoes_item;
+
+     
+
+    // テーブル取得
+    let mycodeList = document.getElementById("mycodeList_id");
+  	let new_table = document.getElementById("mycode_id");
+
+    // 何行目に追加するか・・j=1→0 j=3→1 j=5→2
+    let addRowIndex = Math.floor(j / 2);
+    console.log("j " + j);
+    console.log("addRowIndex " + addRowIndex);
+
+    // 横に追加
+    let tr = mycodeList.rows[addRowIndex];
+    // console.log("お気に入りコーデ+1" + mycodeList.rows.length);
+    let td = tr.insertCell(-1);
+
+	  td.onclick = function() {
+            send_coordinateDtl(tops_item_now.get("objectId"),bottoms_item_now.get("objectId"),outer_item_now.get("objectId"),shoes_item_now.get("objectId"));
+      
+      console.log('onClick');
+    };
+    let copy_table = new_table.cloneNode(true);
+    // copy_table = showAddFavoriteTbl(td, copy_table, items);
+    // トップスとアウターの列
+    let copy_table_rows0 = copy_table.rows[0];
+    let copy_table_tops = copy_table_rows0.cells[0];
+    let copy_table_outer = copy_table_rows0.cells[1];
+
+    // ボトムスの列
+    let copy_table_rows2 = copy_table.rows[2];
+    let copy_table_bottoms = copy_table_rows2.cells[0];
+
+    // シューズの列
+    let copy_table_rows4 = copy_table.rows[4];
+    let copy_table_shoes = copy_table_rows4.cells[0];
+
+
+    let img = new Image();   // 新たな img 要素を作成
+    img.src = tops_item_now.get("image");
+    img.width="50";
+    img.height="50";
+    let img2 = new Image();   // 新たな img 要素を作成
+    img2.src = outer_item_now.get("image");
+    img2.width="50";
+    img2.height="50";
+    let img3 = new Image();   // 新たな img 要素を作成 
+    img3.src = bottoms_item_now.get("image");
+    img3.width="50";
+    img3.height="50";
+    let img4 = new Image();   // 新たな img 要素を作成
+    img4.src = shoes_item_now.get("image");
+    img4.width="50";
+    img4.height="50";
+
+    let new_td = document.createElement("td");
+    new_td.appendChild(img);
+    copy_table_tops.innerHTML = new_td.innerHTML;
+     let new_td2 = document.createElement("td");
+        new_td2.appendChild(img2);
+         copy_table_outer.innerHTML = new_td2.innerHTML;
+         let new_td3 = document.createElement("td");
+        new_td3.appendChild(img3);
+    copy_table_bottoms.innerHTML = new_td3.innerHTML;
+     let new_td4 = document.createElement("td");
+        new_td4.appendChild(img4);
+    copy_table_shoes.innerHTML = new_td4.innerHTML;
+    console.log("new_td" + new_td.innerHTML);
+    td.appendChild(copy_table);
+	}
+
+
 
 
 	// アイテムリスト画面の描画処理
@@ -490,4 +640,6 @@ function searchFvrtCrdItem(objId) {
 		})
 	}
 	</script>
+
+  
 </ons-page>
