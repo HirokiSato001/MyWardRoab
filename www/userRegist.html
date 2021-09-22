@@ -11,15 +11,14 @@
       //ons.notification.alert(this.data.username + " " + this.data.password);
     }
 	</script>
-	<!-- <ons-button onclick="onclick_userRegistTEST()"> 入力値をコンソールに出力</ons-button> -->
-<div class="padding_left">
-	<p>情報を入力してください</p>
-	<p>メールアドレス※</p>
-	<ons-input type="mail" id="regist_mailAddress" modifier="underbar" placeholder="mailAddress" value="" float></ons-input>
-	<p>ニックネーム※</p>
-	<ons-input id="regist_nickName" modifier="underbar" placeholder="nickName" float></ons-input>
-	<p>生年月日</p>
-	<select id="year">
+<div>
+	<p style="margin-left:10px;">情報を入力してください</p>
+	<p class="commonLabelTitle">メールアドレス※</p>
+	<input  class="commonInput" type="mail" id="regist_mailAddress" modifier="underbar" placeholder="mailAddress" value="" float>
+	<p class="commonLabelTitle">ニックネーム※</p>
+	<input  class="commonInput" id="regist_nickName" modifier="underbar" placeholder="nickName" float>
+	<p class="commonLabelTitle">生年月日</p>
+	<select style="margin-left:10px" id="year">
 <option value="">-</option>
 <option value="1931">1931</option>
 <option value="1932">1932</option>
@@ -171,18 +170,18 @@
 <option value="30">30</option>
 <option value="31">31</option>
 </select>日
-	<p>性別</p>
-	<input type="radio" name="gender" value=male>男
+	<p class="commonLabelTitle">性別</p>
+	<input style="margin:10px" type="radio" name="gender" value=male>男
 	<input type="radio" name="gender" value="female">女
 	<input type="radio" name="gender" value="other">その他
-	<p>身長</p>
-	<ons-input type="number" min="50" max="250" id="height" modifier="underbar" placeholder="身長" float></ons-input>cm
-	<p>Password※</p>
-	<ons-input id="regist_password" modifier="underbar" placeholder="Password" type="password" float></ons-input>
-	<p>Password(再確認)※</p>
-	<ons-input id="regist_password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" type="password" float></ons-input>
+	<p class="commonLabelTitle">身長</p>
+	<input class="commonInput" style="width:12%" type="number" min="50" max="250" id="height" modifier="underbar" placeholder="身長" float>cm
+	<p class="commonLabelTitle">Password※</p>
+	<input  class="commonInput" id="regist_password" modifier="underbar" placeholder="Password" type="password" float>
+	<p class="commonLabelTitle">Password(再確認)※</p>
+	<input  class="commonInput" id="regist_password_reconfirmation" modifier="underbar" placeholder="【再確認】Password" type="password" float>
 	<br>
-	<ons-button onclick="onclick_userRegist()">新規登録</ons-button>
+	<ons-button style="margin:10px" onclick="onclick_userRegist()">新規登録</ons-button>
 	<br>
 	<br>
 </div>
