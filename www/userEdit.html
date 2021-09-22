@@ -8,12 +8,12 @@
 	<ons-button onclick="return userRegist()">完了</ons-button>
 
 
-	<p>メールアドレス</p>
-	<ons-input type="mail" id="pre_regist_mailAddress" modifier="underbar" float></ons-input>
-	<p>ニックネーム</p>
-	<ons-input id="pre_regist_nickName" modifier="underbar" float></ons-input>
-	<p>生年月日</p>
-	<select id="pre_regist_birthYear">
+	<p class="commonLabelTitle">メールアドレス</p>
+	<input class="commonInput" type="mail" id="pre_regist_mailAddress">
+	<p class="commonLabelTitle">ニックネーム</p>
+	<input class="commonInput" id="pre_regist_nickName" modifier="underbar" float>
+	<p class="commonLabelTitle">生年月日</p>
+	<select style="margin-left:10px" id="pre_regist_birthYear">
     <option value="">-</option>
     <option value="1931">1931</option>
     <option value="1932">1932</option>
@@ -165,14 +165,14 @@
     <option value="30">30</option>
     <option value="31">31</option>
   </select>日
-	<p>性別</p>
-	<input type="radio" name="gender" value="male">男
+	<p class="commonLabelTitle">性別</p>
+	<input style="margin-left:10px" type="radio" name="gender" value="male">男
 	<input type="radio" name="gender" value="female">女
 	<input type="radio" name="gender" value="other">その他
-	<p>身長</p>
-	<ons-input type="number" min="50" max="250" id="pre_regist_height" modifier="underbar" placeholder="身長" float></ons-input>cm
-	<p>好みの色	<p>
-		<select id="pre_regist_favoriteColor">
+	<p class="commonLabelTitle">身長</p>
+	<input class="commonInput" style="width:12%" type="number" min="50" max="250" id="pre_regist_height" modifier="underbar" placeholder="身長" float>cm
+	<p class="commonLabelTitle">好みの色	<p>
+		<select class="commonSelectYear" style="margin-left:10px" id="pre_regist_favoriteColor">
 			<option value="1">黒</option>
 			<option value="2">ホワイト</option>
 			<option value="3">グレー</option>
