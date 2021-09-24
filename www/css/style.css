@@ -23,13 +23,16 @@ input.itemList {
 }
 
 .box18{
+  width: 370px; height: 200px;
+  position: relative; top: 0px; left: 5px; right: 5px;
     margin:2em 0;
-    position: relative;
-    padding: 0.25em 1em;
-    border: solid 2px #ffcb8a;
-    border-radius: 3px 0 3px 0;
+    padding: 0.5em 1em;
+    /* border: solid 2px #ffcb8a; */
+    /* border-radius: 3px 0 3px 0; */
+    border-radius: 8px;
+    background: #085078;
 }
-.box18:before,.box18:after
+/* .box18:before,.box18:after
 {
     content: '';
     position: absolute;
@@ -45,20 +48,23 @@ input.itemList {
 .box18:before {
     bottom:-12px;
     right:-12px;
-}
+} */
 .box18 p {
     margin: 0; 
-    padding: 0;
+    padding: 00;
 }
 
 .box26 {
-    position: relative;
+    width: 370px; height: 200px;
+  position: relative; top: 0px; left: 5px; right: 5px;
+    /* position: relative; */
     margin: 2em 0;
     padding: 0.5em 1em;
-    border: solid 3px #95ccff;
+    /* border: solid 3px #95ccff; */
     border-radius: 8px;
+      background: #085078;
 }
-.box26 .box-title {
+/* .box26 .box-title {
     position: absolute;
     display: inline-block;
     top: -13px;
@@ -66,10 +72,11 @@ input.itemList {
     padding: 0 9px;
     line-height: 1;
     font-size: 19px;
-    background: #FFF;
-    color: #95ccff;
+    background: #FFF; 
+   color: #95ccff;
+    color:white;
     font-weight: bold;
-}
+} */
 .box26 p {
     margin: 0; 
     padding: 0;
