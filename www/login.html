@@ -37,105 +37,60 @@
   
 	<script>
 		// 画面表示時に起動
-  ons.ready(function() {
-    // アラートビューの表示
-     //ons.notification.alert('ようこそ');
+	ons.ready(function() {
 
-  });
-  ons.getScriptPage().onShow = function() {
+	});
+	ons.getScriptPage().onShow = function() {
+		autoLogin();
+	}
 
-    // アラートビューの表示
-    //  ons.notification.alert('ようこそ');
-  }
 
-var mailAddress;
-var password;
-  // javaScript関数
-  function login(){
-    //id="username"の値を取得
-    mailAddress = document.getElementById('login_mailAddress').value;
-    //id="password"の値を取得
-    password = document.getElementById('login_password').value;
+	var mailAddress;
+	var password;
+	// javaScript関数
+	function login() {
+		//id="username"の値を取得
+		mailAddress = document.getElementById('login_mailAddress').value;
+		//id="password"の値を取得
+		password = document.getElementById('login_password').value;
 
-    console.log("Try login ... " + mailAddress + ":" + password)
-      ncmb.User.login(mailAddress, password)
-      .then(function(data){
-        // ログイン後処理
-        console.log("login Success : " + mailAddress + ":" + password);
-        document.getElementById('nav').pushPage('top.html', {});
-      })
-      .catch(function(err){
-        // エラー処理
-        ons.notification.alert('メールアドレスまたはパスワードが間違っています');
-      });  
-  }
+		doLogin(mailAddress, password);
+	}
 
-  function test(){
 
-  }
+	function test_login() {
 
-  // // onsenUI関数
-  // ons.getScriptPage().onInit = function() {
-  //   this.querySelector('#send_userRegist').onclick = (e) => {
-  //     var username = document.getElementById('username').value;
-  //     var password = document.getElementById('password').value;      
-  //     // const message = document.getElementById('message').value;
+		doLogin("aa@a.a", "aaaa");
+	}
 
-  //     //テキストフィールドの空チェック
-  //       if (username === '' || password === '' ) {
-  //         ons.notification.alert('入力されていません');
-  //         return;
-  //       }
-  //       document.getElementById('nav').pushPage('userRegist.html', {
-  //         data: {
-  //           username,password
-  //         }
-  //       });
-  //     }      
-  //   };
+	function autoLogin() {
 
-//--------------------------
-function test_login() {  
-  ncmb.User.login("aa@a.a", "aaaa")
-      .then(function(data){
-        // ログイン後処理
-        console.log("login Success");
-        document.getElementById('nav').pushPage('top.html', {});
-        
-      })
-      .catch(function(err){
-        // エラー処理
-      });      
-}
-function logintest() {
-    // //id="username"の値を取得
-    // var mailAddress = document.getElementById('mailAddress').value;
-    // //id="password"の値を取得
-    // var password = document.getElementById('password').value;
-    //   ncmb.User.login(mailAddress, password)
-    //   .then(function(data){
-    //     // ログイン後処理
-    //     console.log("login Success");
-    //     document.getElementById('nav').pushPage('top.html', {});
-    //   })
-    //   .catch(function(err){
-    //     // エラー処理
-    //   });      
+		console.log("autoLogin");
+		var currentUser = ncmb.User.getCurrentUser();
 
-var currentUser = ncmb.User.getCurrentUser();
-  if (currentUser) {
-      console.log("ログイン中のユーザー: " + currentUser.get("userName"));
-  } else {
-      console.log("未ログインまたは取得に失敗");
-  }
-}
+		if (currentUser) {
+			console.log("ログイン中のユーザーあり: " + currentUser.get("userName"));
+			doLogin(currentUser.get("mailAddress"), currentUser.get("password"));
+		} else {
+			console.log("未ログインまたは取得に失敗");
+		}
+	}
 
-function logintest1() {
-     ncmb.User.logout().catch(function(err){
-       // エラー処理
-       console.log("Err#" + err.code +": " +err.message);   
-       });
-}
+	function doLogin(mailAddress, password) {
+
+		console.log("Try login ... " + mailAddress + ":" + password);
+		ncmb.User.login(mailAddress, password)
+			.then(function(e) {
+				// ログイン後処理
+				document.getElementById('nav').pushPage('top.html', {});
+			})
+			.catch(function(e) {
+				// エラー処理
+				ons.notification.alert('メールアドレスまたはパスワードが間違っています');
+			});
+	}
+
+
 
 	</script>
 </ons-page> 
