@@ -157,7 +157,7 @@
 	  var objectId_outer_C = ""
 	  var objectId_shoes_C = ""
 	  // 画面表示時
-	  ons.getScriptPage().onShow = function() {
+	  ons.getScriptPage().onInit = function() {
 	    // 3コーディネート提案
 	    suggestionThreeCordhinate();
 	  }
@@ -181,10 +181,10 @@
 	  // コーディネート詳細画面Cへの遷移
 	  function send_coordinateDtl_C() {
 	    console.log("objectId_tops_C," + objectId_tops_C)
-	    console.log("objectId_Cottoms_C," + objectId_Cottoms_C)
+	    console.log("objectId_bottoms_C," + objectId_bottoms_C)
 	    console.log("objectId_outer_C," + objectId_outer_C)
 	    console.log("objectId_shoes_C," + objectId_shoes_C)
-	    send_coordinateDtl(objectId_tops_C, objectId_Cottoms_C, objectId_outer_C, objectId_shoes_C)
+	    send_coordinateDtl(objectId_tops_C, objectId_bottoms_C, objectId_outer_C, objectId_shoes_C)
 	  };
 
 	  function send_coordinateDtl(objectId_tops, objectId_bottoms, objectId_outer, objectId_shoes) {

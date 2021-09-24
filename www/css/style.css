@@ -23,7 +23,7 @@ input.itemList {
 }
 
 .box18{
-  width: 370px; height: 200px;
+  width: 90%; height: 150px;
   position: relative; top: 0px; left: 5px; right: 5px;
     margin:2em 0;
     padding: 0.5em 1em;
@@ -55,7 +55,7 @@ input.itemList {
 }
 
 .box26 {
-    width: 370px; height: 200px;
+    width: 90%; height: 150px;
   position: relative; top: 0px; left: 5px; right: 5px;
     /* position: relative; */
     margin: 2em 0;
