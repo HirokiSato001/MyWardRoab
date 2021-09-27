@@ -161,6 +161,11 @@
  ons.getScriptPage().onShow = function() {
    itemID_edit = this.data.itemID_edit;
    console.log("edit :" + itemID_edit);
+      var screenWidth = screen.width;
+      var screenHeight = screen.height;
+      
+      image.height = screenHeight / 3;
+      image.width = screenWidth / 4 * 3;
 
    // プルダウンの初期化
    category.length = 0;

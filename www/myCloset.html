@@ -126,7 +126,7 @@
    
 
 	// 画面表示時
-	ons.getScriptPage().onShow = function() {
+	ons.getScriptPage().onInit = function() {
     readyItemList();
     getFvrtCrdnt();
 	}
@@ -177,15 +177,15 @@ function getFvrtCrdnt() {
 
               let click_table = document.getElementById("mycode_id")
               	  click_table.rows[0].cells[0].onclick = function() {
-            send_coordinateDtl(tops_item_now.get("objectId"),bottoms_item_now.get("objectId"),outer_item_now.get("objectId"),shoes_item_now.get("objectId"));
+                     send_coordinateDtl(tops_item_now.get("objectId"),bottoms_item_now.get("objectId"),outer_item_now.get("objectId"),shoes_item_now.get("objectId"));
       
-      console.log('onClick');
-    };
+                       console.log('onClick');
+                  };
                console.log("１回目");
-               document.getElementById("tops_image").src = (items[0].get("image"));
-              document.getElementById("bottoms_image").src = (items[1].get("image"));
-              document.getElementById("outer_image").src = (items[2].get("image"));
-              document.getElementById("shoes_image").src = (items[3].get("image"));
+               document.getElementById("tops_image").src = (tops_item_now.get("image"));
+              document.getElementById("bottoms_image").src = (bottoms_item_now.get("image"));
+              document.getElementById("outer_image").src = (outer_item_now.get("image"));
+              document.getElementById("shoes_image").src = (shoes_item_now.get("image"));
             } else {
               if (j % 2 == 1) {
                 console.log("２回目")
@@ -292,6 +292,7 @@ function addFavoriteTblRow(items) {
   var shoes_item;
 // アイテムのカテゴリを仕分ける
 function orderItemCategory(items) {
+
     for (let i = 0; i < items.length; i++) {
       if (items[i].get("category") == 1) {
        tops_item = items[i];
@@ -302,9 +303,9 @@ function orderItemCategory(items) {
       } else if (items[i].get("category") == 3) {
        outer_item = items[i];
         console.log("category 3 " + outer_item.get("category"));
-      } else if (items[i].get("category") == 5) {
+      } else if (items[i].get("category") == 4) {
        shoes_item = items[i];
-        console.log("category 5 " + shoes_item.get("category"));
+        console.log("category 4 " + shoes_item.get("category"));
       } else {
         console.log("category X " + shoes_item.get("category"));
       }
