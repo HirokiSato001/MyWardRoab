@@ -138,7 +138,6 @@ h4, h5, h6 {
   box-sizing: border-box;
 } */
 .page__background {
-background-image: url(../image/haikei.gif);
 position: absolute;
 top: 0px;
 left: 0px;

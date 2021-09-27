@@ -1,5 +1,5 @@
-<ons-page id="login">
-
+<ons-page id="login" >
+  
 	<script language="javascript" type="text/javascript">
 		function OnLinkClick() {
           document.getElementById('nav').pushPage('userRegist.html', {});
@@ -11,140 +11,86 @@
 	<ons-toolbar>
 		<div class="center">ログイン</div>
 	</ons-toolbar>
-
-
+  <p class="commonMainTitle">MyWardRobe</p>
+  <div style="background: #085078;width:100%;height:100%;">
 	<div style="text-align: center; margin-top: 30px;">
-		<p>
-			ユーザーID（メールアドレス）
+		<p >
 			<br>
-			<ons-input id="login_mailAddress" modifier="underbar" placeholder="MailAddress" float></ons-input>
+			<ons-input style="background-color:#f0f0f0;width:75%;margin-top:80px" id="login_mailAddress" modifier="underbar" placeholder="  メールアドレス" float></ons-input>
 		</p>
-		<p>
-			パスワード
+		<p style="line-height:0;">
 			<br>
-			<ons-input id="login_password" type="password" modifier="underbar" placeholder="Password" float></ons-input>
+			<ons-input style="background-color:#f0f0f0;width:75%" id="login_password" type="password" modifier="underbar" placeholder="  パスワード" float></ons-input>
 		</p>
 		<p style="margin-top: 30px;">
-			<ons-button onclick="login()">ログイン</ons-button>
+			<ons-button style="background-color:#E0E0E0;color:black;width:75%;font-weight: bold;" onclick="login()">ログイン</ons-button>
+		</p>
+			<ons-button style="background-color:#2b2b2b;color:white;width:75%;" onclick="OnLinkClick()">新規登録はこちら</ons-button>
+
+		<p>
+				<a style="color:white;width:75%;"  href="～～～.html">パスワードを忘れた方はこちら</a>
+		</p>
 			<ons-button onclick="test_login()">ログイン(固定ユーザ)</ons-button>
-		</p>
-    <br>
-		<p>
-			<u>
-				<a href="javascript:OnLinkClick();">新規登録はこちら</a><br />
-				<br>
-				<div id="output"></div>
-			</u>
-		</p>
-		<p>
-			<u>
-				<a href="～～～.html">パスワードを忘れた方はこちら</a>
-			</u>
-		</p>
 
 	</div>
-
+  </div>
+  
 	<script>
 		// 画面表示時に起動
-  ons.ready(function() {
-    // アラートビューの表示
-     //ons.notification.alert('ようこそ');
+	ons.ready(function() {
 
-  });
-  ons.getScriptPage().onShow = function() {
+	});
+	ons.getScriptPage().onShow = function() {
+		autoLogin();
+	}
 
-    // アラートビューの表示
-    //  ons.notification.alert('ようこそ');
-  }
 
-var mailAddress;
-var password;
-  // javaScript関数
-  function login(){
-    //id="username"の値を取得
-    mailAddress = document.getElementById('login_mailAddress').value;
-    //id="password"の値を取得
-    password = document.getElementById('login_password').value;
+	var mailAddress;
+	var password;
+	// javaScript関数
+	function login() {
+		//id="username"の値を取得
+		mailAddress = document.getElementById('login_mailAddress').value;
+		//id="password"の値を取得
+		password = document.getElementById('login_password').value;
 
-    console.log("Try login ... " + mailAddress + ":" + password)
-      ncmb.User.login(mailAddress, password)
-      .then(function(data){
-        // ログイン後処理
-        console.log("login Success : " + mailAddress + ":" + password);
-        document.getElementById('nav').pushPage('top.html', {});
-      })
-      .catch(function(err){
-        // エラー処理
-        ons.notification.alert('メールアドレスまたはパスワードが間違っています');
-      });  
-  }
+		doLogin(mailAddress, password);
+	}
 
-  function test(){
 
-  }
+	function test_login() {
 
-  // // onsenUI関数
-  // ons.getScriptPage().onInit = function() {
-  //   this.querySelector('#send_userRegist').onclick = (e) => {
-  //     var username = document.getElementById('username').value;
-  //     var password = document.getElementById('password').value;      
-  //     // const message = document.getElementById('message').value;
+		doLogin("aa@a.a", "aaaa");
+	}
 
-  //     //テキストフィールドの空チェック
-  //       if (username === '' || password === '' ) {
-  //         ons.notification.alert('入力されていません');
-  //         return;
-  //       }
-  //       document.getElementById('nav').pushPage('userRegist.html', {
-  //         data: {
-  //           username,password
-  //         }
-  //       });
-  //     }      
-  //   };
+	function autoLogin() {
 
-//--------------------------
-function test_login() {  
-  ncmb.User.login("aa@a.a", "aaaa")
-      .then(function(data){
-        // ログイン後処理
-        console.log("login Success");
-        document.getElementById('nav').pushPage('top.html', {});
-        
-      })
-      .catch(function(err){
-        // エラー処理
-      });      
-}
-function logintest() {
-    // //id="username"の値を取得
-    // var mailAddress = document.getElementById('mailAddress').value;
-    // //id="password"の値を取得
-    // var password = document.getElementById('password').value;
-    //   ncmb.User.login(mailAddress, password)
-    //   .then(function(data){
-    //     // ログイン後処理
-    //     console.log("login Success");
-    //     document.getElementById('nav').pushPage('top.html', {});
-    //   })
-    //   .catch(function(err){
-    //     // エラー処理
-    //   });      
+		console.log("autoLogin");
+		var currentUser = ncmb.User.getCurrentUser();
 
-var currentUser = ncmb.User.getCurrentUser();
-  if (currentUser) {
-      console.log("ログイン中のユーザー: " + currentUser.get("userName"));
-  } else {
-      console.log("未ログインまたは取得に失敗");
-  }
-}
+		if (currentUser) {
+			console.log("ログイン中のユーザーあり: " + currentUser.get("userName"));
+			doLogin(currentUser.get("mailAddress"), currentUser.get("password"));
+		} else {
+			console.log("未ログインまたは取得に失敗");
+		}
+	}
 
-function logintest1() {
-     ncmb.User.logout().catch(function(err){
-       // エラー処理
-       console.log("Err#" + err.code +": " +err.message);   
-       });
-}
+	function doLogin(mailAddress, password) {
+
+		console.log("Try login ... " + mailAddress + ":" + password);
+		ncmb.User.login(mailAddress, password)
+			.then(function(e) {
+				// ログイン後処理
+				document.getElementById('nav').pushPage('top.html', {});
+			})
+			.catch(function(e) {
+				// エラー処理
+				ons.notification.alert('メールアドレスまたはパスワードが間違っています');
+			});
+	}
+
+
 
 	</script>
 </ons-page> 

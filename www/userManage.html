@@ -4,10 +4,7 @@
 			<div class="center">
 		  <ons-row vertical-align="center">
 		    <ons-col width="3%"></ons-col>
-		    <ons-col width="10%">
-			<div class="left">
-				<ons-button>戻る</ons-button>
-			</div></ons-col>
+		    <ons-col width="10%"></ons-col>
 		    <ons-col width="70%">
 			<div class="center">
 				<ons-icon icon="user-circle"></ons-icon>マイページ照会</div></ons-col>
@@ -58,31 +55,12 @@
 </div>
 
 	<script>
-    // 業務コード（色）
-		var ECOLOR = [
-   { No: 1, string: '黒' },
-   { No: 2, string: 'ホワイト' },
-   { No: 3, string: 'グレー' },
-   { No: 4, string: 'カーキ' },
-   { No: 5, string: 'ネイビー' },
-   { No: 6, string: 'ブラウン' },
-   { No: 7, string: 'ベージュ' },
-   { No: 8, string: 'レッド' },
-   { No: 9, string: 'オレンジ' },
-   { No: 10, string: 'イエロー' },
-   { No: 11, string: 'グリーン' },
-   { No: 12, string: 'ブルー' },
-   { No: 13, string: 'パープル' },
-   { No: 14, string: 'ピンク' },
-   { No: 99, string: 'その他' }
-];
 
     // 画面表示時
     ons.getScriptPage().onShow = function() {
 
       // デバッグログ
       console.log("ユーザ管理画面の画面表示メソッド：開始");
-      // console.log(ECOLOR.getByVaule('3'));
       var myuser = new User();
       // メールアドレスの取得
       var mail = myuser.getMailAddress();
@@ -111,10 +89,8 @@
       // 好みの色の取得
       var favoriteColorNo = myuser.getFavoriteColor();
       // 好みの色の表示
-      // document.getElementById("regist_favoriteColor").innerText = favoriteColor;
-      // var ECOLOR = EnumCOLOR.getEcolor();
-      // document.getElementById("regist_favoriteColor").value = COLOR.GREEN.string;
-      document.getElementById("regist_favoriteColor").innerText = convert_color(myuser.getFavoriteColor())
+      document.getElementById("regist_favoriteColor").innerText = COLORS.getByValue('value', myuser.getFavoriteColor()).string;
+
 
       // デバッグログ
       console.log("ユーザ管理画面の画面表示メソッド：終了");   

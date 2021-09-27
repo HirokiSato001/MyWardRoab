@@ -1,6 +1,6 @@
 /**/
 /**/
-body {background-image: url("/www/image/haikei.gif"); }
+body {background-color: #F0F0F0}
 .resizeimage img { width: 100%; }
 #title {text-align: center;}
 #infomation {text-align: left;}
@@ -23,13 +23,16 @@ input.itemList {
 }
 
 .box18{
+  width: 90%; height: 150px;
+  position: relative; top: 0px; left: 5px; right: 5px;
     margin:2em 0;
-    position: relative;
-    padding: 0.25em 1em;
-    border: solid 2px #ffcb8a;
-    border-radius: 3px 0 3px 0;
+    padding: 0.5em 1em;
+    /* border: solid 2px #ffcb8a; */
+    /* border-radius: 3px 0 3px 0; */
+    border-radius: 8px;
+    background: #085078;
 }
-.box18:before,.box18:after
+/* .box18:before,.box18:after
 {
     content: '';
     position: absolute;
@@ -45,20 +48,23 @@ input.itemList {
 .box18:before {
     bottom:-12px;
     right:-12px;
-}
+} */
 .box18 p {
     margin: 0; 
-    padding: 0;
+    padding: 00;
 }
 
 .box26 {
-    position: relative;
+    width: 90%; height: 150px;
+  position: relative; top: 0px; left: 5px; right: 5px;
+    /* position: relative; */
     margin: 2em 0;
     padding: 0.5em 1em;
-    border: solid 3px #95ccff;
+    /* border: solid 3px #95ccff; */
     border-radius: 8px;
+      background: #085078;
 }
-.box26 .box-title {
+/* .box26 .box-title {
     position: absolute;
     display: inline-block;
     top: -13px;
@@ -66,14 +72,16 @@ input.itemList {
     padding: 0 9px;
     line-height: 1;
     font-size: 19px;
-    background: #FFF;
-    color: #95ccff;
+    background: #FFF; 
+   color: #95ccff;
+    color:white;
     font-weight: bold;
-}
+} */
 .box26 p {
     margin: 0; 
     padding: 0;
 }
+
 
 .padding_left {padding-left: 20px;}
 
@@ -100,4 +108,62 @@ input.itemList {
   margin: 0;
   padding: 0;
   font-size: 3vw;
+}
+/* 項目タイトル */
+.commonLabelTitle{
+  line-height:0;
+  font-weight: 900; 
+  margin-left: 10px;
+  color:#085078;
+}
+
+/* 項目アイテム */
+.commonLabelItem{
+  border-bottom: 1px solid gray;
+  font-weight: 500; 
+  color:#000000;
+  margin: 10px;
+}
+/* select属性共通 */
+select{
+  border:3px solid black;  
+  background-color:#F0F0F0; 
+}
+
+/* select属性の年*/
+.commonSelectYear{
+  width:40%;
+}
+/* select属性の月日*/
+.commonSelectMonthDay{
+  width:20%;
+}
+
+/* 項目タイトルとアイテムが同行*/
+.commonLabel{
+  text-decoration-line: underline;
+  text-decoration-color: gray;
+  font-weight: bold; 
+  color:#085078;
+}
+
+/* 共通インプット*/
+.commonInput{
+  line-height:0;
+  width:90%;
+  margin-left:10px;
+  border-style:solid;
+  border-color:black;
+  border-width:3px;
+  background-color:#f0f0f0;
+}
+
+.commonMainTitle{
+  text-align: center;
+  border-bottom: 5px solid #085078;
+  border-top: 5px solid #085078;
+  color:#085078;
+  font-weight: bold; 
+  font-size:30px;
+  font: bold  "Fira Sans", serif;
 }

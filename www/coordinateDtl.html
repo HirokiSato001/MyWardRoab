@@ -20,11 +20,11 @@
 				<tr>
 					<td colspan="1" rowspan="2">
 						<!-- トップス -->
-						<input id="tops_image" type="image" width="100" height="100">
+						<input id="tops_image_coordinate" type="image" width="100" height="100">
 					</td>
 					<td colspan="1" rowspan="3">
 						<!-- アウター -->
-						<input id="outer_image" type="image" width="100" height="100">
+						<input id="outer_image_coordinate" type="image" width="100" height="100">
 					</td>
 					<td colspan="1" rowspan="6" width="5" valign="top">
 						<div style="text-align: center">
@@ -41,7 +41,7 @@
 				<tr>
 					<td colspan="1" rowspan="2">
 						<!-- ボトムス -->
-						<input id="bottoms_image" type="image" width="100" height="100">
+						<input id="bottoms_image_coordinate" type="image" width="100" height="100">
 					</td>
 				</tr>
 				<tr>
@@ -50,7 +50,7 @@
 				<tr>
 					<td colspan="1" rowspan="2">
 						<!-- 靴 -->
-						<input id="shoes_image" type="image" width="100" height="100">
+						<input id="shoes_image_coordinate" type="image" width="100" height="100">
 					</td>
 				</tr>
 			</table>
@@ -65,7 +65,7 @@
 				<!-- アウター -->
 				<tr>
 					<!-- 画像 -->
-					<td><input id="outer_image2" type="image" width="100" height="100" src="image/3_1_blue.png"></td>
+					<td><input id="outer_image_itemList" type="image" width="100" height="100" src="image/3_1_blue.png"></td>
 					<td width="5" valign="top">
 						<div style="text-align:center">
 							<input type="checkbox" id="outer_fvrt" style="display:none;" value="1" onChange="chageFvrt(this)">
@@ -110,7 +110,7 @@
 				<!-- トップス -->
 				<tr>
 					<!-- 画像 -->
-					<td><input id="tops_image2" type="image" width="100" height="100" src="image/1_1_pink.png"></td>
+					<td><input id="tops_image_itemList" type="image" width="100" height="100" src="image/1_1_pink.png"></td>
 					<td width="5" valign="top">
 						<div style="text-align: center">
 							<input type="checkbox" id="tops_fvrt" style="display:none;" value="1" onChange="chageFvrt(this)">
@@ -154,7 +154,7 @@
 				<!-- ボトムス-->
 				<tr>
 					<!-- 画像 -->
-					<td><input id="bottoms_image2" type="image" width="100" height="100" src="image/2_6_blue.png"></td>
+					<td><input id="bottoms_image_itemList" type="image" width="100" height="100" src="image/2_6_blue.png"></td>
 					<td width="5" valign="top">
 						<div style="text-align: center">
 							<input type="checkbox" id="bottoms_fvrt" style="display:none;" value="1" onChange="chageFvrt(this)">
@@ -198,7 +198,7 @@
 				<!-- 靴 -->
 				<tr>
 					<!-- 画像 -->
-					<td><input id="shoes_image2" type="image" width="100" height="100" src="image/5_5_red.png"></td>
+					<td><input id="shoes_image_itemList" type="image" width="100" height="100" src="image/5_5_red.png"></td>
 					<td width="5" valign="top">
 						<div style="text-align: center">
 							<input type="checkbox" id="shoes_fvrt" style="display:none;" value="1" onChange="chageFvrt(this)">
@@ -442,9 +442,9 @@
               var obj = results[0];
               // COORDINATE画像を設定
               console.log("CATEGORY["+ idx + "] =" + CATEGORY[idx]);
-              document.getElementById(CATEGORY[idx] + "_image").src = obj.get("image");
+              document.getElementById(CATEGORY[idx] + "_image_coordinate").src = obj.get("image");
               // ITEM LIST画像を設定
-              document.getElementById(CATEGORY[idx] + "_image2").src = obj.get("image");
+              document.getElementById(CATEGORY[idx] + "_image_itemList").src = obj.get("image");
               // 各アイテムの詳細を設定←サブカテゴリのカラム名に自信なし
               document.getElementById(CATEGORY[idx] + "_sub").innerHTML = convert_sub_category(obj.get("category"),obj.get("sub_category"));
               document.getElementById(CATEGORY[idx] + "_color").innerHTML = convert_color(obj.get("color"));document.getElementById(CATEGORY[idx] + "_design").innerHTML = convert_design(obj.get("design"));document.getElementById(CATEGORY[idx] + "_size").innerHTML = convert_size(obj.get("size"));
