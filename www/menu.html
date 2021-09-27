@@ -39,9 +39,9 @@
        // エラー処理
        console.log("Err#" + err.code +": " +err.message);   
        });
+       localStorage.removeItem("NCMB/"+ncmb.apikey+"/currentUser");
        document.getElementById('nav').resetToPage('login.html',{});
      }
-
 </script> 
 </ons-page>
  
