@@ -4,7 +4,7 @@
 	<ons-toolbar>
 		<div class="center"><b>My Closet</b></div>
 		<div class="right">
-			<ons-button onclick="update()">更新</ons-button>
+			<ons-button onclick="readyItemList()">更新</ons-button>
 			<ons-button onclick="send_ItemRegistPage()">追加</ons-button>
 		</div>
 	</ons-toolbar>
@@ -130,11 +130,6 @@
     readyItemList();
     getFvrtCrdnt();
 	}
-
-function update(){
-    readyItemList();
-    getFvrtCrdnt();
-}
 
 function getFvrtCrdnt() {
 
